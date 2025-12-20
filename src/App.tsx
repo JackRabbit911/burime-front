@@ -1,8 +1,11 @@
+import Router from "./Home/Router"
+import Wrapper from "./Home/Wrapper"
+
 function App() {
   return (
-    <>
-      <h1>It works!</h1>
-    </>
+    <Wrapper>
+      <Router />
+    </Wrapper>
   )
 }
 
