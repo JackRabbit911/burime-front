@@ -27,11 +27,11 @@ export const $myBooks = createStore<MyBook[]>([])
 sample({
     clock: getMyBooksFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => {
-        return response.data.result.map((book) => {
+    fn: (response) => (
+        response.data.result.map((book) => {
             book.cover = JSON.parse(book.cover as string)
             return book
         })
-    },
+    ),
     target: $myBooks,
 })
