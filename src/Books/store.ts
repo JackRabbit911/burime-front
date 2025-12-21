@@ -1,22 +1,7 @@
 import { createEffect, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
-
-type Cover = {
-    bg_img: string | null,
-    cover: string | null,
-    bg_color: string,
-    text_color: string,
-    text_size: number,
-}
-
-type MyBook = {
-    id: number,
-    title: string,
-    cover: Cover | string,
-    alias: string,
-    genreStr: string,
-}
+import type { MyBook } from "./types";
 
 export const getMyBooksFx = createEffect(() => (
     ajax.get<ApiResponse<MyBook[]>>('/my/books')
