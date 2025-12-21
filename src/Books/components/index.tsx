@@ -25,9 +25,9 @@ const Books = () => {
     <>
       <div className="text-end">
         <Link to='/my/branch'>
-          <a href="" className="link">
+          <button className="link">
             Create new branch
-          </a>
+          </button>
         </Link>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 h-auto">
