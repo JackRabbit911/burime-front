@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router"
 import Home from "."
-import Books from "../Books"
+import Books from "../Books/components"
 
 const Router = () => {
   return (
