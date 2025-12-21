@@ -1,9 +1,12 @@
+import { Link } from "react-router";
+
 type Props = {
+  id: number;
   role: number;
   children?: React.ReactNode;
 }
 
-const CoverWrapper = ({ role, children }: Props) => {
+const CoverWrapper = ({ id, role, children }: Props) => {
   const branchEditor = 1 << 6
 
   return (
@@ -12,9 +15,11 @@ const CoverWrapper = ({ role, children }: Props) => {
         {children}
       </div>
       {(role & branchEditor) ?
-        <button className="btn btn-sm btn-outline w-full">
-          Edit branch
-        </button> : null}
+        <Link to={`/my/branch/${id}`}>
+          <button className="btn btn-sm btn-outline w-full">
+            Edit branch
+          </button>
+        </Link> : null}
     </div>
   )
 }

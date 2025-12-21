@@ -3,11 +3,14 @@ import { $myBooks, getMyBooksFx } from "../store"
 import { useEffect } from "react"
 import Cover from "./Cover"
 import CoverWrapper from "./CoverWrapper"
+import { Link } from "react-router"
 
 const Books = () => {
   const myBooks = useList($myBooks, {
     fn: (book) => (
-      <CoverWrapper role={book.myRole}>
+      <CoverWrapper
+        id={book.id}
+        role={book.myRole}>
         <Cover book={book} />
       </CoverWrapper>
     ),
@@ -20,6 +23,13 @@ const Books = () => {
 
   return (
     <>
+      <div className="text-end">
+        <Link to='/my/branch'>
+          <a href="" className="link">
+            Create new branch
+          </a>
+        </Link>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 h-auto">
         {myBooks}
       </div>
