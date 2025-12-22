@@ -3,9 +3,9 @@ import { getCurrentMember } from "../../utils";
 import PermissionsList from "./components/PermissionsList";
 import Participants from "./components/Participants";
 import Status from "./components/Status";
-import { memberIdResetted } from "store/authors";
-import { t } from "i18n/utils";
 import { useUnit } from "effector-react";
+import { memberIdResetted } from "../../../../store/authors";
+import { t } from "../../../../../common/i18n/utils";
 
 type Props = {
   authorId: number;
