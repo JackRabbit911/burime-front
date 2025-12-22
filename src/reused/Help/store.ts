@@ -8,7 +8,7 @@ export const helpBtnClicked = createEvent<number>()
 
 export const getHelpDataFx = createEffect(
     (step: number) => {
-        const uri = '/branch/help/' + step.toString()
+        const uri = '/my/help/branch/' + step.toString()
         return ajax.get<ApiResponse<string>>(uri)
     }
 )
