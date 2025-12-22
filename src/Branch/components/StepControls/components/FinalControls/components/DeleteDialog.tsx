@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { closeBtn, modalClosed } from "../../../../../../reused/Modal/store";
 import { draftDeleted } from "../../../../../store/delete";
 
@@ -6,12 +7,14 @@ type Props = {
 }
 
 const DeleteDialog = ({ id }: Props) => {
-  closeBtn(false)
-
   const onYes = (id: number) => () => {
     draftDeleted(id)
     window.location.href = '/'
   }
+
+  useEffect(() => {
+    closeBtn(false)
+  }, [])
 
   return (
     <>
@@ -19,7 +22,7 @@ const DeleteDialog = ({ id }: Props) => {
         Вы уверены, что хотите удалить ветку?
       </h3>
       <div className="flex justify-center gap-2">
-        <button className="btn" onClick={() => {modalClosed()}}>
+        <button className="btn" onClick={() => { modalClosed() }}>
           No
         </button>
         <button className="btn btn-primary" onClick={onYes(id)}>
