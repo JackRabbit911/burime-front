@@ -58,7 +58,7 @@ export const branchSch = z.strictObject({
     parent_id: z.number().positive().nullable(),
     owner: z.number().positive().nullable(),
     title: z.string(),
-    role: z.number().nonnegative(),
+    role: z.coerce.number().nonnegative(),
     age_limit: z.number().nonnegative(),
     cover: cover,
     info: info,
