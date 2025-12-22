@@ -1,13 +1,13 @@
-import { isReady } from "App/utils";
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form";
-import { modalOpened } from "reused/Modal/store";
-import { $step } from "store/step"
 import CancelDialog from "../CancelDialog";
-import { draftSchema, finalSchema } from "schema/output";
-import FinalDialog from "App/components/Publish/components/FinalDialog";
-import { isObjectEmpty } from "utils";
 import DeleteDialog from "./components/DeleteDialog";
+import { $step } from "../../../../store/step";
+import { modalOpened } from "../../../../../reused/Modal/store";
+import { draftSchema, finalSchema } from "../../../../schema/output";
+import { isObjectEmpty } from "../../../../../common/utils";
+import { isReady } from "../../../../utils";
+import FinalDialog from "../../../Publish/components/FinalDialog";
 
 const FinalControls = () => {
   const step = useUnit($step)
