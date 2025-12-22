@@ -2,8 +2,7 @@ import * as z from "zod"
 import { createEffect, createEvent, createStore } from "effector";
 import ajax from "../ajax";
 import type { ApiResponse } from "../ajax/types";
-
-const uri = '/branch/create/gettranslate'
+import { getTranslateUri } from "../constants";
 
 const translateSch = z.object({})
     .catchall(z.string().nullable())
@@ -21,7 +20,7 @@ export const getTranslateFx = createEffect(
         )
 
         return filter.length > 0
-        ? ajax.post<ApiResponse<Translate>>(uri, {
+        ? ajax.post<ApiResponse<Translate>>(getTranslateUri, {
             'filter': filter,
         })
         : null
