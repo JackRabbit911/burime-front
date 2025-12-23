@@ -15,7 +15,7 @@ const CoverWrapper = ({ id, role, children }: Props) => {
         {children}
       </div>
       {(role & branchEditor) ?
-        <Link to={`/my/branch/${id}`}>
+        <Link to={`/branch/${id}`}>
           <button className="btn btn-sm btn-outline w-full">
             Edit branch
           </button>

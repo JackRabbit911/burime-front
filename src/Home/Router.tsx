@@ -6,9 +6,9 @@ import Branch from "../Branch/components"
 const Router = () => {
   return (
     <Routes>
-      <Route path='/my' element={<Home />} />
-      <Route path='/my/books' element={<Books />} />
-      <Route path='/my/branch/:id?' element={<Branch />} />
+      <Route path='' element={<Home />} />
+      <Route path='books' element={<Books />} />
+      <Route path='branch/:id?' element={<Branch />} />
     </Routes>
   )
 }
