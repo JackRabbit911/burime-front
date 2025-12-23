@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { closeBtn, modalClosed } from "../../../../../../reused/Modal/store";
 import { draftDeleted } from "../../../../../store/delete";
+import { globalReset } from "../../../../../../common/store";
 
 type Props = {
   id: number;
@@ -9,7 +10,9 @@ type Props = {
 const DeleteDialog = ({ id }: Props) => {
   const onYes = (id: number) => () => {
     draftDeleted(id)
-    window.location.href = '/'
+    modalClosed()
+    globalReset()
+    window.location.href = '/my'
   }
 
   useEffect(() => {
