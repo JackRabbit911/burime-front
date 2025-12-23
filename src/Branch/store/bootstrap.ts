@@ -7,13 +7,14 @@ import type { AxiosError, AxiosResponse } from "axios";
 import { $status, globalReset } from "../../common/store";
 
 type AxiosApiResponse = AxiosResponse<ApiResponse<Bootstrap>>;
+type Segment = string | undefined;
 
 export const appBranchStarted = createEvent()
 
-export const getBootstrapFx = createEffect<string | undefined, AxiosApiResponse, AxiosError>(
-    (id: string | undefined) =>
+export const getBootstrapFx = createEffect<Segment[], AxiosApiResponse, AxiosError>(
+    ([id, draft]) =>
         ajax.get<ApiResponse<Bootstrap>>(
-            [getBootsrapUri, id].filter(Boolean).join('/'),
+            [getBootsrapUri, id, draft].filter(Boolean).join('/'),
         ),
 );
 

@@ -9,13 +9,13 @@ import Loading from "../../reused/Loading"
 import { t } from "../../common/i18n/utils"
 
 const Branch = () => {
-  const { id } = useParams()
+  const { id, draft } = useParams()
   const bootstrap = useUnit($bootstrap)
   const status = useUnit($status)
 
   useEffect(() => {
     globalReset()
-    getBootstrapFx(id)
+    getBootstrapFx([id, draft])
   }, [])
 
    if (status >= 400) {
