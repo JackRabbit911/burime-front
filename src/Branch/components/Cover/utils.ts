@@ -1,4 +1,4 @@
-import type { Genre } from "schema/input";
+import type { Genre } from "../../schema/input"
 
 export const fileToUrl = (file: File | null) => file ? URL.createObjectURL(file) : ''
 

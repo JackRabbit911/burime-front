@@ -1,5 +1,5 @@
-import type { Member } from "schema/authors";
-import type { Permissions, Statuses } from "schema/input";
+import type { Member } from "../../../../schema/authors";
+import type { Permissions, Statuses } from "../../../../schema/input";
 import { isPermission } from "../../permissions";
 
 export class buttonEnabled {
