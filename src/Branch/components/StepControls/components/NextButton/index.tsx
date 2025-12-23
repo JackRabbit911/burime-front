@@ -1,11 +1,12 @@
-import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
-import { $step, stepChanged } from "../../../../store/step";
+import { stepChanged } from "../../../../store/step";
 import { isObjectEmpty } from "../../../../../common/utils";
 
-const NextButton = () => {
-  const step = useUnit($step);
+type Props = {
+  step: number;
+}
 
+const NextButton = ({ step }: Props) => {
   const onNextStep = () => {
     stepChanged(step + 1);
   }

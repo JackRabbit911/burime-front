@@ -1,16 +1,17 @@
-import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form";
 import CancelDialog from "../CancelDialog";
 import DeleteDialog from "./components/DeleteDialog";
-import { $step } from "../../../../store/step";
 import { modalOpened } from "../../../../../reused/Modal/store";
 import { draftSchema, finalSchema } from "../../../../schema/output";
 import { isObjectEmpty } from "../../../../../common/utils";
 import { isReady } from "../../../../utils";
 import FinalDialog from "../../../Publish/components/FinalDialog";
 
-const FinalControls = () => {
-  const step = useUnit($step)
+type Props = {
+  step: number;
+}
+
+const FinalControls = ({ step }: Props) => {
   const { watch, formState: { errors } } = useFormContext();
 
   if (step < 5) {

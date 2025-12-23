@@ -1,12 +1,13 @@
-import { useUnit } from "effector-react";
-import { $step } from "../../../../store/step";
 import { helpBtnClicked } from "../../../../../reused/Help/store";
 import { modalOpened } from "../../../../../reused/Modal/store";
 import Helper from "../../../../../reused/Help";
 import { getHelpPath } from "./utils";
 
-const HelpButton = () => {
-  const step = useUnit($step);
+type Props = {
+  step: number;
+}
+
+const HelpButton = ({ step }: Props) => {
   const path = getHelpPath(step)
 
   const onClick = (path: string) => () => {

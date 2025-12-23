@@ -3,12 +3,16 @@ import NextButton from "./components/NextButton";
 import HelpButton from "./components/HelpButton";
 import FinalControls from "./components/FinalControls";
 
-const StepControls = () => (
+type Props = {
+  step: number;
+}
+
+const StepControls = ({ step }: Props) => (
   <div className="flex flex-row justify-between mt-4">
-    <PrevButton />
-    <HelpButton />
-    <NextButton />
-    <FinalControls />
+    <PrevButton step={step}/>
+    <HelpButton step={step} />
+    <NextButton step={step}/>
+    <FinalControls step={step}/>
   </div>
 );
 
