@@ -4,11 +4,11 @@ import ajax from "../../common/ajax";
 import type { ApiResponse } from "../../common/ajax/types";
 import { $status, globalReset } from "../../common/store";
 
-export const helpBtnClicked = createEvent<number>()
+export const helpBtnClicked = createEvent<string>()
 
 export const getHelpDataFx = createEffect(
-    (step: number) => {
-        const uri = '/my/help/branch/' + step.toString()
+    (key: string) => {
+        const uri = '/my/help/' + key
         return ajax.get<ApiResponse<string>>(uri)
     }
 )
@@ -19,8 +19,8 @@ export const $hepls = createStore<Help[]>([])
 sample({
     clock: helpBtnClicked,
     source: $hepls,
-    filter: (helps, step) => !Boolean(helps.find((help) => help.step === step)),
-    fn: (_, step) => step,
+    filter: (helps, key) => !Boolean(helps.find((help) => help.key === key)),
+    fn: (_, key) => key,
     target: getHelpDataFx,
 })
 
@@ -52,7 +52,7 @@ sample({
     source: $hepls,
     filter: (_, response) => Boolean(response?.result?.data?.success),
     fn: (helps, response) => [...helps, {
-        step: response.params,
+        key: response.params,
         body: response?.result?.data?.result
     }],
     target: $hepls,

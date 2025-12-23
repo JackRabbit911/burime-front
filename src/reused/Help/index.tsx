@@ -3,14 +3,14 @@ import type { Help } from "./schema";
 import { $hepls } from "./store";
 
 type Props = {
-  step: number;
+  path: string;
 }
 
-const getHelp = (helps: Help[], step: number) =>
-  helps.find((help: Help) => help.step === step)?.body || ''
+const getHelp = (helps: Help[], path: string) =>
+  helps.find((help: Help) => help.key === path)?.body || ''
 
-const Helper = ({ step }: Props) => {
-  const help = getHelp(useUnit($hepls), step)
+const Helper = ({ path }: Props) => {
+  const help = getHelp(useUnit($hepls), path)
 
   return !help ? (
     <div className="flex flex-col justify-center min-h-64">
