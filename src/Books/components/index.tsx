@@ -24,7 +24,7 @@ const Books = () => {
   return (
     <>
       <div className="text-end">
-        <Link to='/my/branch'>
+        <Link to='/branch'>
           <button className="link">
             Create new branch
           </button>

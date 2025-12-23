@@ -47,7 +47,7 @@ const Form = ({ bootstrap }: Props) => {
         {step === 3 ? <Authors bootstrap={bootstrap} /> : null}
         {step === 4 ? <Cover /> : null}
         {step === 5 ? <Publish /> : null}
-        <StepControls step={step}/>
+        <StepControls step={step} />
         <Modal />
     </FormProvider>
   )
