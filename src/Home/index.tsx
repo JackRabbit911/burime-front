@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <div className="grid grid-cols-3 gap-4">
         <Stat
-          path="/my/books"
+          path="books"
           color="primary"
           title="My Нетленки"
           value={8}
@@ -16,7 +16,7 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
-          path="/my/authors"
+          path="authors"
           color="secondary"
           title="My authors"
           value={8}
@@ -24,7 +24,7 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
-          path="/my/messages"
+          path="messages"
           color="info"
           title="My messages"
           value={8}
@@ -32,7 +32,7 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
-          path="/my/friends"
+          path="friends"
           color="success"
           title="My Friends"
           value={8}
@@ -40,14 +40,14 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
-          path="/my/favorites"
+          path="favorites"
           title="My Favorites"
           value={14}
           icon={<Heart />}
           desc="Уже неплохо"
         />
         <Stat
-          path="/my/profile"
+          path="profile"
           title="My Profile"
           value="75%"
           icon={<Book />}
