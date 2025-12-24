@@ -1,13 +1,13 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import { createEffect, createEvent, createStore, sample } from "effector";
-import type { DraftData } from "../schema/output";
+import type { FormData, DraftData } from "../schema/output";
 import type { ApiResponse } from "../../common/ajax/types";
 import { saveBranchUri, saveDraftUri } from "../../common/constants";
 import ajax from "../../common/ajax";
 import { $status, globalReset } from "../../common/store";
 import { modalOpened } from "../../reused/Modal/store";
 
-type FinalResponse = {
+export type FinalResponse = {
     [x: string]: string | number;
 }
 
