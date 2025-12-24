@@ -24,16 +24,20 @@ export const formSchema = z.object({
   authorsPayload,
 });
 
+export const finalSchema = formSchema.omit({
+  masterId: true,
+  authorsPayload: true,
+}).extend({
+  members: z.array(slimMember),
+  branch_genres: z.array(z.coerce.number()).min(1, { message: "Please select at least one option." }),
+  draft: z.number().positive().nullable().optional()
+})
+
 export const draftSchema = formSchema.omit({
   masterId: true,
   authorsPayload: true,
 }).extend({
   draft: z.number().positive().nullable().optional()
-})
-
-export const finalSchema = draftSchema.extend({
-  members: z.array(slimMember),
-  branch_genres: z.array(z.coerce.number()).min(1, { message: "Please select at least one option." }),
 })
 
 export type FormData = z.infer<typeof finalSchema>
