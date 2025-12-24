@@ -6,6 +6,7 @@ import { draftSchema, finalSchema } from "../../../../schema/output";
 import { isObjectEmpty } from "../../../../../common/utils";
 import { isReady } from "../../../../utils";
 import FinalDialog from "../../../Publish/components/FinalDialog";
+import { draftClicked, published } from "../../../../store/publish";
 
 type Props = {
   step: number;
@@ -36,7 +37,8 @@ const FinalControls = ({ step }: Props) => {
     }
 
     if (valid?.success && valid?.data) {
-      modalOpened(<FinalDialog data={valid.data} />)
+      published(valid.data)
+      modalOpened(<FinalDialog />)
     }
   }
 
@@ -48,7 +50,8 @@ const FinalControls = ({ step }: Props) => {
     }
 
     if (valid?.success && valid?.data) {
-      modalOpened(<FinalDialog data={valid.data} draft={true} />)
+      draftClicked(valid.data)
+      modalOpened(<FinalDialog />)
     }
   }
 
