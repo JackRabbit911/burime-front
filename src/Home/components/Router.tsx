@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router"
 import Home from "."
-import Books from "../Books/components"
-import Branch from "../Branch/components"
-import Drafts from "../Drafts/components"
+import Books from "../../Books/components"
+import Branch from "../../Branch/components"
+import Drafts from "../../Drafts/components"
 
 const Router = () => {
   return (

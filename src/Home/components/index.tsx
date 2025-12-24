@@ -1,7 +1,7 @@
-import Book from "../reused/icons/Book"
-import Heart from "../reused/icons/Heart"
-import Message from "../reused/icons/Message"
-import Stat from "../reused/Stat"
+import Book from "../../reused/icons/Book"
+import Heart from "../../reused/icons/Heart"
+import Message from "../../reused/icons/Message"
+import Stat from "../../reused/Stat"
 
 const Home = () => {
   return (

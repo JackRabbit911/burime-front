@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router"
-import Router from "./Home/Router"
+import Router from "./Home/components/Router"
 import Wrapper from "./Home/Wrapper"
 
 function App() {
