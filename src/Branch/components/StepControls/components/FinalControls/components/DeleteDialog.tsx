@@ -10,7 +10,6 @@ type Props = {
 const DeleteDialog = ({ id }: Props) => {
   const onYes = (id: number) => () => {
     draftDeleted(id)
-    modalClosed()
     globalReset()
     window.location.href = '/my'
   }
