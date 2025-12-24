@@ -7,7 +7,7 @@ type Props = {
 }
 
 const CoverWrapper = ({ id, role, children }: Props) => {
-  const branchEditor = 1 << 6
+  const branchEditor = (1 << 6) | (1 << 7)
 
   return (
     <div>
