@@ -32,6 +32,13 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
+          path="drafts"
+          title="My Drafts"
+          value={3}
+          icon={<Book />}
+          desc="Уже неплохо"
+        />
+        <Stat
           path="friends"
           color="success"
           title="My Friends"

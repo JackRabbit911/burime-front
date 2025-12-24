@@ -1,6 +1,7 @@
 const titles: { [key: string]: string } = {
   home: 'Personal account',
   books: 'My Books',
+  drafts: 'My Drafts',
   messages: 'My Messages',
   authors: 'My Authors',
 }
