@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router";
-import { getTitle } from "./utils";
-import { t } from "../common/i18n/utils";
+import { getTitle } from "../utils";
+import { t } from "../../common/i18n/utils";
 import { useEffect } from "react";
-import { $translate, getTranslateFx } from "../common/i18n/store";
+import { $translate, getTranslateFx } from "../../common/i18n/store";
 import { useUnit } from "effector-react";
 
 type Props = {
