@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router"
-import Router from "./Home/Router"
-import Wrapper from "./Home/Wrapper"
+import Router from "./Home/components/Router"
+import Wrapper from "./Home/components/Wrapper"
 
 function App() {
   const prefix = () => {
