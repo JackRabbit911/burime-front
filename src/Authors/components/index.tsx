@@ -1,0 +1,33 @@
+import { useList } from "effector-react"
+import { $myAuthors, getMyAuthorsFx } from "../store"
+import { useEffect } from "react"
+import AuthorCard from "./AuthorCard"
+import { Link } from "react-router"
+
+const Authors = () => {
+  const myAuthors = useList($myAuthors, {
+    fn: (author) => <AuthorCard author={author} />,
+    placeholder: <h2>Здесь пока ничего нет</h2>
+  })
+
+  useEffect(() => {
+    getMyAuthorsFx()
+  }, [])
+
+  return (
+    <>
+      <div className="text-end">
+        <Link to='/branch'>
+          <button className="link">
+            Create new author or group
+          </button>
+        </Link>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 h-auto">
+        {myAuthors}
+      </div>
+    </>
+  )
+}
+
+export default Authors
