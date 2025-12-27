@@ -9,7 +9,7 @@ import Select from "../../reused/Select"
 import { authorSubmitted } from "../store"
 
 type Props = {
-  author: MyAuthor;
+  author?: MyAuthor;
 }
 
 const AuthorForm = ({ author }: Props) => {
@@ -18,6 +18,8 @@ const AuthorForm = ({ author }: Props) => {
     mode: "all",
     defaultValues: author
   })
+
+  // console.log(author, methods.watch())
 
   const { alias, slogan, file, avatar } = methods.watch()
 
@@ -73,9 +75,9 @@ const AuthorForm = ({ author }: Props) => {
                 fieldName="openclosed"
                 label="Status"
                 options={[
-                  { value: 0, label: 'Open group' },
-                  { value: 1, label: 'Closed group' },
                   { value: 2, label: 'Author only' },
+                  { value: 1, label: 'Closed group' },
+                  { value: 0, label: 'Open group' },
                 ]}
               />
             </div>
