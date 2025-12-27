@@ -17,7 +17,7 @@ const Authors = () => {
   return (
     <>
       <div className="text-end">
-        <Link to='/branch'>
+        <Link to='/author'>
           <button className="link">
             Create new author or group
           </button>
