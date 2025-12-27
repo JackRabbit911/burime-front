@@ -10,12 +10,13 @@ const AuthorFormWrapper = () => {
   const author = authors.filter((item) => item.id === Number(id))[0]
 
    useEffect(() => {
-    if (!author) {
+    if (id && !author) {
       getMyAuthorsFx()
     }
   }, [])
 
-  return author ? <AuthorForm author={author} /> : null
+  return author ? <AuthorForm author={author} /> :
+    ( id ? null : <AuthorForm />)
 }
 
 export default AuthorFormWrapper
