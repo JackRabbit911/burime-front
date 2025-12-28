@@ -5,7 +5,6 @@ import { modalOpened } from "../../../../../reused/Modal/store";
 import { draftSchema, finalSchema } from "../../../../schema/output";
 import { isObjectEmpty } from "../../../../../common/utils";
 import { isReady } from "../../../../utils";
-import FinalDialog from "../../../Publish/components/FinalDialog";
 import { draftClicked, published } from "../../../../store/publish";
 
 type Props = {
@@ -38,7 +37,6 @@ const FinalControls = ({ step }: Props) => {
 
     if (valid?.success && valid?.data) {
       published(valid.data)
-      modalOpened(<FinalDialog />)
     }
   }
 
@@ -51,7 +49,6 @@ const FinalControls = ({ step }: Props) => {
 
     if (valid?.success && valid?.data) {
       draftClicked(valid.data)
-      modalOpened(<FinalDialog />)
     }
   }
 
