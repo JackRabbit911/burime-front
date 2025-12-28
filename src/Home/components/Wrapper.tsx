@@ -18,7 +18,7 @@ const Wrapper = ({ children }: Props) => {
 
   useEffect(() => {
     getTranslateFx(translate)
-  }, [])
+  }, [location])
 
   return (
     <div className="flex flex-row justify-center">
