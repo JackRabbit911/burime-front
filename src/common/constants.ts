@@ -6,3 +6,5 @@ export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
 
 export const getTranslateUri = '/my/gettranslate'
+
+export const saveAuthorUri = '/my/author/save'
