@@ -1,12 +1,13 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 import Textarea from "../../reused/Textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { authorSchema, type MyAuthor } from "../schema"
+import { authorOut, authorSchema, type MyAuthor } from "../schema"
 import TextInput from "../../reused/TextInput"
 import FileInput from "../../reused/FileInput"
 import { avatarSrc } from "../utils"
 import Select from "../../reused/Select"
 import { authorSubmitted } from "../store"
+import { t } from "../../common/i18n/utils"
 
 type Props = {
   author?: MyAuthor;
@@ -19,11 +20,19 @@ const AuthorForm = ({ author }: Props) => {
     defaultValues: author
   })
 
-  // console.log(author, methods.watch())
+  const { alias, info, file, avatar } = methods.watch()
 
-  const { alias, slogan, file, avatar } = methods.watch()
+  const onSubmit: SubmitHandler<MyAuthor> = (data) => {
+    const valid = authorOut.safeParse(data)
 
-  const onSubmit: SubmitHandler<MyAuthor> = (data) => authorSubmitted(data)
+    if (valid?.error) {
+      console.log(valid.error, data, methods.getValues())
+    }
+
+    if (valid?.success && valid?.data) {
+      authorSubmitted(valid.data)
+    }
+  }
 
   return (
     <FormProvider {...methods}>
@@ -35,7 +44,7 @@ const AuthorForm = ({ author }: Props) => {
           <h2 className="text-xl">
             {alias}
           </h2>
-          <p className="flex italic h-full items-center">{slogan}</p>
+          <p className="flex italic h-full items-center">{info.slogan}</p>
         </div>
       </div>
       <form
@@ -51,33 +60,33 @@ const AuthorForm = ({ author }: Props) => {
             fieldName="alias"
           />
           <Textarea
-            fieldName="slogan"
-            label="Slogan"
-            placeholder="Девиз"
+            fieldName="info.slogan"
+            label={t('Slogan')}
+            placeholder={t('Your motto')}
             rows={4}
-            optional="Up to 80 words"
+            optional={t("Up to % words", 80)}
           />
           <Textarea
-            fieldName="info"
-            label="Info"
-            placeholder="Расскажите о своём авторе"
+            fieldName="info.info"
+            label={t('Info')}
+            placeholder={t('Tell us about your author')}
             rows={4}
-            optional="Up to 200 words"
+            optional={t("Up to % words", 80)}
           />
           <div className="flex flex-row gap-3">
             <FileInput
               fieldName="file"
-              label="Avatar"
-              optional="Up 2 Mb"
+              label={t('Avatar')}
+              optional={t('Up % Mb', 2)}
             />
             <div className="w-1/2 mt-0.45">
-            <Select
+              <Select
                 fieldName="openclosed"
-                label="Status"
+                label={t('Status')}
                 options={[
-                  { value: 2, label: 'Author only' },
-                  { value: 1, label: 'Closed group' },
-                  { value: 0, label: 'Open group' },
+                  { value: 2, label: t('Author only') },
+                  { value: 1, label: t('Closed group') },
+                  { value: 0, label: t('Open group') },
                 ]}
               />
             </div>
@@ -86,7 +95,7 @@ const AuthorForm = ({ author }: Props) => {
             type="submit"
             className="btn btn-primary dark:btn-info mt-4"
           >
-            Save
+            {t('Save')}
           </button>
         </fieldset>
       </form>
