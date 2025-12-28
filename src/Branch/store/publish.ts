@@ -6,6 +6,8 @@ import { saveBranchUri, saveDraftUri } from "../../common/constants";
 import ajax from "../../common/ajax";
 import { $status, globalReset } from "../../common/store";
 import { modalOpened } from "../../reused/Modal/store";
+import { successDialog } from "../../reused/InModal/SuccessDialog";
+import { loading } from "../../reused/InModal/Loading";
 
 export type FinalResponse = {
     [x: string]: string | number;
@@ -58,8 +60,14 @@ sample({
 })
 
 sample({
+    clock: [published, draftClicked],
+    fn: () => loading,
+    target: modalOpened,
+})
+
+sample({
     clock: [publishFx.doneData, draftFx.doneData],
     filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => response.data.result,
-    target: $finalResponse,
+    fn: () => successDialog({link: 'books'}),
+    target: modalOpened,
 })
