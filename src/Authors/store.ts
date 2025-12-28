@@ -5,7 +5,8 @@ import { globalReset } from "../common/store";
 import type { MyAuthor, MyAuthorOut } from "./schema";
 import { saveAuthorUri } from "../common/constants";
 import { modalOpened } from "../reused/Modal/store";
-import { successDialog } from "../reused/SuccessDialog";
+import { successDialog } from "../reused/InModal/SuccessDialog";
+import { loading } from "../reused/InModal/Loading";
 
 export const authorSubmitted = createEvent<MyAuthorOut>()
 export const authorSaved = createEvent()
@@ -35,6 +36,12 @@ sample({
 sample({
     clock: authorSubmitted,
     target: saveMyAuthorFx,
+})
+
+sample({
+    clock: authorSubmitted,
+    fn: () => loading,
+    target: modalOpened,
 })
 
 sample({
