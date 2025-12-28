@@ -1,16 +1,12 @@
 import { Link } from "react-router";
 import { host } from "../../common/ajax";
 import type { MyAuthor } from "../schema";
-// import type { MyAuthor } from "../store"
 
 type Props = {
   author: MyAuthor;
 }
 
 const AuthorCard = ({ author }: Props) => {
-  // const info = author.info as Info
-
-  // console.log(author)
   return (
     <div>
       <a href={`${host}/author/${author.id}`} className="m-4">
@@ -22,7 +18,7 @@ const AuthorCard = ({ author }: Props) => {
             <div className="grow overflow-hidden px-2 pt-1">
               <h2 className="text-xl font-medium">{author.alias}</h2>
               <p className="text-balance italic">
-                {author.slogan || '...'}
+                {author.info.slogan || '...'}
               </p>
             </div>
           </div>
