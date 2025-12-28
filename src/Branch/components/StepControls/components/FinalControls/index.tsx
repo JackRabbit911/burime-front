@@ -1,11 +1,11 @@
 import { useFormContext } from "react-hook-form";
-import CancelDialog from "../CancelDialog";
-import DeleteDialog from "./components/DeleteDialog";
-import { modalOpened } from "../../../../../reused/Modal/store";
+import { modalClosed, modalOpened } from "../../../../../reused/Modal/store";
 import { draftSchema, finalSchema } from "../../../../schema/output";
 import { isObjectEmpty } from "../../../../../common/utils";
 import { isReady } from "../../../../utils";
 import { draftClicked, published } from "../../../../store/publish";
+import ConfirmDialog from "../../../../../reused/InModal/ConfirmDialog";
+import { draftDeleted } from "../../../../store/delete";
 
 type Props = {
   step: number;
@@ -21,11 +21,25 @@ const FinalControls = ({ step }: Props) => {
   const values = watch()
 
   const onDelete = () => {
-    modalOpened(<DeleteDialog id={values.draft} />)
+    const onYes = () => {
+      modalClosed()
+      draftDeleted(values.draft)
+    }
+
+    modalOpened(
+      <ConfirmDialog
+        text='Your draft will be deleted'
+        onYes={onYes}
+      />
+    )
   }
 
   const onCancel = () => {
-    modalOpened(<CancelDialog />)
+    modalOpened(
+      <ConfirmDialog
+        text='Branch creation/editing will be cancelled'
+      />
+    )
   }
 
   const onPublish = () => {
