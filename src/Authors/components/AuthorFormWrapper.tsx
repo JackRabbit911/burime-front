@@ -13,14 +13,14 @@ type Props = {
   author?: MyAuthor;
 }
 
-const AuthorForm = ({ author }: Props) => {
+const AuthorFormWrapper = ({ author }: Props) => {
   const methods = useForm({
     resolver: zodResolver(authorSchema),
     mode: "all",
     defaultValues: author
   })
 
-  const { alias, info, file, avatar } = methods.watch()
+  const { alias, info, file, avatar, openclosed } = methods.watch()
 
   const onSubmit: SubmitHandler<MyAuthor> = (data) => {
     const valid = authorOut.safeParse(data)
@@ -33,6 +33,8 @@ const AuthorForm = ({ author }: Props) => {
       authorSubmitted(valid.data)
     }
   }
+
+  console.log(openclosed)
 
   return (
     <FormProvider {...methods}>
@@ -103,4 +105,4 @@ const AuthorForm = ({ author }: Props) => {
   )
 }
 
-export default AuthorForm
+export default AuthorFormWrapper

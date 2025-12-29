@@ -2,7 +2,7 @@ import { useUnit } from "effector-react"
 import { useParams } from "react-router"
 import { $myAuthors, getMyAuthorsFx } from "../store"
 import { useEffect } from "react"
-import AuthorForm from "./AuthorForm"
+import AuthorFormWrapper from "./AuthorFormWrapper"
 
 const AuthorWrapper = () => {
   const { id } = useParams()
@@ -15,8 +15,8 @@ const AuthorWrapper = () => {
     }
   }, [])
 
-  return author ? <AuthorForm author={author} /> :
-    ( id ? null : <AuthorForm />)
+  return author ? <AuthorFormWrapper author={author} /> :
+    ( id ? null : <AuthorFormWrapper />)
 }
 
 export default AuthorWrapper
