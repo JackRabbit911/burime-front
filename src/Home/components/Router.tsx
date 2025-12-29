@@ -4,7 +4,7 @@ import Books from "../../Books/components"
 import Branch from "../../Branch/components"
 import Drafts from "../../Drafts/components"
 import Authors from "../../Authors/components"
-import AuthorFormWrapper from "../../Authors/components/AuthorFormWrapper"
+import AuthorWrapper from "../../Authors/components/AuthorWrapper"
 
 const Router = () => {
   return (
@@ -14,7 +14,7 @@ const Router = () => {
       <Route path='authors' element={<Authors />} />
       <Route path='drafts' element={<Drafts />} />
       <Route path='branch/:id?/:draft?' element={<Branch />} />
-      <Route path='author/:id?' element={<AuthorFormWrapper />} />
+      <Route path='author/:id?' element={<AuthorWrapper />} />
     </Routes>
   )
 }

@@ -4,7 +4,7 @@ import { $myAuthors, getMyAuthorsFx } from "../store"
 import { useEffect } from "react"
 import AuthorForm from "./AuthorForm"
 
-const AuthorFormWrapper = () => {
+const AuthorWrapper = () => {
   const { id } = useParams()
   const authors = useUnit($myAuthors)
   const author = authors.filter((item) => item.id === Number(id))[0]
@@ -19,4 +19,4 @@ const AuthorFormWrapper = () => {
     ( id ? null : <AuthorForm />)
 }
 
-export default AuthorFormWrapper
+export default AuthorWrapper
