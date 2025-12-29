@@ -1,13 +1,10 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
-import Textarea from "../../reused/Textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authorOut, authorSchema, type MyAuthor } from "../schema"
-import TextInput from "../../reused/TextInput"
-import FileInput from "../../reused/FileInput"
 import { avatarSrc } from "../utils"
-import Select from "../../reused/Select"
 import { authorSubmitted } from "../store"
 import { t } from "../../common/i18n/utils"
+import AuthorForm from "./AuthorForm"
 
 type Props = {
   author?: MyAuthor;
@@ -51,48 +48,9 @@ const AuthorFormWrapper = ({ author }: Props) => {
       </div>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        id="my-author"
-        method="post"
-        acceptCharset="UTF-8"
-        encType="multipart/form-data"
       >
         <fieldset className="fieldset w-full">
-          <TextInput
-            label="Alias"
-            fieldName="alias"
-          />
-          <Textarea
-            fieldName="info.slogan"
-            label={t('Slogan')}
-            placeholder={t('Your motto')}
-            rows={4}
-            optional={t("Up to % words", 80)}
-          />
-          <Textarea
-            fieldName="info.info"
-            label={t('Info')}
-            placeholder={t('Tell us about your author')}
-            rows={4}
-            optional={t("Up to % words", 80)}
-          />
-          <div className="flex flex-row gap-3">
-            <FileInput
-              fieldName="file"
-              label={t('Avatar')}
-              optional={t('Up % Mb', 2)}
-            />
-            <div className="w-1/2 mt-0.45">
-              <Select
-                fieldName="openclosed"
-                label={t('Status')}
-                options={[
-                  { value: 2, label: t('Author only') },
-                  { value: 1, label: t('Closed group') },
-                  { value: 0, label: t('Open group') },
-                ]}
-              />
-            </div>
-          </div>
+          <AuthorForm />
           <button
             type="submit"
             className="btn btn-primary dark:btn-info mt-4"
