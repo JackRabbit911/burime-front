@@ -8,7 +8,7 @@ export const authorSchema = z.object({
         slogan: z.string().regex(/^[^<>;]*$/, 'Invalid input!'),
         info: z.string().regex(/^[^<>;]*$/, 'Invalid input!'),
     }),
-    openclosed: z.coerce.number(),
+    openclosed: z.coerce.number<number>(),
     owner: z.boolean().optional(),
     avatar: z.string().optional(),
     file: imageFile.nullish(),
