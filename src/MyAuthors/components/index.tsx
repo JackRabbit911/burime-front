@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import AuthorCard from "./AuthorCard"
 import { Link } from "react-router"
 
-const Authors = () => {
+const MyAuthors = () => {
   const myAuthors = useList($myAuthors, {
     fn: (author) => <AuthorCard author={author} />,
     placeholder: <h2>Здесь пока ничего нет</h2>
@@ -30,4 +30,4 @@ const Authors = () => {
   )
 }
 
-export default Authors
+export default MyAuthors
