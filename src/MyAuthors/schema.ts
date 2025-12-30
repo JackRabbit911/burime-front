@@ -1,5 +1,6 @@
 import * as z from "zod"
 import { imageFile } from "../common/schema.ts/files"
+import { member } from "../reused/Participants/schema"
 
 export const authorSchema = z.object({
     id: z.number().optional(),
@@ -12,6 +13,7 @@ export const authorSchema = z.object({
     owner: z.boolean().optional(),
     avatar: z.string().optional(),
     file: imageFile.nullish(),
+    members: z.array(member).optional()
 })
 
 export const authorOut = authorSchema.omit({
