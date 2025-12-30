@@ -1,7 +1,7 @@
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
 import { useFormContext } from "react-hook-form"
-import { $total1, getAuthorsFx } from "../store";
+import { $total1, getAuthorsFx } from "../store/authors";
 import Paginator from "../../Paginator";
 import PerPage from "../../Paginator/PerPage";
 import { perPages } from "../../../common/constants";
