@@ -5,7 +5,7 @@ export const globalReset = createEvent()
 export const $status = createStore(200)
     .reset(globalReset)
 
-    export const darkModeChanged = createEvent<boolean>()
+export const darkModeChanged = createEvent<boolean>()
 
 export const $darkMode = createStore(initDarkMode())
     .on(darkModeChanged, (_, darkMode) => darkMode)
