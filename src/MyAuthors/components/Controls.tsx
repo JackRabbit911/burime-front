@@ -2,6 +2,7 @@ import { t } from "../../common/i18n/utils"
 import Helper from "../../reused/Help"
 import { helpBtnClicked } from "../../reused/Help/store"
 import { modalOpened } from "../../reused/Modal/store"
+import { memberIdResetted } from "../../reused/Participants/store/authors"
 
 type Props = {
   status: number;
@@ -16,10 +17,12 @@ const Controls = ({ status, view, setView }: Props) => {
   }
 
   const onMembersClick = () => {
+    memberIdResetted()
     setView('members')
   }
 
   const onFormClick = () => {
+    memberIdResetted()
     setView('form')
   }
 
