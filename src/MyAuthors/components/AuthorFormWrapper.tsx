@@ -6,7 +6,7 @@ import { authorSubmitted } from "../store"
 import AuthorForm from "./AuthorForm"
 import Controls from "./Controls"
 import { useState } from "react"
-import Members from "../../reused/Participants"
+import Participants from "./Participants"
 
 type Props = {
   author?: MyAuthor;
@@ -58,7 +58,7 @@ const AuthorFormWrapper = ({ author }: Props) => {
         <fieldset className="fieldset w-full">
           {view === 'form' ?
             <AuthorForm /> :
-            <Members />
+            <Participants />
           }
           <Controls
             status={openclosed}
