@@ -7,6 +7,20 @@ export const getSimpleMembers = (members: Member[], ownAuthors: OwnAuthor[]) => 
     return members.filter((val) => (!ids.includes(val.id)))
 }
 
+export const getCurrentMember = (members: Member[], id: number): Member | null => {
+    if (members.length === 0) {
+        return null
+    }
+
+    const currentMembersArray = members.filter(
+        (author: Member) => author.id === id
+    )
+
+    return currentMembersArray.length > 0
+        ? currentMembersArray[0]
+        : null
+}
+
 export function setAuthorsPayload(limit = perPages[0]): AuthorsPayload {
     return {
         filter: null,
@@ -40,3 +54,5 @@ export const addNewMember = (
 
     return [...members, newMember]
 }
+
+export const isPermission = (role: number, permission: number) => (role & permission) !== 0 ? true : false
