@@ -27,7 +27,7 @@ export const $total = combine($authors, (authors) => authors?.count || 0)
 
 export const $memberId = createStore<number>(0)
     .on(memberIdSetted, (_, id) => id)
-    .reset(memberIdResetted)
+    .reset(memberIdResetted, globalReset)
 
 sample({
     clock: getAuthorsFx.doneData,
