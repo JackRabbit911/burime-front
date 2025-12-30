@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form"
 import { useUnit } from "effector-react"
 import Pagination from "./Pagination"
 import type { Author, AuthorsFilters } from "../schema";
-import { $authors1 } from "../store";
+import { $authors1 } from "../store/authors";
 import type { Member } from "../types";
 import { addNewMember, isInvited } from "../utils";
 import AuthorSearch from "./AuthorSearch";

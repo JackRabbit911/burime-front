@@ -1,7 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext, type FieldError, type FieldErrorsImpl, type Merge } from "react-hook-form";
 import type { AuthorsFilters } from "../schema";
-import { getAuthorsFx } from "../store";
+import { getAuthorsFx } from "../store/authors";
 import { setAuthorsPayload } from "../utils";
 
 type ErrorPayload = {
