@@ -3,19 +3,27 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { authorOut, authorSchema, type MyAuthor } from "../schema"
 import { avatarSrc } from "../utils"
 import { authorSubmitted } from "../store"
-import { t } from "../../common/i18n/utils"
 import AuthorForm from "./AuthorForm"
+import Controls from "./Controls"
+import { useState } from "react"
+import Members from "../../reused/Participants"
 
 type Props = {
   author?: MyAuthor;
 }
 
 const AuthorFormWrapper = ({ author }: Props) => {
+  const [view, setView] = useState('form')
+
   const methods = useForm({
     resolver: zodResolver(authorSchema),
     mode: "all",
     defaultValues: author
   })
+
+  const handleSwitchBtn = (data: string) => {
+    setView(data)
+  }
 
   const { alias, info, file, avatar, openclosed } = methods.watch()
 
@@ -30,8 +38,6 @@ const AuthorFormWrapper = ({ author }: Props) => {
       authorSubmitted(valid.data)
     }
   }
-
-  console.log(openclosed)
 
   return (
     <FormProvider {...methods}>
@@ -50,13 +56,15 @@ const AuthorFormWrapper = ({ author }: Props) => {
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <fieldset className="fieldset w-full">
-          <AuthorForm />
-          <button
-            type="submit"
-            className="btn btn-primary dark:btn-info mt-4"
-          >
-            {t('Save')}
-          </button>
+          {view === 'form' ?
+            <AuthorForm /> :
+            <Members />
+          }
+          <Controls
+            status={openclosed}
+            view={view}
+            setView={handleSwitchBtn}
+          />
         </fieldset>
       </form>
     </FormProvider>
