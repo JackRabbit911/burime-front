@@ -42,7 +42,11 @@ const AuthorFormWrapper = ({ author }: Props) => {
   return (
     <FormProvider {...methods}>
       <div className="flex flex-row gap-4">
-        <div className="avatar aspect-square size-24">
+        <div
+          className="avatar aspect-square size-24"
+          onClick={() => { setView('form') }}
+          style={{ cursor: 'pointer' }}
+        >
           <img src={avatarSrc(file, avatar)} />
         </div>
         <div className="flex flex-col">
