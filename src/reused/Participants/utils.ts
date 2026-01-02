@@ -1,10 +1,5 @@
 import type { Author } from "./schema"
-import type { Member, OwnAuthor } from "./types"
-
-export const getSimpleMembers = (members: Member[], ownAuthors: OwnAuthor[]) => {
-    const ids = ownAuthors.map((val) => val.id)
-    return members.filter((val) => (!ids.includes(val.id)))
-}
+import type { Member} from "./types"
 
 export const getCurrentMember = (members: Member[], id: number): Member | null => {
     if (members.length === 0) {

@@ -4,7 +4,8 @@ import type { ApiResponse } from "../../../common/ajax/types"
 import { getAuthorsUri } from "../../../common/constants"
 import ajax from "../../../common/ajax"
 import { $status, globalReset } from "../../../common/store"
-import { authorsSch, type Authors, type AuthorsPayload } from "../schema"
+import { authorsSch, type Authors } from "../schema"
+import type { AuthorsPayload } from "../types"
 
 export const authorsPageChanged = createEvent<number>()
 export const authorsLimitChanged = createEvent<number>()

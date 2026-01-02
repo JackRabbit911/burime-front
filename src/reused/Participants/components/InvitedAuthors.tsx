@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import type { Member } from "../schema";
 import { memberIdSetted } from "../store/authors";
+import type { Member } from "../types";
 
 type Props = {
   author: Member;

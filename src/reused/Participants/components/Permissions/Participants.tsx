@@ -1,6 +1,6 @@
 import { t } from "../../../../common/i18n/utils";
-import type { Member } from "../../schema";
 import { memberIdSetted } from "../../store/authors";
+import type { Member } from "../../types";
 
 type Props = {
   members: Member[];
