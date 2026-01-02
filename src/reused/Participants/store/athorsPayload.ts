@@ -4,8 +4,8 @@ import { perPages } from "../../../common/constants";
 
 export const limitSet = createEvent<number>()
 export const pageSet = createEvent<number>()
-export const searchSet = createEvent<string>()
-export const filterSet = createEvent<string>()
+export const searchSet = createEvent<string | null>()
+export const filterSet = createEvent<string | null>()
 export const authorsPayloadReset = createEvent()
 
 export const $authorsPayload = createStore<AuthorsPayload>({
