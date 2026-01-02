@@ -5,9 +5,6 @@ import PermissionsList from "../../../reused/Participants/components/Permissions
 import Participants from "../../../reused/Participants/components/Permissions/Participants";
 import { memberIdResetted } from "../../../reused/Participants/store/authors";
 import { t } from "../../../common/i18n/utils";
-import { useEffect } from "react";
-import { referenceRecived } from "../../../reused/Participants/store/reference";
-import { getGroupReferenceUri } from "../../../common/constants";
 
 type Props = {
   authorId: number;
@@ -18,12 +15,6 @@ const MembersPermissions = ({ authorId }: Props) => {
   const { getValues } = useFormContext()
   const members = getValues('members') || []
   const currentAuthor = getCurrentMember(members, authorId)
-
-  
-  useEffect(() => {
-    console.log('qq')
-    referenceRecived(getGroupReferenceUri)
-  }, [])
 
   return (
     <>
