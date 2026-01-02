@@ -8,8 +8,8 @@ type Props = {
 
 const AuthorCard = ({ author }: Props) => {
   return (
-    <div>
-      <a href={`${host}/author/${author.id}`} className="m-4">
+    <div >
+      <a href={`${host}/author/${author.id}`} className="mb-2">
         <div className="aspect-[2.5/1] flex flex-col shadow-md hover:shadow-xl rounded">
           <div className="flex flex-row justify-between h-4/5">
             <div className="avatar aspect-square">
