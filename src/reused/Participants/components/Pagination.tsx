@@ -1,25 +1,22 @@
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
-import { useFormContext } from "react-hook-form"
 import { $total1, getAuthorsFx } from "../store/authors";
 import Paginator from "../../Paginator";
 import PerPage from "../../Paginator/PerPage";
 import { perPages } from "../../../common/constants";
+import { $authorsPayload, limitSet, pageSet } from "../store/athorsPayload";
 
 const Pagination = () => {
-  const { getValues, setValue } = useFormContext();
   const total = useUnit($total1)
-  const authorsPayload = getValues('authorsPayload')
+  const authorsPayload = useUnit($authorsPayload)
 
   const setPage = (page: number) => {
-    authorsPayload.page = page
-    setValue('authorsPayload', authorsPayload, { shouldValidate: true, shouldDirty: true })
+    pageSet(page)
   }
 
   const setLimit = (limit: number) => {
+    limitSet(limit)
     authorsPayload.limit = limit
-    authorsPayload.page = 1
-    setValue('authorsPayload', authorsPayload, { shouldValidate: true, shouldDirty: true })
   }
 
   useEffect(() => {
