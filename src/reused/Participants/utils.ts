@@ -1,5 +1,4 @@
-import { perPages } from "../../common/constants"
-import type { Author, AuthorsPayload } from "./schema"
+import type { Author } from "./schema"
 import type { Member, OwnAuthor } from "./types"
 
 export const getSimpleMembers = (members: Member[], ownAuthors: OwnAuthor[]) => {
@@ -19,15 +18,6 @@ export const getCurrentMember = (members: Member[], id: number): Member | null =
     return currentMembersArray.length > 0
         ? currentMembersArray[0]
         : null
-}
-
-export function setAuthorsPayload(limit = perPages[0]): AuthorsPayload {
-    return {
-        filter: null,
-        search: null,
-        page: 1,
-        limit: limit,
-    }
 }
 
 export const isInvited = (
