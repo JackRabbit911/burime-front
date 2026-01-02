@@ -2,16 +2,18 @@ import { useFormContext } from "react-hook-form";
 import PermissionCheckBox from "./PermissionCheckBox";
 import { useUnit } from "effector-react";
 import { isPermission } from "../../utils";
-import type { Member } from "../../schema";
 import { t } from "../../../../common/i18n/utils";
 import { $referenceBooks } from "../../store/reference";
+import type { Member } from "../../types";
 
 type Props = {
   member: Member | null;
 }
 
 const PermissionsList = ({ member }: Props) => {
-  const { authorsPermissions } = useUnit($referenceBooks)
+  const referenceBooks = useUnit($referenceBooks)
+  const authorsPermissions = referenceBooks?.authorsPermissions
+
   const { setValue, getValues } = useFormContext()
 
   const members = getValues('members')
@@ -29,14 +31,12 @@ const PermissionsList = ({ member }: Props) => {
     setValue('members', newAuthors)
   }
 
-  console.log(authorsPermissions)
-
   return (
     <>
       <h3>
         {t('Permissions')}
       </h3>
-      {Object.entries(authorsPermissions).reverse().map(([label, value]) => (
+      {Object.entries(authorsPermissions ?? {}).reverse().map(([label, value]) => (
         <PermissionCheckBox
           handler={handleCheck}
           member={member}
