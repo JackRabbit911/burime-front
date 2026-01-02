@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import InvitedAuthors from "../../../reused/Participants/components/InvitedAuthors";
-import type { Member } from "../../../reused/Participants/schema";
 import { t } from "../../../common/i18n/utils";
+import type { Member } from "../../../reused/Participants/types";
 
 const Members = () => {
   const { watch } = useFormContext()
