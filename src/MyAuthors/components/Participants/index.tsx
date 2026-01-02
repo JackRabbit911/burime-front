@@ -3,15 +3,18 @@ import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice
 import Members from "./Members"
 import { $memberId1 } from "../../../reused/Participants/store/authors"
 import MembersPermissions from "./MembersPermissions.tsx"
+import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference.ts"
+import { useEffect } from "react"
+import { getGroupReferenceUri } from "../../../common/constants.ts"
 
 const Participants = () => {
   const memberId = useUnit($memberId1)
+  const referenceBooks = useUnit($referenceBooks)
+  const authorsFilters = referenceBooks?.authorsFilters
 
-  const filters = [
-    'friends',
-    'favorites',
-    'addressbook',
-  ]
+  useEffect(() => {
+    referenceRecived(getGroupReferenceUri)
+  }, [])
 
   return (
     <div className="grid md:grid-cols-3 gap-4">
@@ -22,7 +25,7 @@ const Participants = () => {
           </fieldset>
           <div className="md:col-span-2">
             <AuthorsChoice
-              filters={filters}
+              filters={authorsFilters as string[]}
             />
           </div>
         </> :
