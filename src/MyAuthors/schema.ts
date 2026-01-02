@@ -1,6 +1,12 @@
 import * as z from "zod"
 import { imageFile } from "../common/schema.ts/files"
-import { member } from "../reused/Participants/schema"
+
+const member = z.object({
+    id: z.number().int().positive(),
+    role: z.number().int().min(0).max(255),
+    status: z.number().int().min(0).max(255),
+    alias: z.string(),
+})
 
 export const authorSchema = z.object({
     id: z.number().optional(),
