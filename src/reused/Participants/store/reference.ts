@@ -12,25 +12,22 @@ export const referenceRecived = createEvent<string>()
 
 const getReferenceFx = createEffect(
     (uri: string) => {
-        console.log('lala')
         return ajax.get<ApiResponse<ReferenceBooks>>(uri)
     }
 )
 
-export const $referenceBooks = createStore<ReferenceBooks>({
-    authorsFilters: [],
-    authorsPermissions: {},
-    authorsStatuses: {},
-})
+export const $referenceBooks = createStore<ReferenceBooks | null>(null)
 
 sample({
     clock: referenceRecived,
+    source: $referenceBooks,
+    filter: (referenceBooks) => referenceBooks === null,
+    fn: (_, uri) => uri,
     target: getReferenceFx,
 })
 
 sample({
-    clock: referenceRecived,
-    source: getReferenceFx.doneData,
+    clock: getReferenceFx.doneData,
     filter: (response) => response?.data?.success,
     fn: (response) => response?.data?.result,
     target: $referenceBooks,
