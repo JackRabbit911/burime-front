@@ -16,7 +16,6 @@ const Pagination = () => {
 
   const setLimit = (limit: number) => {
     limitSet(limit)
-    authorsPayload.limit = limit
   }
 
   useEffect(() => {
