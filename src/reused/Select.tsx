@@ -6,6 +6,7 @@ type Props = {
   options: {
     value: number | string;
     label: string;
+    disabled?: boolean;
   }[];
 }
 
@@ -25,8 +26,12 @@ const Select = ({ fieldName, label, options }: Props) => {
         {...register(fieldName, { required: true })}
       >
         {options.map(
-          ({ value, label }, key) => (
-            <option value={value} key={key}>
+          ({ value, label, disabled }, key) => (
+            <option
+              key={key}
+              value={value}
+              disabled={disabled}
+            >
               {label}
             </option>
           )

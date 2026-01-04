@@ -1,10 +1,23 @@
 import { t } from "../../common/i18n/utils"
 import FileInput from "../../reused/FileInput"
+import type { Member } from "../../reused/Participants/types"
 import Select from "../../reused/Select"
 import Textarea from "../../reused/Textarea"
 import TextInput from "../../reused/TextInput"
 
-const AuthorForm = () => {
+type Props = {
+  members: Member[] | undefined;
+}
+
+const AuthorForm = ({ members }: Props) => {
+  const disabled = (members: Member[] | undefined) => {
+    if (members === undefined || members.length === 0) {
+      return false
+    }
+
+    return true
+  }
+
   return (
     <>
       <TextInput
@@ -36,7 +49,7 @@ const AuthorForm = () => {
             fieldName="openclosed"
             label={t('Status')}
             options={[
-              { value: 2, label: t('Author only') },
+              { value: 2, label: t('Author only'), disabled: disabled(members)},
               { value: 1, label: t('Closed group') },
               { value: 0, label: t('Open group') },
             ]}

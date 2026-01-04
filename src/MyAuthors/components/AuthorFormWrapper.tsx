@@ -61,7 +61,9 @@ const AuthorFormWrapper = ({ author }: Props) => {
       >
         <fieldset className="fieldset w-full">
           {view === 'form' ?
-            <AuthorForm /> :
+            <AuthorForm
+              members={methods.getValues('members')}
+            /> :
             <Participants />
           }
           <Controls
