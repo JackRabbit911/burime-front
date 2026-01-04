@@ -1,11 +1,12 @@
-import { useFormContext } from "react-hook-form";
-import InvitedAuthors from "./InvitedAuthors";
-import { changeMaster, getSimpleMembers } from "../../../utils";
 import { useEffect } from "react";
-import type { Member, OwnAuthors } from "../../../../../schema/authors";
-import { memberIdSetted } from "../../../../../store/authors";
+import { useFormContext } from "react-hook-form";
 import { getMasterAlias } from "../../../../../utils";
 import { t } from "../../../../../../common/i18n/utils";
+import { changeMaster, getSimpleMembers } from "../../../utils";
+import type { OwnAuthors } from "../../../../../schema/authors";
+import type { Member } from "../../../../../../reused/Participants/types";
+import { memberIdSetted } from "../../../../../../reused/Participants/store/authors";
+import InvitedAuthors from "../../../../../../reused/Participants/components/InvitedAuthors";
 
 type Props = {
   ownAuthors: OwnAuthors;
@@ -17,6 +18,11 @@ const Members = ({ ownAuthors }: Props) => {
   const members = watch('members')
   const authors = getSimpleMembers(members, ownAuthors)
   const masterAlias = getMasterAlias(ownAuthors, masterId)
+
+  const onDelete = (member: Member) => {
+    const newMembers = members.filter((item: Member) => item.id !== member.id)
+    setValue('members', newMembers)
+  }
 
   useEffect(() => {
     const newMembers = changeMaster(members, ownAuthors, masterId)
@@ -36,11 +42,15 @@ const Members = ({ ownAuthors }: Props) => {
         >
           {masterAlias}
         </button>
-          {authors.map(
-            (author: Member) => (
-              <InvitedAuthors author={author} key={author.id} />
-            )
-          )}
+        {authors.map(
+          (author: Member) => (
+            <InvitedAuthors
+              key={author.id}
+              author={author}
+              onDelete={onDelete}
+            />
+          )
+        )}
       </div>
     </>
   )
