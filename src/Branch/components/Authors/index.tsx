@@ -2,14 +2,21 @@ import AuthorsWrapper from "./components/AuthorsWrapper"
 import { useUnit } from "effector-react";
 import MembersPermissions from "./components/MembersPermissions";
 import type { Bootstrap } from "../../schema/input";
-import { $memberId } from "../../store/authors";
+import { $memberId1 } from "../../../reused/Participants/store/authors";
+import { useEffect } from "react";
+import { referenceRecived } from "../../../reused/Participants/store/reference";
+import { getGroupReferenceUri } from "../../../common/constants";
 
 type Props = {
   bootstrap: Bootstrap;
 }
 
 const Authors = ({ bootstrap }: Props) => {
-  const memberId = useUnit($memberId)
+  const memberId = useUnit($memberId1)
+
+  useEffect(() => {
+    referenceRecived(getGroupReferenceUri)
+  }, [])
 
   return (
     <div className="grid md:grid-cols-3 gap-4">
