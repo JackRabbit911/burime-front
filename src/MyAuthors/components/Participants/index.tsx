@@ -7,14 +7,14 @@ import { getGroupReferenceUri } from "../../../common/constants.ts"
 import type { Author } from "../../../reused/Participants/schema.ts"
 import { addNewMember } from "../../../reused/Participants/utils.ts"
 import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice"
-import { $authors1, $memberId1 } from "../../../reused/Participants/store/authors"
+import { $authors, $memberId } from "../../../reused/Participants/store/authors"
 import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference.ts"
 import { $authorsPayload } from "../../../reused/Participants/store/athorsPayload.ts"
 import type { Member } from "../../../reused/Participants/types.ts"
 
 const Participants = () => {
-  const authors = useUnit($authors1)
-  const memberId = useUnit($memberId1)
+  const authors = useUnit($authors)
+  const memberId = useUnit($memberId)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
   const authorsFilters = referenceBooks?.authorsFilters

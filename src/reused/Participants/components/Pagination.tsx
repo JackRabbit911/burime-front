@@ -1,13 +1,13 @@
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
-import { $total1, getAuthorsFx } from "../store/authors";
+import { $total, getAuthorsFx } from "../store/authors";
 import Paginator from "../../Paginator";
 import PerPage from "../../Paginator/PerPage";
 import { perPages } from "../../../common/constants";
 import { $authorsPayload, limitSet, pageSet } from "../store/athorsPayload";
 
 const Pagination = () => {
-  const total = useUnit($total1)
+  const total = useUnit($total)
   const authorsPayload = useUnit($authorsPayload)
 
   const setPage = (page: number) => {

@@ -1,15 +1,14 @@
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
 import { useFormContext } from "react-hook-form"
-import { getAuthorsFx } from "../../../../../store/authors";
 import Paginator from "../../../../../../reused/Paginator";
 import PerPage from "../../../../../../reused/Paginator/PerPage";
 import { perPages } from "../../../../../../common/constants";
-import { $total1 } from "../../../../../../reused/Participants/store/authors";
+import { $total, getAuthorsFx } from "../../../../../../reused/Participants/store/authors";
 
 const Pagination = () => {
   const { getValues, setValue } = useFormContext();
-  const total = useUnit($total1)
+  const total = useUnit($total)
   const authorsPayload = getValues('authorsPayload')
 
   const setPage = (page: number) => {

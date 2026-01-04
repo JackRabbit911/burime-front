@@ -2,7 +2,7 @@ import AuthorsWrapper from "./components/AuthorsWrapper"
 import { useUnit } from "effector-react";
 import MembersPermissions from "./components/MembersPermissions";
 import type { Bootstrap } from "../../schema/input";
-import { $memberId1 } from "../../../reused/Participants/store/authors";
+import { $memberId } from "../../../reused/Participants/store/authors";
 import { useEffect } from "react";
 import { referenceRecived } from "../../../reused/Participants/store/reference";
 import { getGroupReferenceUri } from "../../../common/constants";
@@ -12,7 +12,7 @@ type Props = {
 }
 
 const Authors = ({ bootstrap }: Props) => {
-  const memberId = useUnit($memberId1)
+  const memberId = useUnit($memberId)
 
   useEffect(() => {
     referenceRecived(getGroupReferenceUri)
