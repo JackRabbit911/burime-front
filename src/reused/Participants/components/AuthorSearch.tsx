@@ -1,16 +1,16 @@
 import { authorsFilterSearch } from "../schema";
 import { getAuthorsFx } from "../store/authors";
-import { useUnit } from "effector-react";
-import { $authorsPayload, authorsPayloadReset, filterSet, searchSet } from "../store/athorsPayload";
+import { authorsPayloadReset, filterSet, searchSet } from "../store/athorsPayload";
 import { useRef, useState, type ChangeEventHandler } from "react";
 import { t } from "../../../common/i18n/utils";
+import type { AuthorsPayload } from "../types";
 
 type Props = {
   filters: string[];
+  authorsPayload: AuthorsPayload;
 }
 
-const AuthorSearch = ({ filters }: Props) => {
-  const authorsPayload = useUnit($authorsPayload)
+const AuthorSearch = ({ filters, authorsPayload }: Props) => {
   const [error, setError] = useState<string | null>()
   const searchRef = useRef<HTMLInputElement>(null)
 
