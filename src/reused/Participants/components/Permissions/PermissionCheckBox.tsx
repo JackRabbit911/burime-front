@@ -12,9 +12,9 @@ type Props = {
 
 const PermissionCheckBox = ({ handler, member, label, value, checked }: Props) => {
   const fieldName = 'perms'
-      const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        handler(value, member?.id || 0, event.target.checked)
-      };
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handler(value, member?.id || 0, event.target.checked)
+  };
 
   return (
     <label
