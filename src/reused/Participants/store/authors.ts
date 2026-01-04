@@ -21,7 +21,7 @@ export const getAuthorsFx = createEffect
         })
 )
 
-export const $authors1 = createStore<Authors | null>(null)
+export const $authors1 = createStore<Authors>({list: [], count: 0})
     .reset(globalReset)
 
 export const $total1 = combine($authors1, (authors) => authors?.count || 0)
