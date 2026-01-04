@@ -4,9 +4,10 @@ import { useUnit } from "effector-react";
 import { buttonEnabled } from "../utils";
 import type { Member } from "../../../../../schema/authors";
 import { $permissions, $statusObj } from "../../../../../store/bootstrap";
-import { memberIdResetted } from "../../../../../store/authors";
+// import { memberIdResetted } from "../../../../../store/authors";
 import { t } from "../../../../../../common/i18n/utils";
 import { host } from "../../../../../../common/ajax";
+import { memberIdResetted } from "../../../../../../reused/Participants/store/authors";
 
 type Props = {
   member: Member | null;
