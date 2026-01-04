@@ -1,44 +1,27 @@
-import { useFormContext } from "react-hook-form";
 import PermissionCheckBox from "./PermissionCheckBox";
-import { useUnit } from "effector-react";
 import { isPermission } from "../../utils";
 import { t } from "../../../../common/i18n/utils";
-import { $referenceBooks } from "../../store/reference";
 import type { Member } from "../../types";
 
 type Props = {
   member: Member | null;
+  permissions: {
+    [index: string]: number;
+} | undefined;
+  handler: (val: number, id: number, isAdd: boolean) => void;
 }
 
-const PermissionsList = ({ member }: Props) => {
-  const referenceBooks = useUnit($referenceBooks)
-  const authorsPermissions = referenceBooks?.authorsPermissions
-
-  const { setValue, getValues } = useFormContext()
-
-  const members = getValues('members')
+const PermissionsList = ({ member, permissions, handler }: Props) => {
   const checked = (value: number): boolean => isPermission(member?.role || 0, value)
-
-  const handleCheck = (val: number, id: number, isAdd: boolean) => {
-    const newAuthors = members.map((value: Member) => {
-      if (value.id === id) {
-        value.role = isAdd ? value.role | val : value.role &= ~val
-      }
-
-      return value
-    })
-
-    setValue('members', newAuthors)
-  }
 
   return (
     <>
       <h3>
         {t('Permissions')}
       </h3>
-      {Object.entries(authorsPermissions ?? {}).reverse().map(([label, value]) => (
+      {Object.entries(permissions ?? {}).reverse().map(([label, value]) => (
         <PermissionCheckBox
-          handler={handleCheck}
+          handler={handler}
           member={member}
           label={label}
           key={`${label}.${member?.id}`}
