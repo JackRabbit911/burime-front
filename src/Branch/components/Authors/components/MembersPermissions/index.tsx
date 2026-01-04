@@ -1,11 +1,13 @@
 import { useFormContext } from "react-hook-form";
 import { getCurrentMember } from "../../utils";
-import PermissionsList from "./components/PermissionsList";
-import Participants from "./components/Participants";
 import Status from "./components/Status";
 import { useUnit } from "effector-react";
-import { memberIdResetted } from "../../../../store/authors";
 import { t } from "../../../../../common/i18n/utils";
+import PermissionsList from "../../../../../reused/Participants/components/Permissions/PermissionsList";
+import type { Member } from "../../../../../reused/Participants/types";
+import { memberIdResetted } from "../../../../../reused/Participants/store/authors";
+import { $referenceBooks } from "../../../../../reused/Participants/store/reference";
+import Participants from "../../../../../reused/Participants/components/Permissions/Participants";
 
 type Props = {
   authorId: number;
@@ -13,9 +15,24 @@ type Props = {
 
 const MembersPermissions = ({ authorId }: Props) => {
   const onClose = useUnit(memberIdResetted)
-  const { getValues } = useFormContext()
+  const referenceBooks = useUnit($referenceBooks)
+  const authorsPermissions = referenceBooks?.authorsPermissions
+
+  const { getValues, setValue } = useFormContext()
   const members = getValues('members')
   const currentAuthor = getCurrentMember(members, authorId)
+
+  const handleCheck = (val: number, id: number, isAdd: boolean) => {
+    const newMembers = members.map((value: Member) => {
+      if (value.id === id) {
+        value.role = isAdd ? value.role | val : value.role &= ~val
+      }
+
+      return value
+    })
+
+    setValue('members', newMembers)
+  }
 
   return (
     <>
@@ -34,6 +51,8 @@ const MembersPermissions = ({ authorId }: Props) => {
         <fieldset className="fieldset">
           <PermissionsList
             member={currentAuthor}
+            handler={handleCheck}
+            permissions={authorsPermissions}
           />
         </fieldset>
         <fieldset className="fieldset">
