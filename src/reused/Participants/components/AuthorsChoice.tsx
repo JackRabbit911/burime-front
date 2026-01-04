@@ -1,35 +1,34 @@
-import { useFormContext } from "react-hook-form"
-import { useUnit } from "effector-react"
 import Pagination from "./Pagination"
 import type { Author } from "../schema";
-import { $authors1 } from "../store/authors";
-import type { Member } from "../types";
-import { addNewMember, isInvited } from "../utils";
+import type { AuthorsPayload, Member } from "../types";
+import { isInvited } from "../utils";
 import AuthorSearch from "./AuthorSearch";
 
 type Props = {
   filters: string[];
+  authors: Author[];
+  members: Member[] | [];
+  authorsPayload: AuthorsPayload;
+  handler: (author: Author) => void;
 }
 
-const AuthorsChoice = ({ filters }: Props) => {
-  const authors = useUnit($authors1)
-  const { getValues, setValue } = useFormContext()
-  const members = getValues('members') || []
-
-  const inviteHandle = (members: Member[], author: Author) => () => {
-    const branchMembers = addNewMember(members, author)
-    setValue('members', branchMembers, { shouldValidate: true, shouldDirty: true })
-  }
-
+const AuthorsChoice = ({ filters, authors, members, authorsPayload, handler }: Props) => {
   return (
     <>
-      <AuthorSearch filters={filters} />
+      <AuthorSearch
+        filters={filters}
+        authorsPayload={authorsPayload}
+      />
       <div className="flex flex-wrap gap-2 mt-1">
-        {authors?.list.map((author, key) => (
+        {authors.map((author, key) => (
           <button
+            type="button"
             className="btn btn-soft btn-outline btn-sm"
             disabled={isInvited(members, author.id)}
-            onClick={inviteHandle(members, author)}
+            onClick={() => {
+              handler(author)
+            }}
+
             key={key}
           >
             {author.alias}
