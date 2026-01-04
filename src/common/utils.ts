@@ -23,3 +23,5 @@ export const getObjectProp = (object: object, key: string) => {
 
   return m;
 }
+
+export const fileToUrl = (file: File | null) => file ? URL.createObjectURL(file) : ''

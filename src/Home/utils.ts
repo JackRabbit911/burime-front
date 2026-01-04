@@ -4,6 +4,7 @@ const titles: { [key: string]: string } = {
   drafts: 'My Drafts',
   messages: 'My Messages',
   authors: 'My Authors',
+  author: 'My Author',
 }
 
 export function getTitle (segment: string, branchId: string | undefined): string {

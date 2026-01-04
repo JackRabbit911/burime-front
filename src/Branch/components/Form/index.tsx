@@ -11,7 +11,6 @@ import Steps from "../Steps";
 import Title from "../Title";
 import Genres from "../Genres";
 import StepControls from "../StepControls";
-import Modal from "../../../reused/Modal";
 import Publish from "../Publish";
 import Rules from "../Rules";
 import Authors from "../Authors";
@@ -48,7 +47,6 @@ const Form = ({ bootstrap }: Props) => {
         {step === 4 ? <Cover /> : null}
         {step === 5 ? <Publish /> : null}
         <StepControls step={step} />
-        <Modal />
     </FormProvider>
   )
 }

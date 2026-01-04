@@ -5,11 +5,13 @@ import Message from "../../reused/icons/Message"
 import Stat from "../../reused/Stat"
 import { $myStat, getMyStatFx } from "../store"
 import { useUnit } from "effector-react"
+import { globalReset } from "../../common/store"
 
 const Home = () => {
   const stat = useUnit($myStat)
 
   useEffect(() => {
+    globalReset()
     getMyStatFx()
   }, [])
 

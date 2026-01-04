@@ -1,6 +1,7 @@
 import { createEffect, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
+import { getMyStatUri } from "../common/constants";
 
 type MyStat = {
     books: {
@@ -20,7 +21,7 @@ type MyStat = {
 }
 
 export const getMyStatFx = createEffect(() => (
-    ajax.get<ApiResponse<MyStat>>('/my/stat')
+    ajax.get<ApiResponse<MyStat>>(getMyStatUri)
 ))
 
 export const $myStat = createStore<MyStat | null>(null)

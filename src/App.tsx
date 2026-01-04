@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router"
 import Router from "./Home/components/Router"
 import Wrapper from "./Home/components/Wrapper"
+import Modal from "./reused/Modal";
 
 function App() {
   const prefix = () => {
@@ -14,6 +15,7 @@ function App() {
       <Wrapper>
         <Router />
       </Wrapper>
+      <Modal />
     </BrowserRouter>
   )
 }

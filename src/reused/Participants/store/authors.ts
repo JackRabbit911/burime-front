@@ -1,10 +1,11 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector"
 import type { AxiosError, AxiosResponse } from "axios"
-import { authorsSch, type Authors, type AuthorsPayload } from "../schema/authors"
-import type { ApiResponse } from "../../common/ajax/types"
-import { getAuthorsUri } from "../../common/constants"
-import ajax from "../../common/ajax"
-import { $status, globalReset } from "../../common/store"
+import type { ApiResponse } from "../../../common/ajax/types"
+import { getAuthorsUri } from "../../../common/constants"
+import ajax from "../../../common/ajax"
+import { $status, globalReset } from "../../../common/store"
+import { authorsSch, type Authors } from "../schema"
+import type { AuthorsPayload } from "../types"
 
 export const authorsPageChanged = createEvent<number>()
 export const authorsLimitChanged = createEvent<number>()
@@ -20,12 +21,12 @@ export const getAuthorsFx = createEffect
         })
 )
 
-export const $authors = createStore<Authors | null>(null)
+export const $authors1 = createStore<Authors>({list: [], count: 0})
     .reset(globalReset)
 
-export const $total = combine($authors, (authors) => authors?.count || 0)
+export const $total1 = combine($authors1, (authors) => authors?.count || 0)
 
-export const $memberId = createStore<number>(0)
+export const $memberId1 = createStore<number>(0)
     .on(memberIdSetted, (_, id) => id)
     .reset(memberIdResetted, globalReset)
 
@@ -62,6 +63,6 @@ sample({
     clock: getAuthorsFx.doneData,
     filter: (response) => response?.data?.success,
     fn: (response) => response?.data?.result,
-    target: $authors,
+    target: $authors1,
 })
 
