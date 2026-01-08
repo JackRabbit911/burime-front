@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from "effector";
+import { combine, createEffect, createEvent, createStore, sample } from "effector";
 import type { ApiResponse } from "../common/ajax/types";
 import ajax from "../common/ajax";
 import { globalReset } from "../common/store";
@@ -26,6 +26,14 @@ export const getMyAuthorsFx = createEffect(() => (
 export const $myAuthors = createStore<MyAuthor[]>([])
     .reset(globalReset)
 
+export const $ownAuthors = combine($myAuthors, (store) => (
+    store.filter((value) => value.owner === true && value.openclosed === 2)
+        .map((value) => ({
+            id: value.id,
+            alias: value.alias,
+        }))
+))
+
 sample({
     clock: getMyAuthorsFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
@@ -47,6 +55,6 @@ sample({
 sample({
     clock: saveMyAuthorFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: () => successDialog({link: 'authors'}),
+    fn: () => successDialog({ link: 'authors' }),
     target: modalOpened,
 })
