@@ -1,20 +1,23 @@
 import { useEffect } from "react"
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
-import Members from "../../../reused/Participants/components/Members.tsx"
+import { $ownAuthors } from "../../store.ts"
 import MembersPermissions from "./MembersPermissions.tsx"
 import { getGroupReferenceUri } from "../../../common/constants.ts"
+import type { Member } from "../../../reused/Participants/types.ts"
 import type { Author } from "../../../reused/Participants/schema.ts"
 import { addNewMember } from "../../../reused/Participants/utils.ts"
-import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice"
+import Select from "../../../reused/Participants/components/Select.tsx"
+import Members from "../../../reused/Participants/components/Members.tsx"
 import { $authors, $memberId } from "../../../reused/Participants/store/authors"
-import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference.ts"
+import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice"
 import { $authorsPayload } from "../../../reused/Participants/store/athorsPayload.ts"
-import type { Member } from "../../../reused/Participants/types.ts"
+import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference.ts"
 
 const Participants = () => {
   const authors = useUnit($authors)
   const memberId = useUnit($memberId)
+  const ownAuthors = useUnit($ownAuthors)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
   const authorsFilters = referenceBooks?.authorsFilters
@@ -41,10 +44,15 @@ const Participants = () => {
       {memberId === 0 ?
         <>
           <fieldset className="fieldset">
-              <Members
-                members={members}
-                onDelete={onDelete}
-              />
+            <Select
+              fieldName="masterId"
+              label="Team leader"
+              options={ownAuthors}
+            />
+            <Members
+              members={members}
+              onDelete={onDelete}
+            />
           </fieldset>
           <div className="md:col-span-2">
             <AuthorsChoice
