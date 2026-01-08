@@ -12,7 +12,7 @@ const Members = ({ members, onDelete }: Props) => {
     <>
       <div>
         <legend className="fieldset-legend">
-          <span>{t('Pemissions & status')}</span>
+          <span>{t('Participants')}</span>
         </legend>
       </div>
       <div className="flex flex-col gap-2">
