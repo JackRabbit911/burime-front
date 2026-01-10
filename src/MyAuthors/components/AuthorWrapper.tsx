@@ -1,6 +1,6 @@
 import { useUnit } from "effector-react"
 import { useParams } from "react-router"
-import { $myAuthors, getMyAuthorsFx } from "../store"
+import { $myAuthors, getMyAuthorsFx, getMyMembersFx } from "../store"
 import { useEffect } from "react"
 import AuthorFormWrapper from "./AuthorFormWrapper"
 
@@ -13,9 +13,11 @@ const AuthorWrapper = () => {
     if (id && !author) {
       getMyAuthorsFx()
     }
+
+    getMyMembersFx(id)
   }, [])
 
-  return author ? <AuthorFormWrapper author={author} /> :
+  return author ? <AuthorFormWrapper defaultAuthor={author} /> :
     ( id ? null : <AuthorFormWrapper />)
 }
 
