@@ -1,34 +1,41 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { authorOut, authorSchema, type MyAuthor } from "../schema"
+import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
 import { avatarSrc } from "../utils"
-import { authorSubmitted } from "../store"
+import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
 import AuthorForm from "./AuthorForm"
 import Controls from "./Controls"
 import { useState } from "react"
 import Participants from "./Participants"
+import { useUnit } from "effector-react"
 
 type Props = {
-  author?: MyAuthor;
+  defaultAuthor?: MyAuthor;
 }
 
-const AuthorFormWrapper = ({ author }: Props) => {
+const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
+  const members = useUnit($myMembers)
+  const ownAuthors = useUnit($ownAuthors)
   const [view, setView] = useState('form')
 
   const methods = useForm({
-    resolver: zodResolver(authorSchema),
+    resolver: zodResolver(formInputSchema),
     mode: "all",
-    defaultValues: author
+    defaultValues: {
+      author: defaultAuthor,
+      members: members,
+      masterId: ownAuthors[0]?.id ?? 0
+    }
   })
 
   const handleSwitchBtn = (data: string) => {
     setView(data)
   }
 
-  const { alias, info, file, avatar, openclosed } = methods.watch()
+  const { author, file } = methods.watch()
 
-  const onSubmit: SubmitHandler<MyAuthor> = (data) => {
-    const valid = authorOut.safeParse(data)
+  const onSubmit: SubmitHandler<FormInputType> = (data) => {
+    const valid = formOutputSchema.safeParse(data)
 
     if (valid?.error) {
       console.log(valid.error, data, methods.getValues())
@@ -47,13 +54,13 @@ const AuthorFormWrapper = ({ author }: Props) => {
           onClick={() => { setView('form') }}
           style={{ cursor: 'pointer' }}
         >
-          <img src={avatarSrc(file, avatar)} />
+          <img src={avatarSrc(file, author?.avatar)} />
         </div>
         <div className="flex flex-col">
           <h2 className="text-xl">
-            {alias}
+            {author?.alias}
           </h2>
-          <p className="flex italic h-full items-center">{info.slogan}</p>
+          <p className="flex italic h-full items-center">{author?.info.slogan}</p>
         </div>
       </div>
       <form
@@ -67,7 +74,7 @@ const AuthorFormWrapper = ({ author }: Props) => {
             <Participants />
           }
           <Controls
-            status={openclosed}
+            status={author?.openclosed ?? 2}
             view={view}
             setView={handleSwitchBtn}
           />
