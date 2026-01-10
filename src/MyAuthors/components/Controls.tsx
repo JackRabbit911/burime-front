@@ -1,7 +1,9 @@
+import { useFormContext } from "react-hook-form"
 import { t } from "../../common/i18n/utils"
+import { submitDisabled } from "../utils"
 import Helper from "../../reused/Help"
-import { helpBtnClicked } from "../../reused/Help/store"
 import { modalOpened } from "../../reused/Modal/store"
+import { helpBtnClicked } from "../../reused/Help/store"
 import { memberIdResetted } from "../../reused/Participants/store/authors"
 
 type Props = {
@@ -11,6 +13,9 @@ type Props = {
 }
 
 const Controls = ({ status, view, setView }: Props) => {
+  const { getValues, formState: { errors } } = useFormContext()
+  const author = getValues('author')
+
   const onHelpClick = (path: string) => () => {
     helpBtnClicked(path)
     modalOpened(<Helper path={path} />)
@@ -62,6 +67,7 @@ const Controls = ({ status, view, setView }: Props) => {
       <button
         type="submit"
         className="btn btn-primary dark:btn-info"
+        disabled={submitDisabled(author, errors)}
       >
         {t('Save')}
       </button>
