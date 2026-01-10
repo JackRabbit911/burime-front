@@ -1,9 +1,9 @@
 import { t } from "../../common/i18n/utils"
-import FileInput from "../../reused/FileInput"
-import type { Member } from "../../reused/Participants/types"
 import Select from "../../reused/Select"
 import Textarea from "../../reused/Textarea"
+import FileInput from "../../reused/FileInput"
 import TextInput from "../../reused/TextInput"
+import type { Member } from "../../reused/Participants/types"
 
 type Props = {
   members: Member[] | undefined;
@@ -22,17 +22,17 @@ const AuthorForm = ({ members }: Props) => {
     <>
       <TextInput
         label="Alias"
-        fieldName="alias"
+        fieldName="author.alias"
       />
       <Textarea
-        fieldName="info.slogan"
+        fieldName="author.info.slogan"
         label={t('Slogan')}
         placeholder={t('Your motto')}
         rows={4}
         optional={t("Up to % words", 80)}
       />
       <Textarea
-        fieldName="info.info"
+        fieldName="author.info.info"
         label={t('Info')}
         placeholder={t('Tell us about your author')}
         rows={4}
@@ -46,7 +46,7 @@ const AuthorForm = ({ members }: Props) => {
         />
         <div className="w-1/2 mt-0.45">
           <Select
-            fieldName="openclosed"
+            fieldName="author.openclosed"
             label={t('Status')}
             options={[
               { value: 2, label: t('Author only'), disabled: disabled(members)},
