@@ -68,21 +68,22 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
         </div>
       </div>
       <form
+        className="w-full"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
-        <fieldset className="fieldset w-full">
+        <fieldset className="fieldset">
           {view === 'form' ?
             <AuthorForm
               members={methods.getValues('members')}
             /> :
             <Participants />
           }
-          <Controls
-            status={author?.openclosed ?? 2}
-            view={view}
-            setView={handleSwitchBtn}
-          />
         </fieldset>
+        <Controls
+          status={author?.openclosed ?? 2}
+          view={view}
+          setView={handleSwitchBtn}
+        />
       </form>
     </FormProvider>
   )

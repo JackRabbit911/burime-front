@@ -41,7 +41,7 @@ const Controls = ({ status, view, setView }: Props) => {
   }
 
   return (
-    <div className="flex justify-end gap-2 mt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
       <button
         type="button"
         onClick={onHelpClick('create_author')}
@@ -53,7 +53,7 @@ const Controls = ({ status, view, setView }: Props) => {
         <button
           type="button"
           className="btn"
-          disabled={status==2}
+          disabled={status == 2}
           onClick={onMembersClick}
         >
           {t('Participants')}
@@ -61,7 +61,7 @@ const Controls = ({ status, view, setView }: Props) => {
         <button
           type="button"
           className="btn"
-          disabled={status==2}
+          disabled={status == 2}
           onClick={onFormClick}
         >
           {t('Author form')}
@@ -80,13 +80,15 @@ const Controls = ({ status, view, setView }: Props) => {
       >
         {t('Delete')}
       </button>
-      <button
-        type="submit"
-        className="btn btn-primary dark:btn-info"
-        disabled={submitDisabled(author, errors)}
-      >
-        {t('Save')}
-      </button>
+      <div className="col-span-2 md:col-start-3">
+        <button
+          type="submit"
+          className="btn btn-primary dark:btn-info w-full"
+          disabled={submitDisabled(author, errors)}
+        >
+          {t('Save')}
+        </button>
+      </div>
     </div>
   )
 }
