@@ -5,7 +5,7 @@ import { avatarSrc } from "../utils"
 import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
 import AuthorForm from "./AuthorForm"
 import Controls from "./Controls"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Participants from "./Participants"
 import { useUnit } from "effector-react"
 
@@ -45,6 +45,10 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
       authorSubmitted(valid.data)
     }
   }
+
+  useEffect(() => {
+    methods.setValue('members', members)
+  }, [members])
 
   return (
     <FormProvider {...methods}>
