@@ -5,6 +5,7 @@ import Helper from "../../reused/Help"
 import { modalOpened } from "../../reused/Modal/store"
 import { helpBtnClicked } from "../../reused/Help/store"
 import { memberIdResetted } from "../../reused/Participants/store/authors"
+import ConfirmDialog from "../../reused/InModal/ConfirmDialog"
 
 type Props = {
   status: number;
@@ -29,6 +30,14 @@ const Controls = ({ status, view, setView }: Props) => {
   const onFormClick = () => {
     memberIdResetted()
     setView('form')
+  }
+
+  const onCancel = () => {
+    modalOpened(
+      <ConfirmDialog
+        text='Author/Group creation/editing will be cancelled'
+      />
+    )
   }
 
   return (
@@ -58,6 +67,13 @@ const Controls = ({ status, view, setView }: Props) => {
           {t('Author form')}
         </button>
       }
+      <button
+        type="button"
+        className="btn btn-error"
+        onClick={onCancel}
+      >
+        {t('Cancel')}
+      </button>
       <button
         type="button"
         className="btn btn-error"
