@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
-import { $ownAuthors } from "../../store.ts"
+import { $ownAuthors } from "../../store/index.ts"
 import MembersPermissions from "./MembersPermissions.tsx"
 import { getGroupReferenceUri } from "../../../common/constants.ts"
 import type { Member } from "../../../reused/Participants/types.ts"
