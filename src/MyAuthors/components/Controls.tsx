@@ -1,11 +1,13 @@
+import { useParams } from "react-router"
 import { useFormContext } from "react-hook-form"
-import { t } from "../../common/i18n/utils"
 import { submitDisabled } from "../utils"
+import { authorDeleteFx } from "../store/delete"
+import { t } from "../../common/i18n/utils"
 import Helper from "../../reused/Help"
-import { modalOpened } from "../../reused/Modal/store"
 import { helpBtnClicked } from "../../reused/Help/store"
-import { memberIdResetted } from "../../reused/Participants/store/authors"
 import ConfirmDialog from "../../reused/InModal/ConfirmDialog"
+import { closeBtn, modalOpened } from "../../reused/Modal/store"
+import { memberIdResetted } from "../../reused/Participants/store/authors"
 
 type Props = {
   status: number;
@@ -14,6 +16,7 @@ type Props = {
 }
 
 const Controls = ({ status, view, setView }: Props) => {
+  const { id } = useParams()
   const { getValues, formState: { errors } } = useFormContext()
   const author = getValues('author')
 
@@ -36,6 +39,25 @@ const Controls = ({ status, view, setView }: Props) => {
     modalOpened(
       <ConfirmDialog
         text='Author/Group creation/editing will be cancelled'
+      />
+    )
+  }
+
+  const onDelete = () => {
+    const onYes = () => {
+      const promise = authorDeleteFx(id)
+      closeBtn(true)
+      promise.then((response) => response.data.result)
+        .then((result) => {
+          modalOpened(result)
+        })
+    }
+
+    modalOpened(
+      <ConfirmDialog
+        text='Your author/group will be deleted'
+        onYes={onYes}
+        link='authors'
       />
     )
   }
@@ -77,6 +99,7 @@ const Controls = ({ status, view, setView }: Props) => {
       <button
         type="button"
         className="btn btn-error"
+        onClick={onDelete}
       >
         {t('Delete')}
       </button>
