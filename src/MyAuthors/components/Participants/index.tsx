@@ -44,11 +44,12 @@ const Participants = () => {
       {memberId === 0 ?
         <>
           <fieldset className="fieldset">
+            {ownAuthors.length > 0 ?
             <Select
               fieldName="masterId"
               label="Team leader"
               options={ownAuthors}
-            />
+            /> : null}
             <Members
               members={members}
               onDelete={onDelete}
