@@ -24,20 +24,19 @@ export const isInvited = (
     )
 )
 
-export const addNewMember = (
-    members: Member[],
-    author: Author,
-    role: number = 1,
-    status: number = 110
-) => {
-    const newMember = {
-        id: author.id,
-        role: role,
-        status: status,
+const newMember = (author: Author) => ({
+    id: author.id,
+        role: 1,
+        status: 110,
         alias: author.alias,
-    }
+})
 
-    return [...members, newMember]
+export const addNewMember = (members: Member[], author: Author) => [...members, newMember(author)]
+
+export const addGroupMembers = (members: Member[], group: Author[]) => {
+    const groupMembers = group.map((author) => newMember(author))
+    const mergedMembers = [...members, ...groupMembers]
+    return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
 }
 
 export const isPermission = (role: number, permission: number) => (role & permission) !== 0 ? true : false
