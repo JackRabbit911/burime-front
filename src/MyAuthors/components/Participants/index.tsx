@@ -6,13 +6,14 @@ import MembersPermissions from "./MembersPermissions.tsx"
 import { getGroupReferenceUri } from "../../../common/constants.ts"
 import type { Member } from "../../../reused/Participants/types.ts"
 import type { Author } from "../../../reused/Participants/schema.ts"
-import { addNewMember } from "../../../reused/Participants/utils.ts"
+import { addGroupMembers, addNewMember } from "../../../reused/Participants/utils.ts"
 import Select from "../../../reused/Participants/components/Select.tsx"
 import Members from "../../../reused/Participants/components/Members.tsx"
 import { $authors, $memberId } from "../../../reused/Participants/store/authors"
 import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice"
 import { $authorsPayload } from "../../../reused/Participants/store/athorsPayload.ts"
 import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference.ts"
+import { getGroupMembersFx } from "../../../reused/Participants/store/groupMembers.ts"
 
 const Participants = () => {
   const authors = useUnit($authors)
@@ -25,10 +26,21 @@ const Participants = () => {
   const { getValues, setValue } = useFormContext()
   const members = getValues('members') || []
 
-  const onChoice = (author: Author) => {
+  const onChoiceAuthor = (author: Author) => {
     const newMembers = addNewMember(members, author)
     setValue('members', newMembers, { shouldValidate: true, shouldDirty: true })
   }
+
+  const onChoiceGroup = (author: Author) => {
+    const promise = getGroupMembersFx(author.id)
+    promise.then((response) => response.data.result)
+      .then((result) => {
+        const newMembers = addGroupMembers(members, result)
+        setValue('members', newMembers, { shouldValidate: true, shouldDirty: true })
+      })
+  }
+
+  const onChoice = authorsPayload.filter === 'groups' ? onChoiceGroup : onChoiceAuthor
 
   const onDelete = (member: Member) => {
     const newMembers = members.filter((item: Member) => item.id !== member.id)
@@ -45,11 +57,11 @@ const Participants = () => {
         <>
           <fieldset className="fieldset">
             {ownAuthors.length > 0 ?
-            <Select
-              fieldName="masterId"
-              label="Team leader"
-              options={ownAuthors}
-            /> : null}
+              <Select
+                fieldName="masterId"
+                label="Team leader"
+                options={ownAuthors}
+              /> : null}
             <Members
               members={members}
               onDelete={onDelete}
