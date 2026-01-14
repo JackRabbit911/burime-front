@@ -11,3 +11,8 @@ export type AuthorsPayload = {
     filter: string | null;
     search: string | null;
 }
+
+export type OwnAuthor = {
+    id: number | undefined;
+    alias: string;
+}

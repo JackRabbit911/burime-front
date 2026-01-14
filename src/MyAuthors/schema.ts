@@ -8,7 +8,7 @@ const member = z.object({
     alias: z.string(),
 })
 
-export const authorSchema = z.object({
+const authorSchema = z.object({
     id: z.number().optional(),
     alias: z.string().trim().min(1, { message: 'Required' }).regex(/^[^<>;]*$/, 'Invalid input!'),
     info: z.object({
@@ -18,14 +18,34 @@ export const authorSchema = z.object({
     openclosed: z.coerce.number<number>(),
     owner: z.boolean().optional(),
     avatar: z.string().optional(),
+})
+
+export const formInputSchema = z.object({
+    author: authorSchema,
+    masterId: z.number(),
     file: imageFile.nullish(),
     members: z.array(member).optional()
 })
 
-export const authorOut = authorSchema.omit({
-    owner: true,
-    avatar: true,
+const authorOutSch = authorSchema.transform((input) => ({
+    id: input.id,
+    alias: input.alias,
+    info: input.info,
+    openclosed: input.openclosed,
+}))
+
+const slimMember = member.transform((input) => ({
+    child_id: input.id,
+    role: input.role,
+    status: input.status,
+}))
+
+export const formOutputSchema = z.object({
+    author: authorOutSch,
+    file: imageFile.nullish(),
+    members: z.array(slimMember).optional(),
 })
 
+export type FormInputType = z.infer<typeof formInputSchema>
 export type MyAuthor = z.infer<typeof authorSchema>
-export type MyAuthorOut = z.infer<typeof authorOut>
+export type FormOutputType = z.infer<typeof formOutputSchema>

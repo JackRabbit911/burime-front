@@ -21,12 +21,12 @@ export const getAuthorsFx = createEffect
         })
 )
 
-export const $authors1 = createStore<Authors>({list: [], count: 0})
+export const $authors = createStore<Authors>({list: [], count: 0})
     .reset(globalReset)
 
-export const $total1 = combine($authors1, (authors) => authors?.count || 0)
+export const $total = combine($authors, (authors) => authors?.count || 0)
 
-export const $memberId1 = createStore<number>(0)
+export const $memberId = createStore<number>(0)
     .on(memberIdSetted, (_, id) => id)
     .reset(memberIdResetted, globalReset)
 
@@ -63,6 +63,6 @@ sample({
     clock: getAuthorsFx.doneData,
     filter: (response) => response?.data?.success,
     fn: (response) => response?.data?.result,
-    target: $authors1,
+    target: $authors,
 })
 

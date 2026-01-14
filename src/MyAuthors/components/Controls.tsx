@@ -1,7 +1,12 @@
+import { useParams } from "react-router"
+import { useFormContext } from "react-hook-form"
+import { submitDisabled } from "../utils"
+import { authorDeleteFx } from "../store/delete"
 import { t } from "../../common/i18n/utils"
 import Helper from "../../reused/Help"
 import { helpBtnClicked } from "../../reused/Help/store"
-import { modalOpened } from "../../reused/Modal/store"
+import ConfirmDialog from "../../reused/InModal/ConfirmDialog"
+import { closeBtn, modalOpened } from "../../reused/Modal/store"
 import { memberIdResetted } from "../../reused/Participants/store/authors"
 
 type Props = {
@@ -11,6 +16,10 @@ type Props = {
 }
 
 const Controls = ({ status, view, setView }: Props) => {
+  const { id } = useParams()
+  const { getValues, formState: { errors } } = useFormContext()
+  const author = getValues('author')
+
   const onHelpClick = (path: string) => () => {
     helpBtnClicked(path)
     modalOpened(<Helper path={path} />)
@@ -26,8 +35,35 @@ const Controls = ({ status, view, setView }: Props) => {
     setView('form')
   }
 
+  const onCancel = () => {
+    modalOpened(
+      <ConfirmDialog
+        text='Author/Group creation/editing will be cancelled'
+      />
+    )
+  }
+
+  const onDelete = () => {
+    const onYes = () => {
+      const promise = authorDeleteFx(id)
+      closeBtn(true)
+      promise.then((response) => response.data.result)
+        .then((result) => {
+          modalOpened(result)
+        })
+    }
+
+    modalOpened(
+      <ConfirmDialog
+        text='Your author/group will be deleted'
+        onYes={onYes}
+        link='authors'
+      />
+    )
+  }
+
   return (
-    <div className="flex justify-end gap-2 mt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
       <button
         type="button"
         onClick={onHelpClick('create_author')}
@@ -39,7 +75,7 @@ const Controls = ({ status, view, setView }: Props) => {
         <button
           type="button"
           className="btn"
-          disabled={status==2}
+          disabled={status == 2}
           onClick={onMembersClick}
         >
           {t('Participants')}
@@ -47,7 +83,7 @@ const Controls = ({ status, view, setView }: Props) => {
         <button
           type="button"
           className="btn"
-          disabled={status==2}
+          disabled={status == 2}
           onClick={onFormClick}
         >
           {t('Author form')}
@@ -56,15 +92,26 @@ const Controls = ({ status, view, setView }: Props) => {
       <button
         type="button"
         className="btn btn-error"
+        onClick={onCancel}
+      >
+        {t('Cancel')}
+      </button>
+      <button
+        type="button"
+        className="btn btn-error"
+        onClick={onDelete}
       >
         {t('Delete')}
       </button>
-      <button
-        type="submit"
-        className="btn btn-primary dark:btn-info"
-      >
-        {t('Save')}
-      </button>
+      <div className="col-span-2 md:col-start-3">
+        <button
+          type="submit"
+          className="btn btn-primary dark:btn-info w-full"
+          disabled={submitDisabled(author, errors)}
+        >
+          {t('Save')}
+        </button>
+      </div>
     </div>
   )
 }

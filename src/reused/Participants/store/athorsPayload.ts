@@ -1,6 +1,7 @@
 import { createEvent, createStore } from "effector";
 import type { AuthorsPayload } from "../types";
 import { perPages } from "../../../common/constants";
+import { globalReset } from "../../../common/store";
 
 export const limitSet = createEvent<number>()
 export const pageSet = createEvent<number>()
@@ -26,7 +27,7 @@ export const $authorsPayload = createStore<AuthorsPayload>({
     const updatedStore = { ...store }
     updatedStore.search = search
     return updatedStore
-}).on(authorsPayloadReset, (store) => {
+}).on([authorsPayloadReset, globalReset], (store) => {
     const updatedStore = { ...store }
     updatedStore.page = 1
     updatedStore.search = null

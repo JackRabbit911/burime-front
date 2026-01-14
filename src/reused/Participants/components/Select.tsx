@@ -1,10 +1,10 @@
 import { useFormContext } from "react-hook-form";
-import type { OwnAuthors } from "../../../../../schema/authors";
+import type { OwnAuthor } from "../types";
 
 type Props = {
   fieldName: string;
   label: string;
-  options: OwnAuthors;
+  options: OwnAuthor[];
 }
 
 const Select = ({ fieldName, label, options }: Props) => {

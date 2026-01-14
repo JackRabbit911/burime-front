@@ -45,10 +45,10 @@ const FileInput = ({ fieldName, label, optional }: Props) => {
           )}
         />
         <div className="join w-full border border-zinc-600 rounded-sm">
-        {/* <div className="join w-full border border-red-500 rounded-sm"> */}
           <div className="w-1/2 sm:w-1/3 bg-base-300 text-center flex flex-col justify-center">Выберите файл</div>
           <div className="w-1/2 sm:w-2/3 text-center  flex flex-col justify-center">{fileName}</div>
           <button
+            type="button"
             className="btn basis-1/4 join-item"
             onClick={() => reset(fieldName)}
           >

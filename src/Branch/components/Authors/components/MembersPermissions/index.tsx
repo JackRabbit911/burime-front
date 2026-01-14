@@ -1,21 +1,35 @@
-import { useFormContext } from "react-hook-form";
-import { getCurrentMember } from "../../utils";
-import PermissionsList from "./components/PermissionsList";
-import Participants from "./components/Participants";
-import Status from "./components/Status";
 import { useUnit } from "effector-react";
-import { memberIdResetted } from "../../../../store/authors";
+import { useFormContext } from "react-hook-form";
+import Status from "./Status";
+import { getCurrentMember } from "../../utils";
 import { t } from "../../../../../common/i18n/utils";
+import type { Member } from "../../../../../reused/Participants/types";
+import { $referenceBooks } from "../../../../../reused/Participants/store/reference";
+import { $memberId, memberIdResetted } from "../../../../../reused/Participants/store/authors";
+import Participants from "../../../../../reused/Participants/components/Permissions/Participants";
+import PermissionsList from "../../../../../reused/Participants/components/Permissions/PermissionsList";
 
-type Props = {
-  authorId: number;
-}
-
-const MembersPermissions = ({ authorId }: Props) => {
+const MembersPermissions = () => {
+  const authorId = useUnit($memberId)
   const onClose = useUnit(memberIdResetted)
-  const { getValues } = useFormContext()
+  const referenceBooks = useUnit($referenceBooks)
+  const authorsPermissions = referenceBooks?.authorsPermissions
+
+  const { getValues, setValue } = useFormContext()
   const members = getValues('members')
   const currentAuthor = getCurrentMember(members, authorId)
+
+  const handleCheck = (val: number, id: number, isAdd: boolean) => {
+    const newMembers = members.map((value: Member) => {
+      if (value.id === id) {
+        value.role = isAdd ? value.role | val : value.role &= ~val
+      }
+
+      return value
+    })
+
+    setValue('members', newMembers)
+  }
 
   return (
     <>
@@ -34,6 +48,8 @@ const MembersPermissions = ({ authorId }: Props) => {
         <fieldset className="fieldset">
           <PermissionsList
             member={currentAuthor}
+            handler={handleCheck}
+            permissions={authorsPermissions}
           />
         </fieldset>
         <fieldset className="fieldset">

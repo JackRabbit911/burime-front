@@ -1,5 +1,7 @@
+import type { FieldErrors, FieldValues } from "react-hook-form"
 import { host } from "../common/ajax"
-import { fileToUrl } from "../common/utils"
+import { fileToUrl, isObjectEmpty } from "../common/utils"
+import type { Author } from "../reused/Participants/schema"
 
 export const avatarSrc = (
     file: File | null | undefined,
@@ -8,3 +10,7 @@ export const avatarSrc = (
         (src ? `${host}/${src}` :
             `${host}/avatar/no_avatar.jpg`)
 }
+
+export const submitDisabled = (author: Author | undefined, errors: FieldErrors<FieldValues>) => (
+    author === undefined || author?.alias == '' || !isObjectEmpty(errors)
+)

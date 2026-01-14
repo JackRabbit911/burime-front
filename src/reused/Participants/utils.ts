@@ -1,5 +1,5 @@
 import type { Author } from "./schema"
-import type { Member} from "./types"
+import type { Member } from "./types"
 
 export const getCurrentMember = (members: Member[], id: number): Member | null => {
     if (members.length === 0) {
@@ -24,20 +24,52 @@ export const isInvited = (
     )
 )
 
-export const addNewMember = (
-    members: Member[],
-    author: Author,
-    role: number = 1,
-    status: number = 110
-) => {
-    const newMember = {
-        id: author.id,
-        role: role,
-        status: status,
+const newMember = (author: Author) => ({
+    id: author.id,
+        role: 1,
+        status: 110,
         alias: author.alias,
-    }
+})
 
-    return [...members, newMember]
+export const addNewMember = (members: Member[], author: Author) => [...members, newMember(author)]
+
+export const addGroupMembers = (members: Member[], group: Author[]) => {
+    const groupMembers = group.map((author) => newMember(author))
+    const mergedMembers = [...members, ...groupMembers]
+    return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
 }
 
 export const isPermission = (role: number, permission: number) => (role & permission) !== 0 ? true : false
+
+export const changeMaster = (members: Member[], ownAuthors: Author[], masterId: number) => {
+    const ownAuthorsIds: number[] = []
+    let masterAlias = ''
+
+    ownAuthors.forEach((ownAuthor) => {
+        ownAuthorsIds.push(ownAuthor?.id)
+
+        if (ownAuthor.id === Number(masterId)) {
+            masterAlias = ownAuthor.alias
+        }
+    })
+
+    const result = members.map((member) => {
+        if (ownAuthorsIds.includes(member.id)) {
+            member.id = Number(masterId)
+            member.alias = masterAlias
+        }
+
+        return member
+    })
+
+    if (members.length === 0) {
+        result.push({
+            id: masterId,
+            role: 255,
+            status: 200,
+            alias: masterAlias,
+        })
+    }
+
+    return result;
+}

@@ -15,7 +15,7 @@ import Publish from "../Publish";
 import Rules from "../Rules";
 import Authors from "../Authors";
 import Cover from "../Cover";
-import { $memberId } from "../../store/authors";
+import { $memberId } from "../../../reused/Participants/store/authors";
 
 type Props = {
   bootstrap: Bootstrap;
