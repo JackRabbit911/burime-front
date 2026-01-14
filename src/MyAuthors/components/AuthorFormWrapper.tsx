@@ -6,8 +6,10 @@ import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
 import AuthorForm from "./AuthorForm"
 import Controls from "./Controls"
 import { useEffect, useState } from "react"
-import Participants from "./Participants"
 import { useUnit } from "effector-react"
+import AuthorsWrapper from "../../reused/Participants/components/AuthorsWrapper"
+import Members from "../../reused/Participants/components/Members"
+import MembersPermissions from "./Participants/MembersPermissions"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -76,7 +78,11 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
             <AuthorForm
               members={methods.getValues('members')}
             /> :
-            <Participants />
+            <AuthorsWrapper
+              ownAuthors={ownAuthors}
+              choiceList={<Members />}
+              permissions={<MembersPermissions />}
+            />
           }
         </fieldset>
         <Controls
