@@ -1,19 +1,16 @@
-import { useFormContext } from "react-hook-form";
-import { getCurrentMember } from "../../utils";
-import Status from "./components/Status";
 import { useUnit } from "effector-react";
+import { useFormContext } from "react-hook-form";
+import Status from "./Status";
+import { getCurrentMember } from "../../utils";
 import { t } from "../../../../../common/i18n/utils";
-import PermissionsList from "../../../../../reused/Participants/components/Permissions/PermissionsList";
 import type { Member } from "../../../../../reused/Participants/types";
-import { memberIdResetted } from "../../../../../reused/Participants/store/authors";
 import { $referenceBooks } from "../../../../../reused/Participants/store/reference";
+import { $memberId, memberIdResetted } from "../../../../../reused/Participants/store/authors";
 import Participants from "../../../../../reused/Participants/components/Permissions/Participants";
+import PermissionsList from "../../../../../reused/Participants/components/Permissions/PermissionsList";
 
-type Props = {
-  authorId: number;
-}
-
-const MembersPermissions = ({ authorId }: Props) => {
+const MembersPermissions = () => {
+  const authorId = useUnit($memberId)
   const onClose = useUnit(memberIdResetted)
   const referenceBooks = useUnit($referenceBooks)
   const authorsPermissions = referenceBooks?.authorsPermissions
