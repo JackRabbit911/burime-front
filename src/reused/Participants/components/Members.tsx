@@ -1,13 +1,17 @@
+import { useFormContext } from "react-hook-form";
 import { t } from "../../../common/i18n/utils";
 import type { Member } from "../types";
 import InvitedAuthors from "./InvitedAuthors";
 
-type Props = {
-  members: Member[];
-  onDelete: (member: Member) => void;
-}
+const Members = () => {
+  const { watch, setValue } = useFormContext()
+  const members = watch('members') || []
 
-const Members = ({ members, onDelete }: Props) => {
+  const onDelete = (member: Member) => {
+    const newMembers = members.filter((item: Member) => item.id !== member.id)
+    setValue('members', newMembers)
+  }
+
   return (
     <>
       <div>
