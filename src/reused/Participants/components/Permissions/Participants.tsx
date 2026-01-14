@@ -13,8 +13,8 @@ const Participants = ({ members, authorId}: Props) => {
       <h3>
         {t('Participants')}
       </h3>
-      {members.map(
-        (author: Member) => (
+      {members.sort((a: Member, b: Member) => a.role > b.role ? -1 : 1)
+        .map((author: Member) => (
           <button
             key={author.id}
             className="btn btn-soft btn-sm"

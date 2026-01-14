@@ -20,8 +20,8 @@ const Members = () => {
         </legend>
       </div>
       <div className="flex flex-col gap-2">
-          {members.map(
-            (author: Member) => (
+          {members.sort((a: Member, b: Member) => a.role > b.role ? -1 : 1)
+            .map((author: Member) => (
               <InvitedAuthors
                 key={author.id}
                 author={author}
