@@ -42,7 +42,7 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
 
   const inputClassName =
     !error ?
-      "input join-item border-white" :
+      "input join-item" :
       "input join-item input-error"
 
   const alert = !error ? null : <div
