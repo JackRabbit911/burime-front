@@ -1,13 +1,12 @@
 import { useFormContext } from "react-hook-form";
-import { getStatusString } from "../../../permissions";
 import { useUnit } from "effector-react";
-import { buttonEnabled } from "../utils";
-import type { Member } from "../../../../../schema/authors";
-import { $permissions, $statusObj } from "../../../../../store/bootstrap";
-// import { memberIdResetted } from "../../../../../store/authors";
-import { t } from "../../../../../../common/i18n/utils";
-import { host } from "../../../../../../common/ajax";
-import { memberIdResetted } from "../../../../../../reused/Participants/store/authors";
+import { buttonEnabled } from "./utils";
+import { getStatusString } from "../../permissions";
+import { $permissions, $statusObj } from "../../../../store/bootstrap";
+import { host } from "../../../../../common/ajax";
+import { t } from "../../../../../common/i18n/utils";
+import type { Member } from "../../../../../reused/Participants/types";
+import { memberIdResetted } from "../../../../../reused/Participants/store/authors";
 
 type Props = {
   member: Member | null;
