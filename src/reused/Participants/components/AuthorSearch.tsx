@@ -74,7 +74,7 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
         </div>
         <div className="join basis-1/3">
           <select
-            className="select join-item max-w-1/4"
+            className="select join-item"
             defaultValue=""
             onChange={onSelect}
           >
