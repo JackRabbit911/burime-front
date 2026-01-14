@@ -1,31 +1,19 @@
-import AuthorsWrapper from "./components/AuthorsWrapper"
-import { useUnit } from "effector-react";
 import MembersPermissions from "./components/MembersPermissions";
 import type { Bootstrap } from "../../schema/input";
-import { $memberId } from "../../../reused/Participants/store/authors";
-import { useEffect } from "react";
-import { referenceRecived } from "../../../reused/Participants/store/reference";
-import { getGroupReferenceUri } from "../../../common/constants";
+import AuthorsWrapper from "../../../reused/Participants/components/AuthorsWrapper";
+import Members from "../../../reused/Participants/components/Members";
 
 type Props = {
   bootstrap: Bootstrap;
 }
 
 const Authors = ({ bootstrap }: Props) => {
-  const memberId = useUnit($memberId)
-
-  useEffect(() => {
-    referenceRecived(getGroupReferenceUri)
-  }, [])
-
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      {memberId === 0
-        ? <AuthorsWrapper bootstrap={bootstrap} />
-        : <MembersPermissions authorId={memberId} />
-      }
-    </div>
-  )
+    <AuthorsWrapper
+      ownAuthors={bootstrap.ownAuthors}
+      choiceList={<Members />}
+      permissions={<MembersPermissions />}
+  />)
 }
 
 export default Authors
