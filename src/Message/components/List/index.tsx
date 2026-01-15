@@ -1,0 +1,37 @@
+import { useEffect } from "react"
+import { $inbox, $outbox, getMessageListFx } from "../../store"
+import { useList } from "effector-react"
+import { t } from "../../../common/i18n/utils"
+import InMsgLine from "./InMsgLine"
+import OutMsgLine from "./OutMsgLine"
+import TableHead from "./TableHead"
+
+const List = () => {
+  const inbox = useList($inbox, (message) => <InMsgLine message={message} />)
+  const outbox = useList($outbox, (message) => <OutMsgLine message={message} />)
+
+  useEffect(() => {
+    getMessageListFx()
+  }, [])
+
+  return (
+    <>
+      <h3 className="text-lg">{t('Inbox')}</h3>
+      <table className="table">
+        <TableHead />
+        <tbody>
+          {inbox}
+        </tbody>
+      </table>
+      <h3 className="text-lg">{t('Outbox')}</h3>
+      <table className="table">
+        <TableHead />
+        <tbody>
+          {outbox}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export default List
