@@ -13,3 +13,5 @@ export const getGroupReferenceUri = '/my/reference/group'
 
 export const saveAuthorUri = '/my/author/save'
 export const deleteAuthorUri = '/my/author/delete'
+
+export const getMessageListUri = 'my/message/list'
