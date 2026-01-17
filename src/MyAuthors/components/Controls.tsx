@@ -43,16 +43,15 @@ const Controls = ({ status, view, setView }: Props) => {
     )
   }
 
-  const onDelete = () => {
-    const onYes = () => {
-      const promise = authorDeleteFx(id)
-      closeBtn(true)
-      promise.then((response) => response.data.result)
-        .then((result) => {
-          modalOpened(result)
-        })
-    }
+  const onYes = async () => {
+    const response = await authorDeleteFx(id)
+    const { result } = response.data
 
+    closeBtn(true)
+    modalOpened(result)
+  }
+
+  const onDelete = () => {
     modalOpened(
       <ConfirmDialog
         text='Your author/group will be deleted'
