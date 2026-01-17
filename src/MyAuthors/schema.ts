@@ -22,7 +22,7 @@ const authorSchema = z.object({
 
 export const formInputSchema = z.object({
     author: authorSchema,
-    masterId: z.number(),
+    masterId: z.coerce.number(),
     file: imageFile.nullish(),
     members: z.array(member).optional()
 })
