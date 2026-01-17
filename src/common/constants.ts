@@ -15,3 +15,4 @@ export const saveAuthorUri = '/my/author/save'
 export const deleteAuthorUri = '/my/author/delete'
 
 export const getMessageListUri = 'my/message/list'
+export const getMessageUri = 'my/message/show'
