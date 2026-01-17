@@ -22,3 +22,16 @@ export type MessageList = {
     inbox: Inbox[];
     outbox: Outbox[];
 }
+
+type MsgData = {
+    [key: string]: string;
+}
+
+export type Message = {
+    id: number;
+    from: number;
+    status: number;
+    alias: string;
+    subject: string;
+    data: MsgData | string;
+}
