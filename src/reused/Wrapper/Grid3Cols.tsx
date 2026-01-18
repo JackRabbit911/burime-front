@@ -2,7 +2,7 @@ type Props = {
   children: React.ReactNode;
 }
 
-const Cols3LayOut = ({ children }: Props) => {
+const Grid3Cols = ({ children }: Props) => {
   return (
     <div className="grid md:grid-cols-3 gap-4">
       {children}
@@ -10,4 +10,4 @@ const Cols3LayOut = ({ children }: Props) => {
   )
 }
 
-export default Cols3LayOut
+export default Grid3Cols
