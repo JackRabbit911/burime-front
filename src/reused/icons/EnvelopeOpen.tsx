@@ -4,7 +4,7 @@ type Props = {
 }
 
 const EnvelopeOpen = ({ color = '', size = 'size-6' }: Props) => {
-  const className = `inline-block stroke-current ${size} ${color} float-start`
+  const className = `inline-block ${size} ${color} float-start`
 
   return (
     <svg
