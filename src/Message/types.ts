@@ -23,7 +23,7 @@ export type MessageList = {
     outbox: Outbox[];
 }
 
-type MsgData = {
+export type MsgData = {
     [key: string]: string;
 }
 
@@ -31,7 +31,9 @@ export type Message = {
     id: number;
     from: number;
     status: number;
-    alias: string;
+    to: number;
+    from_alias: string;
+    to_alias: string;
     subject: string;
-    data: MsgData | string;
+    data: MsgData;
 }
