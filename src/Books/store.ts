@@ -2,9 +2,10 @@ import { createEffect, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
 import type { MyBook } from "./types";
+import { getMyBooksUri } from "../common/constants";
 
 export const getMyBooksFx = createEffect(() => (
-    ajax.get<ApiResponse<MyBook[]>>('/my/books')
+    ajax.get<ApiResponse<MyBook[]>>(getMyBooksUri)
 ))
 
 export const $myBooks = createStore<MyBook[]>([])

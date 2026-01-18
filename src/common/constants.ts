@@ -1,6 +1,8 @@
 export const perPages = [25, 50, 100]
 
 export const getMyStatUri = '/my/stat'
+export const getMyBooksUri = '/my/books'
+
 export const getBootsrapUri = '/my/branch/bootstrap'
 export const getAuthorsUri = '/my/branch/authors'
 export const getGroupMembersUri = '/my/authors/group'
