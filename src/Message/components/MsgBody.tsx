@@ -12,17 +12,14 @@ const MsgBody = ({ message }: Props) => {
       <fieldset className="fieldset">
         {t('Subject')}
       </fieldset>
-      <div className="border rounded-sm border-stone-500 p-1 my-3">
+      <div className="border rounded-sm border-stone-500 p-1 my-3 text-md">
         {message.subject}
       </div>
       <fieldset className="fieldset">
         {t('Message')}
       </fieldset>
-      <div className="border rounded-sm border-stone-500 p-1 my-3">
+      <div className="border rounded-sm border-stone-500 p-1 my-3 text-sm">
         {getComponent(message)}
-        <div className="fieldset mt-1 text-end">
-          {t('Best regards')}, {message.from_alias}
-        </div>
       </div>
     </div>
   )
