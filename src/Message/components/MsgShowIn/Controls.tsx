@@ -2,7 +2,11 @@ import { Link, useParams } from "react-router"
 import { t } from "../../../common/i18n/utils"
 import { deleteMsg } from "../../utils"
 
-const Controls = () => {
+type Props = {
+  recipient: number;
+}
+
+const Controls = ({ recipient }: Props) => {
   const { id } = useParams()
 
   return (
@@ -21,7 +25,7 @@ const Controls = () => {
       </Link>
       <button
         className="btn btn-error"
-        onClick={() => deleteMsg(id)}
+        onClick={() => deleteMsg(id, recipient)}
       >
         {t('Delete')}
       </button>
