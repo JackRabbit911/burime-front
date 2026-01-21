@@ -47,4 +47,5 @@ const ConfirmDialog = ({
   )
 }
 
+export const confirmDialog = (props: Props) => <ConfirmDialog {...props} />
 export default ConfirmDialog
