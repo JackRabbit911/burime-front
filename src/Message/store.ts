@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from "effector";
+import { combine, createEffect, createEvent, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
 import type { Message, Inbox, MessageList, Outbox } from "./types";
@@ -26,6 +26,11 @@ export const $message = createStore<Message | null>(null)
     .reset(msgResetted)
 
 export const $toAlias = createStore<string>('Author')
+
+export const $msgCounts = combine({inbox: $inbox, outbox: $outbox}, (store) => ({
+    inboxCount: store.inbox.length,
+    outboxCount: store.outbox.length,
+}))
 
 sample({
     clock: toAliasSetted,
