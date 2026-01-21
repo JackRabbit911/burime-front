@@ -20,8 +20,8 @@ export const removeMsg = (id: string | undefined) => {
     deleteDialog(uri, text, link)
 }
 
-export const deleteMsg = (id: string | undefined) => {
-    const uri = [deleteMessageUri, id].join('/')
+export const deleteMsg = (id: string | undefined, recipient: number) => {
+    const uri = [deleteMessageUri, id, recipient].join('/')
     const text = 'This message will be deleted'
     const link = '/message/list'
 
