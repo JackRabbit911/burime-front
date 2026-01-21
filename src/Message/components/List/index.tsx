@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { $inbox, $outbox, getMessageListFx } from "../../store"
+import { $inbox, $outbox, getMessageListFx, msgResetted } from "../../store"
 import { useList } from "effector-react"
 import { t } from "../../../common/i18n/utils"
 import InMsgLine from "./InMsgLine"
@@ -11,6 +11,7 @@ const List = () => {
   const outbox = useList($outbox, (message) => <OutMsgLine message={message} />)
 
   useEffect(() => {
+    msgResetted()
     getMessageListFx()
   }, [])
 
