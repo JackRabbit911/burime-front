@@ -3,7 +3,7 @@ import type { ApiResponse } from "../../common/ajax/types";
 import ajax from "../../common/ajax";
 import { globalReset } from "../../common/store";
 import type { FormOutputType, MyAuthor } from "../schema";
-import { saveAuthorUri } from "../../common/constants";
+import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "../../common/constants";
 import { modalOpened } from "../../reused/Modal/store";
 import { successDialog } from "../../reused/InModal/SuccessDialog";
 import { loading } from "../../reused/InModal/Loading";
@@ -21,11 +21,11 @@ const saveMyAuthorFx = createEffect((data: FormOutputType) => {
 })
 
 export const getMyAuthorsFx = createEffect(() => (
-    ajax.get<ApiResponse<MyAuthor[]>>('/my/authors')
+    ajax.get<ApiResponse<MyAuthor[]>>(getMyAuthorsUri)
 ))
 
 export const getMyMembersFx = createEffect((id: string | undefined) => (
-    ajax.get<ApiResponse<Member[]>>(['/my/group/members', id].join('/'))
+    ajax.get<ApiResponse<Member[]>>([getMyGroupMembersUri, id].join('/'))
 ))
 
 export const $myAuthors = createStore<MyAuthor[]>([])
