@@ -3,9 +3,11 @@ export const perPages = [25, 50, 100]
 export const getMyStatUri = '/my/stat'
 export const getMyBooksUri = '/my/books'
 
+export const getGroupMembersUri = '/my/common/authors/group'
+export const getOwnAuthorsUri = 'my/common/authors/ownauthors'
+
 export const getBootsrapUri = '/my/branch/bootstrap'
 export const getAuthorsUri = '/my/branch/authors'
-export const getGroupMembersUri = '/my/authors/group'
 export const saveBranchUri = '/my/branch/action/savebranch'
 export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
@@ -15,8 +17,11 @@ export const getGroupReferenceUri = '/my/reference/group'
 
 export const saveAuthorUri = '/my/author/save'
 export const deleteAuthorUri = '/my/author/delete'
+export const getMyAuthorsUri = '/my/authors'
+export const getMyGroupMembersUri = '/my/group/members'
 
 export const getMessageListUri = 'my/message/list'
 export const getMessageUri = 'my/message/show'
 export const removeMessageUri = 'my/message/remove'
 export const deleteMessageUri = 'my/message/delete'
+
