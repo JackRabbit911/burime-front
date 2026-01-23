@@ -52,7 +52,7 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
     <div className="grid md:grid-cols-3 gap-4">
       {memberId === 0 ?
         <>
-          <fieldset className="fieldset">
+          <div>
             {ownAuthors.length > 0 ?
               <Select
                 fieldName="masterId"
@@ -60,7 +60,7 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
                 options={ownAuthors}
               /> : null}
               {choiceList}
-          </fieldset>
+          </div>
           <div className="md:col-span-2">
             <AuthorsChoice
               filters={authorsFilters}
