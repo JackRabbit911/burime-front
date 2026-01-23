@@ -19,11 +19,11 @@ type Props = {
 }
 
 const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
-  const authors = useUnit($authors)
+  const { list: authorsList } = useUnit($authors)
   const memberId = useUnit($memberId)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
-  const authorsFilters = referenceBooks?.authorsFilters
+  const authorsFilters = referenceBooks?.authorsFilters || []
 
   const { watch, setValue } = useFormContext()
   const members = watch('members') || []
@@ -63,8 +63,8 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
           </fieldset>
           <div className="md:col-span-2">
             <AuthorsChoice
-              filters={authorsFilters as string[]}
-              authors={authors?.list}
+              filters={authorsFilters}
+              authors={authorsList}
               members={members}
               authorsPayload={authorsPayload}
               handler={onChoice}
