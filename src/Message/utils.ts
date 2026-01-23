@@ -1,5 +1,6 @@
 import { deleteMessageUri, removeMessageUri } from "../common/constants"
 import { deleteDialog } from "../common/utils/deleteDialog"
+import type { Author } from "../reused/Participants/schema"
 import { defaultMsg } from "./components/Templates/DefaultMsg"
 import type { Message } from "./types"
 
@@ -26,4 +27,11 @@ export const deleteMsg = (id: string | undefined, recipient: number) => {
     const link = '/message/list'
 
     deleteDialog(uri, text, link)
+}
+
+export const addNewRecipient = (recipients: Author[], author: Author) => [...recipients, author]
+
+export const addGroupRecipients = (recipients: Author[], group: Author[]) => {
+    const mergedMembers = [...recipients, ...group]
+    return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
 }
