@@ -11,7 +11,7 @@ const Select = ({ fieldName, label, options }: Props) => {
   const { register } = useFormContext()
 
   return (
-    <>
+    <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
         {label}
       </legend>
@@ -27,7 +27,7 @@ const Select = ({ fieldName, label, options }: Props) => {
           )
         )}
       </select>
-    </>
+    </fieldset>
   )
 }
 
