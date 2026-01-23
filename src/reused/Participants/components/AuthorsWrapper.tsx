@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
-import { $authors, $memberId } from "../store/authors"
+import { $authorsList, $memberId } from "../store/authors"
 import { $authorsPayload } from "../store/athorsPayload"
 import { $referenceBooks, referenceRecived } from "../store/reference"
 import { addGroupMembers, addNewMember } from "../utils"
@@ -19,7 +19,7 @@ type Props = {
 }
 
 const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
-  const { list: authorsList } = useUnit($authors)
+  const authorsList = useUnit($authorsList)
   const memberId = useUnit($memberId)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
