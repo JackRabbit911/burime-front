@@ -4,8 +4,8 @@ import ajax from "../../../common/ajax"
 
 type ReferenceBooks = {
     authorsFilters: string[];
-    authorsPermissions: { [index: string]: number };
-    authorsStatuses: { [index: string]: number };
+    authorsPermissions?: { [index: string]: number };
+    authorsStatuses?: { [index: string]: number };
 }
 
 export const referenceRecived = createEvent<string>()
