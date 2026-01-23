@@ -24,4 +24,5 @@ export const getMessageListUri = 'my/message/list'
 export const getMessageUri = 'my/message/show'
 export const removeMessageUri = 'my/message/remove'
 export const deleteMessageUri = 'my/message/delete'
+export const getMsgReferenceUri = '/my/reference/message'
 
