@@ -1,8 +1,8 @@
 import Pagination from "./Pagination"
 import type { Author } from "../schema";
 import type { AuthorsPayload, Member } from "../types";
-import { isInvited } from "../utils";
 import AuthorSearch from "./AuthorSearch";
+import ChoiceControl from "./ChoiceControl";
 
 type Props = {
   filters: string[];
@@ -21,18 +21,12 @@ const AuthorsChoice = ({ filters, authors, members, authorsPayload, handler }: P
       />
       <div className="flex flex-wrap gap-2 mt-1">
         {authors.map((author, key) => (
-          <button
-            type="button"
-            className="btn btn-soft btn-outline btn-sm"
-            disabled={isInvited(members, author.id)}
-            onClick={() => {
-              handler(author)
-            }}
-
+          <ChoiceControl
+            author={author}
+            members={members}
+            handler={handler}
             key={key}
-          >
-            {author.alias}
-          </button>
+          />
         ))}
       </div>
       <Pagination />
