@@ -7,10 +7,10 @@ type Props = {
   bootstrap: Bootstrap;
 }
 
-const Authors = ({ bootstrap }: Props) => {
+const Authors = ({ bootstrap: { ownAuthors } }: Props) => {
   return (
     <AuthorsWrapper
-      ownAuthors={bootstrap.ownAuthors}
+      ownAuthors={ownAuthors}
       choiceList={<Members />}
       permissions={<MembersPermissions />}
   />)
