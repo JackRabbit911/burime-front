@@ -11,14 +11,15 @@ export const getAuthorsUri = '/my/branch/authors'
 export const saveBranchUri = '/my/branch/action/savebranch'
 export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
+export const getBranchReferenceUri = '/my/reference/branch'
 
 export const getTranslateUri = '/my/gettranslate'
-export const getGroupReferenceUri = '/my/reference/group'
 
 export const saveAuthorUri = '/my/author/save'
 export const deleteAuthorUri = '/my/author/delete'
 export const getMyAuthorsUri = '/my/authors'
 export const getMyGroupMembersUri = '/my/group/members'
+export const getGroupReferenceUri = '/my/reference/group'
 
 export const getMessageListUri = 'my/message/list'
 export const getMessageUri = 'my/message/show'
