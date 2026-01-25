@@ -21,7 +21,6 @@ export const $referenceBooks = createStore<ReferenceBooks | null>(null)
 sample({
     clock: referenceRecived,
     source: $referenceBooks,
-    filter: (referenceBooks) => referenceBooks === null,
     fn: (_, uri) => uri,
     target: getReferenceFx,
 })
