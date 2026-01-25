@@ -10,6 +10,7 @@ import { useUnit } from "effector-react"
 import AuthorsWrapper from "../../reused/Participants/components/AuthorsWrapper"
 import Members from "../../reused/Participants/components/Members"
 import MembersPermissions from "./Participants/MembersPermissions"
+import { getGroupReferenceUri } from "../../common/constants"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -82,6 +83,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
               ownAuthors={ownAuthors}
               choiceList={<Members />}
               permissions={<MembersPermissions />}
+              referenceUri={getGroupReferenceUri}
             />
           }
         </fieldset>

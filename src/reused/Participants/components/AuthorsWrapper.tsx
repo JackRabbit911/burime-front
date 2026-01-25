@@ -8,7 +8,6 @@ import { addGroupMembers, addNewMember } from "../utils"
 import type { Author } from "../schema"
 import { getGroupMembersFx } from "../store/groupMembers"
 import type { OwnAuthor } from "../types"
-import { getGroupReferenceUri } from "../../../common/constants"
 import Select from "./Select"
 import AuthorsChoice from "./AuthorsChoice"
 
@@ -16,9 +15,10 @@ type Props = {
   ownAuthors: OwnAuthor[];
   choiceList: React.ReactNode;
   permissions: React.ReactNode;
+  referenceUri: string;
 }
 
-const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
+const AuthorsWrapper = ({ ownAuthors, choiceList, permissions, referenceUri }: Props) => {
   const authorsList = useUnit($authorsList)
   const memberId = useUnit($memberId)
   const authorsPayload = useUnit($authorsPayload)
@@ -45,7 +45,7 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
   const onChoice = authorsPayload.filter === 'groups' ? onChoiceGroup : onChoiceAuthor
 
   useEffect(() => {
-    referenceRecived(getGroupReferenceUri)
+    referenceRecived(referenceUri)
   }, [])
 
   return (
