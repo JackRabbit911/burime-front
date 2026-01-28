@@ -25,6 +25,7 @@ export const $authors = createStore<Authors>({list: [], count: 0})
     .reset(globalReset)
 
 export const $total = combine($authors, (authors) => authors?.count || 0)
+export const $authorsList = combine($authors, (authors) => authors?.list || [])
 
 export const $memberId = createStore<number>(0)
     .on(memberIdSetted, (_, id) => id)

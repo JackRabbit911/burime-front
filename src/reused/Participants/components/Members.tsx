@@ -14,11 +14,11 @@ const Members = () => {
 
   return (
     <>
-      <div>
+      <fieldset className="fieldset">
         <legend className="fieldset-legend">
           <span>{t('Participants')}</span>
         </legend>
-      </div>
+      </fieldset>
       <div className="flex flex-col gap-2">
           {members.sort((a: Member, b: Member) => a.role > b.role ? -1 : 1)
             .map((author: Member) => (

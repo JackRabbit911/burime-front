@@ -4,8 +4,8 @@ import ajax from "../../../common/ajax"
 
 type ReferenceBooks = {
     authorsFilters: string[];
-    authorsPermissions: { [index: string]: number };
-    authorsStatuses: { [index: string]: number };
+    authorsPermissions?: { [index: string]: number };
+    authorsStatuses?: { [index: string]: number };
 }
 
 export const referenceRecived = createEvent<string>()
@@ -21,7 +21,6 @@ export const $referenceBooks = createStore<ReferenceBooks | null>(null)
 sample({
     clock: referenceRecived,
     source: $referenceBooks,
-    filter: (referenceBooks) => referenceBooks === null,
     fn: (_, uri) => uri,
     target: getReferenceFx,
 })

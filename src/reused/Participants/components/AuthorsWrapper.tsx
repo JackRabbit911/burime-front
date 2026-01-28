@@ -1,14 +1,13 @@
 import { useEffect } from "react"
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
-import { $authors, $memberId } from "../store/authors"
+import { $authorsList, $memberId } from "../store/authors"
 import { $authorsPayload } from "../store/athorsPayload"
 import { $referenceBooks, referenceRecived } from "../store/reference"
 import { addGroupMembers, addNewMember } from "../utils"
 import type { Author } from "../schema"
 import { getGroupMembersFx } from "../store/groupMembers"
 import type { OwnAuthor } from "../types"
-import { getGroupReferenceUri } from "../../../common/constants"
 import Select from "./Select"
 import AuthorsChoice from "./AuthorsChoice"
 
@@ -16,14 +15,15 @@ type Props = {
   ownAuthors: OwnAuthor[];
   choiceList: React.ReactNode;
   permissions: React.ReactNode;
+  referenceUri: string;
 }
 
-const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
-  const authors = useUnit($authors)
+const AuthorsWrapper = ({ ownAuthors, choiceList, permissions, referenceUri }: Props) => {
+  const authorsList = useUnit($authorsList)
   const memberId = useUnit($memberId)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
-  const authorsFilters = referenceBooks?.authorsFilters
+  const authorsFilters = referenceBooks?.authorsFilters || []
 
   const { watch, setValue } = useFormContext()
   const members = watch('members') || []
@@ -45,14 +45,14 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
   const onChoice = authorsPayload.filter === 'groups' ? onChoiceGroup : onChoiceAuthor
 
   useEffect(() => {
-    referenceRecived(getGroupReferenceUri)
+    referenceRecived(referenceUri)
   }, [])
 
   return (
     <div className="grid md:grid-cols-3 gap-4">
       {memberId === 0 ?
         <>
-          <fieldset className="fieldset">
+          <div>
             {ownAuthors.length > 0 ?
               <Select
                 fieldName="masterId"
@@ -60,11 +60,11 @@ const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
                 options={ownAuthors}
               /> : null}
               {choiceList}
-          </fieldset>
+          </div>
           <div className="md:col-span-2">
             <AuthorsChoice
-              filters={authorsFilters as string[]}
-              authors={authors?.list}
+              filters={authorsFilters}
+              authors={authorsList}
               members={members}
               authorsPayload={authorsPayload}
               handler={onChoice}

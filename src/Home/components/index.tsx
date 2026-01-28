@@ -36,7 +36,7 @@ const Home = () => {
           desc="Уже неплохо"
         />
         <Stat
-          path="messages"
+          path="message/list"
           color="info"
           title="My messages"
           value={`${stat?.messages.total}/${stat?.messages.new}`}

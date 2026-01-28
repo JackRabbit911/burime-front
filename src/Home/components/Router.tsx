@@ -5,6 +5,9 @@ import Branch from "../../Branch/components"
 import Drafts from "../../Drafts/components"
 import MyAuthors from "../../MyAuthors/components"
 import AuthorWrapper from "../../MyAuthors/components/AuthorWrapper"
+import List from "../../Message/components/List"
+import MessageShow from "../../Message/components/MessageShow"
+import MessageFormWrapper from "../../Message/components/Form/MessageFormWrapper"
 
 const Router = () => {
   return (
@@ -12,6 +15,11 @@ const Router = () => {
       <Route path='' element={<Home />} />
       <Route path='books' element={<Books />} />
       <Route path='authors' element={<MyAuthors />} />
+      <Route path='message'>
+        <Route path='list' element={<List />} />
+        <Route path=':id' element={<MessageShow />} />
+        <Route path='form' element={<MessageFormWrapper />} />
+      </Route>
       <Route path='drafts' element={<Drafts />} />
       <Route path='branch/:id?/:draft?' element={<Branch />} />
       <Route path='author/:id?' element={<AuthorWrapper />} />
