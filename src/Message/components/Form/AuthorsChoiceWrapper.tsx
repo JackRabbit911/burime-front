@@ -25,7 +25,7 @@ const AuthorsChoiceWrapper = () => {
   }
 
   const onChoiceGroup = async (author: Author) => {
-    const response  = await getGroupMembersFx(author.id)
+    const response = await getGroupMembersFx(author.id)
     const result = response.data.result
     const newRecipients = addGroupRecipients(recipients, result)
     setValue('recipients', newRecipients, { shouldValidate: true, shouldDirty: true })
@@ -38,17 +38,13 @@ const AuthorsChoiceWrapper = () => {
   }, [])
 
   return (
-    <>
-      <div className="md:col-span-2">
-        <AuthorsChoice
-          filters={authorsFilters}
-          authors={authorsList}
-          members={recipients}
-          authorsPayload={authorsPayload}
-          handler={onChoice}
-        />
-      </div>
-    </>
+    <AuthorsChoice
+      filters={authorsFilters}
+      authors={authorsList}
+      members={recipients}
+      authorsPayload={authorsPayload}
+      handler={onChoice}
+    />
   )
 }
 
