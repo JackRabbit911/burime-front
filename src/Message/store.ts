@@ -2,10 +2,12 @@ import { combine, createEffect, createEvent, createStore, sample } from "effecto
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
 import type { Message, Inbox, MessageList, Outbox } from "./types";
-import { getMessageListUri, getMessageUri } from "../common/constants";
+import { getMessageListUri, getMessageUri, saveMessageUri } from "../common/constants";
+import type { MessageOut } from "./schema";
 
 export const msgResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
+export const msgSubmitted = createEvent<MessageOut>()
 
 export const getMessageListFx = createEffect(
     () => ajax.get<ApiResponse<MessageList>>(getMessageListUri)
@@ -14,6 +16,10 @@ export const getMessageListFx = createEffect(
 export const getMessageFx = createEffect(
     (id: string) => ajax.get([getMessageUri, id].join('/'))
 )
+
+const saveMessageFx = createEffect((data: MessageOut) => (
+    ajax.postForm(saveMessageUri, data)
+))
 
 export const $inbox = createStore<Inbox[]>([])
     .on(getMessageListFx.doneData, (_, response) => response.data.result.inbox)
@@ -37,3 +43,10 @@ sample({
     fn: (alias) => alias,
     target: $toAlias
 })
+
+sample({
+    clock: msgSubmitted,
+    target: saveMessageFx,
+})
+
+
