@@ -34,14 +34,6 @@ export const $msgCounts = combine({inbox: $inbox, outbox: $outbox}, (store) => (
 
 sample({
     clock: toAliasSetted,
-    source: $message,
-    filter: (message) => typeof (message?.to) === 'object',
-    fn: (message, alias) => {
-        if (typeof (message?.to) === 'object') {
-            return alias
-        }
-
-        return 'Author'
-    },
+    fn: (alias) => alias,
     target: $toAlias
 })
