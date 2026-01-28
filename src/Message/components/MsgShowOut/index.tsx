@@ -16,8 +16,7 @@ const MsgShowOut = ({ message }: Props) => {
 
   useEffect(() => {
     if (typeof (message.to) === 'object') {
-      message.to_alias = message.to[0].alias
-      toAliasSetted(message.to_alias)
+      toAliasSetted(message.to[0].alias)
     }
   }, [])
 
