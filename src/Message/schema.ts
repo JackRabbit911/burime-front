@@ -5,6 +5,8 @@ const recipient = z.object({
     alias: z.string(),
 })
 
+const recipientOut = recipient.transform((input) => input.id)
+
 const undefinedIfEmpty = z.string()
     .regex(/^[^<>;]*$/, 'Invalid input!')
     .transform(val => val === "" ? undefined : val)
@@ -33,5 +35,10 @@ export const messageForm = z.object({
     important: z.boolean(),
 })
 
+export const messageOut = messageForm.extend({
+    recipients: z.array(recipientOut),
+})
+
 export type NewRecipient = z.infer<typeof recipient>
 export type MessageForm = z.infer<typeof messageForm>
+export type MessageOut = z.infer<typeof messageOut>
