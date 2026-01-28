@@ -26,4 +26,5 @@ const Helper = ({ path }: Props) => {
   )
 }
 
+export const helper = (props: Props) => <Helper { ...props } />
 export default Helper
