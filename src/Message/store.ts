@@ -4,6 +4,8 @@ import type { ApiResponse } from "../common/ajax/types";
 import type { Message, Inbox, MessageList, Outbox } from "./types";
 import { getMessageListUri, getMessageUri, saveMessageUri } from "../common/constants";
 import type { MessageOut } from "./schema";
+import { successDialog } from "../reused/InModal/SuccessDialog";
+import { modalOpened } from "../reused/Modal/store";
 
 export const msgResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
@@ -49,4 +51,9 @@ sample({
     target: saveMessageFx,
 })
 
-
+sample({
+    clock: saveMessageFx.doneData,
+    filter: (response) => Boolean(response?.data?.success),
+    fn: () => successDialog({ link: 'message/list' }),
+    target: modalOpened,
+})
