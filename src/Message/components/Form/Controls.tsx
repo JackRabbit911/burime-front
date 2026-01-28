@@ -1,7 +1,4 @@
-import { helpBtnClicked } from "../../../reused/Help/store";
-import { modalOpened } from "../../../reused/Modal/store";
-import Helper from "../../../reused/Help";
-import ConfirmDialog from "../../../reused/InModal/ConfirmDialog";
+import { useControls } from "../../hooks";
 import { t } from "../../../common/i18n/utils";
 
 type Props = {
@@ -10,30 +7,17 @@ type Props = {
 }
 
 const Controls = ({ view, setView }: Props) => {
-  const onHelpClick = (path: string) => () => {
-    helpBtnClicked(path)
-    modalOpened(<Helper path={path} />)
-  }
-
-  const onChoiceClick = () => {
-    setView('choice')
-  }
-
-  const onFormClick = () => {
-    setView('form')
-  }
-
-  const onCancel = () => {
-    modalOpened(
-      <ConfirmDialog
-        text='Message creation will be cancelled'
-        link='/message/list'
-      />
-    )
-  }
+  const {
+    onHelpClick,
+    onChoiceClick,
+    onFormClick,
+    onCancel,
+    submitDisabled,
+    formBtnDisabled
+  } = useControls(setView)
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
       <button
         type="button"
         onClick={onHelpClick('create_author')}
@@ -53,6 +37,7 @@ const Controls = ({ view, setView }: Props) => {
           type="button"
           className="btn"
           onClick={onFormClick}
+          disabled={formBtnDisabled}
         >
           {t('Write message')}
         </button>
@@ -64,16 +49,15 @@ const Controls = ({ view, setView }: Props) => {
       >
         {t('Cancel')}
       </button>
-      {view === 'form' ? 
+      {view === 'form' ?
         <button
           type="submit"
           className="btn btn-primary dark:btn-info w-full"
-          // disabled={submitDisabled(author, errors)}
+          disabled={submitDisabled}
         >
           {t('Send')}
         </button> : null}
-      </div>
-
+    </div>
   )
 }
 
