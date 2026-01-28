@@ -8,23 +8,21 @@ import { useFormContext } from "react-hook-form"
 import { $ownAuthors } from "../../../common/store/ownAuthors"
 import type { OwnAuthor } from "../../../reused/Participants/types"
 
+const getAuthorAlias = (id: number | string, authors: OwnAuthor[]): string => {
+  const author = authors.find(item => item.id == id)
+  return author !== undefined ? author.alias : ''
+}
+
 const Form = () => {
   const appeal = useUnit($toAlias)
   const ownAuthors = useUnit($ownAuthors)
   const { watch } = useFormContext()
   const from = watch('message.from')
 
-  const getAuthorAlias = (id: number | string, authors: OwnAuthor[]): string => {
-    const author = authors.find(item => item.id == id)
-    return author !== undefined ? author.alias : ''
-  }
-
   const fromAlias = getAuthorAlias(from, ownAuthors)
 
   return (
-    <form
-      className="col-span-2 w-full"
-    >
+    <>
       <TextInput
         fieldName="message.subject"
         label={t('Subject')}
@@ -51,8 +49,8 @@ const Form = () => {
         message={t('Best regards, %', fromAlias)}
         placeholder={t('Best regards, %', fromAlias)}
         checkboxLabel={t('Generate signature automatically')}
-      /> 
-    </form >
+      />
+    </>
   )
 }
 
