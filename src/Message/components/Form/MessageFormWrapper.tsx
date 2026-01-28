@@ -7,15 +7,23 @@ import { $ownAuthors, getOwnAuthorsFx } from "../../../common/store/ownAuthors"
 import { useEffect, useState } from "react"
 import Select from "../../../reused/Participants/components/Select"
 import Controls from "./Controls"
+import Form from "."
+import { zodResolver } from "@hookform/resolvers/zod"
+import { messageForm } from "../../schema"
+import CheckBox from "../../../reused/CheckBox"
+import { t } from "../../../common/i18n/utils"
 
 const MessageFormWrapper = () => {
   const ownAuthors = useUnit($ownAuthors)
   const [view, setView] = useState('choice')
 
   const methods = useForm({
+    resolver: zodResolver(messageForm),
+    mode: 'all',
     defaultValues: {
       recipients: [],
-      from: 7,
+      message: {},
+      important: false,
     }
   })
 
@@ -27,28 +35,39 @@ const MessageFormWrapper = () => {
     getOwnAuthorsFx()
   }, [])
 
+  useEffect(() => {
+    if (ownAuthors.length > 0) {
+      methods.setValue('message.from', ownAuthors[0].id || 0)
+    }
+
+  }, [ownAuthors])
+
   return (
-    <>
-      <FormProvider {...methods}>
-        <Grid3Cols>
-          <div>
-            <Select
-              fieldName="from"
-              label="Message sender"
-              options={ownAuthors}
+    <FormProvider {...methods}>
+      <Grid3Cols>
+        <div>
+          <Select
+            fieldName="message.from"
+            label="Message sender"
+            options={ownAuthors}
+          />
+          <div className="mt-2">
+            <CheckBox
+              fieldName="important"
+              label={t('Mark as important')}
             />
-            <Recipients />
           </div>
-          {view === 'form' ? null :
-            <AuthorsChoiceWrapper />
-          }
-        </Grid3Cols>
-        <Controls
-          view={view}
-          setView={handleSwitchBtn}
-        />
-      </FormProvider>
-    </>
+          <Recipients />
+        </div>
+        {view === 'form' ? <Form /> :
+          <AuthorsChoiceWrapper />
+        }
+      </Grid3Cols>
+      <Controls
+        view={view}
+        setView={handleSwitchBtn}
+      />
+    </FormProvider>
   )
 }
 
