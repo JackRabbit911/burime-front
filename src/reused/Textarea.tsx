@@ -27,7 +27,7 @@ const Textarea = ({ fieldName, label, placeholder, rows, optional = '', disabled
       !err ? "textarea w-full" : "textarea w-full textarea-error";
 
   return (
-    <div>
+    <fieldset className="fieldset">
       <label className="fieldset-label flex justify-between">
         <legend className="fieldset-legend">{label}</legend>
         {alert}
@@ -40,7 +40,7 @@ const Textarea = ({ fieldName, label, placeholder, rows, optional = '', disabled
         disabled={disabled}
         {...register(fieldName)}
       />
-    </ div>
+    </fieldset>
   )
 }
 

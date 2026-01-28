@@ -28,7 +28,7 @@ const TextInput = ({
   /> : null
 
   return (
-    <>
+    <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
         {label}
         {alert}
@@ -39,8 +39,7 @@ const TextInput = ({
         placeholder={placeholder}
         className={inputClassName}
       />
-    </>
-
+    </fieldset>
   )
 }
 
