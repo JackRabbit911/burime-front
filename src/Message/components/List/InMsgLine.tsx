@@ -9,7 +9,7 @@ type Props = {
 
 const InMsgLine = ({ message }: Props) => {
   let navigate = useNavigate();
-  const path = `/message/${message.id}`
+  const path = `/message/in/${message.id}`
 
   return (
     <>

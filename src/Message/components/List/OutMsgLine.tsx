@@ -8,7 +8,7 @@ type Props = {
 
 const OutMsgLine = ({ message }: Props) => {
   let navigate = useNavigate();
-  const path = `/message/${message.id}`
+  const path = `/message/out/${message.id}`
   const recipients = JSON.parse(message.to).join(', ')
 
   return (
