@@ -1,5 +1,5 @@
-import { useControls } from "../../hooks";
 import { t } from "../../../common/i18n/utils";
+import { useControls } from "../../hooks/controls";
 
 type Props = {
   view: string;
