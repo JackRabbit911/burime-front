@@ -18,9 +18,17 @@ export type Outbox = {
     created: string;
 }
 
+export type Delbox = {
+    id: number;
+    from: number;
+    alias: string;
+    subject: string;
+}
+
 export type MessageList = {
     inbox: Inbox[];
     outbox: Outbox[];
+    deleted: Delbox[];
 }
 
 export type MsgData = {
