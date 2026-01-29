@@ -54,6 +54,9 @@ sample({
 sample({
     clock: saveMessageFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: () => successDialog({ link: 'message/list' }),
+    fn: () => successDialog({
+        text: 'Message was sended and saved!',
+        link: 'message/list',
+    }),
     target: modalOpened,
 })
