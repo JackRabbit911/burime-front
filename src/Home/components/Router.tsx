@@ -17,7 +17,9 @@ const Router = () => {
       <Route path='authors' element={<MyAuthors />} />
       <Route path='message'>
         <Route path='list' element={<List />} />
-        <Route path=':id' element={<MessageShow />} />
+        <Route path='in/:id' element={<MessageShow cond='in'/>} />
+        <Route path='out/:id' element={<MessageShow cond='out'/>} />
+        <Route path='del/:id' element={<MessageShow cond='del'/>} />
         <Route path='form' element={<MessageFormWrapper />} />
       </Route>
       <Route path='drafts' element={<Drafts />} />
