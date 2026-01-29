@@ -3,15 +3,16 @@ import { removeMsg } from "../utils"
 import { t } from "../../common/i18n/utils"
 
 type Props = {
+  link: string;
   label: string;
 }
 
-const Controls = ({ label }:Props) => {
+const Controls = ({ link, label }:Props) => {
   const { id } = useParams()
 
   return (
     <div className="flex justify-end gap-2 mt-1">
-      <Link to="/message/list">
+      <Link to={link}>
         <button
           className="btn"
         >
