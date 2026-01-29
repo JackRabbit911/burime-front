@@ -27,7 +27,7 @@ export const useControls = (setView: (data: string) => void) => {
         modalOpened(
             confirmDialog({
                 text: 'Message creation will be cancelled',
-                link: '/message/list',
+                link: '/message/inbox',
             })
         )
     }

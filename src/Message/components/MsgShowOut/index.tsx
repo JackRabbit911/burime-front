@@ -26,7 +26,7 @@ const MsgShowOut = ({ message }: Props) => {
         <MsgInfo message={message} />
         <MsgBody message={message} />
       </Grid3Cols>
-      <Controls label="Delete from everyone" />
+      <Controls link="/message/outbox" label="Delete from everyone" />
     </>
   )
 }

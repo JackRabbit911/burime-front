@@ -17,7 +17,7 @@ const MsgShowDel = ({ message }: Props) => {
         <MsgInfo message={message} />
         <MsgBody message={message} />
       </Grid3Cols>
-      <Controls label="Delete" />
+      <Controls link="/message/deleted" label="Delete" />
     </>
   )
 }
