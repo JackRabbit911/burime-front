@@ -16,7 +16,7 @@ const Controls = ({ recipient }: Props) => {
       >
         {t('Reply to sender')}
       </button>
-      <Link to="/message/list">
+      <Link to="/message/inbox">
         <button
           className="btn"
         >

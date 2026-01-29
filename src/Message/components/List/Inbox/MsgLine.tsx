@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router";
-import { host } from "../../../common/ajax";
-import type { Inbox } from "../../types"
-import MsgStatus from "../MsgStatus";
+import type { Inbox } from "../../../types";
+import MsgStatus from "../../MsgStatus";
+import { host } from "../../../../common/ajax";
 
 type Props = {
   message: Inbox;
 }
 
-const InMsgLine = ({ message }: Props) => {
+const MsgLine = ({ message }: Props) => {
   let navigate = useNavigate();
-  const path = `/message/${message.id}`
+  const path = `/message/in/${message.id}`
 
   return (
     <>
@@ -43,4 +43,4 @@ const InMsgLine = ({ message }: Props) => {
   )
 }
 
-export default InMsgLine
+export default MsgLine

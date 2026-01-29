@@ -1,36 +1,37 @@
-import { useEffect, useState } from "react"
-import { $inbox, $msgCounts, $outbox, getMessageListFx, msgResetted } from "../../store"
-import { useList, useUnit } from "effector-react"
-import { t } from "../../../common/i18n/utils"
-import InMsgLine from "./InMsgLine"
-import OutMsgLine from "./OutMsgLine"
-import TableHead from "./TableHead"
+import { useEffect } from "react"
+import { getMessageListFx, msgResetted } from "../../store"
 import { Link } from "react-router"
+import Inbox from "./Inbox"
+import Outbox from "./Outbox"
+import Delbox from "./Delbox"
 
-const List = () => {
-  const inbox = useList($inbox, (message) => <InMsgLine message={message} />)
-  const outbox = useList($outbox, (message) => <OutMsgLine message={message} />)
-  const { inboxCount, outboxCount } = useUnit($msgCounts)
-  const [tab, setTab] = useState('inbox')
-  let inboxClass = "tab"
-  let ouboxClass = "tab"
+type Props = {
+  box: string;
+}
 
-  switch (tab) {
-    case ('inbox'):
-      inboxClass = "tab tab-active"
-      ouboxClass = "tab"
+const List = ({ box }: Props) => {
+  let component
+
+  switch (box) {
+    case 'inbox':
+      component = <Inbox />
       break
-    case ('outbox'):
-      inboxClass = "tab"
-      ouboxClass = "tab tab-active"
+    case 'outbox':
+      component = <Outbox />
+      break
+    case 'deleted':
+      component = <Delbox />
+      break
+    default:
+      component = `Invalid segment: ${box}`
   }
-
 
   useEffect(() => {
     msgResetted()
     getMessageListFx()
   }, [])
 
+  
   return (
     <>
       <div className="text-end">
@@ -40,38 +41,7 @@ const List = () => {
           </button>
         </Link>
       </div>
-      <div role="tablist" className="tabs tabs-lift w-full">
-        <a
-          role="tab"
-          className={inboxClass}
-          onClick={() => setTab('inbox')}
-        >
-          {t('Inbox')} ({inboxCount})
-        </a>
-        <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
-          <table className="table">
-            <TableHead />
-            <tbody>
-              {inbox}
-            </tbody>
-          </table>
-        </div>
-        <a
-          role="tab"
-          className={ouboxClass}
-          onClick={() => setTab('outbox')}
-        >
-          {t('Outbox')} ({outboxCount})
-        </a>
-        <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
-          <table className="table">
-            <TableHead />
-            <tbody>
-              {outbox}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {component}
     </>
   )
 }

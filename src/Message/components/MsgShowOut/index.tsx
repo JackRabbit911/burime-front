@@ -4,8 +4,8 @@ import MsgBody from "../MsgBody";
 import MsgInfo from "./MsgInfo";
 import { useUnit } from "effector-react";
 import { $toAlias, toAliasSetted } from "../../store";
-import Controls from "./Controls";
 import Grid3Cols from "../../../reused/Wrapper/Grid3Cols";
+import Controls from "../Controls";
 
 type Props = {
   message: Message;
@@ -26,7 +26,7 @@ const MsgShowOut = ({ message }: Props) => {
         <MsgInfo message={message} />
         <MsgBody message={message} />
       </Grid3Cols>
-      <Controls />
+      <Controls link="/message/outbox" label="Delete from everyone" />
     </>
   )
 }

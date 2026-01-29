@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router";
-import type { Outbox } from "../../types"
-import MsgStatus from "../MsgStatus";
+import type { Outbox } from "../../../types";
+import MsgStatus from "../../MsgStatus";
 
 type Props = {
   message: Outbox;
 }
 
-const OutMsgLine = ({ message }: Props) => {
+const MsgLine = ({ message }: Props) => {
   let navigate = useNavigate();
-  const path = `/message/${message.id}`
+  const path = `/message/out/${message.id}`
   const recipients = JSON.parse(message.to).join(', ')
 
   return (
@@ -36,4 +36,4 @@ const OutMsgLine = ({ message }: Props) => {
   )
 }
 
-export default OutMsgLine
+export default MsgLine

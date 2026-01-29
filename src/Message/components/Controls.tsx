@@ -1,13 +1,18 @@
 import { Link, useParams } from "react-router"
-import { t } from "../../../common/i18n/utils"
-import { removeMsg } from "../../utils"
+import { removeMsg } from "../utils"
+import { t } from "../../common/i18n/utils"
 
-const Controls = () => {
+type Props = {
+  link: string;
+  label: string;
+}
+
+const Controls = ({ link, label }:Props) => {
   const { id } = useParams()
 
   return (
     <div className="flex justify-end gap-2 mt-1">
-      <Link to="/message/list">
+      <Link to={link}>
         <button
           className="btn"
         >
@@ -18,7 +23,7 @@ const Controls = () => {
         className="btn btn-error"
         onClick={() => removeMsg(id)}
       >
-        {t('Delete from everyone')}
+        {t(label)}
       </button>
     </div>
   )
