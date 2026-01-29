@@ -2,10 +2,13 @@ import { useParams } from "react-router"
 import { useEffect } from "react"
 import { $message, getMessageFx } from "../store"
 import { useUnit } from "effector-react"
-import MsgShowIn from "./MsgShowIn"
-import MsgShowOut from "./MsgShowOut"
+import MsgShowWrapper from "./WsgShowWrappper"
 
-const MessageShow = () => {
+type Props = {
+  cond: string;
+}
+
+const MessageShow = ({ cond }: Props) => {
   const { id } = useParams()
   const message = useUnit($message)
 
@@ -16,11 +19,10 @@ const MessageShow = () => {
   return (
     <>
       {message ? (
-        <>
-            {message.incoming ?
-              <MsgShowIn message={message} /> :
-              <MsgShowOut message={message} />}
-        </>
+        <MsgShowWrapper
+          cond={cond}
+          message={message}
+        />
       ) : null
       }
     </>
