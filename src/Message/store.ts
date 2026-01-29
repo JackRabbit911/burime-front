@@ -6,6 +6,7 @@ import { getMessageListUri, getMessageUri, saveMessageUri } from "../common/cons
 import type { MessageOut } from "./schema";
 import { successDialog } from "../reused/InModal/SuccessDialog";
 import { modalOpened } from "../reused/Modal/store";
+import { globalReset } from "../common/store";
 
 export const msgResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
@@ -25,13 +26,15 @@ const saveMessageFx = createEffect((data: MessageOut) => (
 
 export const $inbox = createStore<Inbox[]>([])
     .on(getMessageListFx.doneData, (_, response) => response.data.result.inbox)
+    .reset(globalReset)
 
 export const $outbox = createStore<Outbox[]>([])
     .on(getMessageListFx.doneData, (_, response) => response.data.result.outbox)
+    .reset(globalReset)
 
 export const $message = createStore<Message | null>(null)
     .on(getMessageFx.doneData, (_, response) => response.data.result)
-    .reset(msgResetted)
+    .reset(msgResetted, globalReset)
 
 export const $toAlias = createStore<string>('Author')
 
