@@ -17,7 +17,7 @@ const Router = () => {
       <Route path='authors' element={<MyAuthors />} />
       <Route path='message'>
         <Route path='inbox' element={<List box='inbox' />} />
-        <Route path='outox' element={<List box='outbox' />} />
+        <Route path='outbox' element={<List box='outbox' />} />
         <Route path='deleted' element={<List box='deleted' />} />
         <Route path='in/:id' element={<MessageShow cond='in'/>} />
         <Route path='out/:id' element={<MessageShow cond='out'/>} />
