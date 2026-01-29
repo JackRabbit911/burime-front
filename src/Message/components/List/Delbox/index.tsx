@@ -10,10 +10,10 @@ const Delbox = () => {
 
   return (
     <div role="tablist" className="tabs tabs-lift w-full">
-      <Link to='/message/list/inbox' role="tab" className="tab">
+      <Link to='/message/inbox' role="tab" className="tab">
         {t('Inbox')} ({inboxCount})
       </Link>
-      <Link to='/message/list/outbox' role="tab" className="tab">
+      <Link to='/message/outbox' role="tab" className="tab">
         {t('Outbox')} ({outboxCount})
       </Link>
       <a

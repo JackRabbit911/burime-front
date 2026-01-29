@@ -11,7 +11,7 @@ const Outbox = () => {
 
   return (
     <div role="tablist" className="tabs tabs-lift w-full">
-      <Link to='/message/list/inbox' role="tab" className="tab">
+      <Link to='/message/inbox' role="tab" className="tab">
           {t('Inbox')} ({inboxCount})
       </Link>
       <a
@@ -28,7 +28,7 @@ const Outbox = () => {
           </tbody>
         </table>
       </div>
-      <Link to='/message/list/deleted' role="tab" className="tab">
+      <Link to='/message/deleted' role="tab" className="tab">
           {t('Deleted')} ({delboxCount})
       </Link>
     </div >

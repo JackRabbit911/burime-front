@@ -25,10 +25,10 @@ const Inbox = () => {
           </tbody>
         </table>
       </div>
-      <Link to='/message/list/outbox' role="tab" className="tab">
+      <Link to='/message/outbox' role="tab" className="tab">
           {t('Outbox')} ({outboxCount})
       </Link>
-      <Link to='/message/list/deleted' role="tab" className="tab">
+      <Link to='/message/deleted' role="tab" className="tab">
           {t('Deleted')} ({delboxCount})
       </Link>
     </div >
