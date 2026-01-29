@@ -1,7 +1,7 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
-import type { Message, Inbox, MessageList, Outbox } from "./types";
+import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
 import { getMessageListUri, getMessageUri, saveMessageUri } from "../common/constants";
 import type { MessageOut } from "./schema";
 import { successDialog } from "../reused/InModal/SuccessDialog";
@@ -32,15 +32,20 @@ export const $outbox = createStore<Outbox[]>([])
     .on(getMessageListFx.doneData, (_, response) => response.data.result.outbox)
     .reset(globalReset)
 
+export const $delbox = createStore<Delbox[]>([])
+    .on(getMessageListFx.doneData, (_, response) => response.data.result.deleted)
+    .reset(globalReset)
+
 export const $message = createStore<Message | null>(null)
     .on(getMessageFx.doneData, (_, response) => response.data.result)
     .reset(msgResetted, globalReset)
 
 export const $toAlias = createStore<string>('Author')
 
-export const $msgCounts = combine({inbox: $inbox, outbox: $outbox}, (store) => ({
+export const $msgCounts = combine({inbox: $inbox, outbox: $outbox, delbox: $delbox}, (store) => ({
     inboxCount: store.inbox.length,
     outboxCount: store.outbox.length,
+    delboxCount: store.delbox.length,
 }))
 
 sample({
