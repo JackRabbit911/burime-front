@@ -1,3 +1,5 @@
+import { host } from "./ajax";
+
 export const isObjectEmpty = (obj: object) => {
   for (const prop in obj) {
     if (Object.hasOwn(obj, prop)) {
@@ -25,3 +27,11 @@ export const getObjectProp = (object: object, key: string) => {
 }
 
 export const fileToUrl = (file: File | null) => file ? URL.createObjectURL(file) : ''
+
+export const avatarSrc = (
+    file: File | null | undefined,
+    src: string | undefined): string => {
+    return file ? fileToUrl(file) :
+        (src ? `${host}/${src}` :
+            `${host}/avatar/no_avatar.jpg`)
+}
