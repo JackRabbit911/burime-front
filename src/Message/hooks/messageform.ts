@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 
 import { msgSubmitted } from "../store"
+import { throttle } from "../../common/utils/decorator"
 import { messageForm, messageOut, type MessageForm } from "../schema"
 import { $ownAuthors, getOwnAuthorsFx } from "../../common/store/ownAuthors"
 
@@ -19,8 +20,9 @@ export const useMessageForm = () => {
           important: false,
         }
       })
-    
+
       const onSubmit: SubmitHandler<MessageForm> = (data) => {
+        const throttledSubmit = throttle(msgSubmitted, 1000);
         const valid = messageOut.safeParse(data)
     
         if (valid?.error) {
@@ -28,7 +30,7 @@ export const useMessageForm = () => {
         }
     
         if (valid?.success && valid?.data) {
-          msgSubmitted(valid.data)
+          throttledSubmit(valid.data)
         }
       }
     
