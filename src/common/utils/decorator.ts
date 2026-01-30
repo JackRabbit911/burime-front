@@ -2,42 +2,42 @@ export function debounce<T extends (...args: any[]) => void>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
 
   return function (...args: Parameters<T>): void {
     if (timeoutId) {
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId)
     }
 
     timeoutId = setTimeout(() => {
-      func(...args);
-    }, delay);
-  };
+      func(...args)
+    }, delay)
+  }
 }
 
 type Func = (...args: any[]) => void;
 
-export function throttle<T extends Func>(func: T, wait: number): (...args: Parameters<T>) => void {
-    let isThrottled = false;
-    let savedArgs: Parameters<T> | null = null;
-    let savedThis: any = null;
+export function throttle<T extends Func>(func: T, delay: number): (...args: Parameters<T>) => void {
+    let isThrottled = false
+    let savedArgs: Parameters<T> | null = null
+    let savedThis: any = null
 
     return function wrapper(this: any, ...args: Parameters<T>) {
         if (isThrottled) {
-            savedArgs = args;
-            savedThis = this;
+            savedArgs = args
+            savedThis = this
             return;
         }
 
-        func.apply(this, args);
-        isThrottled = true;
+        func.apply(this, args)
+        isThrottled = true
 
         setTimeout(() => {
-            isThrottled = false;
+            isThrottled = false
             if (savedArgs) {
-                wrapper.apply(savedThis, savedArgs);
-                savedArgs = savedThis = null;
+                wrapper.apply(savedThis, savedArgs)
+                savedArgs = savedThis = null
             }
-        }, wait);
+        }, delay)
     };
 }
