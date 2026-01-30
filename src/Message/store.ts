@@ -64,7 +64,7 @@ sample({
     filter: (response) => Boolean(response?.data?.success),
     fn: () => successDialog({
         text: 'Message was sended and saved!',
-        link: 'message/list',
+        link: 'message/outbox',
     }),
     target: modalOpened,
 })
