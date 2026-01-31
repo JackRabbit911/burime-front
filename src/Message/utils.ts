@@ -16,7 +16,7 @@ export const getComponent = (message: Message) => {
 export const removeMsg = (id: string | undefined) => {
     const uri = [removeMessageUri, id].join('/')
     const text = 'Your sended message will be deleted from everyone!'
-    const link = '/message/list'
+    const link = '/message/outbox'
 
     deleteDialog(uri, text, link)
 }
@@ -24,7 +24,7 @@ export const removeMsg = (id: string | undefined) => {
 export const deleteMsg = (id: string | undefined, recipient: number) => {
     const uri = [deleteMessageUri, id, recipient].join('/')
     const text = 'This message will be deleted'
-    const link = '/message/list'
+    const link = '/message/inbox'
 
     deleteDialog(uri, text, link)
 }
