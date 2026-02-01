@@ -1,6 +1,6 @@
 import { perPages } from "../../../common/constants"
 import type { AuthorsPayload, Member, OwnAuthors } from "../../schema/authors"
-import { base64ToFile } from "../../schema/files"
+import { base64ToFile } from "../../utils/files"
 import type { Bootstrap } from "../../schema/input"
 import { changeMaster } from "../Authors/utils"
 

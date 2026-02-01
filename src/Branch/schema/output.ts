@@ -1,7 +1,7 @@
 import * as z from "zod"
 import { authorsPayload, member, slimMember } from "./authors"
-import { imageFile } from "./files"
 import { branchSch, posts } from "./input"
+import { imageFile } from "../../common/schema.ts/files"
 
 const branchTitle = z.string()
   .trim()
