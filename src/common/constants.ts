@@ -28,3 +28,6 @@ export const deleteMessageUri = 'my/message/delete'
 export const saveMessageUri = 'my/message/save'
 export const getMsgReferenceUri = '/my/reference/message'
 
+export const getUserDataUri = 'my/profile'
+export const saveUserDataUri = 'my/profile/save'
+export const savePasswordUri = 'my/profile/savepswd'

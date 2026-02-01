@@ -7,10 +7,11 @@ type Props = {
   label: string;
   optional?: string;
   placeholder?: string;
+  type?: string;
 }
 
 const TextInput = ({
-  fieldName, label, optional, placeholder
+  fieldName, label, optional, placeholder, type = 'text'
 }: Props) => {
   const { register, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
@@ -35,6 +36,7 @@ const TextInput = ({
         <span className="label-text">{optional}</span>
       </legend>
       <input
+        type={type}
         {...register(fieldName)}
         placeholder={placeholder}
         className={inputClassName}

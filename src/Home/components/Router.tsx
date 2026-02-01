@@ -8,6 +8,8 @@ import AuthorWrapper from "../../MyAuthors/components/AuthorWrapper"
 import List from "../../Message/components/List"
 import MessageShow from "../../Message/components/MessageShow"
 import MessageFormWrapper from "../../Message/components/Form/MessageFormWrapper"
+import Profile from "../../Profile/components"
+import Password from "../../Profile/components/Password"
 
 const Router = () => {
   return (
@@ -27,6 +29,8 @@ const Router = () => {
       <Route path='drafts' element={<Drafts />} />
       <Route path='branch/:id?/:draft?' element={<Branch />} />
       <Route path='author/:id?' element={<AuthorWrapper />} />
+      <Route path='profile' element={<Profile />} />
+      <Route path='profile/password' element={<Password />} />
     </Routes>
   )
 }

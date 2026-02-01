@@ -7,6 +7,7 @@ import type { MessageOut } from "./schema";
 import { successDialog } from "../reused/InModal/SuccessDialog";
 import { modalOpened } from "../reused/Modal/store";
 import { globalReset } from "../common/store";
+import { pending } from "patronum";
 
 export const msgResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
@@ -68,3 +69,5 @@ sample({
     }),
     target: modalOpened,
 })
+
+export const $isPending = pending([saveMessageFx])

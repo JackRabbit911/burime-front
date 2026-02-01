@@ -3,13 +3,12 @@ import { useUnit } from "effector-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 
-import { msgSubmitted } from "../store"
-import { throttle } from "../../common/utils/decorator"
+import { $isPending, msgSubmitted } from "../store"
 import { messageForm, messageOut, type MessageForm } from "../schema"
 import { $ownAuthors, getOwnAuthorsFx } from "../../common/store/ownAuthors"
 
 export const useMessageForm = () => {
-    const ownAuthors = useUnit($ownAuthors)
+    const [ ownAuthors, isPending ] = useUnit([$ownAuthors, $isPending])
     
       const methods = useForm({
         resolver: zodResolver(messageForm),
@@ -22,15 +21,17 @@ export const useMessageForm = () => {
       })
 
       const onSubmit: SubmitHandler<MessageForm> = (data) => {
-        const throttledSubmit = throttle(msgSubmitted, 1000);
-        const valid = messageOut.safeParse(data)
-    
-        if (valid?.error) {
-          console.log(valid.error, data)
-        }
-    
-        if (valid?.success && valid?.data) {
-          throttledSubmit(valid.data)
+        if (!isPending) {
+          const valid = messageOut.safeParse(data)
+      
+          if (valid?.error) {
+            console.log(valid.error, data)
+          }
+      
+          if (valid?.success && valid?.data) {
+            msgSubmitted(valid.data)
+          }
+
         }
       }
     

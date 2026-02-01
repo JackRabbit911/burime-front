@@ -38,13 +38,14 @@ const AuthorForm = ({ members }: Props) => {
         rows={4}
         optional={t("Up to % words", 200)}
       />
-      <div className="flex flex-row gap-3">
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2">
         <FileInput
           fieldName="file"
           label={t('Avatar')}
           optional={t('Up % Mb', 2)}
         />
-        <div className="w-1/2 mt-0.45">
+        </div>
           <Select
             fieldName="author.openclosed"
             label={t('Status')}
@@ -54,7 +55,6 @@ const AuthorForm = ({ members }: Props) => {
               { value: 0, label: t('Open group') },
             ]}
           />
-        </div>
       </div>
     </>
   )

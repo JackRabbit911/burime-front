@@ -18,7 +18,7 @@ const FileInput = ({ fieldName, label, optional }: Props) => {
   }
 
   return (
-    <div className="basis-3/4">
+    <>
       <label className="fieldset-label flex flex-col w-full">
         <div className="flex justify-between w-full">
           <legend className="fieldset-legend">
@@ -59,7 +59,7 @@ const FileInput = ({ fieldName, label, optional }: Props) => {
       <div className="fieldset-label text-error mt-1">
         {errors[fieldName]?.message as string}
       </div>
-    </ div>
+    </>
   )
 }
 

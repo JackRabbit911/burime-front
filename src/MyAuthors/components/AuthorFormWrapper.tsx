@@ -1,7 +1,6 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
-import { avatarSrc } from "../utils"
 import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
 import AuthorForm from "./AuthorForm"
 import Controls from "./Controls"
@@ -11,6 +10,7 @@ import AuthorsWrapper from "../../reused/Participants/components/AuthorsWrapper"
 import Members from "../../reused/Participants/components/Members"
 import MembersPermissions from "./Participants/MembersPermissions"
 import { getGroupReferenceUri } from "../../common/constants"
+import { avatarSrc } from "../../common/utils"
 
 type Props = {
   defaultAuthor?: MyAuthor;

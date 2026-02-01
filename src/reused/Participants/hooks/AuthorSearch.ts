@@ -1,18 +1,11 @@
 import { useRef, useState } from "react";
 import { authorsFilterSearch } from "../schema";
-import { debounce } from "../../../common/utils/decorator";
 import { authorsPayloadReset, filterSet, searchSet } from "../store/athorsPayload";
 
 export const useAuthorSearch = () => {
     const [error, setError] = useState<string | null>()
     const searchRef = useRef<HTMLInputElement>(null)
     const filterRef = useRef<HTMLSelectElement>(null)
-
-    const handleSearch = (query: string | null) => {
-        searchSet(query)
-    };
-
-    const debouncedSearch = debounce(handleSearch, 500);
 
     const onSelect = () => {
         filterSet(filterRef.current?.value ?? null)
@@ -22,7 +15,7 @@ export const useAuthorSearch = () => {
         const valid = authorsFilterSearch.safeParse(searchRef.current?.value)
         if (valid.success && valid.data) {
             setError(null)
-            debouncedSearch(valid.data ?? null)
+            searchSet(valid.data)
         } else if (valid.error) {
             setError(valid.error.issues[0].message)
         }

@@ -22,7 +22,7 @@ const Select = ({ fieldName, label, options }: Props) => {
       </div>
       </legend>
       <select
-        className="select"
+        className="select w-full"
         {...register(fieldName, { required: true })}
       >
         {options.map(
