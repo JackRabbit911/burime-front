@@ -20,6 +20,7 @@ export const $authorsPayload = createStore<AuthorsPayload>({
     return updatedStore
 }).on(limitSet, (store, limit) => {
     const updatedStore = { ...store }
+    updatedStore.page = 1
     updatedStore.limit = limit
     return updatedStore
 }).on(filterSet, (store, filter) => {

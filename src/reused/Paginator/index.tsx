@@ -17,17 +17,16 @@ const Paginator = (props: Props) => {
 
   return (
     <div className="join">
-      {paginationData.map(
-        (pb, key) => {
-          return paginationData.length > 1
-            ? <Button
-                key={key}
-                {...pb}
-                setPageNumber={onSetPage}
-              />
-            : ''
-        }
-      )}
+      {paginationData.length > 1 ? 
+      paginationData.map(
+        (pb, key) => (
+          <Button
+            key={key}
+            {...pb}
+            setPageNumber={onSetPage}
+          />
+        )
+      ) : ''}
     </div>
   )
 }
