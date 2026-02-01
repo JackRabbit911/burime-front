@@ -14,4 +14,13 @@ export const userData = z.object({
     file: imageFile.nullish(),
 })
 
+export const passwordSchema = z.object({
+  password: z.string().min(5, "Password must be at least 5 characters"),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
 export type UserData = z.infer<typeof userData>
+export type ConfirmPassword = z.infer<typeof passwordSchema>
