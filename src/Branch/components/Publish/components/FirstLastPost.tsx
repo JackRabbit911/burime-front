@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import Textarea from "../../../../reused/Textarea";
-import { t } from "../../../../common/i18n/utils";
+
+import { t } from "common/i18n/utils";
+import Textarea from "reused/Textarea";
 
 const FirstLastPost = () => {
   const { getValues, setValue } = useFormContext()

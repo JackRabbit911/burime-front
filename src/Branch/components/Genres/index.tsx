@@ -1,8 +1,10 @@
 import { useFormContext } from "react-hook-form";
+
+import { t } from "common/i18n/utils";
+import { getObjectProp } from "common/utils";
 import SameWeightGenres from "./components/SameWeightGenres";
+
 import type { Genre } from "../../schema/input";
-import { getObjectProp } from "../../../common/utils";
-import { t } from "../../../common/i18n/utils";
 
 type Props = {
   genres: Genre[];
