@@ -1,6 +1,4 @@
-// import Alert from "../../reused/Alert"
-// import CoverWrapper from "./CoverWrapper"
-
+// import Alert from "reused/Alert"
 import CoverWrapper from "./components/CoverWrapper"
 
 const Cover = () => {
