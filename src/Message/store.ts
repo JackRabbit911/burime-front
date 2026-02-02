@@ -1,13 +1,15 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector";
-import ajax from "../common/ajax";
-import type { ApiResponse } from "../common/ajax/types";
-import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
-import { getMessageListUri, getMessageUri, saveMessageUri } from "../common/constants";
-import type { MessageOut } from "./schema";
-import { successDialog } from "../reused/InModal/SuccessDialog";
-import { modalOpened } from "../reused/Modal/store";
-import { globalReset } from "../common/store";
 import { pending } from "patronum";
+
+import ajax from "common/ajax";
+import { globalReset } from "common/store";
+import type { MessageOut } from "./schema";
+import { modalOpened } from "reused/Modal/store";
+import type { ApiResponse } from "common/ajax/types";
+import { successDialog } from "reused/InModal/SuccessDialog";
+import { getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
+
+import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
 
 export const msgResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
