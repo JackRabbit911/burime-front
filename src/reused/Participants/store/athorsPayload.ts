@@ -1,8 +1,9 @@
 import { createEvent, createStore } from "effector";
-import type { AuthorsPayload } from "../types";
-import { perPages } from "../../../common/constants";
-import { globalReset } from "../../../common/store";
 import { debounce } from "patronum";
+
+import { globalReset } from "common/store";
+import { perPages } from "common/constants";
+import type { AuthorsPayload } from "../types";
 
 export const limitSet = createEvent<number>()
 export const pageSet = createEvent<number>()
