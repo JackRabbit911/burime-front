@@ -1,9 +1,9 @@
-import { t } from "../../common/i18n/utils"
-import Select from "../../reused/Select"
-import Textarea from "../../reused/Textarea"
-import FileInput from "../../reused/FileInput"
-import TextInput from "../../reused/TextInput"
-import type { Member } from "../../reused/Participants/types"
+import Select from "reused/Select"
+import { t } from "common/i18n/utils"
+import Textarea from "reused/Textarea"
+import FileInput from "reused/FileInput"
+import TextInput from "reused/TextInput"
+import type { Member } from "reused/Participants/types"
 
 type Props = {
   members: Member[] | undefined;

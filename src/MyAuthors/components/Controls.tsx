@@ -1,13 +1,14 @@
 import { useParams } from "react-router"
 import { useFormContext } from "react-hook-form"
+
+import Helper from "reused/Help"
+import { t } from "common/i18n/utils"
 import { submitDisabled } from "../utils"
 import { authorDeleteFx } from "../store/delete"
-import { t } from "../../common/i18n/utils"
-import Helper from "../../reused/Help"
-import { helpBtnClicked } from "../../reused/Help/store"
-import ConfirmDialog from "../../reused/InModal/ConfirmDialog"
-import { closeBtn, modalOpened } from "../../reused/Modal/store"
-import { memberIdResetted } from "../../reused/Participants/store/authors"
+import { helpBtnClicked } from "reused/Help/store"
+import ConfirmDialog from "reused/InModal/ConfirmDialog"
+import { closeBtn, modalOpened } from "reused/Modal/store"
+import { memberIdResetted } from "reused/Participants/store/authors"
 
 type Props = {
   status: number;

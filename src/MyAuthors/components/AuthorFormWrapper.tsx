@@ -1,16 +1,17 @@
-import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
-import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
-import AuthorForm from "./AuthorForm"
-import Controls from "./Controls"
-import { useEffect, useState } from "react"
 import { useUnit } from "effector-react"
-import AuthorsWrapper from "../../reused/Participants/components/AuthorsWrapper"
+import { useEffect, useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
+
+import Controls from "./Controls"
+import AuthorForm from "./AuthorForm"
+import { avatarSrc } from "common/utils"
+import { getGroupReferenceUri } from "common/constants"
 import Members from "../../reused/Participants/components/Members"
 import MembersPermissions from "./Participants/MembersPermissions"
-import { getGroupReferenceUri } from "../../common/constants"
-import { avatarSrc } from "../../common/utils"
+import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
+import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
+import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
 
 type Props = {
   defaultAuthor?: MyAuthor;

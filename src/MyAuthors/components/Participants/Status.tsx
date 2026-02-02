@@ -1,5 +1,5 @@
-import { t } from "../../../common/i18n/utils";
-import type { Member } from "../../../reused/Participants/types"
+import { t } from "common/i18n/utils";
+import type { Member } from "reused/Participants/types"
 
 type Props = {
   member: Member | null;

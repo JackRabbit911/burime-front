@@ -1,13 +1,15 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector";
-import type { ApiResponse } from "../../common/ajax/types";
-import ajax from "../../common/ajax";
-import { globalReset } from "../../common/store";
+
+import ajax from "common/ajax";
+import { globalReset } from "common/store";
+import { modalOpened } from "reused/Modal/store";
+import { loading } from "reused/InModal/Loading";
+import { successDialog } from "reused/InModal/SuccessDialog";
+import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "common/constants";
+
+import type { ApiResponse } from "common/ajax/types";
+import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
-import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "../../common/constants";
-import { modalOpened } from "../../reused/Modal/store";
-import { successDialog } from "../../reused/InModal/SuccessDialog";
-import { loading } from "../../reused/InModal/Loading";
-import type { Member } from "../../reused/Participants/types";
 
 export const authorSubmitted = createEvent<FormOutputType>()
 export const authorSaved = createEvent()

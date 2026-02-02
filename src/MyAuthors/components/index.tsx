@@ -1,8 +1,9 @@
-import { useList } from "effector-react"
-import { $myAuthors, getMyAuthorsFx } from "../store"
 import { useEffect } from "react"
-import AuthorCard from "./AuthorCard"
 import { Link } from "react-router"
+import { useList } from "effector-react"
+
+import AuthorCard from "./AuthorCard"
+import { $myAuthors, getMyAuthorsFx } from "../store"
 
 const MyAuthors = () => {
   const myAuthors = useList($myAuthors, {

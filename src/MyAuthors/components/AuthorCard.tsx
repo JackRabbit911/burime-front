@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import { host } from "../../common/ajax";
+
+import { host } from "common/ajax";
 import type { MyAuthor } from "../schema";
 
 type Props = {
