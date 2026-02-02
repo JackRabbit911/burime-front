@@ -1,11 +1,12 @@
 import { useFormContext } from "react-hook-form";
-import { modalClosed, modalOpened } from "../../../../../reused/Modal/store";
-import { draftSchema, finalSchema } from "../../../../schema/output";
-import { isObjectEmpty } from "../../../../../common/utils";
-import { isReady } from "../../../../utils";
-import { draftClicked, published } from "../../../../store/publish";
-import ConfirmDialog from "../../../../../reused/InModal/ConfirmDialog";
-import { draftDeleted } from "../../../../store/delete";
+
+import { isReady } from "Branch/utils";
+import { isObjectEmpty } from "common/utils";
+import { draftDeleted } from "Branch/store/delete";
+import ConfirmDialog from "reused/InModal/ConfirmDialog";
+import { modalClosed, modalOpened } from "reused/Modal/store";
+import { draftClicked, published } from "Branch/store/publish";
+import { draftSchema, finalSchema } from "Branch/schema/output";
 
 type Props = {
   step: number;
