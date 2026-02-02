@@ -1,13 +1,14 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import { createEffect, createEvent, createStore, sample } from "effector";
+
+import ajax from "common/ajax";
+import { modalOpened } from "reused/Modal/store";
+import { loading } from "reused/InModal/Loading";
+import { $status, globalReset } from "common/store";
+import type { ApiResponse } from "common/ajax/types";
 import type { FormData, DraftData } from "../schema/output";
-import type { ApiResponse } from "../../common/ajax/types";
-import { saveBranchUri, saveDraftUri } from "../../common/constants";
-import ajax from "../../common/ajax";
-import { $status, globalReset } from "../../common/store";
-import { modalOpened } from "../../reused/Modal/store";
-import { successDialog } from "../../reused/InModal/SuccessDialog";
-import { loading } from "../../reused/InModal/Loading";
+import { successDialog } from "reused/InModal/SuccessDialog";
+import { saveBranchUri, saveDraftUri } from "common/constants";
 
 export type FinalResponse = {
     [x: string]: string | number;
