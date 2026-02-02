@@ -1,5 +1,5 @@
-import Envelope from "../../reused/icons/Envelope";
-import EnvelopeOpen from "../../reused/icons/EnvelopeOpen";
+import Envelope from "reused/icons/Envelope";
+import EnvelopeOpen from "reused/icons/EnvelopeOpen";
 
 type Props = {
     status: number;

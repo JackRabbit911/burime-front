@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router"
+
 import { removeMsg } from "../utils"
-import { t } from "../../common/i18n/utils"
+import { t } from "common/i18n/utils"
 
 type Props = {
   link: string;

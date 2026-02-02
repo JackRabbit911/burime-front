@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
-import type { Outbox } from "../../../types";
+
 import MsgStatus from "../../MsgStatus";
+import type { Outbox } from "Message/types";
 
 type Props = {
   message: Outbox;

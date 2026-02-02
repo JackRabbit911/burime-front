@@ -1,7 +1,8 @@
-import { useParams } from "react-router"
 import { useEffect } from "react"
-import { $message, getMessageFx } from "../store"
+import { useParams } from "react-router"
 import { useUnit } from "effector-react"
+
+import { $message, getMessageFx } from "../store"
 import MsgShowWrapper from "./WsgShowWrappper"
 
 type Props = {

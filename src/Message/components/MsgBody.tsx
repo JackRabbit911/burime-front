@@ -1,6 +1,6 @@
-import { t } from "../../common/i18n/utils";
-import type { Message } from "../types";
+import { t } from "common/i18n/utils";
 import { getComponent } from "../utils";
+import type { Message } from "../types";
 
 type Props = {
   message: Message;

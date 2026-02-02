@@ -1,7 +1,7 @@
-import { host } from "../../common/ajax";
-import { t } from "../../common/i18n/utils";
-import type { Message } from "../types";
+import { host } from "common/ajax";
+import { t } from "common/i18n/utils";
 import MsgStatus from "./MsgStatus";
+import type { Message } from "../types";
 
 type Props = {
   message: Message;

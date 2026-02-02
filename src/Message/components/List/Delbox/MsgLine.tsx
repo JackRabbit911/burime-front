@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import type { Delbox } from "../../../types";
+import type { Delbox } from "Message/types";
 
 type Props = {
   message: Delbox;

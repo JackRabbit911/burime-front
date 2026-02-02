@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { getMessageListFx, msgResetted } from "../../store"
 import { Link } from "react-router"
+
 import Inbox from "./Inbox"
 import Outbox from "./Outbox"
 import Delbox from "./Delbox"
+import { getMessageListFx, msgResetted } from "Message/store"
 
 type Props = {
   box: string;

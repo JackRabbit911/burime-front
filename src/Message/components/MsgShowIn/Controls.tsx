@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router"
-import { t } from "../../../common/i18n/utils"
-import { deleteMsg } from "../../utils"
+
+import { t } from "common/i18n/utils"
+import { deleteMsg } from "Message/utils";
 
 type Props = {
   recipient: number;

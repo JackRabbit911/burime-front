@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
-import type { Inbox } from "../../../types";
-import MsgStatus from "../../MsgStatus";
-import { host } from "../../../../common/ajax";
+
+import { host } from "common/ajax";
+import MsgStatus from "Message/components/MsgStatus";
+
+import type { Inbox } from "Message/types";
 
 type Props = {
   message: Inbox;
