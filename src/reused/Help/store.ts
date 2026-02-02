@@ -1,8 +1,9 @@
 import { createEffect, createEvent, createStore, sample } from "effector";
+
+import ajax from "common/ajax";
+import { $status, globalReset } from "common/store";
 import { helpInputSch, type Help } from "./schema";
-import ajax from "../../common/ajax";
-import type { ApiResponse } from "../../common/ajax/types";
-import { $status, globalReset } from "../../common/store";
+import type { ApiResponse } from "common/ajax/types";
 
 export const helpBtnClicked = createEvent<string>()
 
