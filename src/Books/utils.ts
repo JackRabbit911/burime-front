@@ -1,4 +1,4 @@
-import type { MyStat } from "../common/types";
+import type { MyStat } from "common/types";
 
 export const isOwnAuthors = (stat: MyStat | null) => {
     if (!stat) {
