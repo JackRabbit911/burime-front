@@ -1,5 +1,5 @@
-import { confirmDialog } from "../../reused/InModal/ConfirmDialog"
-import { closeBtn, modalOpened } from "../../reused/Modal/store"
+import { confirmDialog } from "reused/InModal/ConfirmDialog"
+import { closeBtn, modalOpened } from "reused/Modal/store"
 import ajax from "../ajax"
 
 const yes = async (uri: string) => {

@@ -1,8 +1,10 @@
 import { createEffect, createStore } from "effector";
+
 import ajax from "../ajax";
 import { getOwnAuthorsUri } from "../constants";
+
 import type { ApiResponse } from "../ajax/types";
-import type { OwnAuthor } from "../../reused/Participants/types";
+import type { OwnAuthor } from "reused/Participants/types";
 
 export const getOwnAuthorsFx = createEffect(
     () => ajax.get<ApiResponse<OwnAuthor[]>>(getOwnAuthorsUri)
