@@ -4,6 +4,7 @@ import Home from "."
 import Books from "Books/components"
 import Branch from "Branch/components"
 import Drafts from "Drafts/components"
+import ErrorCmp from "reused/ErrorCmp"
 import Profile from "Profile/components"
 import List from "Message/components/List"
 import MyAuthors from "MyAuthors/components"
@@ -32,6 +33,7 @@ const Router = () => {
       <Route path='author/:id?' element={<AuthorWrapper />} />
       <Route path='profile' element={<Profile />} />
       <Route path='profile/password' element={<Password />} />
+      <Route path='*' element={<ErrorCmp status={404} />} />
     </Routes>
   )
 }
