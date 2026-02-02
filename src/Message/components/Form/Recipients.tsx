@@ -1,9 +1,11 @@
-import { useFormContext } from "react-hook-form";
-import { t } from "../../../common/i18n/utils";
-import type { Author } from "../../../reused/Participants/schema";
-import Recipient from "./Recipient";
-import { toAliasSetted } from "../../store";
 import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+
+import Recipient from "./Recipient";
+import { t } from "common/i18n/utils";
+import { toAliasSetted } from "Message/store";
+
+import type { Author } from "reused/Participants/schema";
 
 const Recipients = () => {
   const { watch, setValue } = useFormContext()
