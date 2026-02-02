@@ -1,21 +1,23 @@
-import { useUnit } from "effector-react";
 import { useEffect } from "react";
-import type { Bootstrap } from "../../schema/input";
-import { $step } from "../../store/step";
-import { $translate, getTranslateFx } from "../../../common/i18n/store";
-import { FormProvider, useForm } from "react-hook-form";
-import { formSchema } from "../../schema/output";
+import { useUnit } from "effector-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getDefaults } from "./utils";
+import { FormProvider, useForm } from "react-hook-form";
+
 import Steps from "../Steps";
 import Title from "../Title";
-import Genres from "../Genres";
-import StepControls from "../StepControls";
-import Publish from "../Publish";
 import Rules from "../Rules";
-import Authors from "../Authors";
 import Cover from "../Cover";
-import { $memberId } from "../../../reused/Participants/store/authors";
+import Genres from "../Genres";
+import Publish from "../Publish";
+import Authors from "../Authors";
+import { getDefaults } from "./utils";
+import { $step } from "Branch/store/step";
+import StepControls from "../StepControls";
+import { formSchema } from "Branch/schema/output";
+import { $memberId } from "reused/Participants/store/authors";
+import { $translate, getTranslateFx } from "common/i18n/store";
+
+import type { Bootstrap } from "Branch/schema/input";
 
 type Props = {
   bootstrap: Bootstrap;
@@ -25,7 +27,7 @@ const Form = ({ bootstrap }: Props) => {
   const step = useUnit($step)
   const memberId = useUnit($memberId)
   const translate = useUnit($translate)
-  const branchGenres = bootstrap?.branch_genres as number[];
+  const branchGenres = bootstrap?.branch_genres || [];
   
   const methods = useForm({
     resolver: zodResolver(formSchema),
