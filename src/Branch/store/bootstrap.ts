@@ -1,10 +1,11 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector";
-import ajax from "../../common/ajax";
-import type { ApiResponse } from "../../common/ajax/types";
-import { bootstrapSch, type Bootstrap } from "../schema/input";
-import { getBootsrapUri } from "../../common/constants";
+
+import ajax from "common/ajax";
+import { getBootsrapUri } from "common/constants";
+import { $status, globalReset } from "common/store";
+import type { ApiResponse } from "common/ajax/types";
 import type { AxiosError, AxiosResponse } from "axios";
-import { $status, globalReset } from "../../common/store";
+import { bootstrapSch, type Bootstrap } from "Branch/schema/input";
 
 type AxiosApiResponse = AxiosResponse<ApiResponse<Bootstrap>>;
 type Segment = string | undefined;
