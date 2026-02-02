@@ -1,6 +1,7 @@
 import type { ChangeEvent } from "react";
-import { t } from "../../../../common/i18n/utils";
-import type { Member } from "../../types";
+
+import { t } from "common/i18n/utils";
+import type { Member } from "reused/Participants/types";
 
 type Props = {
   handler: (val: number, id: number, isAdd: boolean) => void;

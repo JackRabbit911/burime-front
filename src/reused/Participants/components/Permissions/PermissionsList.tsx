@@ -1,7 +1,8 @@
+import { t } from "common/i18n/utils";
 import PermissionCheckBox from "./PermissionCheckBox";
-import { isPermission } from "../../utils";
-import { t } from "../../../../common/i18n/utils";
-import type { Member } from "../../types";
+import { isPermission } from "reused/Participants/utils";
+
+import type { Member } from "reused/Participants/types";
 
 type Props = {
   member: Member | null;

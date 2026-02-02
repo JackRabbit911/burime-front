@@ -1,6 +1,6 @@
-import { t } from "../../../common/i18n/utils";
-import type { AuthorsPayload } from "../types";
+import { t } from "common/i18n/utils";
 import { useAuthorSearch } from "../hooks/AuthorSearch";
+import type { AuthorsPayload } from "../types";
 
 type Props = {
   filters: string[];
