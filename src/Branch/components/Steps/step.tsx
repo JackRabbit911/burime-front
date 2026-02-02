@@ -1,8 +1,9 @@
 import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
-import { $step, stepChanged } from "../../store/step";
-import { isObjectEmpty } from "../../../common/utils";
-import { $darkMode } from "../../../common/store";
+
+import { $darkMode } from "common/store";
+import { isObjectEmpty } from "common/utils";
+import { $step, stepChanged } from "Branch/store/step";
 
 type Props = {
   step: number;

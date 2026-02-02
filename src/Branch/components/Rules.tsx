@@ -1,8 +1,8 @@
-import { t } from "../../common/i18n/utils"
-import CheckBox from "../../reused/CheckBox"
-import NumberInput from "../../reused/NumberInput"
-import RadioBox from "../../reused/RadioBox"
-import Textarea from "../../reused/Textarea"
+import { t } from "common/i18n/utils"
+import CheckBox from "reused/CheckBox"
+import RadioBox from "reused/RadioBox"
+import Textarea from "reused/Textarea"
+import NumberInput from "reused/NumberInput"
 
 const Rules = () => {
   return (

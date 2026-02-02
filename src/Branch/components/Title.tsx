@@ -1,7 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { t } from "../../common/i18n/utils";
-import { getObjectProp } from "../../common/utils";
+
+import { t } from "common/i18n/utils";
+import { getObjectProp } from "common/utils";
 
 const label = "Title"
 const optional = "Up to % words"
