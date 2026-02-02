@@ -38,8 +38,6 @@ export const authorsPayload = z.object({
 
 export const ownAuthors = z.array(author)
 
-export type Member = z.infer<typeof member>
 export type Author = z.infer<typeof author>
 export type Authors = z.infer<typeof authorsSch>
 export type OwnAuthors = z.infer<typeof ownAuthors>
-export type AuthorsPayload = z.infer<typeof authorsPayload>

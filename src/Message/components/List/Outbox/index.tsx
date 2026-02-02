@@ -1,9 +1,10 @@
-import { useList, useUnit } from "effector-react"
-import { $msgCounts, $outbox } from "../../../store"
-import { t } from "../../../../common/i18n/utils"
-import TableHead from "../TableHead"
 import { Link } from "react-router"
+import { useList, useUnit } from "effector-react"
+
 import MsgLine from "./MsgLine"
+import TableHead from "../TableHead"
+import { t } from "common/i18n/utils"
+import { $msgCounts, $outbox } from "Message/store"
 
 const Outbox = () => {
   const outbox = useList($outbox, (message) => <MsgLine message={message} />)

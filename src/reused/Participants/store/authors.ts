@@ -1,9 +1,10 @@
 import { combine, createEffect, createEvent, createStore, sample } from "effector"
 import type { AxiosError, AxiosResponse } from "axios"
-import type { ApiResponse } from "../../../common/ajax/types"
-import { getAuthorsUri } from "../../../common/constants"
-import ajax from "../../../common/ajax"
-import { $status, globalReset } from "../../../common/store"
+
+import ajax from "common/ajax"
+import { getAuthorsUri } from "common/constants"
+import type { ApiResponse } from "common/ajax/types"
+import { $status, globalReset } from "common/store"
 import { authorsSch, type Authors } from "../schema"
 import type { AuthorsPayload } from "../types"
 

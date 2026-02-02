@@ -1,6 +1,7 @@
 import { createEffect, createEvent, createStore, sample } from "effector"
-import type { ApiResponse } from "../../../common/ajax/types"
-import ajax from "../../../common/ajax"
+
+import ajax from "common/ajax"
+import type { ApiResponse } from "common/ajax/types"
 
 type ReferenceBooks = {
     authorsFilters: string[];

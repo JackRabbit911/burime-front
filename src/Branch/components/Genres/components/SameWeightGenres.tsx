@@ -1,5 +1,5 @@
-import type { Genre } from "../../../schema/input";
 import GenreCheckBox from "./GenreCheckBox";
+import type { Genre } from "Branch/schema/input";
 
 type Props = {
   genres: Genre;

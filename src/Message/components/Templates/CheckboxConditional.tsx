@@ -1,5 +1,4 @@
 import type { ChangeEvent } from "react";
-// import { t } from "../../../common/i18n/utils"
 
 type Props = {
   label: string;

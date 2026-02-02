@@ -1,9 +1,10 @@
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
+
+import Paginator from "reused/Paginator";
+import { perPages } from "common/constants";
+import PerPage from "reused/Paginator/PerPage";
 import { $total, getAuthorsFx } from "../store/authors";
-import Paginator from "../../Paginator";
-import PerPage from "../../Paginator/PerPage";
-import { perPages } from "../../../common/constants";
 import { $authorsPayload, limitSet, pageSet } from "../store/athorsPayload";
 
 const Pagination = () => {

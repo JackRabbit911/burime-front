@@ -1,11 +1,12 @@
 import { useEffect } from "react"
-import Book from "../../reused/icons/Book"
-import Heart from "../../reused/icons/Heart"
-import Message from "../../reused/icons/Message"
-import Stat from "../../reused/Stat"
-import { $myStat, getMyStatFx } from "../store"
 import { useUnit } from "effector-react"
-import { globalReset } from "../../common/store"
+
+import Stat from "reused/Stat"
+import Book from "reused/icons/Book"
+import Heart from "reused/icons/Heart"
+import Message from "reused/icons/Message"
+import { globalReset } from "common/store"
+import { $myStat, getMyStatFx } from "Home/store"
 
 const Home = () => {
   const stat = useUnit($myStat)

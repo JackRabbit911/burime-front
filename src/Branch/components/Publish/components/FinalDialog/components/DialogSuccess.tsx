@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { closeBtn, modalClosed } from "../../../../../../reused/Modal/store";
-import { globalReset } from "../../../../../../common/store";
-import { host } from "../../../../../../common/ajax";
-import { t } from "../../../../../../common/i18n/utils";
-import type { FinalResponse } from "../../../../../store/publish";
+
+import { host } from "common/ajax";
+import { t } from "common/i18n/utils";
+import { globalReset } from "common/store";
+import { closeBtn, modalClosed } from "reused/Modal/store";
+
+import type { FinalResponse } from "Branch/store/publish";
 
 type Props = {
   response: FinalResponse;

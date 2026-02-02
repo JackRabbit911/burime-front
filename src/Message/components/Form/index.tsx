@@ -1,12 +1,13 @@
 import { useUnit } from "effector-react"
-import { t } from "../../../common/i18n/utils"
-import Textarea from "../../../reused/Textarea"
-import TextInput from "../../../reused/TextInput"
-import { $toAlias } from "../../store"
-import ConditionalInput from "../Templates/ConditionalInput"
 import { useFormContext } from "react-hook-form"
-import { $ownAuthors } from "../../../common/store/ownAuthors"
-import type { OwnAuthor } from "../../../reused/Participants/types"
+
+import { t } from "common/i18n/utils"
+import Textarea from "reused/Textarea"
+import TextInput from "reused/TextInput"
+import { $toAlias } from "Message/store"
+import { $ownAuthors } from "common/store/ownAuthors"
+import type { OwnAuthor } from "reused/Participants/types"
+import ConditionalInput from "../Templates/ConditionalInput"
 
 const getAuthorAlias = (id: number | string, authors: OwnAuthor[]): string => {
   const author = authors.find(item => item.id == id)

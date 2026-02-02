@@ -1,8 +1,9 @@
-import { useList, useUnit } from "effector-react"
-import { $delbox, $msgCounts } from "../../../store"
-import { t } from "../../../../common/i18n/utils"
 import { Link } from "react-router"
+import { useList, useUnit } from "effector-react"
+
 import MsgLine from "./MsgLine"
+import { t } from "common/i18n/utils"
+import { $delbox, $msgCounts } from "Message/store"
 
 const Delbox = () => {
   const delbox = useList($delbox, (message) => <MsgLine message={message} />)

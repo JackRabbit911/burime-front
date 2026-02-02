@@ -1,13 +1,15 @@
 import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
+
 import Status from "./Status";
-import { getCurrentMember } from "../../utils";
-import { t } from "../../../../../common/i18n/utils";
-import type { Member } from "../../../../../reused/Participants/types";
-import { $referenceBooks } from "../../../../../reused/Participants/store/reference";
-import { $memberId, memberIdResetted } from "../../../../../reused/Participants/store/authors";
-import Participants from "../../../../../reused/Participants/components/Permissions/Participants";
-import PermissionsList from "../../../../../reused/Participants/components/Permissions/PermissionsList";
+import { t } from "common/i18n/utils";
+import { getCurrentMember } from "reused/Participants/utils";
+import { $referenceBooks } from "reused/Participants/store/reference";
+import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
+import Participants from "reused/Participants/components/Permissions/Participants";
+import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
+
+import type { Member } from "reused/Participants/types";
 
 const MembersPermissions = () => {
   const authorId = useUnit($memberId)

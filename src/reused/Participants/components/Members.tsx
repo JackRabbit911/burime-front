@@ -1,7 +1,9 @@
 import { useFormContext } from "react-hook-form";
-import { t } from "../../../common/i18n/utils";
-import type { Member } from "../types";
+
+import { t } from "common/i18n/utils";
 import InvitedAuthors from "./InvitedAuthors";
+
+import type { Member } from "../types";
 
 const Members = () => {
   const { watch, setValue } = useFormContext()

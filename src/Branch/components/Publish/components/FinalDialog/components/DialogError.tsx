@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { closeBtn } from "../../../../../../reused/Modal/store";
-import { t } from "../../../../../../common/i18n/utils";
+
+import { t } from "common/i18n/utils";
+import { closeBtn } from "reused/Modal/store";
 
 type Props = {
   error?: {[x: string]: string};

@@ -1,4 +1,4 @@
-import type { Author } from "../../../reused/Participants/schema";
+import type { Author } from "reused/Participants/schema";
 
 type Props = {
   author: Author;

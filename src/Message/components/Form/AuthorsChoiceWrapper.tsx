@@ -1,14 +1,16 @@
-import { useUnit } from "effector-react"
-import { $authorsList } from "../../../reused/Participants/store/authors"
-import { $authorsPayload } from "../../../reused/Participants/store/athorsPayload"
-import { $referenceBooks, referenceRecived } from "../../../reused/Participants/store/reference"
 import { useEffect } from "react"
-import { getMsgReferenceUri } from "../../../common/constants"
+import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
-import type { Author } from "../../../reused/Participants/schema"
-import { getGroupMembersFx } from "../../../reused/Participants/store/groupMembers"
+
+import { getMsgReferenceUri } from "common/constants"
+import { $authorsList } from "reused/Participants/store/authors"
 import { addGroupRecipients, addNewRecipient } from "../../utils"
-import AuthorsChoice from "../../../reused/Participants/components/AuthorsChoice"
+import AuthorsChoice from "reused/Participants/components/AuthorsChoice"
+import { $authorsPayload } from "reused/Participants/store/athorsPayload"
+import { getGroupMembersFx } from "reused/Participants/store/groupMembers"
+import { $referenceBooks, referenceRecived } from "reused/Participants/store/reference"
+
+import type { Author } from "reused/Participants/schema"
 
 const AuthorsChoiceWrapper = () => {
   const authorsList = useUnit($authorsList)

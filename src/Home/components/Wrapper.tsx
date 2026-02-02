@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router";
-import { getTitle } from "../utils";
-import { t } from "../../common/i18n/utils";
 import { useEffect } from "react";
-import { $translate, getTranslateFx } from "../../common/i18n/store";
 import { useUnit } from "effector-react";
-import { globalReset } from "../../common/store";
+import { Link, useLocation } from "react-router";
+
+import { getTitle } from "../utils";
+import { t } from "common/i18n/utils";
+import { globalReset } from "common/store";
+import { $translate, getTranslateFx } from "common/i18n/store";
 
 type Props = {
   children?: React.ReactNode;

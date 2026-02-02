@@ -1,15 +1,12 @@
-import { host } from "../../../common/ajax";
-import { t } from "../../../common/i18n/utils";
-import type { Message } from "../../types";
-// import RecipientCmp from "./RecipientCmp";
+import { host } from "common/ajax";
+import { t } from "common/i18n/utils";
+import type { Message } from "Message/types";
 
 type Props = {
   message: Message;
 }
 
 const MsgInfo = ({ message }: Props) => {
-  // const recipients = message.to as Recipient[]
-
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between">

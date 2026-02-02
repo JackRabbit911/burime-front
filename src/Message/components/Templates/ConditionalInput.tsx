@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { useState, type ChangeEvent } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 
-import { getObjectProp } from "../../../common/utils";
+import { getObjectProp } from "common/utils";
 import CheckboxConditional from "./CheckboxConditional";
 
 type Props = {

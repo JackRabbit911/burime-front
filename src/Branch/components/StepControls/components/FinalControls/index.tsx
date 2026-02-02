@@ -1,70 +1,24 @@
-import { useFormContext } from "react-hook-form";
-import { modalClosed, modalOpened } from "../../../../../reused/Modal/store";
-import { draftSchema, finalSchema } from "../../../../schema/output";
-import { isObjectEmpty } from "../../../../../common/utils";
-import { isReady } from "../../../../utils";
-import { draftClicked, published } from "../../../../store/publish";
-import ConfirmDialog from "../../../../../reused/InModal/ConfirmDialog";
-import { draftDeleted } from "../../../../store/delete";
+import { isReady } from "Branch/utils";
+import { isObjectEmpty } from "common/utils";
+import { useFinalControls } from "../../hooks/finalControls";
 
 type Props = {
   step: number;
 }
 
 const FinalControls = ({ step }: Props) => {
-  const { watch, formState: { errors } } = useFormContext();
-
   if (step < 5) {
     return null
   }
 
-  const values = watch()
-
-  const onDelete = () => {
-    const onYes = () => {
-      modalClosed()
-      draftDeleted(values.draft)
-    }
-
-    modalOpened(
-      <ConfirmDialog
-        text='Your draft will be deleted'
-        onYes={onYes}
-      />
-    )
-  }
-
-  const onCancel = () => {
-    modalOpened(
-      <ConfirmDialog
-        text='Branch creation/editing will be cancelled'
-      />
-    )
-  }
-
-  const onPublish = () => {
-    const valid = finalSchema.safeParse(values)
-
-    if (valid?.error) {
-      console.log(valid.error, values)
-    }
-
-    if (valid?.success && valid?.data) {
-      published(valid.data)
-    }
-  }
-
-  const onDraft = () => {
-    const valid = draftSchema.safeParse(values)
-
-    if (valid?.error) {
-      console.log(valid.error, values)
-    }
-
-    if (valid?.success && valid?.data) {
-      draftClicked(valid.data)
-    }
-  }
+  const {
+    values,
+    errors,
+    onDelete,
+    onCancel,
+    onPublish,
+    onDraft
+  } = useFinalControls()
 
   return (
     <>

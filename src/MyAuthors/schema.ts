@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { imageFile } from "../common/schema.ts/files"
+import { imageFile } from "common/schema.ts/files"
 
 const member = z.object({
     id: z.number().int().positive(),

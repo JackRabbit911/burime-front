@@ -1,6 +1,7 @@
 import type React from "react"
 import { useFormContext } from "react-hook-form"
-import { getAlerts, readyProgress } from "../../../utils"
+
+import { getAlerts, readyProgress } from "Branch/utils"
 
 const Indicator = () => {
   const { watch } = useFormContext()

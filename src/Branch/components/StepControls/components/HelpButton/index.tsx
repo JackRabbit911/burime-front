@@ -1,7 +1,7 @@
-import { helpBtnClicked } from "../../../../../reused/Help/store";
-import { modalOpened } from "../../../../../reused/Modal/store";
-import Helper from "../../../../../reused/Help";
+import Helper from "reused/Help";
 import { getHelpPath } from "./utils";
+import { modalOpened } from "reused/Modal/store";
+import { helpBtnClicked } from "reused/Help/store";
 
 type Props = {
   step: number;

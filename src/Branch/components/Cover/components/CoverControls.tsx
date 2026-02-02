@@ -1,6 +1,6 @@
-import ColorPicker from "../../../../reused/ColorPicker"
-import FileInput from "../../../../reused/FileInput"
-import Range from "../../../../reused/Range"
+import Range from "reused/Range"
+import FileInput from "reused/FileInput"
+import ColorPicker from "reused/ColorPicker"
 
 const CoverControls = () => {
   return (

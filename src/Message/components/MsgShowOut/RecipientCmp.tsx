@@ -1,7 +1,7 @@
-import { host } from "../../../common/ajax";
-import { toAliasSetted } from "../../store";
-import type { Recipient } from "../../types"
+import { host } from "common/ajax";
 import MsgStatus from "../MsgStatus";
+import { toAliasSetted } from "Message/store";
+import type { Recipient } from "Message/types";
 
 type Props = {
   recipient: Recipient;

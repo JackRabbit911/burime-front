@@ -1,8 +1,9 @@
+import { useEffect } from "react"
 import { useUnit } from "effector-react"
 import { useParams } from "react-router"
-import { $myAuthors, getMyAuthorsFx, getMyMembersFx } from "../store"
-import { useEffect } from "react"
+
 import AuthorFormWrapper from "./AuthorFormWrapper"
+import { $myAuthors, getMyAuthorsFx, getMyMembersFx } from "../store"
 
 const AuthorWrapper = () => {
   const { id } = useParams()

@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import { useParams } from "react-router"
-import { $bootstrap, getBootstrapFx } from "../store/bootstrap"
 import { useUnit } from "effector-react"
+
 import Form from "./Form"
-import { $status, globalReset } from "../../common/store"
-import ErrorCmp from "../../reused/ErrorCmp"
-import Loading from "../../reused/Loading"
-import { t } from "../../common/i18n/utils"
+import Loading from "reused/Loading"
+import { t } from "common/i18n/utils"
+import ErrorCmp from "reused/ErrorCmp"
+import { $status, globalReset } from "common/store"
+import { $bootstrap, getBootstrapFx } from "Branch/store/bootstrap"
 
 const Branch = () => {
   const { id, draft } = useParams()

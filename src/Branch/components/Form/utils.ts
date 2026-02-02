@@ -1,8 +1,8 @@
-import { perPages } from "../../../common/constants"
-import type { AuthorsPayload, Member, OwnAuthors } from "../../schema/authors"
-import { base64ToFile } from "../../schema/files"
-import type { Bootstrap } from "../../schema/input"
-import { changeMaster } from "../Authors/utils"
+import { perPages } from "common/constants"
+import { base64ToFile } from "Branch/utils/files"
+import type { Bootstrap } from "Branch/schema/input"
+import type { OwnAuthors } from "Branch/schema/authors"
+import type { AuthorsPayload, Member } from "reused/Participants/types"
 
 export const getDefaults = (bootstrap: Bootstrap) => {
     const masterId = getMasterId(bootstrap.members, bootstrap.ownAuthors)
@@ -21,7 +21,7 @@ export const getDefaults = (bootstrap: Bootstrap) => {
     }
 }
 
-export function setAuthorsPayload(limit = perPages[0]): AuthorsPayload {
+function setAuthorsPayload(limit = perPages[0]): AuthorsPayload {
     return {
         filter: null,
         search: null,
@@ -41,6 +41,39 @@ function getMasterId(members: Member[], ownAuthors: OwnAuthors) {
         })
         : null
     return !master ? ownAuthors[0].id : master.id
+}
+
+export const changeMaster = (members: Member[], ownAuthors: OwnAuthors, masterId: number) => {
+    const ownAuthorsIds: number[] = []
+    let masterAlias = ''
+
+    ownAuthors.forEach((ownAuthor) => {
+        ownAuthorsIds.push(ownAuthor.id)
+
+        if (ownAuthor.id === Number(masterId)) {
+            masterAlias = ownAuthor.alias
+        }
+    })
+
+    const result = members.map((member) => {
+        if (ownAuthorsIds.includes(member.id)) {
+            member.id = Number(masterId)
+            member.alias = masterAlias
+        }
+
+        return member
+    })
+
+    if (members.length === 0) {
+        result.push({
+            id: masterId,
+            role: 255,
+            status: 200,
+            alias: masterAlias,
+        })
+    }
+
+    return result;
 }
 
 function getMembers(members: Member[], ownAuthors: OwnAuthors, masterId: number) {

@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form"
-import { avatarSrc } from "../../common/utils"
+import { avatarSrc } from "common/utils"
 
 const Header = () => {
   const { getValues } = useFormContext()

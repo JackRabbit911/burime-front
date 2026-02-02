@@ -1,5 +1,5 @@
-import { t } from "../../../common/i18n/utils";
 import Step from "./step";
+import { t } from "common/i18n/utils";
 
 const Steps = () => {
   return (

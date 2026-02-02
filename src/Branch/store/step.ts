@@ -1,5 +1,6 @@
 import { createEvent, createStore } from "effector";
-import { globalReset } from "../../common/store";
+
+import { globalReset } from "common/store";
 
 export const stepChanged = createEvent<number>()
 

@@ -1,5 +1,5 @@
 import type { FieldValues } from "react-hook-form";
-import type { OwnAuthors } from "./schema/authors";
+import type { OwnAuthors } from "../schema/authors";
 
 const readyCover = (values: FieldValues): boolean => (
     values.branch.info.cover

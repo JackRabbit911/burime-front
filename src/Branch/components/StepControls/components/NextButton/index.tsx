@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
-import { stepChanged } from "../../../../store/step";
-import { isObjectEmpty } from "../../../../../common/utils";
+
+import { isObjectEmpty } from "common/utils";
+import { stepChanged } from "Branch/store/step";
 
 type Props = {
   step: number;

@@ -1,7 +1,8 @@
 import { useUnit } from "effector-react";
-import type { Message } from "../../types"
+
+import { t } from "common/i18n/utils";
 import { $toAlias } from "../../store";
-import { t } from "../../../common/i18n/utils";
+import type { Message } from "../../types"
 
 type Props = {
   message: Message;

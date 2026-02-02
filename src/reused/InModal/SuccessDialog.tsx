@@ -1,9 +1,10 @@
-import { Link } from "react-router";
-import { t } from "../../common/i18n/utils";
-import { closeBtn, modalClosed } from "../Modal/store";
 import { useEffect } from "react";
+import { Link } from "react-router";
 import { useUnit } from "effector-react";
-import { $translate, getTranslateFx } from "../../common/i18n/store";
+
+import { t } from "common/i18n/utils";
+import { closeBtn, modalClosed } from "../Modal/store";
+import { $translate, getTranslateFx } from "common/i18n/store";
 
 type Props = {
   title?: string;

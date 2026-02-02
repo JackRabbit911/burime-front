@@ -1,8 +1,9 @@
-import { deleteMessageUri, removeMessageUri } from "../common/constants"
-import { deleteDialog } from "../common/utils/deleteDialog"
-import type { Author } from "../reused/Participants/schema"
+import { deleteDialog } from "common/utils/deleteDialog"
 import { defaultMsg } from "./components/Templates/DefaultMsg"
+import { deleteMessageUri, removeMessageUri } from "common/constants"
+
 import type { Message } from "./types"
+import type { Author } from "reused/Participants/schema"
 
 export const getComponent = (message: Message) => {
     const key = message.data?.tpl ?? ''

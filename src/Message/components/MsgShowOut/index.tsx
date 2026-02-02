@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import type { Message } from "../../types"
-import MsgBody from "../MsgBody";
-import MsgInfo from "./MsgInfo";
 import { useUnit } from "effector-react";
-import { $toAlias, toAliasSetted } from "../../store";
-import Grid3Cols from "../../../reused/Wrapper/Grid3Cols";
+
+import MsgInfo from "./MsgInfo";
+import MsgBody from "../MsgBody";
 import Controls from "../Controls";
+import Grid3Cols from "reused/Wrapper/Grid3Cols";
+import { $toAlias, toAliasSetted } from "Message/store";
+
+import type { Message } from "../../types"
 
 type Props = {
   message: Message;

@@ -1,14 +1,15 @@
 import { useState } from "react"
 import { FormProvider } from "react-hook-form"
+
 import Form from "."
 import Controls from "./Controls"
 import Recipients from "./Recipients"
-import { t } from "../../../common/i18n/utils"
-import CheckBox from "../../../reused/CheckBox"
-import { useMessageForm } from "../../hooks/messageform"
-import Grid3Cols from "../../../reused/Wrapper/Grid3Cols"
+import { t } from "common/i18n/utils"
+import CheckBox from "reused/CheckBox"
+import Grid3Cols from "reused/Wrapper/Grid3Cols"
 import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
-import Select from "../../../reused/Participants/components/Select"
+import Select from "reused/Participants/components/Select"
+import { useMessageForm } from "Message/hooks/messageform"
 
 const MessageFormWrapper = () => {
   const [view, setView] = useState('choice')

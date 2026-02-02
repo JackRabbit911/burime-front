@@ -1,7 +1,7 @@
-import { host } from "../../../common/ajax";
-import { t } from "../../../common/i18n/utils";
-import type { Message, Recipient } from "../../types";
+import { host } from "common/ajax";
+import { t } from "common/i18n/utils";
 import RecipientCmp from "./RecipientCmp";
+import type { Message, Recipient } from "Message/types";
 
 type Props = {
   message: Message;

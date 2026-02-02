@@ -1,8 +1,9 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import { createEffect, createEvent, sample } from "effector";
-import type { ApiResponse } from "../../common/ajax/types";
-import { deleteDraftUri } from "../../common/constants";
-import ajax from "../../common/ajax";
+
+import ajax from "common/ajax";
+import { deleteDraftUri } from "common/constants";
+import type { ApiResponse } from "common/ajax/types";
 
 type AxiosApiResponse = AxiosResponse<ApiResponse<string>>;
 

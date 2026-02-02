@@ -1,4 +1,4 @@
-import { t } from "../../../common/i18n/utils"
+import { t } from "common/i18n/utils"
 
 const TableHead = () => {
   return (
