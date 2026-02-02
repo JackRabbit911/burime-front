@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
-import { passwordSchema, type ConfirmPassword } from "../schema";
+
+import { t } from "common/i18n/utils";
+import TextInput from "reused/TextInput";
 import { passwordSubmitted } from "../store";
-import { t } from "../../common/i18n/utils";
-import TextInput from "../../reused/TextInput";
+import { passwordSchema, type ConfirmPassword } from "../schema";
 
 const Password = () => {
     const methods = useForm({

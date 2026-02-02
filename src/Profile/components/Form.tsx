@@ -1,7 +1,7 @@
-import { t } from "../../common/i18n/utils"
-import FileInput from "../../reused/FileInput"
-import RadioBox from "../../reused/RadioBox"
-import TextInput from "../../reused/TextInput"
+import { t } from "common/i18n/utils"
+import RadioBox from "reused/RadioBox"
+import FileInput from "reused/FileInput"
+import TextInput from "reused/TextInput"
 
 const Form = () => {
   return (

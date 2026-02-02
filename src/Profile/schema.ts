@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { imageFile } from "../common/schema.ts/files"
+import { imageFile } from "common/schema.ts/files"
 
 export const userData = z.object({
     id: z.number().positive().nullable(),

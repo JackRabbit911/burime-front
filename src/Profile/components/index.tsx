@@ -1,12 +1,13 @@
-import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
-import Form from "./Form";
-import { t } from "../../common/i18n/utils";
-import Header from "./Header";
 import { Link } from "react-router";
+import { useUnit } from "effector-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
+
+import Form from "./Form";
+import Header from "./Header";
+import { t } from "common/i18n/utils";
 import { userData, type UserData } from "../schema";
 import { $isPending, getUserDataFx, profileSubmitted } from "../store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useUnit } from "effector-react";
 
 const Profile = () => {
   const isPending = useUnit($isPending)

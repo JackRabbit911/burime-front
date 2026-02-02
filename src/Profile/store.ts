@@ -1,11 +1,12 @@
 import { createEffect, createEvent, sample } from "effector";
-import ajax from "../common/ajax";
-import { getUserDataUri, savePasswordUri, saveUserDataUri } from "../common/constants";
-import type { ConfirmPassword, UserData } from "./schema";
-import type { ApiResponse } from "../common/ajax/types";
 import { pending, throttle } from "patronum";
-import { successDialog } from "../reused/InModal/SuccessDialog";
+
+import ajax from "../common/ajax";
 import { modalOpened } from "../reused/Modal/store";
+import { successDialog } from "../reused/InModal/SuccessDialog";
+import { getUserDataUri, savePasswordUri, saveUserDataUri } from "../common/constants";
+import type { ApiResponse } from "../common/ajax/types";
+import type { ConfirmPassword, UserData } from "./schema";
 
 export const profileSubmitted = createEvent<UserData>()
 export const passwordSubmitted = createEvent<ConfirmPassword>()
