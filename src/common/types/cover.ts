@@ -7,7 +7,7 @@ export type CoverType = {
 }
 
 export type MyBook = {
-    id: number;
+    id?: number;
     title: string;
     cover: CoverType | string;
     alias: string;
