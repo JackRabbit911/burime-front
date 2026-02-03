@@ -5,9 +5,9 @@ export const getMyBooksUri = '/my/books'
 
 export const getGroupMembersUri = '/my/common/authors/group'
 export const getOwnAuthorsUri = 'my/common/authors/ownauthors'
+export const getAuthorsUri = '/my/common/authors/authors'
 
 export const getBootsrapUri = '/my/branch/bootstrap'
-export const getAuthorsUri = '/my/branch/authors'
 export const saveBranchUri = '/my/branch/action/savebranch'
 export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
