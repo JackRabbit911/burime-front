@@ -31,3 +31,5 @@ export const getMsgReferenceUri = '/my/reference/message'
 export const getUserDataUri = 'my/profile'
 export const saveUserDataUri = 'my/profile/save'
 export const savePasswordUri = 'my/profile/savepswd'
+
+export const getCoverUri = 'my/additional/branch'
