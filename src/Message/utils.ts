@@ -4,11 +4,14 @@ import { deleteMessageUri, removeMessageUri } from "common/constants"
 
 import type { Message } from "./types"
 import type { Author } from "reused/Participants/schema"
+import { inviteToBranch } from "./components/Templates/InviteToBranch"
 
 export const getComponent = (message: Message) => {
     const key = message.data?.tpl ?? ''
     
     switch (key) {
+        case 'inviteToBranch':
+            return inviteToBranch({ message })
         default:
             return defaultMsg({ message })
     }
