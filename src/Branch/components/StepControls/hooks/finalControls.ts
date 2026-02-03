@@ -5,6 +5,7 @@ import { confirmDialog } from "reused/InModal/ConfirmDialog";
 import { modalClosed, modalOpened } from "reused/Modal/store";
 import { draftClicked, published } from "Branch/store/publish";
 import { draftSchema, finalSchema } from "Branch/schema/output";
+import { getMyDraftsFx } from "Drafts/store";
 
 export const useFinalControls = () => {
     const { watch, formState: { errors } } = useFormContext();
@@ -15,6 +16,7 @@ export const useFinalControls = () => {
         const onYes = () => {
             modalClosed()
             draftDeleted(values.draft)
+            getMyDraftsFx()
         }
 
         modalOpened(confirmDialog({
