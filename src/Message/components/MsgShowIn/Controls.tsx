@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router"
 
 import { t } from "common/i18n/utils"
 import { deleteMsg } from "Message/utils";
+import { coverResetted } from "common/store/cover";
 
 type Props = {
   recipient: number;
@@ -20,6 +21,7 @@ const Controls = ({ recipient }: Props) => {
       <Link to="/message/inbox">
         <button
           className="btn"
+          onClick={() => {coverResetted}}
         >
           {t('Back to message list')}
         </button>
