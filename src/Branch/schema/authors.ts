@@ -11,6 +11,7 @@ export const slimMember = member.transform((input) => ({
     author_id: input.id,
     role: input.role,
     status: input.status,
+    alias: input.alias,
 }))
 
 const authorsFilterSearch = z.string()
