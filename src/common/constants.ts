@@ -20,6 +20,8 @@ export const deleteAuthorUri = '/my/author/delete'
 export const getMyAuthorsUri = '/my/authors'
 export const getMyGroupMembersUri = '/my/group/members'
 export const getGroupReferenceUri = '/my/reference/group'
+export const setGroupStatusUri = 'my/group/setstatus'
+export const getGroupStatusUri = 'my/group/getstatus'
 
 export const getMessageListUri = 'my/message/list'
 export const getMessageUri = 'my/message/show'
