@@ -5,11 +5,7 @@ import { useUnit } from "effector-react"
 import { $message, getMessageFx } from "../store"
 import MsgShowWrapper from "./WsgShowWrappper"
 
-type Props = {
-  cond: string;
-}
-
-const MessageShow = ({ cond }: Props) => {
+const MessageShow = () => {
   const { id } = useParams()
   const message = useUnit($message)
 
@@ -21,7 +17,6 @@ const MessageShow = ({ cond }: Props) => {
     <>
       {message ? (
         <MsgShowWrapper
-          cond={cond}
           message={message}
         />
       ) : null

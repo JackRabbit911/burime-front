@@ -5,13 +5,15 @@ export const getMyBooksUri = '/my/books'
 
 export const getGroupMembersUri = '/my/common/authors/group'
 export const getOwnAuthorsUri = 'my/common/authors/ownauthors'
+export const getAuthorsUri = '/my/common/authors/authors'
 
 export const getBootsrapUri = '/my/branch/bootstrap'
-export const getAuthorsUri = '/my/branch/authors'
 export const saveBranchUri = '/my/branch/action/savebranch'
 export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
 export const getBranchReferenceUri = '/my/reference/branch'
+export const getBranchAuthorStatusUri = 'my/branch/status/get'
+export const setBranchAuthorStatusUri = 'my/branch/status/set'
 
 export const getTranslateUri = '/my/gettranslate'
 
@@ -20,6 +22,8 @@ export const deleteAuthorUri = '/my/author/delete'
 export const getMyAuthorsUri = '/my/authors'
 export const getMyGroupMembersUri = '/my/group/members'
 export const getGroupReferenceUri = '/my/reference/group'
+export const setGroupStatusUri = 'my/group/setstatus'
+export const getGroupStatusUri = 'my/group/getstatus'
 
 export const getMessageListUri = 'my/message/list'
 export const getMessageUri = 'my/message/show'
@@ -31,3 +35,5 @@ export const getMsgReferenceUri = '/my/reference/message'
 export const getUserDataUri = 'my/profile'
 export const saveUserDataUri = 'my/profile/save'
 export const savePasswordUri = 'my/profile/savepswd'
+
+export const getCoverUri = 'my/additional/branch'

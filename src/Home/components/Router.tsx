@@ -23,9 +23,7 @@ const Router = () => {
         <Route path='inbox' element={<List box='inbox' />} />
         <Route path='outbox' element={<List box='outbox' />} />
         <Route path='deleted' element={<List box='deleted' />} />
-        <Route path='in/:id' element={<MessageShow cond='in'/>} />
-        <Route path='out/:id' element={<MessageShow cond='out'/>} />
-        <Route path='del/:id' element={<MessageShow cond='del'/>} />
+        <Route path=':box/:id' element={<MessageShow />} />
         <Route path='form' element={<MessageFormWrapper />} />
       </Route>
       <Route path='drafts' element={<Drafts />} />

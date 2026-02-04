@@ -9,8 +9,6 @@ type Props = {
 }
 
 const MsgShowDel = ({ message }: Props) => {
-  message.data.appeal = message?.to_alias
-
   return (
     <>
       <Grid3Cols>

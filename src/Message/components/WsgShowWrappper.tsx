@@ -1,15 +1,17 @@
+import { useParams } from "react-router";
 import type { Message } from "../types";
 import MsgShowDel from "./MsgShowDel";
 import MsgShowIn from "./MsgShowIn";
 import MsgShowOut from "./MsgShowOut";
 
 type Props = {
-  cond: string;
   message: Message;
 }
 
-const MsgShowWrapper = ({ cond, message }: Props) => {
-  switch (cond) {
+const MsgShowWrapper = ({message }: Props) => {
+  const { box } = useParams()
+
+  switch (box) {
     case 'in':
       return <MsgShowIn message={message} />
     case 'out':
@@ -17,7 +19,7 @@ const MsgShowWrapper = ({ cond, message }: Props) => {
     case 'del':
       return <MsgShowDel message={message} />
     default:
-      return `Invalid condition: ${cond}`
+      return `Invalid condition: ${box}`
   }
 }
 

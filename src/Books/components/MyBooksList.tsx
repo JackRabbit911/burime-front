@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useList } from "effector-react"
 
-import Cover from "./Cover"
 import CoverWrapper from "./CoverWrapper"
 import { $myBooks, getMyBooksFx } from "Books/store"
+import Cover from "reused/Cover"
 
 const MyBooksList = () => {
   const myBooks = useList($myBooks, {
