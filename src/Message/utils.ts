@@ -4,7 +4,7 @@ import { deleteMessageUri, removeMessageUri } from "common/constants"
 
 import type { Message } from "./types"
 import type { Author } from "reused/Participants/schema"
-import { inviteToBranch } from "./components/Templates/InviteToBranch"
+import { inviteToBranch } from "./components/Templates/IviteToBranch"
 import { inviteToGroup } from "./components/Templates/InviteToGroup"
 
 export const getComponent = (message: Message) => {
