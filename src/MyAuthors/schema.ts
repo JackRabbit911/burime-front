@@ -38,6 +38,7 @@ const slimMember = member.transform((input) => ({
     child_id: input.id,
     role: input.role,
     status: input.status,
+    alias: input.alias,
 }))
 
 export const formOutputSchema = z.object({
