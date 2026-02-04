@@ -12,7 +12,7 @@ const MsgBody = ({ message }: Props) => {
       <fieldset className="fieldset">
         {t('Subject')}
       </fieldset>
-      <div className="border rounded-sm border-zinc-600 p-1 my-3 text-md">
+      <div className="border rounded-sm border-zinc-600 p-1 my-3 text-sm">
         {message.subject}
       </div>
       <fieldset className="fieldset">
