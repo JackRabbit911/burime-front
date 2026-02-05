@@ -22,7 +22,7 @@ const data = z.object({
 )
 
 const message = z.object({
-    from: z.coerce.number(),
+    from: z.coerce.number().nullable(),
     subject: z.string().trim()
         .min(1, { message: 'Required' })
         .regex(/^[^<>;]*$/, 'Invalid input!'),
