@@ -5,12 +5,16 @@ import Inbox from "./Inbox"
 import Outbox from "./Outbox"
 import Delbox from "./Delbox"
 import { getMessageListFx, msgResetted } from "Message/store"
+import { t } from "common/i18n/utils"
+import { useTranslate } from "common/i18n/hook"
 
 type Props = {
   box: string;
 }
 
 const List = ({ box }: Props) => {
+  useTranslate()
+
   let component
 
   switch (box) {
@@ -32,13 +36,12 @@ const List = ({ box }: Props) => {
     getMessageListFx()
   }, [])
 
-  
   return (
     <>
       <div className="text-end">
         <Link to='/message/form'>
           <button className="link">
-            New message
+            {t('New message')}
           </button>
         </Link>
       </div>

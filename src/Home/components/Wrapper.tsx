@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { useUnit } from "effector-react";
 import { Link, useLocation } from "react-router";
 
 import { getTitle } from "../utils";
 import { t } from "common/i18n/utils";
 import { globalReset } from "common/store";
-import { $translate, getTranslateFx } from "common/i18n/store";
+import { useTranslate } from "common/i18n/hook";
 
 type Props = {
   children?: React.ReactNode;
@@ -16,15 +14,12 @@ const Wrapper = ({ children }: Props) => {
   const uriSegments = location.pathname.split('/').filter((v) => Boolean(v))
   const addr = uriSegments[0] ?? 'home'
   const id = uriSegments[1]
-  const translate = useUnit($translate)
 
   const onClick = () => {
     globalReset()
   }
 
-  useEffect(() => {
-    getTranslateFx(translate)
-  }, [location])
+  useTranslate([location])
 
   return (
     <div className="flex flex-row justify-center">

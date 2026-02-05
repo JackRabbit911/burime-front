@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useUnit } from "effector-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,9 +12,9 @@ import Authors from "../Authors";
 import { getDefaults } from "./utils";
 import { $step } from "Branch/store/step";
 import StepControls from "../StepControls";
+import { useTranslate } from "common/i18n/hook";
 import { formSchema } from "Branch/schema/output";
 import { $memberId } from "reused/Participants/store/authors";
-import { $translate, getTranslateFx } from "common/i18n/store";
 
 import type { Bootstrap } from "Branch/schema/input";
 
@@ -26,7 +25,6 @@ type Props = {
 const Form = ({ bootstrap }: Props) => {
   const step = useUnit($step)
   const memberId = useUnit($memberId)
-  const translate = useUnit($translate)
   const branchGenres = bootstrap?.branch_genres || [];
   
   const methods = useForm({
@@ -35,9 +33,7 @@ const Form = ({ bootstrap }: Props) => {
     defaultValues: getDefaults(bootstrap)
   });
 
-  useEffect(() => {
-    getTranslateFx(translate)
-  }, [step, memberId])
+  useTranslate([step, memberId])
 
   return (
     <FormProvider {...methods}>
