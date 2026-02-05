@@ -2,6 +2,7 @@ import { Link } from "react-router";
 
 import { host } from "common/ajax";
 import type { MyAuthor } from "../schema";
+import { t } from "common/i18n/utils";
 
 type Props = {
   author: MyAuthor;
@@ -29,7 +30,7 @@ const AuthorCard = ({ author }: Props) => {
       <div className="text-end">
         <Link to={`/author/${author.id}`}>
           <button className="btn btn-sm">
-            Edit author
+            {t('Edit author')}
           </button>
         </Link>
         </div> : null}

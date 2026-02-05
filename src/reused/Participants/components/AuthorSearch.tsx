@@ -25,7 +25,7 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
-        <div>Search & filter</div>
+        <div>{t('Search & filter')}</div>
         {alert}
       </legend>
       <div className="join">
@@ -42,9 +42,9 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
           onChange={onSelect}
           ref={filterRef}
         >
-          <option value="" disabled>Filter</option>
+          <option value="" disabled>{t('Filter')}</option>
           {filters?.map((item, key) => (
-            <option key={key} value={item}>{item}</option>
+            <option key={key} value={item}>{t(item)}</option>
           ))}
         </select>
         <button
