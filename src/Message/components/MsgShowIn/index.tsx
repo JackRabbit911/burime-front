@@ -15,7 +15,9 @@ const MsgShowIn = ({ message }: Props) => {
         <MsgInfo message={message} />
         <MsgBody message={message} />
       </Grid3Cols>
-      <Controls recipient={message.to as number} />
+      <Controls
+        message={message}
+      />
     </>
   )
 }
