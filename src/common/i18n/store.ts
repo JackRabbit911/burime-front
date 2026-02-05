@@ -1,13 +1,11 @@
-import * as z from "zod"
 import { createEffect, createEvent, createStore } from "effector";
 import ajax from "../ajax";
 import type { ApiResponse } from "../ajax/types";
 import { getTranslateUri } from "../constants";
 
-const translateSch = z.object({})
-    .catchall(z.string().nullable())
-
-type Translate = z.infer<typeof translateSch>
+type Translate = {
+    [key: string]: string | null;
+}
 
 export const translateKeyAdded = createEvent<string>()
 
@@ -19,11 +17,10 @@ export const getTranslateFx = createEffect(
             )
         )
 
-        return filter.length > 0
-        ? ajax.post<ApiResponse<Translate>>(getTranslateUri, {
+        return filter.length > 0 ?
+         ajax.post<ApiResponse<Translate>>(getTranslateUri, {
             'filter': filter,
-        })
-        : null
+        }): null
     }
 )
 
