@@ -4,12 +4,15 @@ import Textarea from "reused/Textarea"
 import FileInput from "reused/FileInput"
 import TextInput from "reused/TextInput"
 import type { Member } from "reused/Participants/types"
+import { useTranslate } from "common/i18n/hook"
 
 type Props = {
   members: Member[] | undefined;
 }
 
 const AuthorForm = ({ members }: Props) => {
+  useTranslate()
+  
   const disabled = (members: Member[] | undefined) => {
     if (members === undefined || members.length === 0) {
       return false
@@ -21,7 +24,7 @@ const AuthorForm = ({ members }: Props) => {
   return (
     <>
       <TextInput
-        label="Alias"
+        label={t("Alias")}
         fieldName="author.alias"
       />
       <Textarea

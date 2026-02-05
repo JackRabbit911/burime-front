@@ -4,6 +4,8 @@ import { useList } from "effector-react"
 
 import AuthorCard from "./AuthorCard"
 import { $myAuthors, getMyAuthorsFx } from "../store"
+import { t } from "common/i18n/utils"
+import { useTranslate } from "common/i18n/hook"
 
 const MyAuthors = () => {
   const myAuthors = useList($myAuthors, {
@@ -15,12 +17,14 @@ const MyAuthors = () => {
     getMyAuthorsFx()
   }, [])
 
+  useTranslate()
+
   return (
     <>
       <div className="text-end">
         <Link to='/author'>
           <button className="link">
-            Create new author or group
+            {t('Create new author or group')}
           </button>
         </Link>
       </div>

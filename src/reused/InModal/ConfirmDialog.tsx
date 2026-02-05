@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
-import { useUnit } from "effector-react";
 
 import { t } from "common/i18n/utils";
+import { useTranslate } from "common/i18n/hook";
 import { closeBtn, modalClosed } from "../Modal/store";
-import { $translate, getTranslateFx } from "common/i18n/store";
 
 type Props = {
   onYes?: () => void;
@@ -20,10 +19,11 @@ const ConfirmDialog = ({
   link = '',
   title = 'Are You sure?',
   text = '' }: Props) => {
-  const translate = useUnit($translate)
+
+  useTranslate()
+
   useEffect(() => {
     closeBtn(false)
-    getTranslateFx(translate)
   }, [])
 
   return (
