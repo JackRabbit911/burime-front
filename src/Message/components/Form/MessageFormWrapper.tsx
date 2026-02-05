@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { FormProvider } from "react-hook-form"
 
 import Form from "."
@@ -12,12 +11,11 @@ import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 
 const MessageFormWrapper = () => {
-  const [view, setView] = useState('choice')
+  const { methods, ownAuthors, onSubmit, view, setView } = useMessageForm()
+
   const handleSwitchBtn = (data: string) => {
     setView(data)
   }
-
-  const { methods, ownAuthors, onSubmit } = useMessageForm()
 
   return (
     <FormProvider {...methods}>
