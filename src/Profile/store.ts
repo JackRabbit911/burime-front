@@ -8,6 +8,7 @@ import { getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constan
 
 import type { ApiResponse } from "common/ajax/types";
 import type { ConfirmPassword, UserData } from "./schema";
+import { successRedirectDialog } from "./components/SuccessRedirectDialog";
 
 export const profileSubmitted = createEvent<UserData>()
 export const passwordSubmitted = createEvent<ConfirmPassword>()
@@ -42,10 +43,7 @@ sample({
 sample({
     source: sendProfileFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: () => successDialog({
-        text: 'Your profile data was saved',
-        link: '',
-    }),
+    fn: () => successRedirectDialog({}),
     target: modalOpened,
 })
 
