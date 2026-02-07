@@ -1,9 +1,9 @@
-import { Link, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 import { getTitle } from "../utils";
 import { t } from "common/i18n/utils";
-import { globalReset } from "common/store";
 import { useTranslate } from "common/i18n/hook";
+import BreadCrumbs from "./BreadCrumbs";
 
 type Props = {
   children?: React.ReactNode;
@@ -15,10 +15,6 @@ const Wrapper = ({ children }: Props) => {
   const addr = uriSegments[0] ?? 'home'
   const id = uriSegments[1]
 
-  const onClick = () => {
-    globalReset()
-  }
-
   useTranslate([location])
 
   return (
@@ -28,14 +24,7 @@ const Wrapper = ({ children }: Props) => {
           <h1 className="text-2xl">{t(getTitle(addr, id))}</h1>
           {addr === 'home' ?
             <a href="/auth/logout" className="btn btn-outline btn-error">{t('Log Out')}</a> :
-            <Link to=''>
-              <button
-                className="btn btn-outline"
-                onClick={onClick}
-              >
-                {t('Personal account')}
-              </button>
-            </Link>
+            <BreadCrumbs pathname={location.pathname} />
           }
         </div>
         {children}
