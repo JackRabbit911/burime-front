@@ -8,6 +8,7 @@ import Header from "./Header";
 import { t } from "common/i18n/utils";
 import { userData, type UserData } from "../schema";
 import { $isPending, getUserDataFx, profileSubmitted } from "../store";
+import { isObjectEmpty } from "common/utils";
 
 const Profile = () => {
   const isPending = useUnit($isPending)
@@ -31,6 +32,8 @@ const Profile = () => {
     }
   }
 
+  const disabled = !isObjectEmpty(methods.formState.errors)
+
   if (methods.formState.isLoading) {
     return <p>Loading form data...</p>;
   }
@@ -44,6 +47,7 @@ const Profile = () => {
           <button
             type="submit"
             className="btn btn-primary dark:btn-info w-full mt-4"
+            disabled={disabled}
           >
             {t('Save')}
           </button>
