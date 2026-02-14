@@ -4,6 +4,8 @@ import FileInput from "reused/FileInput"
 import TextInput from "reused/TextInput"
 
 const Form = () => {
+  const today = new Date().toISOString().split('T')[0]
+
   return (
     <>
       <TextInput
@@ -23,6 +25,7 @@ const Form = () => {
           type="date"
           label="Date of birth"
           fieldName="dob"
+          max={today}
         />
         <div className="fieldset">
           <legend className="fieldset-legend flex justify-between w-full">
