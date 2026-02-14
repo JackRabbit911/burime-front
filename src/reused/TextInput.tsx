@@ -8,10 +8,11 @@ type Props = {
   optional?: string;
   placeholder?: string;
   type?: string;
+  max?: string;
 }
 
 const TextInput = ({
-  fieldName, label, optional, placeholder, type = 'text'
+  fieldName, label, optional, placeholder, type = 'text', max
 }: Props) => {
   const { register, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
@@ -40,6 +41,7 @@ const TextInput = ({
         {...register(fieldName)}
         placeholder={placeholder}
         className={inputClassName}
+        max={max}
       />
     </fieldset>
   )
