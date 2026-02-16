@@ -5,6 +5,7 @@ import { t } from "common/i18n/utils";
 import { useTranslate } from "common/i18n/hook";
 import BreadCrumbs from "./BreadCrumbs";
 import ajax from "common/ajax";
+import { logoutUri } from "common/constants";
 
 type Props = {
   children?: React.ReactNode;
@@ -17,7 +18,7 @@ const Wrapper = ({ children }: Props) => {
   const id = uriSegments[1]
 
   const onLogOut = () => {
-    ajax.get('/auth/logout')
+    ajax.get(logoutUri)
       .then((response) => response.data)
       .then((data) => {
         if (data.success) {

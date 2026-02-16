@@ -37,3 +37,5 @@ export const saveUserDataUri = 'my/profile/save'
 export const savePasswordUri = 'my/profile/savepswd'
 
 export const getCoverUri = 'my/additional/branch'
+
+export const logoutUri = 'auth/logout'
