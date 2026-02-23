@@ -15,7 +15,7 @@ export const getBranchReferenceUri = '/my/reference/branch'
 export const getBranchAuthorStatusUri = 'my/branch/status/get'
 export const setBranchAuthorStatusUri = 'my/branch/status/set'
 
-export const getTranslateUri = '/my/gettranslate'
+export const getTranslateUri = '/gettranslate'
 
 export const saveAuthorUri = '/my/author/save'
 export const deleteAuthorUri = '/my/author/delete'
