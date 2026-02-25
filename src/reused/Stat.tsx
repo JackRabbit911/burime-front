@@ -35,10 +35,10 @@ const Stat = ({ path, title, value, icon, color = 'default', desc = '' }: Props)
   }
 
   return (
-    <div className="text-center border border-stone-300 rounded-sm">
-      <div className="stats shadow">
+    <div className="text-center border border-zinc-600 rounded-sm">
+      <div className="stats">
         <Link to={path}>
-          <div className="stat">
+          <div className="stat p-0 gap-0">
             <div className={classMap.figure[color]}>
               {icon}
             </div>
