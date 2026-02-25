@@ -35,7 +35,7 @@ const Wrapper = ({ children }: Props) => {
     <div className="flex flex-row justify-center">
       <div className="w-full md:w-2xl lg:w-4xl bg-base-100 p-4">
         <div className="flex flex-roe justify-between mb-4">
-          <h1 className="text-2xl">{t(getTitle(addr, id))}!</h1>
+          <h1 className="text-2xl">{t(getTitle(addr, id))}</h1>
           {addr === 'home' ?
             <button
               className="btn btn-outline btn-error"
