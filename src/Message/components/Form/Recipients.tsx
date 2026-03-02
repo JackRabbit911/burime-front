@@ -7,7 +7,11 @@ import { toAliasSetted } from "Message/store";
 
 import type { Author } from "reused/Participants/schema";
 
-const Recipients = () => {
+type Props = {
+  setView: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Recipients = ({ setView }: Props) => {
   const { watch, setValue } = useFormContext()
   const recipients = watch('recipients') || []
 
@@ -16,9 +20,12 @@ const Recipients = () => {
     }
 
   const onDelete = (member: Author) => {
-    const newRecipients = recipients.filter((item: Author) => item.id !== member.id)
+    const newRecipients: string[] = recipients.filter((item: Author) => item.id !== member.id)
     setValue('recipients', newRecipients)
-    console.log(member)
+
+    if (newRecipients.length === 0) {
+      setView('choice')
+    }
   }
 
   useEffect(() => {
