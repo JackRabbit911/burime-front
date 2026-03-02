@@ -12,7 +12,7 @@ const Recipient = ({ author, onClick, onDelete }: Props) => {
     <div className="flex flex-row justify-between gap-2">
       <button
         type="button"
-        className="btn btn-soft btn-outline btn-xs grow"
+        className="btn btn-outline btn-xs grow"
         onClick={() => {
           onClick(author.alias)
         }}
