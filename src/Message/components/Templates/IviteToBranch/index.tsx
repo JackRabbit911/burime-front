@@ -8,17 +8,21 @@ type Props = {
 }
 
 const InviteToBranch = ({ message }: Props) => {
+  const author: number|undefined = typeof(message.to) === 'number' ? message.to : undefined
+  
   return (
     <>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         <CoverWrapper branchId={message.data.branch} />
-        <div>
-          <p>
-            {message.data.appeal},
-          </p>
-          <p>
-            {message.data?.body ?? 'no body'}
-          </p>
+        <div className="col-span-2 flex flex-col justify-between">
+          <div>
+            <p>
+              {message.data.appeal},
+            </p>
+            <p>
+              {message.data?.body ?? 'no body'}
+            </p>
+          </div>
           <div className="fieldset mt-1 text-end">
             {t('Best regards')}, {message.from_alias}
           </div>
@@ -26,7 +30,7 @@ const InviteToBranch = ({ message }: Props) => {
       </div>
       <Controls
         branch={message.data.branch}
-        author={message.to as number}
+        author={author}
       />
     </>
   )
