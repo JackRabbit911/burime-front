@@ -42,3 +42,13 @@ export const addGroupRecipients = (recipients: Author[], group: Author[]) => {
     const mergedMembers = [...recipients, ...group]
     return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
 }
+
+export const emptyMessage = {
+    message: {
+      from: null,
+      subject: '',
+      data: {body: ''}
+    },
+    recipients: [],
+    important: false,
+}
