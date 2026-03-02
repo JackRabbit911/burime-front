@@ -3,9 +3,8 @@ import { Link, useParams } from "react-router"
 import { t } from "common/i18n/utils"
 import { deleteMsg } from "Message/utils";
 import { coverResetted } from "common/store/cover";
-import { replySetted } from "Message/store";
+
 import type { Message } from "Message/types";
-import type { MessageForm } from "Message/schema";
 
 type Props = {
   message: Message;
@@ -14,29 +13,22 @@ type Props = {
 const Controls = ({ message }: Props) => {
   const { id } = useParams()
 
-  const replyMsg: MessageForm = {
-    message: {
-      from: message.to as number,
-      subject: 'Re: ' + message.subject,
-      data: {body: ''}
-    },
-    recipients: [{
-      id: message.from,
-      alias: message.from_alias
-    }],
-    important: false,
+  const msgData = {
+    to: message.from.toString(),
+    alias: message.from_alias,
+    from: message.to.toString(),
+    subject: 'Re: ' + message.subject,
   }
 
-  const onReply = () => {
-    replySetted(replyMsg)
-  }
-
+  const path = '/message/form'
+  const search = new URLSearchParams(msgData)
+  const link = [path, search.toString()].join('?')
+  
   return (
     <div className="flex justify-end gap-2 mt-1">
-      <Link to="/message/form">
+      <Link to={link}>
         <button
           className="btn btn-success"
-          onClick={onReply}
         >
           {t('Reply to sender')}
         </button>
