@@ -56,10 +56,10 @@ const ConditionalInput = ({ fieldName, label, message, placeholder, checkboxLabe
         </div>
         :
         <input
-        {...register(fieldName)}
-        placeholder={placeholder}
-        className={inputClassName} 
-      />
+          {...register(fieldName)}
+          placeholder={placeholder}
+          className={inputClassName}
+        />
       }
     </fieldset>
   )
