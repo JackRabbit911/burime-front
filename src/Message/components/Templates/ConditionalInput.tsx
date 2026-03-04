@@ -51,7 +51,7 @@ const ConditionalInput = ({ fieldName, label, message, placeholder, checkboxLabe
         />
       </legend>
       {isChecked ?
-        <div className="border rounded-sm border-stone-500 px-3 py-2.5 text-sm">
+        <div className="border rounded-sm border-zinc-600 px-3 py-2.5 text-sm">
           {message}
         </div>
         :
