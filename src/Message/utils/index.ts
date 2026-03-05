@@ -1,6 +1,9 @@
 import { deleteDialog } from "common/utils/deleteDialog"
-import type { Author } from "reused/Participants/schema"
 import { deleteMessageUri, removeMessageUri } from "common/constants"
+
+import type { MessageForm } from "Message/schema"
+import type { Author } from "reused/Participants/schema"
+import type { OwnAuthor } from "reused/Participants/types"
 
 export const removeMsg = (id: string | undefined) => {
     const uri = [removeMessageUri, id].join('/')
@@ -25,7 +28,12 @@ export const addGroupRecipients = (recipients: Author[], group: Author[]) => {
     return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
 }
 
-export const emptyMessage = {
+export const getAuthorAlias = (id: number | null, authors: OwnAuthor[]): string => {
+  const author = authors.find(item => item.id == id)
+  return author !== undefined ? author.alias : ''
+}
+
+export const emptyMessage: MessageForm = {
     message: {
       from: null,
       subject: '',
