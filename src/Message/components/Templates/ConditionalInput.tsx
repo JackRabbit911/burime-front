@@ -14,8 +14,8 @@ type Props = {
 }
 
 const ConditionalInput = ({ fieldName, label, message, placeholder, checkboxLabel }: Props) => {
-  const { register, getValues, setValue, formState: { errors } } = useFormContext();
-  const [isChecked, setIsChecked] = useState<boolean>(!Boolean(getValues(fieldName)));
+  const { register, setValue, watch, formState: { errors } } = useFormContext();
+  const [isChecked, setIsChecked] = useState<boolean>(!Boolean(watch(fieldName)));
   const err = getObjectProp(errors, fieldName)
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -56,9 +56,10 @@ const ConditionalInput = ({ fieldName, label, message, placeholder, checkboxLabe
         </div>
         :
         <input
-          {...register(fieldName)}
-          placeholder={placeholder}
           className={inputClassName}
+          placeholder={placeholder}
+          {...register(fieldName)}
+          defaultValue={watch('message.from')}
         />
       }
     </fieldset>
