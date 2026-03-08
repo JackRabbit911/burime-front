@@ -29,8 +29,6 @@ const message = z.object({
     data: data,
 })
 
-const messageTpl = message.omit({ subject: true })
-
 export const messageForm = z.object({
     recipients: z.array(recipient),
     message: message,
@@ -44,4 +42,3 @@ export const messageOut = messageForm.extend({
 export type NewRecipient = z.infer<typeof recipient>
 export type MessageForm = z.infer<typeof messageForm>
 export type MessageOut = z.infer<typeof messageOut>
-export type MessageTpl = z.infer<typeof messageTpl>
