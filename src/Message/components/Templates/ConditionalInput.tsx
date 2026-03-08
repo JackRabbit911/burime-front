@@ -59,7 +59,6 @@ const ConditionalInput = ({ fieldName, label, message, placeholder, checkboxLabe
           className={inputClassName}
           placeholder={placeholder}
           {...register(fieldName)}
-          defaultValue={watch('message.from')}
         />
       }
     </fieldset>
