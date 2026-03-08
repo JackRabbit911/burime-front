@@ -1,6 +1,6 @@
-import { useFormContext } from "react-hook-form";
-import type { OwnAuthor } from "../types";
 import { t } from "common/i18n/utils";
+import type { OwnAuthor } from "../types";
+import { useFormContext } from "react-hook-form";
 
 type Props = {
   fieldName: string;
@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Select = ({ fieldName, label, options }: Props) => {
-  const { register } = useFormContext()
+  const { register, watch } = useFormContext()
 
   return (
     <fieldset className="fieldset">
@@ -19,6 +19,7 @@ const Select = ({ fieldName, label, options }: Props) => {
       <select
         className="select w-full"
         {...register(fieldName, { required: true })}
+        value={String(watch(fieldName))}
       >
         {options.map(
           ({ id, alias }, key) => (
