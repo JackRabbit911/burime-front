@@ -9,14 +9,18 @@ import Grid3Cols from "reused/Wrapper/Grid3Cols"
 import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
 import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
+import { useMessageTemplate } from "Message/hooks/messageTemplate"
 
 const MessageFormWrapper = () => {
-  const { methods, ownAuthors, onSubmit, view, setView } = useMessageForm()
+  const { message, isPending } = useMessageTemplate()
+  const { methods, ownAuthors, onSubmit, view, setView } = useMessageForm(message)
 
   const handleSwitchBtn = (data: string) => {
     setView(data)
   }
 
+  const Component = view === 'form' ? <Form message={message} /> : <AuthorsChoiceWrapper />
+  
   return (
     <FormProvider {...methods}>
       <form
@@ -35,12 +39,10 @@ const MessageFormWrapper = () => {
                 label={t('Mark as important')}
               />
             </div>
-            <Recipients />
+            <Recipients setView={setView} />
           </div>
           <div className="md:col-span-2">
-            {view === 'form' ? <Form /> :
-              <AuthorsChoiceWrapper />
-            }
+            {!isPending ? Component : null}
           </div>
         </Grid3Cols>
         <Controls
