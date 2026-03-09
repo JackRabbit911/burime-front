@@ -1,10 +1,11 @@
 import { createEvent, createStore, sample } from "effector";
 
 export const globalReset = createEvent()
+export const statusReset = createEvent()
 export const statusSetted = createEvent<number>()
 
 export const $status = createStore(200)
-    .reset(globalReset)
+    .reset(globalReset, statusReset)
 
 export const darkModeChanged = createEvent<boolean>()
 
