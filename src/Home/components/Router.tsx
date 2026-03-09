@@ -12,8 +12,14 @@ import Password from "Profile/components/Password"
 import MessageShow from "Message/components/MessageShow"
 import AuthorWrapper from "MyAuthors/components/AuthorWrapper"
 import MessageFormWrapper from "Message/components/Form/MessageFormWrapper"
+import { useEffect } from "react"
+import { statusReset } from "common/store"
 
 const Router = () => {
+  useEffect(() => {
+    statusReset()
+  }, [])
+
   return (
     <Routes>
       <Route path='' element={<Home />} />
