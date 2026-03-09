@@ -14,10 +14,9 @@ const Controls = ({ message }: Props) => {
   const { id } = useParams()
 
   const msgData = {
-    to: message.from.toString(),
-    alias: message.from_alias,
+    id: String(id),
     from: message.to.toString(),
-    subject: 'Re: ' + message.subject,
+    content: 'reply'
   }
 
   const path = '/message/form'
