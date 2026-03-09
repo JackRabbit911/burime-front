@@ -4,14 +4,23 @@ import { useUnit } from "effector-react"
 
 import { $message, getMessageFx } from "../store"
 import MsgShowWrapper from "./WsgShowWrappper"
+import { $status } from "common/store"
+import ErrorCmp from "reused/ErrorCmp"
 
 const MessageShow = () => {
   const { id } = useParams()
   const message = useUnit($message)
+  const status = useUnit($status)
 
   useEffect(() => {
     getMessageFx(id as string)
   }, [])
+
+  if (status >= 400) {
+    return (
+        <ErrorCmp status={status} />
+    )
+  }
 
   return (
     <>
