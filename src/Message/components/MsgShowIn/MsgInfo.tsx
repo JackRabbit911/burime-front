@@ -15,7 +15,7 @@ const MsgInfo = ({ message }: Props) => {
         <span className="fieldset">{t('incoming')}</span>
         <MsgStatus status={message.status} />
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between overflow-x-auto">
         <div>
           <h3 className="fieldset">{t('From')}</h3>
           {message.from_alias}
@@ -24,7 +24,7 @@ const MsgInfo = ({ message }: Props) => {
           <img src={`${host}/avatar/author/${message.from}`} alt={message.from_alias} />
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between overflow-x-auto">
         <div>
           <h3 className="fieldset">{t('Recipients')}</h3>
           {message.to_alias}

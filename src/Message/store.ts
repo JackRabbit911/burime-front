@@ -1,28 +1,35 @@
-import { combine, createEffect, createEvent, createStore, sample } from "effector";
 import { pending } from "patronum";
+import { combine, createEffect, createEvent, createStore, sample } from "effector";
 
 import ajax from "common/ajax";
+import { emptyMessage } from "./utils";
 import { globalReset } from "common/store";
-import type { MessageForm, MessageOut } from "./schema";
 import { modalOpened } from "reused/Modal/store";
-import type { ApiResponse } from "common/ajax/types";
 import { successDialog } from "reused/InModal/SuccessDialog";
-import { getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
+import { getMessageBlank, getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
 
+import type { ApiResponse } from "common/ajax/types";
+import type { MessageForm, MessageOut } from "./schema";
 import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
+import type { AxiosError, AxiosResponse } from "axios";
+
+type AxiosApiResponse = AxiosResponse<ApiResponse<Message>>;
 
 export const msgResetted = createEvent()
 export const msgFormResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
 export const msgSubmitted = createEvent<MessageOut>()
-export const replySetted = createEvent<MessageForm>()
 
 export const getMessageListFx = createEffect(
     () => ajax.get<ApiResponse<MessageList>>(getMessageListUri)
 )
 
-export const getMessageFx = createEffect(
+export const getMessageFx = createEffect<string, AxiosApiResponse, AxiosError>(
     (id: string) => ajax.get([getMessageUri, id].join('/'))
+)
+
+export const getMessageBlankFx = createEffect(
+    (search: string) => ajax.get([getMessageBlank, search].join('?'))
 )
 
 const saveMessageFx = createEffect((data: MessageOut) => (
@@ -45,19 +52,11 @@ export const $message = createStore<Message | null>(null)
     .on(getMessageFx.doneData, (_, response) => response.data.result)
     .reset(msgResetted, globalReset)
 
-export const $msgForm = createStore<MessageForm>({
-     message: {
-      from: null,
-      subject: '',
-      data: {body: ''}
-    },
-    recipients: [],
-    important: false,
-})
-    .on(replySetted, (_, data) => data)
-    .reset(msgResetted, globalReset, msgFormResetted)
-
 export const $toAlias = createStore<string>('Author')
+
+export const $messageBlank = createStore<MessageForm>(emptyMessage)
+    .on(getMessageBlankFx.doneData, (_, response) => response.data.result)
+    .reset(msgResetted, globalReset)
 
 export const $msgCounts = combine({inbox: $inbox, outbox: $outbox, delbox: $delbox}, (store) => ({
     inboxCount: store.inbox.length,
@@ -87,3 +86,4 @@ sample({
 })
 
 export const $isPending = pending([saveMessageFx])
+export const $isPendingBlank = pending([getMessageBlankFx])

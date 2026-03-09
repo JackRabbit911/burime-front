@@ -1,15 +1,22 @@
 import { t } from "common/i18n/utils";
+import { useUnit } from "effector-react";
 import CoverWrapper from "Message/components/CoverWrapper";
+import { $toAlias } from "Message/store";
+
 import type { Message } from "Message/types";
-import Controls from "./Controls";
 
 type Props = {
   message: Message;
 }
 
-const InviteToBranch = ({ message }: Props) => {
-  const author: number|undefined = typeof(message.to) === 'number' ? message.to : undefined
-  
+const Branch = ({ message }: Props) => {
+  const toAlias = useUnit($toAlias);
+  const appeal = message.data.appeal ??
+    (message.incoming && Object.hasOwn(message, 'to_alias')) ?
+      message.to_alias : toAlias
+
+  const signature = message.data.signature ?? t('Best regards') + ', ' + message.from_alias
+
   return (
     <>
       <div className="grid grid-cols-3 gap-2">
@@ -17,24 +24,19 @@ const InviteToBranch = ({ message }: Props) => {
         <div className="col-span-2 flex flex-col justify-between">
           <div>
             <p>
-              {message.data.appeal},
+              {appeal},
             </p>
             <p>
               {message.data?.body ?? 'no body'}
             </p>
           </div>
           <div className="fieldset mt-1 text-end">
-            {t('Best regards')}, {message.from_alias}
+            {signature}
           </div>
         </div>
       </div>
-      <Controls
-        branch={message.data.branch}
-        author={author}
-      />
     </>
   )
 }
 
-export const inviteToBranch = (props: Props) => <InviteToBranch {...props} />
-export default InviteToBranch
+export default Branch

@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { statusSetted } from "common/store";
 
 const lang = document.querySelector('html')?.getAttribute('lang');
 const { protocol, hostname } = window.location
@@ -23,9 +24,11 @@ ajax.interceptors.response.use(
                 } else {
                     window.location.reload();
                 }
+            } else {
+                statusSetted(error?.status || 400)
             }
         }
-        
+
         return Promise.reject(error);
     },
 );

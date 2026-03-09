@@ -7,6 +7,7 @@ import Delbox from "./Delbox"
 import { getMessageListFx, msgResetted } from "Message/store"
 import { t } from "common/i18n/utils"
 import { useTranslate } from "common/i18n/hook"
+import { statusReset } from "common/store"
 
 type Props = {
   box: string;
@@ -32,6 +33,7 @@ const List = ({ box }: Props) => {
   }
 
   useEffect(() => {
+    statusReset()
     msgResetted()
     getMessageListFx()
   }, [])

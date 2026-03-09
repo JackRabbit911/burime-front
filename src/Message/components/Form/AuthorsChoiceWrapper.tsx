@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form"
 
 import { getMsgReferenceUri } from "common/constants"
 import { $authorsList } from "reused/Participants/store/authors"
-import { addGroupRecipients, addNewRecipient } from "../../utils"
+import { addGroupRecipients, addNewRecipient } from "Message/utils"
 import AuthorsChoice from "reused/Participants/components/AuthorsChoice"
 import { $authorsPayload } from "reused/Participants/store/athorsPayload"
 import { getGroupMembersFx } from "reused/Participants/store/groupMembers"

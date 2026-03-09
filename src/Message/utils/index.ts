@@ -1,24 +1,9 @@
 import { deleteDialog } from "common/utils/deleteDialog"
-import { defaultMsg } from "./components/Templates/DefaultMsg"
 import { deleteMessageUri, removeMessageUri } from "common/constants"
 
-import type { Message } from "./types"
+import type { MessageForm } from "Message/schema"
 import type { Author } from "reused/Participants/schema"
-import { inviteToBranch } from "./components/Templates/IviteToBranch"
-import { inviteToGroup } from "./components/Templates/InviteToGroup"
-
-export const getComponent = (message: Message) => {
-    const key = message.data?.tpl ?? ''
-    
-    switch (key) {
-        case 'inviteToBranch':
-            return inviteToBranch({ message })
-        case 'inviteToGroup':
-            return inviteToGroup({ message })
-        default:
-            return defaultMsg({ message })
-    }
-}
+import type { OwnAuthor } from "reused/Participants/types"
 
 export const removeMsg = (id: string | undefined) => {
     const uri = [removeMessageUri, id].join('/')
@@ -41,4 +26,19 @@ export const addNewRecipient = (recipients: Author[], author: Author) => [...rec
 export const addGroupRecipients = (recipients: Author[], group: Author[]) => {
     const mergedMembers = [...recipients, ...group]
     return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
+}
+
+export const getAuthorAlias = (id: number | null, authors: OwnAuthor[]): string => {
+  const author = authors.find(item => item.id == id)
+  return author !== undefined ? author.alias : ''
+}
+
+export const emptyMessage: MessageForm = {
+    message: {
+      from: null,
+      subject: '',
+      data: {body: ''}
+    },
+    recipients: [],
+    important: false,
 }

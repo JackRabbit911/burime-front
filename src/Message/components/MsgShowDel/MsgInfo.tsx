@@ -13,7 +13,7 @@ const MsgInfo = ({ message }: Props) => {
         <h3 className="fieldset">{t('Status')}</h3>
         <span className="fieldset">{t('Outgoing')}</span>
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between overflow-x-auto">
         <div>
           <h3 className="fieldset">{t('From')}</h3>
           {message.from_alias}

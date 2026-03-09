@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react"
 import { useUnit } from "effector-react"
+import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 
-import { $isPending, $msgForm, msgFormResetted, msgSubmitted } from "../store"
+import { $isPending, msgSubmitted, toAliasSetted } from "../store"
 import { messageForm, messageOut, type MessageForm } from "../schema"
 import { $ownAuthors, getOwnAuthorsFx } from "../../common/store/ownAuthors"
 
-export const useMessageForm = () => {
+export const useMessageForm = (message: MessageForm) => {
   const [view, setView] = useState('choice')
   const [ownAuthors, isPending] = useUnit([$ownAuthors, $isPending])
-  const defaultMsg = useUnit($msgForm)
 
   const methods = useForm({
     resolver: zodResolver(messageForm),
     mode: 'all',
-    defaultValues: defaultMsg,
+    defaultValues: message,
   })
 
   const onSubmit: SubmitHandler<MessageForm> = (data) => {
@@ -29,28 +28,26 @@ export const useMessageForm = () => {
       if (valid?.success && valid?.data) {
         msgSubmitted(valid.data)
       }
-
     }
   }
 
   useEffect(() => {
     getOwnAuthorsFx()
 
-    if (defaultMsg.recipients.length > 0) {
+    if (message.recipients.length > 0) {
       setView('form')
     }
-
-    msgFormResetted()
   }, [])
 
   useEffect(() => {
-    const from = methods.getValues('message.from')
-
-    if (ownAuthors.length > 0 && !from) {
-      methods.setValue('message.from', ownAuthors[0].id || 0)
-    }
-
-  }, [ownAuthors])
+        if (message.recipients.length > 0) {
+          toAliasSetted(message.recipients[0].alias)
+        }
+    
+        methods.setValue('message', message.message)
+        methods.setValue('recipients', message.recipients)
+        methods.setValue('important', message.important)
+      }, [message])
 
   return { methods, ownAuthors, onSubmit, view, setView }
 }
