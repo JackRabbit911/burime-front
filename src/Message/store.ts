@@ -3,7 +3,7 @@ import { combine, createEffect, createEvent, createStore, sample } from "effecto
 
 import ajax from "common/ajax";
 import { emptyMessage } from "./utils";
-import { $status, globalReset } from "common/store";
+import { globalReset } from "common/store";
 import { modalOpened } from "reused/Modal/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { getMessageBlank, getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
@@ -49,6 +49,7 @@ export const $delbox = createStore<Delbox[]>([])
     .reset(globalReset)
 
 export const $message = createStore<Message | null>(null)
+    .on(getMessageFx.doneData, (_, response) => response.data.result)
     .reset(msgResetted, globalReset)
 
 export const $toAlias = createStore<string>('Author')
@@ -62,19 +63,6 @@ export const $msgCounts = combine({inbox: $inbox, outbox: $outbox, delbox: $delb
     outboxCount: store.outbox.length,
     delboxCount: store.delbox.length,
 }))
-
-sample({
-    clock: getMessageFx.doneData,
-    filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => response.data.result,
-    target: $message,
-});
-
-sample({
-    clock: getMessageFx.failData,
-    fn: (error) => error?.status || 503,
-    target: $status,
-});
 
 sample({
     clock: toAliasSetted,
