@@ -53,11 +53,3 @@ sample({
     fn: () => 400,
     target: $status,
 });
-
-sample({
-    clock: getBootstrapFx.failData,
-    fn: (error) => {
-        return error?.status || 503
-    },
-    target: $status,
-});
