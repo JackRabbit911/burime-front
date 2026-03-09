@@ -1,6 +1,7 @@
-import { createEvent, createStore } from "effector";
+import { createEvent, createStore, sample } from "effector";
 
 export const globalReset = createEvent()
+export const statusSetted = createEvent<number>()
 
 export const $status = createStore(200)
     .reset(globalReset)
@@ -20,3 +21,8 @@ function initDarkMode () {
 function handleThemeChange(this: MediaQueryList, ev: MediaQueryListEvent) {
     darkModeChanged(ev.matches)
 }
+
+sample({
+    clock: statusSetted,
+    target: $status,
+})
