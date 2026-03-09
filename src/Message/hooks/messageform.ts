@@ -33,11 +33,13 @@ export const useMessageForm = (message: MessageForm) => {
 
   useEffect(() => {
     getOwnAuthorsFx()
+  }, [])
 
+  useEffect(() => {
     if (message.recipients.length > 0) {
       setView('form')
     }
-  }, [])
+  }, [message.recipients])
 
   useEffect(() => {
         if (message.recipients.length > 0) {
