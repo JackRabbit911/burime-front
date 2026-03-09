@@ -27,13 +27,11 @@ const BranchForm = ({ message }: Props) => {
 
   useEffect(() => {
     const signature = t('Best regards, %', fromAlias)
-    setValue('message.data.signature', signature)
-  }, [fromAlias])
-
-  useEffect(() => {
     const dear = t('Dear, %', appeal)
+    setValue('message.data.signature', signature)
     setValue('message.data.appeal', dear)
-  }, [appeal])
+    setValue('message.data.branch', branchId)
+  }, [fromAlias, appeal])
 
   return (
     <>
