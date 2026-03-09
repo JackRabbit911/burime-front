@@ -3,7 +3,7 @@ import { combine, createEffect, createEvent, createStore, sample } from "effecto
 
 import ajax from "common/ajax";
 import { emptyMessage } from "./utils";
-import { globalReset } from "common/store";
+import { $status, globalReset } from "common/store";
 import { modalOpened } from "reused/Modal/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { getMessageBlank, getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
@@ -11,6 +11,9 @@ import { getMessageBlank, getMessageListUri, getMessageUri, saveMessageUri } fro
 import type { ApiResponse } from "common/ajax/types";
 import type { MessageForm, MessageOut } from "./schema";
 import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
+import type { AxiosError, AxiosResponse } from "axios";
+
+type AxiosApiResponse = AxiosResponse<ApiResponse<Message>>;
 
 export const msgResetted = createEvent()
 export const msgFormResetted = createEvent()
@@ -21,7 +24,7 @@ export const getMessageListFx = createEffect(
     () => ajax.get<ApiResponse<MessageList>>(getMessageListUri)
 )
 
-export const getMessageFx = createEffect(
+export const getMessageFx = createEffect<string, AxiosApiResponse, AxiosError>(
     (id: string) => ajax.get([getMessageUri, id].join('/'))
 )
 
@@ -46,7 +49,6 @@ export const $delbox = createStore<Delbox[]>([])
     .reset(globalReset)
 
 export const $message = createStore<Message | null>(null)
-    .on(getMessageFx.doneData, (_, response) => response.data.result)
     .reset(msgResetted, globalReset)
 
 export const $toAlias = createStore<string>('Author')
@@ -60,6 +62,19 @@ export const $msgCounts = combine({inbox: $inbox, outbox: $outbox, delbox: $delb
     outboxCount: store.outbox.length,
     delboxCount: store.delbox.length,
 }))
+
+sample({
+    clock: getMessageFx.doneData,
+    filter: (response) => Boolean(response?.data?.success),
+    fn: (response) => response.data.result,
+    target: $message,
+});
+
+sample({
+    clock: getMessageFx.failData,
+    fn: (error) => error?.status || 503,
+    target: $status,
+});
 
 sample({
     clock: toAliasSetted,
