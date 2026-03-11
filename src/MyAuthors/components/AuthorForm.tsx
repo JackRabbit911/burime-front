@@ -1,17 +1,16 @@
 import Select from "reused/Select"
-import { t } from "common/i18n/utils"
 import Textarea from "reused/Textarea"
 import FileInput from "reused/FileInput"
 import TextInput from "reused/TextInput"
+import { useTranslate } from "common/i18n/hooks"
 import type { Member } from "reused/Participants/types"
-import { useTranslate } from "common/i18n/hook"
 
 type Props = {
   members: Member[] | undefined;
 }
 
 const AuthorForm = ({ members }: Props) => {
-  useTranslate()
+  const __ = useTranslate()
   
   const disabled = (members: Member[] | undefined) => {
     if (members === undefined || members.length === 0) {
@@ -24,38 +23,38 @@ const AuthorForm = ({ members }: Props) => {
   return (
     <>
       <TextInput
-        label={t("Alias")}
+        label={__("Alias")}
         fieldName="author.alias"
       />
       <Textarea
         fieldName="author.info.slogan"
-        label={t('Slogan')}
-        placeholder={t('Your motto')}
+        label={__('Slogan')}
+        placeholder={__('Your motto')}
         rows={4}
-        optional={t("Up to % words", 80)}
+        optional={__("Up to % words", 80)}
       />
       <Textarea
         fieldName="author.info.info"
-        label={t('Info')}
-        placeholder={t('Tell us about your author')}
+        label={__('Info')}
+        placeholder={__('Tell us about your author')}
         rows={4}
-        optional={t("Up to % words", 200)}
+        optional={__("Up to % words", 200)}
       />
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2">
         <FileInput
           fieldName="file"
-          label={t('Avatar')}
-          optional={t('Up % Mb', 2)}
+          label={__('Avatar')}
+          optional={__('Up % Mb', 2)}
         />
         </div>
           <Select
             fieldName="author.openclosed"
-            label={t('Status')}
+            label={__('Status')}
             options={[
-              { value: 2, label: t('Author only'), disabled: disabled(members)},
-              { value: 1, label: t('Closed group') },
-              { value: 0, label: t('Open group') },
+              { value: 2, label: __('Author only'), disabled: disabled(members)},
+              { value: 1, label: __('Closed group') },
+              { value: 0, label: __('Open group') },
             ]}
           />
       </div>
