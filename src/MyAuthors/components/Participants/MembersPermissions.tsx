@@ -2,7 +2,6 @@ import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import Status from "./Status";
-import { t } from "common/i18n/utils";
 import { getCurrentMember } from "reused/Participants/utils";
 import { $referenceBooks } from "reused/Participants/store/reference";
 import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
@@ -10,6 +9,7 @@ import Participants from "reused/Participants/components/Permissions/Participant
 import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
 
 import type { Member } from "reused/Participants/types";
+import { useGetText } from "common/i18n/hooks";
 
 const MembersPermissions = () => {
   const onClose = useUnit(memberIdResetted)
@@ -20,6 +20,8 @@ const MembersPermissions = () => {
   const { getValues, setValue } = useFormContext()
   const members = getValues('members') || []
   const currentAuthor = getCurrentMember(members, authorId)
+
+  const __ = useGetText()
 
   const handleCheck = (val: number, id: number, isAdd: boolean) => {
       const newMembers = members.map((value: Member) => {
@@ -42,6 +44,7 @@ const MembersPermissions = () => {
       </div>
       <fieldset className="fieldset">
         <Participants
+          __={__}
           members={members}
           authorId={authorId}
         />
@@ -49,6 +52,7 @@ const MembersPermissions = () => {
       <div className="md:col-span-2 grid grid-cols-2 gap-4">
         <fieldset className="fieldset">
           <PermissionsList
+            __={__}
             member={currentAuthor}
             handler={handleCheck}
             permissions={authorsPermissions}
@@ -63,7 +67,7 @@ const MembersPermissions = () => {
         <button className="md:col-span-2 btn btn-sm"
           onClick={onClose}
         >
-          {t('Close')}
+          {__('Close')}
         </button>
       </div>
     </>
