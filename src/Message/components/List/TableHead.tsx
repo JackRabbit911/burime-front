@@ -1,14 +1,14 @@
-import { t } from "common/i18n/utils"
+import type { GetTextProp } from "common/i18n/types"
 
-const TableHead = () => {
+const TableHead = ({ __ }: GetTextProp) => {
   return (
     <thead>
       <tr>
-        <th>{t('Status')}</th>
-        <th>{t('Date')}</th>
-        <th>{t('From')}</th>
-        <th>{t('To')}</th>
-        <th>{t('Subject')}</th>
+        <th>{__('Status')}</th>
+        <th>{__('Date')}</th>
+        <th>{__('From')}</th>
+        <th>{__('To')}</th>
+        <th>{__('Subject')}</th>
       </tr>
     </thead>
   )

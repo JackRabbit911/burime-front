@@ -3,10 +3,11 @@ import { useList, useUnit } from "effector-react"
 
 import MsgLine from "./MsgLine"
 import TableHead from "../TableHead"
-import { t } from "common/i18n/utils"
+// import { t } from "common/i18n/utils"
 import { $inbox, $msgCounts } from "Message/store"
+import type { GetTextProp } from "common/i18n/types"
 
-const Inbox = () => {
+const Inbox = ({ __ }: GetTextProp) => {
   const inbox = useList($inbox, (message) => <MsgLine message={message} />)
   const { inboxCount, outboxCount, delboxCount } = useUnit($msgCounts)
 
@@ -16,21 +17,21 @@ const Inbox = () => {
         role="tab"
         className="tab tab-active"
       >
-        {t('Inbox')} ({inboxCount})
+        {__('Inbox')} ({inboxCount})
       </a>
       <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
         <table className="table">
-          <TableHead />
+          <TableHead __={__} />
           <tbody>
             {inbox}
           </tbody>
         </table>
       </div>
       <Link to='/message/outbox' role="tab" className="tab">
-          {t('Outbox')} ({outboxCount})
+          {__('Outbox')} ({outboxCount})
       </Link>
       <Link to='/message/deleted' role="tab" className="tab">
-          {t('Deleted')} ({delboxCount})
+          {__('Deleted')} ({delboxCount})
       </Link>
     </div >
   )

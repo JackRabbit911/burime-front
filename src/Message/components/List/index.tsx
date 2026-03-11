@@ -6,7 +6,7 @@ import Outbox from "./Outbox"
 import Delbox from "./Delbox"
 import { getMessageListFx, msgResetted } from "Message/store"
 import { t } from "common/i18n/utils"
-import { useTranslate } from "common/i18n/hook"
+import { useTranslate } from "common/i18n/hooks"
 import { statusReset } from "common/store"
 
 type Props = {
@@ -14,19 +14,19 @@ type Props = {
 }
 
 const List = ({ box }: Props) => {
-  useTranslate()
+  const __ = useTranslate()
 
   let component
 
   switch (box) {
     case 'inbox':
-      component = <Inbox />
+      component = <Inbox __={__} />
       break
     case 'outbox':
-      component = <Outbox />
+      component = <Outbox __={__} />
       break
     case 'deleted':
-      component = <Delbox />
+      component = <Delbox __={__} />
       break
     default:
       component = `Invalid segment: ${box}`
