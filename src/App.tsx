@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router"
 import Modal from "./reused/Modal";
 import Router from "./Home/components/Router"
 import Wrapper from "./Home/components/Wrapper"
+import TranslateProvider from "common/i18n/TranslateProvider";
 
 function App() {
   const prefix = () => {
@@ -13,10 +14,12 @@ function App() {
 
   return (
     <BrowserRouter basename={prefix()}>
-      <Wrapper>
-        <Router />
-      </Wrapper>
-      <Modal />
+      <TranslateProvider>
+        <Wrapper>
+          <Router />
+        </Wrapper>
+        <Modal />
+      </TranslateProvider>
     </BrowserRouter>
   )
 }
