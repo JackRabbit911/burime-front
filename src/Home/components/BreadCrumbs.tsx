@@ -1,4 +1,4 @@
-import { t } from "common/i18n/utils";
+import type { GetText } from "common/i18n/types";
 import { globalReset } from "common/store";
 import { Link } from "react-router";
 
@@ -37,22 +37,23 @@ const breadCrumbsArray = (pathname: string) => {
 }
 
 type Props = {
+  __: GetText;
   pathname: string;
 }
 
-const BreadCrumbs = ({ pathname }: Props) => {
+const BreadCrumbs = ({ __, pathname }: Props) => {
   const links = breadCrumbsArray(pathname) || []
 
   return (
     <div className="flex flex-row mt-3 text-sm">
       <Link to=''>
-        <span className="link" onClick={() => globalReset()}>{t('Personal account')}</span>
+        <span className="link" onClick={() => globalReset()}>{__('Personal account')}</span>
       </Link>
       {links.filter(item => item !== undefined).map((item, key) => (
         <div key={key}>
           <span className="ms-2 opacity-50">/</span>
           <Link to={item[0]}>
-            <span className="link ms-2">{t(item[1])} </span>
+            <span className="link ms-2">{__(item[1])} </span>
           </Link>
         </div>
       ))}

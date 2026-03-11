@@ -1,15 +1,15 @@
 import Step from "./step";
-import { t } from "common/i18n/utils";
+import type { GetTextProp } from "common/i18n/types";
 
-const Steps = () => {
+const Steps = ({ __ }: GetTextProp) => {
   return (
     <>
       <ul className="steps w-full sm:my-4 steps-vertical sm:steps-horizontal">
-        <Step step={1} title={t("Genres")} />
-        <Step step={2} title={t("Rules")} />
-        <Step step={3} title={t("Participants")} />
-        <Step step={4} title={t("Cover")} />
-        <Step step={5} title={t("Publish")} />
+        <Step step={1} title={__("Genres")} />
+        <Step step={2} title={__("Rules")} />
+        <Step step={3} title={__("Participants")} />
+        <Step step={4} title={__("Cover")} />
+        <Step step={5} title={__("Publish")} />
       </ul>
     </>
   );
