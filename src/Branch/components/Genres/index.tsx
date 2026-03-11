@@ -1,26 +1,32 @@
 import { useFormContext } from "react-hook-form";
 
-import { t } from "common/i18n/utils";
 import { getObjectProp } from "common/utils";
+import { useGetText } from "common/i18n/hooks";
 import SameWeightGenres from "./components/SameWeightGenres";
 
 import type { Genre } from "../../schema/input";
 
 type Props = {
+  step: number;
   genres: Genre[];
   checked: number[];
   fieldName?: string;
 }
 
-const Genres = ({ genres, checked, fieldName = 'branch_genres' }: Props) => {
+const Genres = ({ step, genres, checked, fieldName = 'branch_genres' }: Props) => {
+  const __ = useGetText()
   const { getValues, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
+
+  if (step !== 1) {
+    return null
+  }
   
   checked = getValues(fieldName) || checked
 
   return (
     <fieldset className="fieldset">
-      <legend className="fieldset-legend my-3">{t("Genres")}</legend>
+      <legend className="fieldset-legend my-3">{__("Genres")}</legend>
       {genres.map((group, key) => (
         <div key={key}>
           {key as number > 0 ? <div className="divider w-full my-0"></div> : null}

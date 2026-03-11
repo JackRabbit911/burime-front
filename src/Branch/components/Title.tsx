@@ -1,15 +1,15 @@
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
-import { t } from "common/i18n/utils";
 import { getObjectProp } from "common/utils";
+import type { GetTextProp } from "common/i18n/types";
 
 const label = "Title"
 const optional = "Up to % words"
 const fieldName = "branch.title"
 const placeholder = "Название произведения"
 
-const Title = () => {
+const Title = ({ __ }: GetTextProp) => {
   const { register, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
 
@@ -28,9 +28,9 @@ const Title = () => {
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
-        {t(label)}
+        {__(label)}
         {alert}
-        <span className="label-text">{t(optional, 8)}</span>
+        <span className="label-text">{__(optional, 8)}</span>
       </legend>
       <input
         {...register(fieldName)}
