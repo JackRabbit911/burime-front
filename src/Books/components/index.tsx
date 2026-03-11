@@ -4,9 +4,11 @@ import { useUnit } from "effector-react"
 import { $myStat } from "Home/store"
 import MyBooksList from "./MyBooksList"
 import { isOwnAuthors } from "Books/utils"
+import { useTranslate } from "common/i18n/hooks"
 
 const Books = () => {
   const stat = useUnit($myStat)
+  const __ = useTranslate()
 
   return (
     <>
@@ -14,12 +16,12 @@ const Books = () => {
         {isOwnAuthors(stat) ?
           <Link to='/branch'>
             <button className="link">
-              Create new branch
+              {__('Create new branch')}
             </button>
           </Link> :
           <Link to='/author'>
             <button className="link">
-              Create new author or group
+              {__('Create new author or group')}
             </button>
           </Link>
         }
