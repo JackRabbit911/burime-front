@@ -1,11 +1,12 @@
 import { useLocation } from "react-router";
 
 import { getTitle } from "../utils";
-import { t } from "common/i18n/utils";
-import { useTranslate } from "common/i18n/hook";
+// import { t } from "common/i18n/utils";
+// import { useTranslate } from "common/i18n/hook";
 import BreadCrumbs from "./BreadCrumbs";
 import ajax from "common/ajax";
 import { logoutUri } from "common/constants";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   children?: React.ReactNode;
@@ -29,21 +30,24 @@ const Wrapper = ({ children }: Props) => {
       })
   }
 
-  useTranslate([location])
+  const __ = useTranslate()
 
   return (
     <div className="flex flex-row justify-center">
       <div className="w-full md:w-2xl lg:w-4xl bg-base-100 p-4">
         <div className="flex flex-roe justify-between mb-4">
-          <h1 className="text-2xl">{t(getTitle(addr, id))}</h1>
+          <h1 className="text-2xl">{__(getTitle(addr, id))}</h1>
           {addr === 'home' ?
             <button
               className="btn btn-outline btn-error"
               onClick={onLogOut}
             >
-              {t('Log Out')}
+              {__('Log Out')}
             </button> :
-            <BreadCrumbs pathname={location.pathname} />
+            <BreadCrumbs
+              __={__}
+              pathname={location.pathname}
+            />
           }
         </div>
         {children}
