@@ -1,8 +1,8 @@
 import { useUnit } from "effector-react";
 
-import { t } from "common/i18n/utils";
 import { $toAlias } from "../../store";
 import type { Message } from "../../types"
+import { useGetText } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
@@ -11,17 +11,18 @@ type Props = {
 const DefaultMsg = ({ message }: Props) => {
   const toAlias = useUnit($toAlias);
   const appeal = message.incoming && Object.hasOwn(message, 'to_alias') ? message.to_alias : toAlias
+  const __ = useGetText()
 
   return (
     <>
       <p>
-        {t('Dear')}, {appeal},
+        {__('Dear')}, {appeal},
       </p>
       <p>
         {message.data?.body ?? 'no body'}
       </p>
       <div className="fieldset mt-1 text-end">
-        {t('Best regards')}, {message.from_alias}
+        {__('Best regards')}, {message.from_alias}
       </div>
     </>
   )

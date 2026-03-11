@@ -1,14 +1,15 @@
 import { Link, useParams } from "react-router"
 
-import { t } from "common/i18n/utils"
 import { removeMsg } from "Message/utils";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
+  __: GetText;
   link: string;
   label: string;
 }
 
-const Controls = ({ link, label }:Props) => {
+const Controls = ({ __, link, label }:Props) => {
   const { id } = useParams()
 
   return (
@@ -17,14 +18,14 @@ const Controls = ({ link, label }:Props) => {
         <button
           className="btn"
         >
-          {t('Back to message list')}
+          {__('Back to message list')}
         </button>
       </Link>
       <button
         className="btn btn-error"
         onClick={() => removeMsg(id)}
       >
-        {t(label)}
+        {__(label)}
       </button>
     </div>
   )

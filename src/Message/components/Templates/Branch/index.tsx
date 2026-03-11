@@ -1,4 +1,4 @@
-import { t } from "common/i18n/utils";
+import { useGetText } from "common/i18n/hooks";
 import { useUnit } from "effector-react";
 import CoverWrapper from "Message/components/CoverWrapper";
 import { $toAlias } from "Message/store";
@@ -13,9 +13,10 @@ const Branch = ({ message }: Props) => {
   const toAlias = useUnit($toAlias);
   const appeal = message.data.appeal ??
     (message.incoming && Object.hasOwn(message, 'to_alias')) ?
-      message.to_alias : toAlias
+    message.to_alias : toAlias
 
-  const signature = message.data.signature ?? t('Best regards') + ', ' + message.from_alias
+  const __ = useGetText()
+  const signature = message.data.signature ?? __('Best regards') + ', ' + message.from_alias
 
   return (
     <>
