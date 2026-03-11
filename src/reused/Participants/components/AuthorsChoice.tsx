@@ -1,8 +1,8 @@
 import Pagination from "./Pagination"
-import type { Author } from "../schema";
-import type { AuthorsPayload, Member } from "../types";
 import AuthorSearch from "./AuthorSearch";
 import ChoiceControl from "./ChoiceControl";
+import type { Author } from "../schema";
+import type { AuthorsPayload, Member } from "../types";
 
 type Props = {
   filters: string[];
