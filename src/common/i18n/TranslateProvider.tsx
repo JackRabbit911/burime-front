@@ -1,27 +1,27 @@
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import type { Argv, ChildrenProps, TranslateContextType, TranslateType } from "./types";
+import { sprintf } from "./utils";
 
-export const translateKeys: string[] = []
 export const TranslateContext = createContext<TranslateContextType | undefined>(undefined)
-
-const sprintf = (str: string, ...argv: any[]): string => !argv.length ? str :
-  sprintf(str = str.replace("%", argv.shift()), ...argv);
 
 const TranslateProvider = ({ children }: ChildrenProps) => {
   const [translate, setTranslate] = useState<TranslateType>({})
+  const translateKeys = useRef<string[]>([])
 
   const gettext = (key: string, ...argv: Argv) => {
-    if (!translate[key] && !translateKeys.includes(key)) {
-            translateKeys.push(key)
-        }
+    if (Object.hasOwn(translate, key)) {
+      return sprintf(translate[key], ...argv)
+    }
 
-    return translate[key]
-      ? sprintf(translate[key], ...argv)
-      : sprintf(key, ...argv)
+    if (!translate[key] && !translateKeys.current.includes(key)) {
+      translateKeys.current.push(key)
+    }
+
+    return sprintf(key, ...argv)
   }
 
   return (
-    <TranslateContext.Provider value={{ gettext, translate, setTranslate }}>
+    <TranslateContext.Provider value={{ gettext, translateKeys, translate, setTranslate }}>
       {children}
     </TranslateContext.Provider>
   )
