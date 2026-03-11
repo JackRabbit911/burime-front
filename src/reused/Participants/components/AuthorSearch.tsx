@@ -1,5 +1,6 @@
-import { t } from "common/i18n/utils";
+import { useGetText } from "common/i18n/hooks";
 import { useAuthorSearch } from "../hooks/AuthorSearch";
+
 import type { AuthorsPayload } from "../types";
 
 type Props = {
@@ -18,6 +19,8 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
     inputClassName
   } = useAuthorSearch()
 
+  const __ = useGetText()
+
   const alert = !error ? null : <div
     className="fieldset-label text-error"
   >{error}</div>
@@ -25,13 +28,13 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
-        <div>{t('Search & filter')}</div>
+        <div>{__('Search & filter')}</div>
         {alert}
       </legend>
       <div className="join">
         <input
           className={inputClassName}
-          placeholder={t('Search')}
+          placeholder={__('Search')}
           defaultValue={authorsPayload.search ?? ''}
           onChange={onSearch}
           ref={searchRef}
@@ -42,9 +45,9 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
           onChange={onSelect}
           ref={filterRef}
         >
-          <option value="" disabled>{t('Filter')}</option>
+          <option value="" disabled>{__('Filter')}</option>
           {filters?.map((item, key) => (
-            <option key={key} value={item}>{t(item)}</option>
+            <option key={key} value={item}>{__(item)}</option>
           ))}
         </select>
         <button

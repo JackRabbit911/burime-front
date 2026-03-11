@@ -1,6 +1,6 @@
-import { t } from "common/i18n/utils";
 import type { OwnAuthor } from "../types";
 import { useFormContext } from "react-hook-form";
+import { useGetText } from "common/i18n/hooks";
 
 type Props = {
   fieldName: string;
@@ -10,11 +10,12 @@ type Props = {
 
 const Select = ({ fieldName, label, options }: Props) => {
   const { register, watch } = useFormContext()
+  const __ = useGetText()
 
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend flex justify-between w-full">
-        {t(label)}
+        {__(label)}
       </legend>
       <select
         className="select w-full"
