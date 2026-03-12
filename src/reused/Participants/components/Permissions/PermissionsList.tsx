@@ -23,6 +23,7 @@ const PermissionsList = ({ __, member, permissions, handler }: Props) => {
       </h3>
       {Object.entries(permissions ?? {}).reverse().map(([label, value]) => (
         <PermissionCheckBox
+          __={__}
           handler={handler}
           member={member}
           label={label}
