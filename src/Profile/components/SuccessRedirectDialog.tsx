@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-
-import { t } from "common/i18n/utils";
-import { useTranslate } from "common/i18n/hook";
+;
+import { useTranslate } from "common/i18n/hooks";
 import { closeBtn, modalClosed } from "reused/Modal/store";
 
 type Props = {
@@ -20,7 +19,7 @@ const SuccessRedirectDialog = ({
     window.location.replace("/my")
   }
 
-  useTranslate()
+  const __ = useTranslate()
 
   useEffect(() => {
     closeBtn(false)
@@ -30,16 +29,16 @@ const SuccessRedirectDialog = ({
     <div className="flex flex-col justify-center min-h-48">
       <div className="text-center w-full">
         <h2 className="text-lg mb-3">
-          {t(title)}
+          {__(title)}
         </h2>
         <p className="mb-4">
-          {t(text)}
+          {__(text)}
         </p>
           <button
             className="btn btn-success"
             onClick={onClick}
           >
-            {t(btn)}
+            {__(btn)}
           </button>
       </div>
     </div>

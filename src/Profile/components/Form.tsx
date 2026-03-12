@@ -1,9 +1,9 @@
-import { t } from "common/i18n/utils"
 import RadioBox from "reused/RadioBox"
 import FileInput from "reused/FileInput"
 import TextInput from "reused/TextInput"
+import type { GetTextProp } from "common/i18n/types"
 
-const Form = () => {
+const Form = ({ __ }: GetTextProp) => {
   const today = new Date().toISOString().split('T')[0]
 
   return (
@@ -29,16 +29,16 @@ const Form = () => {
         />
         <div className="fieldset">
           <legend className="fieldset-legend flex justify-between w-full">
-            {t('Sex')}
+            {__('Sex')}
           </legend>
           <div className="grid grid-cols-2 gap-8">
             <RadioBox
-              label={t('Male')}
+              label={__('Male')}
               value={1}
               fieldName="sex"
             />
             <RadioBox
-              label={t('Female')}
+              label={__('Female')}
               value={0}
               fieldName="sex"
             />
@@ -48,8 +48,8 @@ const Form = () => {
       <fieldset className="fieldset">
         <FileInput
           fieldName="file"
-          label={t('Avatar')}
-          optional={t('Up % Mb', 2)}
+          label={__('Avatar')}
+          optional={__('Up % Mb', 2)}
         />
       </fieldset>
     </>
