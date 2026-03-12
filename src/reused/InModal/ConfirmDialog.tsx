@@ -28,7 +28,7 @@ const ConfirmDialog = ({
   return (
     <div className="flex flex-col justify-center min-h-48">
       <div className="text-center w-full">
-        <p>{__(text)} bebe</p>
+        <p>{__(text)}</p>
         <h2 className="text-lg mb-3">
           {__(title)}
         </h2>
