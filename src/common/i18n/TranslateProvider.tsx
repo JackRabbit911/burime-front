@@ -1,12 +1,13 @@
 import { createContext, useRef, useState } from "react";
 import type { Argv, ChildrenProps, TranslateContextType, TranslateType } from "./types";
-import { sprintf } from "./utils";
+import { detectLang, sprintf } from "./utils";
 
 export const TranslateContext = createContext<TranslateContextType | undefined>(undefined)
 
 const TranslateProvider = ({ children }: ChildrenProps) => {
   const [translate, setTranslate] = useState<TranslateType>({})
   const translateKeys = useRef<string[]>([])
+  const lang = detectLang()
 
   const gettext = (key: string, ...argv: Argv) => {
     if (Object.hasOwn(translate, key)) {
@@ -21,7 +22,7 @@ const TranslateProvider = ({ children }: ChildrenProps) => {
   }
 
   return (
-    <TranslateContext.Provider value={{ gettext, translateKeys, translate, setTranslate }}>
+    <TranslateContext.Provider value={{ gettext, translateKeys, translate, setTranslate, lang }}>
       {children}
     </TranslateContext.Provider>
   )

@@ -29,6 +29,7 @@ export const useTranslate = (clock: React.DependencyList = []) => {
             fetch(getTranslateUri, {
                 method: 'POST',
                 headers: {
+                    'Accept-Language': context.lang,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ filter: context.translateKeys.current })
