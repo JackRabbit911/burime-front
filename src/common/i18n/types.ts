@@ -11,6 +11,7 @@ export type TranslateContextType = {
   translateKeys: React.RefObject<string[]>;
   translate: TranslateType;
   setTranslate: React.Dispatch<React.SetStateAction<TranslateType>>;
+  lang: string;
 }
 
 export type ChildrenProps = {
