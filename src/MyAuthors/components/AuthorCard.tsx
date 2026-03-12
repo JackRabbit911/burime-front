@@ -2,13 +2,14 @@ import { Link } from "react-router";
 
 import { host } from "common/ajax";
 import type { MyAuthor } from "../schema";
-import { t } from "common/i18n/utils";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
+  __: GetText;
   author: MyAuthor;
 }
 
-const AuthorCard = ({ author }: Props) => {
+const AuthorCard = ({ __, author }: Props) => {
   return (
     <div >
       <a href={`${host}/author/${author.id}`} className="mb-2">
@@ -30,7 +31,7 @@ const AuthorCard = ({ author }: Props) => {
       <div className="text-end">
         <Link to={`/author/${author.id}`}>
           <button className="btn btn-sm">
-            {t('Edit author')}
+            {__('Edit author')}
           </button>
         </Link>
         </div> : null}

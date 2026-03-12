@@ -5,10 +5,10 @@ import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
 import Form from "./Form";
 import Header from "./Header";
-import { t } from "common/i18n/utils";
+import { isObjectEmpty } from "common/utils";
+import { useTranslate } from "common/i18n/hooks";
 import { userData, type UserData } from "../schema";
 import { $isPending, getUserDataFx, profileSubmitted } from "../store";
-import { isObjectEmpty } from "common/utils";
 
 const Profile = () => {
   const isPending = useUnit($isPending)
@@ -17,6 +17,7 @@ const Profile = () => {
     mode: 'all',
     defaultValues: () => getUserDataFx()
   });
+  const __ = useTranslate()
 
   const onSubmit: SubmitHandler<UserData> = (data) => {
     if (!isPending ) {
@@ -43,19 +44,19 @@ const Profile = () => {
       <FormProvider {...methods}>
         <Header />
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Form />
+          <Form __={__} />
           <button
             type="submit"
             className="btn btn-primary dark:btn-info w-full mt-4"
             disabled={disabled}
           >
-            {t('Save')}
+            {__('Save')}
           </button>
         </form>
         <div className="text-end">
           <Link to='/profile/password'>
             <button className="link mt-4">
-              {t('Change password')}
+              {__('Change password')}
             </button>
           </Link>
         </div>

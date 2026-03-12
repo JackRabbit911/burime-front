@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 
-import { t } from "common/i18n/utils";
 import TextInput from "reused/TextInput";
 import { passwordSubmitted } from "../store";
 import { passwordSchema, type ConfirmPassword } from "../schema";
+import { useTranslate } from "common/i18n/hooks";
 
 const Password = () => {
     const methods = useForm({
@@ -15,6 +15,8 @@ const Password = () => {
         confirmPassword: ''
       }
     });
+
+    const __ = useTranslate()
   
     const onSubmit: SubmitHandler<ConfirmPassword> = (data) => {
         const valid = passwordSchema.safeParse(data)
@@ -32,24 +34,24 @@ const Password = () => {
     <>
       <FormProvider {...methods}>
         <h3 className="text-xl">
-          {t('Change Password form')}
+          {__('Change Password form')}
         </h3>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <TextInput
             type="password"
             fieldName="password"
-            label={t('Password')}
+            label={__('Password')}
           />
           <TextInput
             type="password"
             fieldName="confirmPassword"
-            label={t('Confirm')}
+            label={__('Confirm')}
           />
           <button
             type="submit"
             className="btn btn-primary dark:btn-info w-full mt-4"
           >
-            {t('Save')}
+            {__('Save')}
           </button>
         </form>
       </FormProvider>

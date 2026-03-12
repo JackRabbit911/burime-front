@@ -2,19 +2,20 @@ import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import { host } from "common/ajax";
-import { t } from "common/i18n/utils";
 import { buttonEnabled } from "./utils";
 import { getStatusString } from "../../permissions";
 import { $permissions, $statusObj } from "Branch/store/bootstrap";
 import { memberIdResetted } from "reused/Participants/store/authors";
 
+import type { GetText } from "common/i18n/types";
 import type { Member } from "reused/Participants/types";
 
 type Props = {
+  __: GetText;
   member: Member | null;
 }
 
-const Status = ({ member }: Props) => {
+const Status = ({ __, member }: Props) => {
   const permissions = useUnit($permissions)
   const statusObj = useUnit($statusObj)
   const { getValues, setValue } = useFormContext()
@@ -57,46 +58,46 @@ const Status = ({ member }: Props) => {
 
   return (
     <>
-      <h3>{t('Status')} {t(status)} {member?.status}</h3>
+      <h3>{__('Status')} {__(status)} {member?.status}</h3>
       <button
         className="btn btn-soft btn-sm"
         onClick={addPermission(permissions.MANAGE | permissions.MODERATE)}
         disabled={!enable.moderator()}
       >
-        {t('Make moderator')}
+        {__('Make moderator')}
       </button>
       <button
         className="btn btn-soft btn-sm"
         onClick={setStatus(statusObj.invited)}
         disabled={!enable.accept()}
       >
-        {t('Accept to project')} {statusObj.invited} qq
+        {__('Accept to project')} {statusObj.invited} qq
       </button>
       <button
         className="btn btn-soft btn-sm"
         onClick={setStatus(statusObj.denied)}
         disabled={!enable.deny()}
       >
-        {t('Deny')}
+        {__('Deny')}
       </button>
       <button
         className="btn btn-soft btn-error btn-sm"
         disabled={!enable.ban()}
       >
-        {t('Ban')}
+        {__('Ban')}
       </button>
       <button
         className="btn btn-soft btn-error btn-sm"
         onClick={deleteMember(member)}
         disabled={!enable.delete()}
       >
-        {t('Delete')}
+        {__('Delete')}
       </button>
       <button
         className="btn btn-soft btn-sm"
         onClick={() => {window.open(`${host}/author/${member?.id}`, '_blank')}}
       >
-        {t('Show profile')}
+        {__('Show profile')}
       </button>
     </>
   )

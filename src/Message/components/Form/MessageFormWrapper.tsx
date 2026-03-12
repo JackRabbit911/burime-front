@@ -3,13 +3,13 @@ import { FormProvider } from "react-hook-form"
 import Form from "."
 import Controls from "./Controls"
 import Recipients from "./Recipients"
-import { t } from "common/i18n/utils"
 import CheckBox from "reused/CheckBox"
 import Grid3Cols from "reused/Wrapper/Grid3Cols"
 import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
 import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 import { useMessageTemplate } from "Message/hooks/messageTemplate"
+import { useTranslate } from "common/i18n/hooks"
 
 const MessageFormWrapper = () => {
   const { message, isPending } = useMessageTemplate()
@@ -20,6 +20,7 @@ const MessageFormWrapper = () => {
   }
 
   const Component = view === 'form' ? <Form message={message} /> : <AuthorsChoiceWrapper />
+  const __ = useTranslate()
   
   return (
     <FormProvider {...methods}>
@@ -30,22 +31,23 @@ const MessageFormWrapper = () => {
           <div>
             <Select
               fieldName="message.from"
-              label="Message sender"
+              label={__('Message sender')}
               options={ownAuthors}
             />
             <div className="mt-2">
               <CheckBox
                 fieldName="important"
-                label={t('Mark as important')}
+                label={__('Mark as important')}
               />
             </div>
-            <Recipients setView={setView} />
+            <Recipients __={__} setView={setView} />
           </div>
           <div className="md:col-span-2">
             {!isPending ? Component : null}
           </div>
         </Grid3Cols>
         <Controls
+          __={__}
           view={view}
           setView={handleSwitchBtn}
         />

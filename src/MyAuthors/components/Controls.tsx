@@ -2,21 +2,22 @@ import { useParams } from "react-router"
 import { useFormContext } from "react-hook-form"
 
 import Helper from "reused/Help"
-import { t } from "common/i18n/utils"
 import { submitDisabled } from "../utils"
 import { authorDeleteFx } from "../store/delete"
 import { helpBtnClicked } from "reused/Help/store"
 import ConfirmDialog from "reused/InModal/ConfirmDialog"
 import { closeBtn, modalOpened } from "reused/Modal/store"
 import { memberIdResetted } from "reused/Participants/store/authors"
+import type { GetText } from "common/i18n/types"
 
 type Props = {
+  __: GetText;
   status: number;
   view: string;
   setView: (data: string) => void;
 }
 
-const Controls = ({ status, view, setView }: Props) => {
+const Controls = ({ __, status, view, setView }: Props) => {
   const { id } = useParams()
   const { getValues, formState: { errors } } = useFormContext()
   const author = getValues('author')
@@ -69,7 +70,7 @@ const Controls = ({ status, view, setView }: Props) => {
         onClick={onHelpClick('create_author')}
         className="btn btn-success"
       >
-        {t('Help')}
+        {__('Help')}
       </button>
       {view === 'form' ?
         <button
@@ -78,7 +79,7 @@ const Controls = ({ status, view, setView }: Props) => {
           disabled={status == 2}
           onClick={onMembersClick}
         >
-          {t('Participants')}
+          {__('Participants')}
         </button> :
         <button
           type="button"
@@ -86,7 +87,7 @@ const Controls = ({ status, view, setView }: Props) => {
           disabled={status == 2}
           onClick={onFormClick}
         >
-          {t('Author form')}
+          {__('Author form')}
         </button>
       }
       <button
@@ -94,14 +95,14 @@ const Controls = ({ status, view, setView }: Props) => {
         className="btn btn-error"
         onClick={onCancel}
       >
-        {t('Cancel')}
+        {__('Cancel')}
       </button>
       <button
         type="button"
         className="btn btn-error"
         onClick={onDelete}
       >
-        {t('Delete')}
+        {__('Delete')}
       </button>
       <div className="col-span-2 md:col-start-3">
         <button
@@ -109,7 +110,7 @@ const Controls = ({ status, view, setView }: Props) => {
           className="btn btn-primary dark:btn-info w-full"
           disabled={submitDisabled(author, errors)}
         >
-          {t('Save')}
+          {__('Save')}
         </button>
       </div>
     </div>

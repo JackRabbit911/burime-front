@@ -1,13 +1,15 @@
-import { t } from "common/i18n/utils";
 import type { Message } from "../../../types"
 import { host } from "common/ajax";
 import Controls from "./Controls";
+import { useGetText } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
 }
 
 const InviteToGroup = ({ message }: Props) => {
+  const __ = useGetText()
+
   return (
     <>
       <div className="grid grid-cols-3 gap-2 mb-2">
@@ -24,11 +26,12 @@ const InviteToGroup = ({ message }: Props) => {
             {message.data?.body ?? 'no body'}
           </p>
           <div className="fieldset mt-1 text-end">
-            {t('Best regards')}, {message.from_alias}
+            {__('Best regards')}, {message.from_alias}
           </div>
         </div>
       </div>
       <Controls
+        __={__}
         group={message.data.group}
         author={message.to as number}
       />

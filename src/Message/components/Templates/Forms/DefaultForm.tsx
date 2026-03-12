@@ -1,6 +1,5 @@
 import { useUnit } from "effector-react";
 
-import { t } from "common/i18n/utils"
 import Textarea from "reused/Textarea"
 import { $toAlias } from "Message/store";
 import TextInput from "reused/TextInput";
@@ -9,6 +8,7 @@ import ConditionalInput from "../ConditionalInput"
 import { $ownAuthors } from "common/store/ownAuthors";
 
 import type { MessageForm } from "Message/schema";
+import { useGetText } from "common/i18n/hooks";
 
 type Props = {
   message: MessageForm;
@@ -18,35 +18,36 @@ const DefaultForm = ({ message }: Props) => {
   const appeal = useUnit($toAlias)
   const ownAuthors = useUnit($ownAuthors)
   const fromAlias = getAuthorAlias(message.message.from, ownAuthors)
+  const __ = useGetText()
 
   return (
     <>
       <TextInput
         fieldName="message.subject"
-        label={t('Subject')}
-        optional={t('Up to % words', 10)}
-        placeholder={t('Message subject')}
+        label={__('Subject')}
+        optional={__('Up to % words', 10)}
+        placeholder={__('Message subject')}
       />
       <ConditionalInput
         fieldName="message.data.appeal"
-        label={t('Appeal')}
-        message={t('Dear, %!', appeal)}
-        placeholder={t('Dear, Username!')}
-        checkboxLabel={t('Generate an appeal automatically')}
+        label={__('Appeal')}
+        message={__('Dear, %!', appeal)}
+        placeholder={__('Dear, Username!')}
+        checkboxLabel={__('Generate an appeal automatically')}
       />
       <Textarea
         fieldName="message.data.body"
-        label={t('Message')}
-        optional={t('Up to % words', 200)}
-        placeholder={t('Message body')}
+        label={__('Message')}
+        optional={__('Up to % words', 200)}
+        placeholder={__('Message body')}
         rows={6}
       />
       <ConditionalInput
         fieldName="message.data.signature"
-        label={t('Signature')}
-        message={t('Best regards, %', fromAlias)}
-        placeholder={t('Best regards, %', fromAlias)}
-        checkboxLabel={t('Generate signature automatically')}
+        label={__('Signature')}
+        message={__('Best regards, %', fromAlias)}
+        placeholder={__('Best regards, %', fromAlias)}
+        checkboxLabel={__('Generate signature automatically')}
       />
     </>
   )

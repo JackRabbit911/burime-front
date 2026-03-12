@@ -12,7 +12,7 @@ const ChoiceControl = ({ author, members, handler }: Props) => {
   return (
     <button
       type="button"
-      className="btn btn-soft btn-outline btn-sm"
+      className="btn btn-outline btn-sm"
       disabled={isInvited(members, author.id)}
       onClick={() => {
         handler(author)

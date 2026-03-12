@@ -2,8 +2,9 @@ import type React from "react"
 import { useFormContext } from "react-hook-form"
 
 import { getAlerts, readyProgress } from "Branch/utils"
+import type { GetTextProp } from "common/i18n/types"
 
-const Indicator = () => {
+const Indicator = ({ __ }: GetTextProp) => {
   const { watch } = useFormContext()
   const values = watch()
   const alerts = getAlerts(values)
@@ -26,10 +27,10 @@ const Indicator = () => {
       </div>
       {alerts.length > 0 ? 
       <ul className="list-disc mt-4">
-        {alerts.map((item, key) => <li key={key}>{item}</li>)}
+        {alerts.map((item, key) => <li key={key}>{__(item)}</li>)}
       </ul>:
       <div className="w-full text-center text-success mt-3">
-        Yes!<br />Your project is ready to publish!
+        Yes!<br />{__('Your project is ready to publish!')}
       </div>}
       
     </div>

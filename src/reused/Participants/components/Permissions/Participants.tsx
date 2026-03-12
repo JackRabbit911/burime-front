@@ -1,17 +1,18 @@
-import { t } from "common/i18n/utils";
 import type { Member } from "reused/Participants/types";
 import { memberIdSetted } from "reused/Participants/store/authors";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
+  __: GetText;
   members: Member[];
   authorId: number;
 }
 
-const Participants = ({ members, authorId}: Props) => {
+const Participants = ({ __, members, authorId}: Props) => {
   return (
     <>
       <h3>
-        {t('Participants')}
+        {__('Participants')}
       </h3>
       {members.sort((a: Member, b: Member) => a.role > b.role ? -1 : 1)
         .map((author: Member) => (

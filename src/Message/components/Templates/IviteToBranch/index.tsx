@@ -1,13 +1,14 @@
-import { t } from "common/i18n/utils";
 import CoverWrapper from "Message/components/CoverWrapper";
 import type { Message } from "Message/types";
 import Controls from "./Controls";
+import { useGetText } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
 }
 
 const InviteToBranch = ({ message }: Props) => {
+  const __ = useGetText()
   const author: number|undefined = typeof(message.to) === 'number' ? message.to : undefined
   
   return (
@@ -24,11 +25,12 @@ const InviteToBranch = ({ message }: Props) => {
             </p>
           </div>
           <div className="fieldset mt-1 text-end">
-            {t('Best regards')}, {message.from_alias}
+            {__('Best regards')}, {message.from_alias}
           </div>
         </div>
       </div>
       <Controls
+        __={__}
         branch={message.data.branch}
         author={author}
       />

@@ -1,12 +1,13 @@
-import { t } from "common/i18n/utils";
 import { useInviteStatus } from "./hook";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   branch: string | number;
   author?: number;
+  __: GetText;
 }
 
-const Controls = ({ branch, author }: Props) => {
+const Controls = ({ __, branch, author }: Props) => {
   const { onClick, disabledAccept, disabledRefuse } = useInviteStatus(branch, author)
 
   return (
@@ -16,14 +17,14 @@ const Controls = ({ branch, author }: Props) => {
         disabled={disabledRefuse}
         onClick={onClick(80)}
       >
-        {t('Refuse')}
+        {__('Refuse')}
       </button>
       <button
         className="btn btn-success"
         disabled={disabledAccept}
         onClick={onClick(200)}
       >
-        {t('Accept')}
+        {__('Accept')}
       </button>
     </div>
   )

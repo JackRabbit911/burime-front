@@ -1,11 +1,12 @@
 import { useFormContext } from "react-hook-form";
 
-import { t } from "common/i18n/utils";
+import { useGetText } from "common/i18n/hooks";
 import InvitedAuthors from "./InvitedAuthors";
 
 import type { Member } from "../types";
 
 const Members = () => {
+  const __ = useGetText()
   const { watch, setValue } = useFormContext()
   const members = watch('members') || []
 
@@ -18,7 +19,7 @@ const Members = () => {
     <>
       <fieldset className="fieldset">
         <legend className="fieldset-legend">
-          <span>{t('Participants')}</span>
+          <span>{__('Participants')}</span>
         </legend>
       </fieldset>
       <div className="flex flex-col gap-2">

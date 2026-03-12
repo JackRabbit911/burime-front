@@ -2,7 +2,7 @@ import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import Status from "./Status";
-import { t } from "common/i18n/utils";
+import { useGetText } from "common/i18n/hooks";
 import { getCurrentMember } from "reused/Participants/utils";
 import { $referenceBooks } from "reused/Participants/store/reference";
 import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
@@ -12,6 +12,7 @@ import PermissionsList from "reused/Participants/components/Permissions/Permissi
 import type { Member } from "reused/Participants/types";
 
 const MembersPermissions = () => {
+  const __ = useGetText()
   const authorId = useUnit($memberId)
   const onClose = useUnit(memberIdResetted)
   const referenceBooks = useUnit($referenceBooks)
@@ -42,6 +43,7 @@ const MembersPermissions = () => {
       </div>
       <fieldset className="fieldset">
         <Participants
+          __={__}
           members={members}
           authorId={authorId}
         />
@@ -49,6 +51,7 @@ const MembersPermissions = () => {
       <div className="md:col-span-2 grid grid-cols-2 gap-4">
         <fieldset className="fieldset">
           <PermissionsList
+            __={__}
             member={currentAuthor}
             handler={handleCheck}
             permissions={authorsPermissions}
@@ -56,13 +59,14 @@ const MembersPermissions = () => {
         </fieldset>
         <fieldset className="fieldset">
           <Status
+            __={__}
             member={currentAuthor}
           />
         </fieldset>
         <button className="md:col-span-2 btn btn-sm"
           onClick={onClose}
         >
-          {t('Close')}
+          {__('Close')}
         </button>
       </div>
     </>

@@ -1,16 +1,17 @@
 import { Link, useParams } from "react-router"
 
-import { t } from "common/i18n/utils"
 import { deleteMsg } from "Message/utils";
 import { coverResetted } from "common/store/cover";
 
 import type { Message } from "Message/types";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   message: Message;
+  __: GetText;
 }
 
-const Controls = ({ message }: Props) => {
+const Controls = ({ __, message }: Props) => {
   const { id } = useParams()
 
   const msgData = {
@@ -29,7 +30,7 @@ const Controls = ({ message }: Props) => {
         <button
           className="btn btn-success"
         >
-          {t('Reply to sender')}
+          {__('Reply to sender')}
         </button>
       </Link>
       <Link to="/message/inbox">
@@ -37,14 +38,14 @@ const Controls = ({ message }: Props) => {
           className="btn"
           onClick={() => { coverResetted }}
         >
-          {t('Back to message list')}
+          {__('Back to message list')}
         </button>
       </Link>
       <button
         className="btn btn-error"
         onClick={() => deleteMsg(id, message.to as number)}
       >
-        {t('Delete')}
+        {__('Delete')}
       </button>
     </div >
   )

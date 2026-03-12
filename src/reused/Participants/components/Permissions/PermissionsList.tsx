@@ -1,10 +1,11 @@
-import { t } from "common/i18n/utils";
 import PermissionCheckBox from "./PermissionCheckBox";
 import { isPermission } from "reused/Participants/utils";
 
 import type { Member } from "reused/Participants/types";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
+  __: GetText;
   member: Member | null;
   permissions: {
     [index: string]: number;
@@ -12,16 +13,17 @@ type Props = {
   handler: (val: number, id: number, isAdd: boolean) => void;
 }
 
-const PermissionsList = ({ member, permissions, handler }: Props) => {
+const PermissionsList = ({ __, member, permissions, handler }: Props) => {
   const checked = (value: number): boolean => isPermission(member?.role || 0, value)
 
   return (
     <>
       <h3>
-        {t('Permissions')}
+        {__('Permissions')}
       </h3>
       {Object.entries(permissions ?? {}).reverse().map(([label, value]) => (
         <PermissionCheckBox
+          __={__}
           handler={handler}
           member={member}
           label={label}

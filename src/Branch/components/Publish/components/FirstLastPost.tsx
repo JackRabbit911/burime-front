@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-import { t } from "common/i18n/utils";
 import Textarea from "reused/Textarea";
+import type { GetTextProp } from "common/i18n/types";
 
-const FirstLastPost = () => {
+const FirstLastPost = ({ __ }: GetTextProp) => {
   const { getValues, setValue } = useFormContext()
   const postSize = getValues('branch.info.post_size')
   const masterId = getValues('masterId')
@@ -24,10 +24,10 @@ const FirstLastPost = () => {
     <fieldset className="fieldset md:col-span-2">
       <Textarea
         fieldName="posts.first.body"
-        label="First post"
+        label={__('First post')}
         placeholder="Напишите что-нибудь"
         rows={7}
-        optional={t('Up to % words', postSize)}
+        optional={__('Up to % words', postSize)}
       />
       <div className="text-end -mt-6">
         <button
@@ -39,10 +39,10 @@ const FirstLastPost = () => {
       </div>
       <Textarea
         fieldName="posts.last.body"
-        label="Last post"
+        label={__('Last post')}
         placeholder="Если хотите, напишите финальные строки вашего произведения"
         rows={7}
-        optional={t('Up to % words', postSize)}
+        optional={__('Up to % words', postSize)}
       />
        <div className="text-end -mt-6">
         <button

@@ -1,14 +1,15 @@
-import { t } from "common/i18n/utils";
 import { useParams } from "react-router";
 import { getGroupStatusFx, setGroupStatusFx } from "./store";
 import { useEffect, useState } from "react";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   group: string | number;
   author: string | number;
+  __: GetText;
 }
 
-const Controls = ({ group, author }: Props) => {
+const Controls = ({ __, group, author }: Props) => {
   const [status, setStatus] = useState(110)
   const { box } = useParams()
   const disabledBoth = box === 'in' ? false : true
@@ -45,14 +46,14 @@ const Controls = ({ group, author }: Props) => {
         disabled={disabledRefuse}
         onClick={onClick(80)}
       >
-        {t('Refuse')}
+        {__('Refuse')}
       </button>
       <button
         className="btn btn-success"
         disabled={disabledAccept}
         onClick={onClick(200)}
       >
-        {t('Accept')}
+        {__('Accept')}
       </button>
     </div>
   )

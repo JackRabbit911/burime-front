@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 
-import { t } from "common/i18n/utils";
 import type { Member } from "reused/Participants/types";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   handler: (val: number, id: number, isAdd: boolean) => void;
@@ -9,9 +9,10 @@ type Props = {
   label: string;
   value: number;
   checked: boolean;
+  __: GetText;
 }
 
-const PermissionCheckBox = ({ handler, member, label, value, checked }: Props) => {
+const PermissionCheckBox = ({ handler, member, label, value, checked, __ }: Props) => {
   const fieldName = 'perms'
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     handler(value, member?.id || 0, event.target.checked)
@@ -21,7 +22,7 @@ const PermissionCheckBox = ({ handler, member, label, value, checked }: Props) =
     <label
       className="fieldset-label flex justify-between"
     >
-      {t(label)}
+      {__(label)}
       <input
         name={`${fieldName}.${member?.id}`}
         type="checkbox"
