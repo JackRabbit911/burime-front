@@ -22,3 +22,7 @@ export const updateTranslate = (
     context.translateKeys.current.length = 0
     result = {}
 }
+
+export const detectLang = (): string => (
+    document.querySelector('html')?.getAttribute('lang') || navigator.language.split('-')[0]
+)
