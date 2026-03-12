@@ -1,12 +1,13 @@
-import { t } from "common/i18n/utils";
 import { useControls } from "Message/hooks/controls";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
+  __: GetText
   view: string;
   setView: (data: string) => void;
 }
 
-const Controls = ({ view, setView }: Props) => {
+const Controls = ({ __, view, setView }: Props) => {
   const {
     onHelpClick,
     onChoiceClick,
@@ -23,7 +24,7 @@ const Controls = ({ view, setView }: Props) => {
         onClick={onHelpClick('create_author')}
         className="btn btn-success"
       >
-        {t('Help')}
+        {__('Help')}
       </button>
       {view === 'form' ?
         <button
@@ -31,7 +32,7 @@ const Controls = ({ view, setView }: Props) => {
           className="btn"
           onClick={onChoiceClick}
         >
-          {t('Choice recipients')}
+          {__('Choice recipients')}
         </button> :
         <button
           type="button"
@@ -39,7 +40,7 @@ const Controls = ({ view, setView }: Props) => {
           onClick={onFormClick}
           disabled={formBtnDisabled}
         >
-          {t('Write message')}
+          {__('Write message')}
         </button>
       }
       <button
@@ -47,7 +48,7 @@ const Controls = ({ view, setView }: Props) => {
         className="btn btn-error"
         onClick={onCancel}
       >
-        {t('Cancel')}
+        {__('Cancel')}
       </button>
       {view === 'form' ?
         <button
@@ -55,7 +56,7 @@ const Controls = ({ view, setView }: Props) => {
           className="btn btn-primary dark:btn-info w-full"
           disabled={submitDisabled}
         >
-          {t('Send')}
+          {__('Send')}
         </button> : null}
     </div>
   )

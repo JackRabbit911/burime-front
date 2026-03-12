@@ -47,6 +47,7 @@ const MessageFormWrapper = () => {
           </div>
         </Grid3Cols>
         <Controls
+          __={__}
           view={view}
           setView={handleSwitchBtn}
         />
