@@ -2,16 +2,15 @@ import Select from "reused/Select"
 import Textarea from "reused/Textarea"
 import FileInput from "reused/FileInput"
 import TextInput from "reused/TextInput"
-import { useTranslate } from "common/i18n/hooks"
 import type { Member } from "reused/Participants/types"
+import type { GetText } from "common/i18n/types"
 
 type Props = {
+  __: GetText;
   members: Member[] | undefined;
 }
 
-const AuthorForm = ({ members }: Props) => {
-  const __ = useTranslate()
-  
+const AuthorForm = ({ __, members }: Props) => { 
   const disabled = (members: Member[] | undefined) => {
     if (members === undefined || members.length === 0) {
       return false

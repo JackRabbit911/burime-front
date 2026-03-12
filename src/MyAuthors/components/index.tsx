@@ -4,14 +4,16 @@ import { useList } from "effector-react"
 
 import AuthorCard from "./AuthorCard"
 import { $myAuthors, getMyAuthorsFx } from "../store"
-import { t } from "common/i18n/utils"
-import { useTranslate } from "common/i18n/hook"
+import { useTranslate } from "common/i18n/hooks"
 
 const MyAuthors = () => {
+  const __ = useTranslate()
+
   const myAuthors = useList($myAuthors, {
-    fn: (author) => <AuthorCard author={author} />,
+    fn: (author) => <AuthorCard __={__} author={author} />,
     placeholder: <h2>Здесь пока ничего нет</h2>
   })
+
 
   useEffect(() => {
     getMyAuthorsFx()
@@ -24,7 +26,7 @@ const MyAuthors = () => {
       <div className="text-end">
         <Link to='/author'>
           <button className="link">
-            {t('Create new author or group')}
+            {__('Create new author or group')}
           </button>
         </Link>
       </div>

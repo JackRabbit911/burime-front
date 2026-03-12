@@ -60,6 +60,7 @@ const MembersPermissions = () => {
         </fieldset>
         <fieldset className="fieldset">
           <Status
+            __={__}
             member={currentAuthor}
             statuses={referenceBooks?.authorsStatuses}
           />

@@ -1,12 +1,13 @@
-import { t } from "common/i18n/utils";
+import type { GetText } from "common/i18n/types";
 import type { Member } from "reused/Participants/types"
 
 type Props = {
+  __: GetText;
   member: Member | null;
   statuses: { [index: string]: number } | undefined;
 }
 
-const Status = ({ member, statuses }: Props) => {
+const Status = ({ __, member, statuses }: Props) => {
   if (!statuses || !member) {
     return null
   }
@@ -16,10 +17,10 @@ const Status = ({ member, statuses }: Props) => {
   return (
     <>
       <h3>
-        {t('Status')}
+        {__('Status')}
       </h3>
       <div className="text-center text-lg">
-        {status ? t(status) : null}
+        {status ? __(status) : null}
       </div>
     </>
   )

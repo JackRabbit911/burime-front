@@ -12,6 +12,7 @@ import MembersPermissions from "./Participants/MembersPermissions"
 import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
 import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
+import { useTranslate } from "common/i18n/hooks"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -21,6 +22,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
   const members = useUnit($myMembers)
   const ownAuthors = useUnit($ownAuthors)
   const [view, setView] = useState('form')
+  const __ = useTranslate()
 
   const methods = useForm({
     resolver: zodResolver(formInputSchema),
@@ -78,6 +80,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
         <fieldset className="fieldset">
           {view === 'form' ?
             <AuthorForm
+              __={__}
               members={methods.getValues('members')}
             /> :
             <AuthorsWrapper
@@ -89,6 +92,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
           }
         </fieldset>
         <Controls
+          __={__}
           status={author?.openclosed ?? 2}
           view={view}
           setView={handleSwitchBtn}
