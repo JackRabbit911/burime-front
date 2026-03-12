@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
 
-import { t } from "common/i18n/utils";
-import { useTranslate } from "common/i18n/hook";
+import { useTranslate } from "common/i18n/hooks";
 import { closeBtn, modalClosed } from "../Modal/store";
 
 type Props = {
@@ -20,7 +19,7 @@ const ConfirmDialog = ({
   title = 'Are You sure?',
   text = '' }: Props) => {
 
-  useTranslate()
+  const __ = useTranslate()
 
   useEffect(() => {
     closeBtn(false)
@@ -29,17 +28,17 @@ const ConfirmDialog = ({
   return (
     <div className="flex flex-col justify-center min-h-48">
       <div className="text-center w-full">
-        <p>{t(text)}</p>
+        <p>{__(text)} bebe</p>
         <h2 className="text-lg mb-3">
-          {t(title)}
+          {__(title)}
         </h2>
         <div className="flex justify-center gap-2">
           <button className="btn" onClick={onNo}>
-            No
+            {__('No')}
           </button>
           <Link to={link}>
             <button className="btn btn-primary" onClick={onYes}>
-              Yes
+              {__('Yes')}
             </button>
           </Link>
         </div>

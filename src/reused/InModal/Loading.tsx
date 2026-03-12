@@ -1,11 +1,13 @@
-import { t } from "common/i18n/utils"
+import { useTranslate } from "common/i18n/hooks"
 
 const Loading = () => {
+  const __ = useTranslate()
+
   return (
     <div className="flex flex-col justify-center min-h-48">
       <div className="text-center w-full">
         <span className="text-xl">
-          {t('Wait, please')}
+          {__('Wait, please')}
         </span>
         <span className="loading loading-dots loading-xs ms-1.5 mt-2.5"></span>
       </div>
