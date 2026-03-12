@@ -11,7 +11,7 @@ const InvitedAuthors = ({ author, onDelete }: Props) => {
     <div className="flex flex-row justify-between gap-2">
       <button
         type="button"
-        className="btn btn-soft btn-outline btn-xs grow"
+        className="btn btn-outline btn-xs grow"
         onClick={() => memberIdSetted(author.id)}
       >
         {author.alias}
