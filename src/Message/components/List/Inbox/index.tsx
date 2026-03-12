@@ -20,18 +20,20 @@ const Inbox = ({ __ }: GetTextProp) => {
         {__('Inbox')} ({inboxCount})
       </a>
       <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
-        <table className="table">
-          <TableHead __={__} />
-          <tbody>
-            {inbox}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table className="table table-sm md:table-md">
+            <TableHead __={__} />
+            <tbody>
+              {inbox}
+            </tbody>
+          </table>
+        </div>
       </div>
       <Link to='/message/outbox' role="tab" className="tab">
-          {__('Outbox')} ({outboxCount})
+        {__('Outbox')} ({outboxCount})
       </Link>
       <Link to='/message/deleted' role="tab" className="tab">
-          {__('Deleted')} ({delboxCount})
+        {__('Deleted')} ({delboxCount})
       </Link>
     </div >
   )
