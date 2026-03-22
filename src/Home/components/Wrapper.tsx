@@ -1,12 +1,22 @@
 import { useLocation } from "react-router";
 
-import { getTitle } from "../utils";
-// import { t } from "common/i18n/utils";
-// import { useTranslate } from "common/i18n/hook";
-import BreadCrumbs from "./BreadCrumbs";
 import ajax from "common/ajax";
+import { getTitle } from "../utils";
+import BreadCrumbs from "./BreadCrumbs";
 import { logoutUri } from "common/constants";
 import { useTranslate } from "common/i18n/hooks";
+
+const onLogOut = () => {
+  ajax.get(logoutUri)
+    .then((response) => response.data)
+    .then((data) => {
+      if (data.success) {
+        window.location.href = "/"
+      } else {
+        console.error(data.error)
+      }
+    })
+}
 
 type Props = {
   children?: React.ReactNode;
@@ -17,19 +27,6 @@ const Wrapper = ({ children }: Props) => {
   const uriSegments = location.pathname.split('/').filter((v) => Boolean(v))
   const addr = uriSegments[0] ?? 'home'
   const id = uriSegments[1]
-
-  const onLogOut = () => {
-    ajax.get(logoutUri)
-      .then((response) => response.data)
-      .then((data) => {
-        if (data.success) {
-          window.location.href = "/"
-        } else {
-          console.error(data.error)
-        }
-      })
-  }
-
   const __ = useTranslate()
 
   return (
