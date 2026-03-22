@@ -2,17 +2,13 @@ import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import Recipient from "./Recipient";
-import { toAliasSetted } from "Message/store";
+import { setMsgView, toAliasSetted } from "Message/store";
 
+import type { GetTextProp } from "common/i18n/types";
 import type { Author } from "reused/Participants/schema";
-import type { GetText } from "common/i18n/types";
 
-type Props = {
-  setView: React.Dispatch<React.SetStateAction<string>>;
-  __: GetText;
-}
 
-const Recipients = ({ __, setView }: Props) => {
+const Recipients = ({ __ }: GetTextProp) => {
   const { watch, setValue } = useFormContext()
   const recipients = watch('recipients') || []
 
@@ -25,7 +21,7 @@ const Recipients = ({ __, setView }: Props) => {
     setValue('recipients', newRecipients)
 
     if (newRecipients.length === 0) {
-      setView('choice')
+      setMsgView('choice')
     }
   }
 
