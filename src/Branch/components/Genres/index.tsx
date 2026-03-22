@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { getObjectProp } from "common/utils";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 import SameWeightGenres from "./components/SameWeightGenres";
 
 import type { Genre } from "../../schema/input";
@@ -14,7 +14,7 @@ type Props = {
 }
 
 const Genres = ({ step, genres, checked, fieldName = 'branch_genres' }: Props) => {
-  const __ = useGetText()
+  const __ = useTranslate()
   const { getValues, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
 

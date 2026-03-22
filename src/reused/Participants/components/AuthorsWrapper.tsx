@@ -19,8 +19,8 @@ type Props = {
 }
 
 const AuthorsWrapper = ({ ownAuthors, choiceList, permissions, referenceUri }: Props) => {
-  const authorsList = useUnit($authorsList)
   const memberId = useUnit($memberId)
+  const authorsList = useUnit($authorsList)
   const authorsPayload = useUnit($authorsPayload)
   const referenceBooks = useUnit($referenceBooks)
   const authorsFilters = referenceBooks?.authorsFilters || []

@@ -9,7 +9,7 @@ import Participants from "reused/Participants/components/Permissions/Participant
 import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
 
 import type { Member } from "reused/Participants/types";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 const MembersPermissions = () => {
   const onClose = useUnit(memberIdResetted)
@@ -21,7 +21,7 @@ const MembersPermissions = () => {
   const members = getValues('members') || []
   const currentAuthor = getCurrentMember(members, authorId)
 
-  const __ = useGetText()
+  const __ = useTranslate()
 
   const handleCheck = (val: number, id: number, isAdd: boolean) => {
       const newMembers = members.map((value: Member) => {

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { Route, Routes } from "react-router"
 
 import Home from "."
@@ -7,13 +8,12 @@ import Drafts from "Drafts/components"
 import ErrorCmp from "reused/ErrorCmp"
 import Profile from "Profile/components"
 import List from "Message/components/List"
+import { statusReset } from "common/store"
 import MyAuthors from "MyAuthors/components"
 import Password from "Profile/components/Password"
 import MessageShow from "Message/components/MessageShow"
 import AuthorWrapper from "MyAuthors/components/AuthorWrapper"
 import MessageFormWrapper from "Message/components/Form/MessageFormWrapper"
-import { useEffect } from "react"
-import { statusReset } from "common/store"
 
 const Router = () => {
   useEffect(() => {

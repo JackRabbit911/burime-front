@@ -10,7 +10,7 @@ import CoverWrapper from "Message/components/CoverWrapper";
 
 import type { MessageForm } from "Message/schema";
 import TextInput from "reused/TextInput";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   message: MessageForm;
@@ -24,7 +24,7 @@ const BranchForm = ({ message }: Props) => {
   const branchId = searchParams.get('branch')
   const fromAlias = getAuthorAlias(message.message.from, ownAuthors)
   const cover = branchId ? <CoverWrapper branchId={branchId} /> : null
-  const __ = useGetText()
+  const __ = useTranslate()
 
   useEffect(() => {
     const signature = __('Best regards, %', fromAlias)

@@ -1,4 +1,4 @@
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 import { useAuthorSearch } from "../hooks/AuthorSearch";
 
 import type { AuthorsPayload } from "../types";
@@ -19,7 +19,7 @@ const AuthorSearch = ({ filters, authorsPayload }: Props) => {
     inputClassName
   } = useAuthorSearch()
 
-  const __ = useGetText()
+  const __ = useTranslate()
 
   const alert = !error ? null : <div
     className="fieldset-label text-error"

@@ -19,6 +19,7 @@ export const msgResetted = createEvent()
 export const msgFormResetted = createEvent()
 export const toAliasSetted = createEvent<string>('')
 export const msgSubmitted = createEvent<MessageOut>()
+export const setMsgView = createEvent<string>()
 
 export const getMessageListFx = createEffect(
     () => ajax.get<ApiResponse<MessageList>>(getMessageListUri)
@@ -56,6 +57,10 @@ export const $toAlias = createStore<string>('Author')
 
 export const $messageBlank = createStore<MessageForm>(emptyMessage)
     .on(getMessageBlankFx.doneData, (_, response) => response.data.result)
+    .reset(msgResetted, globalReset)
+
+export const $viewMsgForm = createStore('choice')
+    .on(setMsgView, (_, store) => store)
     .reset(msgResetted, globalReset)
 
 export const $msgCounts = combine({inbox: $inbox, outbox: $outbox, delbox: $delbox}, (store) => ({

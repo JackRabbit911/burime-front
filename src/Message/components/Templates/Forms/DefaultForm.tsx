@@ -8,7 +8,7 @@ import ConditionalInput from "../ConditionalInput"
 import { $ownAuthors } from "common/store/ownAuthors";
 
 import type { MessageForm } from "Message/schema";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   message: MessageForm;
@@ -18,7 +18,7 @@ const DefaultForm = ({ message }: Props) => {
   const appeal = useUnit($toAlias)
   const ownAuthors = useUnit($ownAuthors)
   const fromAlias = getAuthorAlias(message.message.from, ownAuthors)
-  const __ = useGetText()
+  const __ = useTranslate()
 
   return (
     <>

@@ -1,14 +1,14 @@
 import CoverWrapper from "Message/components/CoverWrapper";
 import type { Message } from "Message/types";
 import Controls from "./Controls";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
 }
 
 const InviteToBranch = ({ message }: Props) => {
-  const __ = useGetText()
+  const __ = useTranslate()
   const author: number|undefined = typeof(message.to) === 'number' ? message.to : undefined
   
   return (

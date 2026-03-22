@@ -1,14 +1,14 @@
 import type { Message } from "../../../types"
 import { host } from "common/ajax";
 import Controls from "./Controls";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
 }
 
 const InviteToGroup = ({ message }: Props) => {
-  const __ = useGetText()
+  const __ = useTranslate()
 
   return (
     <>
