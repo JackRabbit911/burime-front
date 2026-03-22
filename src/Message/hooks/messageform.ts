@@ -1,14 +1,14 @@
+import { useEffect } from "react"
 import { useUnit } from "effector-react"
-import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 
-import { $isPending, msgSubmitted, toAliasSetted } from "../store"
 import { messageForm, messageOut, type MessageForm } from "../schema"
 import { $ownAuthors, getOwnAuthorsFx } from "../../common/store/ownAuthors"
+import { $isPending, $viewMsgForm, msgSubmitted, setMsgView, toAliasSetted } from "../store"
 
 export const useMessageForm = (message: MessageForm) => {
-  const [view, setView] = useState('choice')
+  const view = useUnit($viewMsgForm)
   const [ownAuthors, isPending] = useUnit([$ownAuthors, $isPending])
 
   const methods = useForm({
@@ -37,7 +37,7 @@ export const useMessageForm = (message: MessageForm) => {
 
   useEffect(() => {
     if (message.recipients.length > 0) {
-      setView('form')
+      setMsgView('form')
     }
   }, [message.recipients])
 
@@ -51,5 +51,5 @@ export const useMessageForm = (message: MessageForm) => {
         methods.setValue('important', message.important)
       }, [message])
 
-  return { methods, ownAuthors, onSubmit, view, setView }
+  return { methods, ownAuthors, onSubmit, view }
 }
