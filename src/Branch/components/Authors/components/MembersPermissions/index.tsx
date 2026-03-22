@@ -2,7 +2,7 @@ import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import Status from "./Status";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 import { getCurrentMember } from "reused/Participants/utils";
 import { $referenceBooks } from "reused/Participants/store/reference";
 import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
@@ -12,7 +12,7 @@ import PermissionsList from "reused/Participants/components/Permissions/Permissi
 import type { Member } from "reused/Participants/types";
 
 const MembersPermissions = () => {
-  const __ = useGetText()
+  const __ = useTranslate()
   const authorId = useUnit($memberId)
   const onClose = useUnit(memberIdResetted)
   const referenceBooks = useUnit($referenceBooks)

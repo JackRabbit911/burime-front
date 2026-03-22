@@ -2,7 +2,7 @@ import { useUnit } from "effector-react";
 
 import { $toAlias } from "../../store";
 import type { Message } from "../../types"
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   message: Message;
@@ -11,7 +11,7 @@ type Props = {
 const DefaultMsg = ({ message }: Props) => {
   const toAlias = useUnit($toAlias);
   const appeal = message.incoming && Object.hasOwn(message, 'to_alias') ? message.to_alias : toAlias
-  const __ = useGetText()
+  const __ = useTranslate()
 
   return (
     <>

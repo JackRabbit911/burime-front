@@ -1,6 +1,6 @@
 import type { OwnAuthor } from "../types";
 import { useFormContext } from "react-hook-form";
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 
 type Props = {
   fieldName: string;
@@ -10,7 +10,7 @@ type Props = {
 
 const Select = ({ fieldName, label, options }: Props) => {
   const { register, watch } = useFormContext()
-  const __ = useGetText()
+  const __ = useTranslate()
 
   return (
     <fieldset className="fieldset">

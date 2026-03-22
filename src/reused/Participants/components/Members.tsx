@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form";
 
-import { useGetText } from "common/i18n/hooks";
+import { useTranslate } from "common/i18n/hooks";
 import InvitedAuthors from "./InvitedAuthors";
 
 import type { Member } from "../types";
 
 const Members = () => {
-  const __ = useGetText()
+  const __ = useTranslate()
   const { watch, setValue } = useFormContext()
   const members = watch('members') || []
 
