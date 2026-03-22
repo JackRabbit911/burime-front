@@ -6,18 +6,14 @@ export type TranslateType = {
   [key: string]: string;
 }
 
-export type TranslateContextType = {
-  gettext: GetText;
-  translateKeys: React.RefObject<string[]>;
-  translate: TranslateType;
-  setTranslate: React.Dispatch<React.SetStateAction<TranslateType>>;
-  lang: string;
-}
-
 export type ChildrenProps = {
   children?: React.ReactNode;
 }
 
 export type GetTextProp = {
   __: GetText;
+}
+
+export type TranslateContextType = {
+  gettext: GetText;
 }
