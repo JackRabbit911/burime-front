@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { detectLang } from "common/i18n/utils";
 import { statusSetted } from "common/store";
+import { detectLang } from "common/i18n/config";
 
 const lang = detectLang()
 const { protocol, hostname } = window.location
