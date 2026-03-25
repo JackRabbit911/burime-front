@@ -9,6 +9,7 @@ import { isObjectEmpty } from "common/utils";
 import { useTranslate } from "common/i18n/hooks";
 import { userData, type UserData } from "../schema";
 import { $isPending, getUserDataFx, profileSubmitted } from "../store";
+import CSRF from "reused/CSRF";
 
 const Profile = () => {
   const isPending = useUnit($isPending)
@@ -44,6 +45,7 @@ const Profile = () => {
       <FormProvider {...methods}>
         <Header />
         <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <CSRF />
           <Form __={__} />
           <button
             type="submit"
