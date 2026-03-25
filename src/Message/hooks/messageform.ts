@@ -51,9 +51,14 @@ export const useMessageForm = (message: MessageForm) => {
       toAliasSetted(message.recipients[0].alias)
     }
 
+    if (message.message.from === null) {
+      message.message.from = ownAuthors[0]?.id || null
+    }
+
     methods.setValue('message', message.message)
     methods.setValue('recipients', message.recipients)
     methods.setValue('important', message.important)
+    methods.setValue('_csrf', message._csrf)
   }, [message])
 
   useEffect(() => {
