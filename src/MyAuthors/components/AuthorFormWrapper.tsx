@@ -3,18 +3,20 @@ import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
+import CSRF from "reused/CSRF"
 import Controls from "./Controls"
 import AuthorForm from "./AuthorForm"
 import { avatarSrc } from "common/utils"
 import { useTranslate } from "common/i18n/hooks"
 import { getGroupReferenceUri } from "common/constants"
+import { getAuthorsFx } from "reused/Participants/store/authors"
 import Members from "../../reused/Participants/components/Members"
 import MembersPermissions from "./Participants/MembersPermissions"
+import { $authorView, viewSetted } from "MyAuthors/store/authorView"
+import { $authorsPayload } from "reused/Participants/store/athorsPayload"
 import { $myMembers, $ownAuthors, $scrf, authorSubmitted } from "../store"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
 import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
-import CSRF from "reused/CSRF"
-import { $authorView, viewSetted } from "MyAuthors/store/authorView"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -24,6 +26,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
   const [members, csrf] = useUnit([$myMembers, $scrf])
   const ownAuthors = useUnit($ownAuthors)
   const [view, setView] = useUnit([$authorView, viewSetted])
+  const authorsPayload = useUnit($authorsPayload)
   const __ = useTranslate()
 
   const methods = useForm({
@@ -40,7 +43,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
   const handleSwitchBtn = (data: string) => {
     setView(data)
   }
-  
+
   const { author, file } = methods.watch()
 
   const onSubmit: SubmitHandler<FormInputType> = (data) => {
@@ -59,6 +62,10 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
     methods.setValue('members', members)
     methods.setValue('_csrf', csrf)
   }, [members, csrf])
+
+  useEffect(() => {
+    getAuthorsFx(authorsPayload)
+  }, [authorsPayload])
 
   return (
     <FormProvider {...methods}>
