@@ -1,7 +1,6 @@
 import { deleteDialog } from "common/utils/deleteDialog"
 import { deleteMessageUri, removeMessageUri } from "common/constants"
 
-import type { MessageForm } from "Message/schema"
 import type { Author } from "reused/Participants/schema"
 import type { OwnAuthor } from "reused/Participants/types"
 
@@ -33,7 +32,7 @@ export const getAuthorAlias = (id: number | null, authors: OwnAuthor[]): string 
   return author !== undefined ? author.alias : ''
 }
 
-export const emptyMessage: MessageForm = {
+export const emptyMessage = () => ({
     message: {
       from: null,
       subject: '',
@@ -41,4 +40,5 @@ export const emptyMessage: MessageForm = {
     },
     recipients: [],
     important: false,
-}
+    _csrf: ''
+})
