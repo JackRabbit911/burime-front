@@ -11,6 +11,11 @@ import type { ApiResponse } from "common/ajax/types";
 import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
 
+type MembersAndScrf = {
+    members: Member[];
+    _csrf: string;
+}
+
 export const authorSubmitted = createEvent<FormOutputType>()
 export const authorSaved = createEvent()
 
@@ -27,7 +32,7 @@ export const getMyAuthorsFx = createEffect(() => (
 ))
 
 export const getMyMembersFx = createEffect((id: string | undefined) => (
-    ajax.get<ApiResponse<Member[]>>([getMyGroupMembersUri, id].join('/'))
+    ajax.get<ApiResponse<MembersAndScrf>>([getMyGroupMembersUri, id].join('/'))
 ))
 
 export const $myAuthors = createStore<MyAuthor[]>([])
@@ -43,6 +48,9 @@ export const $ownAuthors = combine($myAuthors, (store) => (
             alias: value.alias,
         }))
 ))
+
+export const $scrf = createStore('')
+    .reset(globalReset)
 
 sample({
     clock: getMyAuthorsFx.doneData,
@@ -72,6 +80,13 @@ sample({
 sample({
     clock: getMyMembersFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => response.data.result,
+    fn: (response) => response.data.result.members,
     target: $myMembers,
+})
+
+sample({
+    clock: getMyMembersFx.doneData,
+    filter: (response) => Boolean(response?.data?.success),
+    fn: (response) => response.data.result._csrf,
+    target: $scrf,
 })
