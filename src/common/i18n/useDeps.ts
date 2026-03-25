@@ -2,6 +2,7 @@ import { $bootstrap } from "Branch/store/bootstrap";
 import { $step } from "Branch/store/step";
 import { useUnit } from "effector-react";
 import { $viewMsgForm } from "Message/store";
+import { $authorView } from "MyAuthors/store/authorView";
 import { useLocation } from "react-router";
 import { $modalComponent } from "reused/Modal/store";
 import { $memberId } from "reused/Participants/store/authors";
@@ -14,6 +15,7 @@ export const useDeps = () => {
     const bootstrap = useUnit($bootstrap)
     const memberId = useUnit($memberId)
     const msgView = useUnit($viewMsgForm)
+    const authorView = useUnit($authorView)
 
-    return [pathname, step, isOpen, bootstrap, memberId, msgView]
+    return [pathname, step, isOpen, bootstrap, memberId, msgView, authorView]
 }

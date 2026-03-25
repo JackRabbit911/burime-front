@@ -30,7 +30,7 @@ export const getMessageFx = createEffect<string, AxiosApiResponse, AxiosError>(
 )
 
 export const getMessageBlankFx = createEffect(
-    (search: string) => ajax.get([getMessageBlank, search].join('?'))
+    (search: string) => ajax.get(getMessageBlank + search)
 )
 
 const saveMessageFx = createEffect((data: MessageOut) => (
@@ -55,7 +55,7 @@ export const $message = createStore<Message | null>(null)
 
 export const $toAlias = createStore<string>('Author')
 
-export const $messageBlank = createStore<MessageForm>(emptyMessage)
+export const $messageBlank = createStore<MessageForm>(emptyMessage())
     .on(getMessageBlankFx.doneData, (_, response) => response.data.result)
     .reset(msgResetted, globalReset)
 

@@ -16,6 +16,7 @@ import { useTranslate } from "common/i18n/hooks";
 import { formSchema } from "Branch/schema/output";
 
 import type { Bootstrap } from "Branch/schema/input";
+import CSRF from "reused/CSRF";
 
 type Props = {
   bootstrap: Bootstrap;
@@ -24,7 +25,7 @@ type Props = {
 const Form = ({ bootstrap }: Props) => {
   const step = useUnit($step)
   const branchGenres = bootstrap?.branch_genres || [];
-  
+
   const methods = useForm({
     resolver: zodResolver(formSchema),
     mode: "all",
@@ -35,14 +36,15 @@ const Form = ({ bootstrap }: Props) => {
 
   return (
     <FormProvider {...methods}>
-        <Title __={__} />
-        <Steps __={__} />
-        <Genres step={step} genres={bootstrap?.total_genres || []} checked={branchGenres} />
-        <Rules step={step} __={__} />
-        {step === 3 ? <Authors bootstrap={bootstrap} /> : null}
-        {step === 4 ? <Cover /> : null}
-        {step === 5 ? <Publish /> : null}
-        <StepControls step={step} />
+      <CSRF />
+      <Title __={__} />
+      <Steps __={__} />
+      <Genres step={step} genres={bootstrap?.total_genres || []} checked={branchGenres} />
+      <Rules step={step} __={__} />
+      {step === 3 ? <Authors bootstrap={bootstrap} /> : null}
+      {step === 4 ? <Cover /> : null}
+      {step === 5 ? <Publish /> : null}
+      <StepControls step={step} />
     </FormProvider>
   )
 }

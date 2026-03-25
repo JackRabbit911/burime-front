@@ -11,6 +11,7 @@ import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
 import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 import { useMessageTemplate } from "Message/hooks/messageTemplate"
+import CSRF from "reused/CSRF"
 
 const MessageFormWrapper = () => {
   const { message, isPending } = useMessageTemplate()
@@ -28,6 +29,7 @@ const MessageFormWrapper = () => {
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
       >
+        <CSRF />
         <Grid3Cols>
           <div>
             <Select

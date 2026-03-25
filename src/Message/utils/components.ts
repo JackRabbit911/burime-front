@@ -28,6 +28,6 @@ export const getMsgForm = (message: MessageForm) => {
         case 'branch':
             return BranchForm({ message })
         default:
-            return DefaultForm({ message })
+            return DefaultForm()
     }
 }

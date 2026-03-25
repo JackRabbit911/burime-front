@@ -1,27 +1,32 @@
 import { useUnit } from "effector-react"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
+import CSRF from "reused/CSRF"
 import Controls from "./Controls"
 import AuthorForm from "./AuthorForm"
 import { avatarSrc } from "common/utils"
+import { useTranslate } from "common/i18n/hooks"
 import { getGroupReferenceUri } from "common/constants"
+import { getAuthorsFx } from "reused/Participants/store/authors"
 import Members from "../../reused/Participants/components/Members"
 import MembersPermissions from "./Participants/MembersPermissions"
-import { $myMembers, $ownAuthors, authorSubmitted } from "../store"
+import { $authorView, viewSetted } from "MyAuthors/store/authorView"
+import { $authorsPayload } from "reused/Participants/store/athorsPayload"
+import { $myMembers, $ownAuthors, $scrf, authorSubmitted } from "../store"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
 import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
-import { useTranslate } from "common/i18n/hooks"
 
 type Props = {
   defaultAuthor?: MyAuthor;
 }
 
 const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
-  const members = useUnit($myMembers)
+  const [members, csrf] = useUnit([$myMembers, $scrf])
   const ownAuthors = useUnit($ownAuthors)
-  const [view, setView] = useState('form')
+  const [view, setView] = useUnit([$authorView, viewSetted])
+  const authorsPayload = useUnit($authorsPayload)
   const __ = useTranslate()
 
   const methods = useForm({
@@ -30,7 +35,8 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
     defaultValues: {
       author: defaultAuthor,
       members: members,
-      masterId: ownAuthors[0]?.id ?? 0
+      masterId: ownAuthors[0]?.id ?? 0,
+      _csrf: csrf,
     }
   })
 
@@ -54,7 +60,12 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
 
   useEffect(() => {
     methods.setValue('members', members)
-  }, [members])
+    methods.setValue('_csrf', csrf)
+  }, [members, csrf])
+
+  useEffect(() => {
+    getAuthorsFx(authorsPayload)
+  }, [authorsPayload])
 
   return (
     <FormProvider {...methods}>
@@ -77,6 +88,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
         className="w-full"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
+        <CSRF />
         <fieldset className="fieldset">
           {view === 'form' ?
             <AuthorForm

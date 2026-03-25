@@ -34,8 +34,8 @@ export const info = z.object({
   allow_comments: z.coerce.number().min(0).max(1),
   moderation: z.coerce.number().min(0).max(1),
   signature: z.coerce.number().min(0).max(1),
-  post_size: z.number().int().positive(),
-  time_limit: z.number().int().positive(),
+  post_size: z.coerce.number().int().positive(),
+  time_limit: z.coerce.number().int().positive(),
   rules: regString,
   description: regString,
 })
@@ -76,6 +76,7 @@ export const bootstrapSch = z.object({
     authorsPermissions,
     authorsStatuses,
     draft: z.number().positive().nullable().optional(),
+    _csrf: z.string(),
 })
 
 export type Bootstrap = z.infer<typeof bootstrapSch>

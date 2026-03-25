@@ -7,19 +7,17 @@ import { getAuthorAlias } from "Message/utils";
 import ConditionalInput from "../ConditionalInput"
 import { $ownAuthors } from "common/store/ownAuthors";
 
-import type { MessageForm } from "Message/schema";
 import { useTranslate } from "common/i18n/hooks";
+import { useFormContext } from "react-hook-form";
 
-type Props = {
-  message: MessageForm;
-}
-
-const DefaultForm = ({ message }: Props) => {
+const DefaultForm = () => {
+  const { watch } = useFormContext()
+  const message = watch('message')
   const appeal = useUnit($toAlias)
   const ownAuthors = useUnit($ownAuthors)
-  const fromAlias = getAuthorAlias(message.message.from, ownAuthors)
+  const fromAlias = getAuthorAlias(message.from, ownAuthors)
   const __ = useTranslate()
-
+  
   return (
     <>
       <TextInput

@@ -18,6 +18,7 @@ export const userData = z.object({
   phone: z.coerce.number().nullable(),
   sex: z.coerce.number().min(0).max(1).nullable(),
   file: imageFile.nullish(),
+  _csrf: z.string()
 })
 
 export const passwordSchema = z.object({

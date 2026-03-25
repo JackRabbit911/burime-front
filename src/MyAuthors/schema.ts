@@ -24,7 +24,8 @@ export const formInputSchema = z.object({
     author: authorSchema,
     masterId: z.coerce.number(),
     file: imageFile.nullish(),
-    members: z.array(member).optional()
+    members: z.array(member).optional(),
+    _csrf: z.string(),
 })
 
 const authorOutSch = authorSchema.transform((input) => ({
@@ -45,6 +46,7 @@ export const formOutputSchema = z.object({
     author: authorOutSch,
     file: imageFile.nullish(),
     members: z.array(slimMember).optional(),
+    _csrf: z.string(),
 })
 
 export type FormInputType = z.infer<typeof formInputSchema>

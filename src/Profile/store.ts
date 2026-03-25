@@ -57,4 +57,10 @@ sample({
     target: modalOpened,
 })
 
+sample({
+    clock: sendProfileFx.failData,
+    fn: (error) => error.message,
+    target: modalOpened,
+})
+
 export const $isPending = pending([sendProfileFx])
