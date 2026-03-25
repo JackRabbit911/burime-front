@@ -1,10 +1,9 @@
 import { useUnit } from "effector-react"
-import { useEffect } from "react"
 
 import Paginator from "reused/Paginator";
+import { $total } from "../store/authors";
 import { perPages } from "common/constants";
 import PerPage from "reused/Paginator/PerPage";
-import { $total, getAuthorsFx } from "../store/authors";
 import { $authorsPayload, limitSet, pageSet } from "../store/athorsPayload";
 
 const Pagination = () => {
@@ -18,10 +17,6 @@ const Pagination = () => {
   const setLimit = (limit: number) => {
     limitSet(limit)
   }
-
-  useEffect(() => {
-    getAuthorsFx(authorsPayload)
-  }, [authorsPayload])
 
   return (
     <div className="flex justify-between mt-2">
