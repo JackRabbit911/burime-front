@@ -22,6 +22,7 @@ export const userData = z.object({
 })
 
 export const passwordSchema = z.object({
+  _csrf: z.string(),
   password: z.string().min(5, "Password must be at least 5 characters"),
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
