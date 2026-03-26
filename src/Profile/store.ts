@@ -4,7 +4,7 @@ import { pending, throttle } from "patronum";
 import ajax from "common/ajax";
 import { modalOpened } from "reused/Modal/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
-import { getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
+import { getCsrfPswdUri, getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
 
 import type { ApiResponse } from "common/ajax/types";
 import type { ConfirmPassword, UserData } from "./schema";
@@ -20,6 +20,16 @@ export const getUserDataFx = createEffect(async () => {
     const response = await ajax.get<ApiResponse<UserData>>(getUserDataUri)
     const { result } = response.data
     return result
+})
+
+export const getCsrfFx = createEffect(async () => {
+    const response = await ajax.get<ApiResponse<string>>(getCsrfPswdUri)
+    const { result } = response.data
+    return {
+        _csrf: result,
+        password: '',
+        confirmPassword: '',
+    }
 })
 
 const sendProfileFx = createEffect((data: UserData) => (
