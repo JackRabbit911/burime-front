@@ -12,6 +12,8 @@ export const SUPPORTED_LANGS = {
 }
 export const DEFAULT_LANG = 'ru'
 
+export const defaultTranslateKeys = []
+
 export const getTranslateUri = 'http://localhost/api/gettranslate'
 export const limit = null //cache limit in pairs key-valaue
 export const delay = 100 //debounse delay im ms
