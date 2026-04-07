@@ -9,7 +9,7 @@ const Steps = ({ __ }: GetTextProp) => {
         <Step step={2} title={__("Rules")} />
         <Step step={3} title={__("Participants")} />
         <Step step={4} title={__("Cover")} />
-        <Step step={5} title={__("Publish")} />
+        <Step step={5} title={__("Publication")} />
       </ul>
     </>
   );
