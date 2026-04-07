@@ -42,6 +42,7 @@ const AuthorForm = ({ __, members }: Props) => {
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2">
         <FileInput
+          __={__}
           fieldName="file"
           label={__('Avatar')}
           optional={__('Up % Mb', 2)}

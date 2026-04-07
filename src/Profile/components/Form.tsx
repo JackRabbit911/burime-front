@@ -47,6 +47,7 @@ const Form = ({ __ }: GetTextProp) => {
       </div>
       <fieldset className="fieldset">
         <FileInput
+          __={__}
           fieldName="file"
           label={__('Avatar')}
           optional={__('Up to %Mb', 2)}
