@@ -30,14 +30,16 @@ const CoverControls = () => {
       />
       <div className="divider mt-8 mb-4 text-lg text-current/75">or</div>
         <FileInput
+          __={__}
           fieldName="cover"
           label={__('Cover image')}
-          optional="Up to 2Mb"
+          optional={__('Up to %Mb', 2)}
         />
         <FileInput
+          __={__}
           fieldName="bgImg"
           label={__('Background image')}
-          optional="Up to 2Mb"
+          optional={__('Up to %Mb', 2)}
         />
     </fieldset>
   )

@@ -31,11 +31,11 @@ export const getAlerts = (values: FieldValues): string[] => {
     }
 
     if (values.members.length === 0) {
-        result.push('You need to choose at least team leader')
+        result.push('You need to choose team leader')
     }
 
     if (!values.branch.info.description) {
-        result.push('Create a description for Your work')
+        result.push('Add a description to Your work')
     }
 
     if (!values.branch.info.rules) {

@@ -7,10 +7,11 @@ export const sprintf = (str: string, ...argv: any[]): string => !argv.length ? s
 export const updateTranslate = (
     translate: TranslateType,
     result: TranslateType,
-    translateKeys: React.RefObject<string[]>,
+    translateKeys: string[],
     setTranslate: React.Dispatch<React.SetStateAction<TranslateType>>
 ) => {
     const keys = Object.keys(translate)
+    translateKeys = defaultTranslateKeys
 
     if (limit) {
         const n = keys.length + Object.keys(result).length - limit
@@ -21,7 +22,6 @@ export const updateTranslate = (
     }
 
     setTranslate({ ...translate, ...result })
-    translateKeys.current = defaultTranslateKeys
     result = {}
 }
 

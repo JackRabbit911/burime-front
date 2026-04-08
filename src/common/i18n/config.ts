@@ -12,7 +12,9 @@ export const SUPPORTED_LANGS = {
 }
 export const DEFAULT_LANG = 'ru'
 
-export const defaultTranslateKeys = []
+export const defaultTranslateKeys = [
+    'Title is required',
+]
 
 export const getTranslateUri = 'http://localhost/api/gettranslate'
 export const limit = null //cache limit in pairs key-valaue

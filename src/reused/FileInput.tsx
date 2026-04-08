@@ -1,12 +1,14 @@
+import type { GetText } from "common/i18n/types";
 import { Controller, useFormContext } from "react-hook-form";
 
 type Props = {
+  __: GetText;
   fieldName: string;
   label: string;
   optional: string;
 }
 
-const FileInput = ({ fieldName, label, optional }: Props) => {
+const FileInput = ({ __, fieldName, label, optional }: Props) => {
   const { control, watch, setValue, clearErrors, formState: { errors } } = useFormContext()
 
   const file = watch(fieldName)
@@ -49,10 +51,10 @@ const FileInput = ({ fieldName, label, optional }: Props) => {
           <div className="w-1/2 sm:w-2/3 text-center  flex flex-col justify-center">{fileName}</div>
           <button
             type="button"
-            className="btn basis-1/4 join-item"
+            className="btn basis-1/4 join-item text-xs font-light"
             onClick={() => reset(fieldName)}
           >
-            Cansel
+            {__('Cancel')}
           </button >
         </div>
       </label>

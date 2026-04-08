@@ -2,7 +2,7 @@ import { createContext, useCallback, useEffect, useRef, useState } from "react";
 
 import { useDebounce } from "./hooks";
 import { sprintf, updateTranslate } from "./utils";
-import { delay, detectLang, getTranslate } from "./config";
+import { defaultTranslateKeys, delay, detectLang, getTranslate } from "./config";
 import type { Argv, TranslateContextType, TranslateType } from "./types";
 
 export const TranslateContext = createContext<TranslateContextType | undefined>(undefined)
@@ -15,13 +15,13 @@ type Props = {
 const TranslateProvider = ({ deps = [], children }: Props) => {
   const [translate, setTranslate] = useState<TranslateType>({})
   const [lang, _] = useState<string>(detectLang())
-  const translateKeys = useRef<string[]>([])
+  const translateKeys = useRef<string[]>(defaultTranslateKeys)
 
   const gettext = useCallback((key: string, ...argv: Argv) => {
     if (Object.hasOwn(translate, key)) {
       return sprintf(translate[key], ...argv)
     }
-    
+
     if (!translate[key] && !translateKeys.current.includes(key)) {
       translateKeys.current.push(key)
     }
@@ -31,15 +31,15 @@ const TranslateProvider = ({ deps = [], children }: Props) => {
 
   const debouncedFetch = useDebounce((lang, keys) => {
     getTranslate(lang, keys)
-    .then((result: TranslateType) => {
-      updateTranslate(translate, result, translateKeys, setTranslate)
-    })
-  }, delay)
-  
-  useEffect(() => {
-    const keys = Object.keys(translate)
-    const diff = translateKeys.current.filter(x => !keys.includes(x));
-
+      .then((result: TranslateType) => {
+        updateTranslate(translate, result, translateKeys.current, setTranslate)
+      })
+    }, delay)
+    
+    useEffect(() => {
+      const keys = Object.keys(translate)
+      const diff = translateKeys.current.filter(x => !keys.includes(x));
+      
     if (diff.length > 0) {
       debouncedFetch(lang, diff)
     }

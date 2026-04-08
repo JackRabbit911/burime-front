@@ -9,7 +9,7 @@ const Form = ({ __ }: GetTextProp) => {
   return (
     <>
       <TextInput
-        label="User Name"
+        label={__("User Name")}
         fieldName="name"
       />
       <TextInput
@@ -17,13 +17,13 @@ const Form = ({ __ }: GetTextProp) => {
         fieldName="email"
       />
       <TextInput
-        label="Phone"
+        label={__("Phone")}
         fieldName="phone"
       />
       <div className="grid grid-cols-2 gap-4">
         <TextInput
           type="date"
-          label="Date of birth"
+          label={__("Date of birth")}
           fieldName="dob"
           max={today}
         />
@@ -47,9 +47,10 @@ const Form = ({ __ }: GetTextProp) => {
       </div>
       <fieldset className="fieldset">
         <FileInput
+          __={__}
           fieldName="file"
           label={__('Avatar')}
-          optional={__('Up % Mb', 2)}
+          optional={__('Up to %Mb', 2)}
         />
       </fieldset>
     </>

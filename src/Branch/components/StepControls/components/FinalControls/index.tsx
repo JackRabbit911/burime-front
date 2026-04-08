@@ -1,12 +1,14 @@
 import { isReady } from "Branch/utils";
 import { isObjectEmpty } from "common/utils";
 import { useFinalControls } from "../../hooks/finalControls";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   step: number;
+  __: GetText;
 }
 
-const FinalControls = ({ step }: Props) => {
+const FinalControls = ({ step, __ }: Props) => {
   if (step < 5) {
     return null
   }
@@ -28,7 +30,7 @@ const FinalControls = ({ step }: Props) => {
             className="btn btn-error"
             onClick={onDelete}
           >
-            Delete
+            {__('Delete')}
           </button>
         ) : null}
 
@@ -36,7 +38,7 @@ const FinalControls = ({ step }: Props) => {
           className="btn btn-error"
           onClick={onCancel}
         >
-          Cancel
+          {__('Cancel')}
         </button>
         <button
           className="btn"
@@ -44,14 +46,14 @@ const FinalControls = ({ step }: Props) => {
           onClick={onDraft}
 
         >
-          Draft
+          {__('Draft')}
         </button>
         <button
           className="btn btn-primary dark:btn-info"
           disabled={!isObjectEmpty(errors) || !isReady(values)}
           onClick={onPublish}
         >
-          Publish
+          {__('Publish')}
         </button>
       </div>
     </>
