@@ -1,18 +1,23 @@
 import Loading from "./Loading";
 import ErrorCmp from "./ErrorCmp";
+import { useUnit } from "effector-react";
+import { $status } from "common/store";
 
 type Props = {
   isLoading: boolean;
-  status: number;
   children?: React.ReactNode;
 }
 
-const ErrorOrPending = ({ isLoading, status, children }: Props) => (
-  <>
-    {status >= 400 ?
-      <ErrorCmp status={status} /> :
-      (isLoading ? <Loading message="Loading" /> : children)}
-  </>
-)
+const ErrorOrPending = ({ isLoading, children }: Props) => {
+  const status = useUnit($status)
+
+  return (
+    <>
+      {status >= 400 ?
+        <ErrorCmp status={status} /> :
+        (isLoading ? <Loading message="Loading" /> : children)}
+    </>
+  )
+}
 
 export default ErrorOrPending

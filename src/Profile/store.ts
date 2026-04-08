@@ -73,4 +73,4 @@ sample({
     target: modalOpened,
 })
 
-export const $isPending = pending([sendProfileFx])
+export const $isPending = pending([sendProfileFx, getUserDataFx])

@@ -3,13 +3,12 @@ import { Link } from "react-router"
 import { useList, useUnit } from "effector-react"
 
 import AuthorCard from "./AuthorCard"
-import { $isPending, $myAuthors, getMyAuthorsFx } from "../store"
 import { useTranslate } from "common/i18n/hooks"
-import { $status } from "common/store"
 import ErrorOrPending from "reused/ErrorOrPendig"
+import { $isPending, $myAuthors, getMyAuthorsFx } from "../store"
 
 const MyAuthors = () => {
-  const [status, isLoading] = useUnit([$status, $isPending])
+  const isLoading = useUnit($isPending)
   const __ = useTranslate()
   const myAuthors = useList($myAuthors, {
     fn: (author) => <AuthorCard author={author} __={__} />,
@@ -21,7 +20,7 @@ const MyAuthors = () => {
   }, [])
 
   return (
-    <ErrorOrPending status={status} isLoading={isLoading}>
+    <ErrorOrPending isLoading={isLoading}>
       <div className="text-end">
         <Link to='/author'>
           <button className="link">

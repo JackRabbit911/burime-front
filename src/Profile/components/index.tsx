@@ -1,20 +1,19 @@
-import { Link } from "react-router";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router"
+import { useUnit } from "effector-react"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
-import Form from "./Form";
-import Header from "./Header";
-import { isObjectEmpty } from "common/utils";
-import { useTranslate } from "common/i18n/hooks";
-import { userData, type UserData } from "../schema";
-import { getUserDataFx, profileSubmitted } from "../store";
-import CSRF from "reused/CSRF";
-import { useUnit } from "effector-react";
-import { $status } from "common/store";
-import ErrorOrPending from "reused/ErrorOrPendig";
+import Form from "./Form"
+import Header from "./Header"
+import CSRF from "reused/CSRF"
+import { isObjectEmpty } from "common/utils"
+import { useTranslate } from "common/i18n/hooks"
+import ErrorOrPending from "reused/ErrorOrPendig"
+import { userData, type UserData } from "../schema"
+import { $isPending, getUserDataFx, profileSubmitted } from "../store"
 
 const Profile = () => {
-  const status = useUnit($status)
+  const isLoading = useUnit($isPending)
   const methods = useForm({
     resolver: zodResolver(userData),
     mode: 'all',
@@ -26,13 +25,10 @@ const Profile = () => {
   }
 
   const __ = useTranslate()
-
   const disabled = !isObjectEmpty(methods.formState.errors)
 
-  // console.log(status)
-
   return (
-    <ErrorOrPending isLoading={methods.formState.isLoading} status={status}>
+    <ErrorOrPending isLoading={isLoading}>
       <FormProvider {...methods}>
         <Header />
         <form onSubmit={methods.handleSubmit(onSubmit)}>
