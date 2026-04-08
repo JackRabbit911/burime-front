@@ -13,6 +13,7 @@ const MyBooksList = ({ __ }: GetTextProp) => {
   const myBooks = useList($myBooks, {
     fn: (book) => (
       <CoverWrapper
+        __={__}
         id={book.id}
         role={book.myRole}>
         <Cover book={book} />
