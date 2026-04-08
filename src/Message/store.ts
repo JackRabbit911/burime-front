@@ -90,5 +90,5 @@ sample({
     target: modalOpened,
 })
 
-export const $isPending = pending([saveMessageFx])
+export const $isPending = pending([saveMessageFx, getMessageListFx, getMessageFx])
 export const $isPendingBlank = pending([getMessageBlankFx])
