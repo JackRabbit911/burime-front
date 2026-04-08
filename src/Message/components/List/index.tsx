@@ -1,35 +1,36 @@
 import { useEffect } from "react"
 import { Link } from "react-router"
+import { useUnit } from "effector-react"
 
 import Inbox from "./Inbox"
 import Outbox from "./Outbox"
 import Delbox from "./Delbox"
-import { getMessageListFx, msgResetted } from "Message/store"
 import { useTranslate } from "common/i18n/hooks"
-import { statusReset } from "common/store"
+import ErrorOrPending from "reused/ErrorOrPendig"
+import { $status, statusReset } from "common/store"
+import { $isPending, getMessageListFx, msgResetted } from "Message/store"
+import type { GetText } from "common/i18n/types"
+
+const component = (box: string, __: GetText) => {
+  switch (box) {
+    case 'inbox':
+      return <Inbox __={__} />
+    case 'outbox':
+      return <Outbox __={__} />
+    case 'deleted':
+      return <Delbox __={__} />
+    default:
+      return `Invalid segment: ${box}`
+  }
+}
 
 type Props = {
   box: string;
 }
 
 const List = ({ box }: Props) => {
+  const [status, isLoading] = useUnit([$status, $isPending])
   const __ = useTranslate()
-
-  let component
-
-  switch (box) {
-    case 'inbox':
-      component = <Inbox __={__} />
-      break
-    case 'outbox':
-      component = <Outbox __={__} />
-      break
-    case 'deleted':
-      component = <Delbox __={__} />
-      break
-    default:
-      component = `Invalid segment: ${box}`
-  }
 
   useEffect(() => {
     statusReset()
@@ -46,7 +47,9 @@ const List = ({ box }: Props) => {
           </button>
         </Link>
       </div>
-      {component}
+      <ErrorOrPending status={status} isLoading={isLoading}>
+        {component(box, __)}
+      </ErrorOrPending>
     </>
   )
 }

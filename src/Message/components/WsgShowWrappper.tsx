@@ -4,23 +4,31 @@ import MsgShowDel from "./MsgShowDel";
 import MsgShowIn from "./MsgShowIn";
 import MsgShowOut from "./MsgShowOut";
 
-type Props = {
-  message: Message;
+const component = (box: string | undefined, message: Message | null) => {
+  if (message) {
+    switch (box) {
+      case 'in':
+        return <MsgShowIn message={message} />
+      case 'out':
+        return <MsgShowOut message={message} />
+      case 'del':
+        return <MsgShowDel message={message} />
+      default:
+        return `Invalid condition: ${box}`
+    }
+  } else {
+    return null
+  }
 }
 
-const MsgShowWrapper = ({message }: Props) => {
+type Props = {
+  message: Message | null;
+}
+
+const MsgShowWrapper = ({ message }: Props) => {
   const { box } = useParams()
 
-  switch (box) {
-    case 'in':
-      return <MsgShowIn message={message} />
-    case 'out':
-      return <MsgShowOut message={message} />
-    case 'del':
-      return <MsgShowDel message={message} />
-    default:
-      return `Invalid condition: ${box}`
-  }
+  return component(box, message)
 }
 
 export default MsgShowWrapper

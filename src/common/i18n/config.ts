@@ -13,7 +13,7 @@ export const SUPPORTED_LANGS = {
 export const DEFAULT_LANG = 'ru'
 
 export const defaultTranslateKeys = [
-    'Title is required',
+    'Title is required', 'Loading'
 ]
 
 export const getTranslateUri = 'http://localhost/api/gettranslate'

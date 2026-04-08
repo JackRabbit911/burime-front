@@ -1,6 +1,7 @@
 import { createEffect, createStore, sample } from "effector";
 import ajax from "../common/ajax";
 import type { ApiResponse } from "../common/ajax/types";
+import { pending } from "patronum";
 
 type MyDraft = {
     id: number;
@@ -19,3 +20,5 @@ sample({
     fn: (response) => response.data.result,
     target: $myDrafts,
 })
+
+export const $isPending = pending([getMyDraftsFx])

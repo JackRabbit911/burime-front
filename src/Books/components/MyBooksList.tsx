@@ -1,11 +1,16 @@
 import { useEffect } from "react"
-import { useList } from "effector-react"
+import { useList, useUnit } from "effector-react"
 
-import CoverWrapper from "./CoverWrapper"
-import { $myBooks, getMyBooksFx } from "Books/store"
 import Cover from "reused/Cover"
+import { $status } from "common/store"
+import CoverWrapper from "./CoverWrapper"
+import ErrorOrPending from "reused/ErrorOrPendig"
+import { $isPending, $myBooks, getMyBooksFx } from "Books/store"
 
-const MyBooksList = () => {
+import type { GetTextProp } from "common/i18n/types"
+
+const MyBooksList = ({ __ }: GetTextProp) => {
+  const [status, isLoadind] = useUnit([$status, $isPending])
   const myBooks = useList($myBooks, {
     fn: (book) => (
       <CoverWrapper
@@ -14,14 +19,20 @@ const MyBooksList = () => {
         <Cover book={book} />
       </CoverWrapper>
     ),
-    placeholder: <h2>Здесь пока ничего нет</h2>
+    placeholder: __("There's nothing here yet")
   })
 
   useEffect(() => {
     getMyBooksFx()
   }, [])
 
-  return myBooks
+  return (
+    <ErrorOrPending status={status} isLoading={isLoadind}>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 h-auto">
+        {myBooks}
+      </div>
+    </ErrorOrPending>
+  )
 }
 
 export default MyBooksList

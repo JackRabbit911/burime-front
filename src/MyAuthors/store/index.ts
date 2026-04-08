@@ -10,6 +10,7 @@ import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "common/con
 import type { ApiResponse } from "common/ajax/types";
 import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
+import { pending } from "patronum";
 
 type MembersAndScrf = {
     members: Member[];
@@ -90,3 +91,5 @@ sample({
     fn: (response) => response.data.result._csrf,
     target: $scrf,
 })
+
+export const $isPending = pending([getMyAuthorsFx])

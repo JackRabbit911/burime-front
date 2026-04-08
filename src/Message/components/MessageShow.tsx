@@ -2,35 +2,26 @@ import { useEffect } from "react"
 import { useParams } from "react-router"
 import { useUnit } from "effector-react"
 
-import { $message, getMessageFx } from "../store"
-import MsgShowWrapper from "./WsgShowWrappper"
 import { $status } from "common/store"
-import ErrorCmp from "reused/ErrorCmp"
+import MsgShowWrapper from "./WsgShowWrappper"
+import ErrorOrPending from "reused/ErrorOrPendig"
+import { $isPending, $message, getMessageFx } from "../store"
 
 const MessageShow = () => {
   const { id } = useParams()
   const message = useUnit($message)
-  const status = useUnit($status)
+  const [status, isLoading] = useUnit([$status, $isPending])
 
   useEffect(() => {
     getMessageFx(id as string)
   }, [])
 
-  if (status >= 400) {
-    return (
-        <ErrorCmp status={status} />
-    )
-  }
-
   return (
-    <>
-      {message ? (
-        <MsgShowWrapper
-          message={message}
-        />
-      ) : null
-      }
-    </>
+    <ErrorOrPending status={status} isLoading={isLoading}>
+      <MsgShowWrapper
+        message={message}
+      />
+    </ErrorOrPending>
   )
 }
 

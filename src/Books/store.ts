@@ -5,6 +5,7 @@ import { getMyBooksUri } from "common/constants";
 
 import type { ApiResponse } from "common/ajax/types";
 import type { MyBook } from "./types";
+import { pending } from "patronum";
 
 export const getMyBooksFx = createEffect(() => (
     ajax.get<ApiResponse<MyBook[]>>(getMyBooksUri)
@@ -23,3 +24,5 @@ sample({
     ),
     target: $myBooks,
 })
+
+export const $isPending = pending([getMyBooksFx])

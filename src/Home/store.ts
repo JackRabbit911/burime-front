@@ -1,8 +1,11 @@
+import { pending } from "patronum";
 import { createEffect, createStore, sample } from "effector";
+
 import ajax from "../common/ajax";
-import type { ApiResponse } from "../common/ajax/types";
 import { getMyStatUri } from "../common/constants";
+
 import type { MyStat } from "../common/types";
+import type { ApiResponse } from "../common/ajax/types";
 
 export const getMyStatFx = createEffect(() => (
     ajax.get<ApiResponse<MyStat>>(getMyStatUri)
@@ -16,3 +19,5 @@ sample({
     fn: (response) => response.data.result,
     target: $myStat,
 })
+
+export const $isPending = pending([getMyStatFx])
