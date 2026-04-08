@@ -11,6 +11,7 @@ import { getUserDataFx, profileSubmitted } from "../store";
 import CSRF from "reused/CSRF";
 import { useUnit } from "effector-react";
 import { $status } from "common/store";
+import ErrorOrPending from "reused/ErrorOrPendig";
 
 const Profile = () => {
   const status = useUnit($status)
@@ -28,30 +29,32 @@ const Profile = () => {
 
   const disabled = !isObjectEmpty(methods.formState.errors)
 
-  console.log(status)
+  // console.log(status)
 
   return (
-    <FormProvider {...methods}>
-      <Header />
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <CSRF />
-        <Form __={__} />
-        <button
-          type="submit"
-          className="btn btn-primary dark:btn-info w-full mt-4"
-          disabled={disabled}
-        >
-          {__('Save')}
-        </button>
-      </form>
-      <div className="text-end">
-        <Link to='/profile/password'>
-          <button className="link mt-4">
-            {__('Change password')}
+    <ErrorOrPending isLoading={methods.formState.isLoading} status={status}>
+      <FormProvider {...methods}>
+        <Header />
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <CSRF />
+          <Form __={__} />
+          <button
+            type="submit"
+            className="btn btn-primary dark:btn-info w-full mt-4"
+            disabled={disabled}
+          >
+            {__('Save')}
           </button>
-        </Link>
-      </div>
-    </FormProvider>
+        </form>
+        <div className="text-end">
+          <Link to='/profile/password'>
+            <button className="link mt-4">
+              {__('Change password')}
+            </button>
+          </Link>
+        </div>
+      </FormProvider>
+    </ErrorOrPending>
   )
 }
 
