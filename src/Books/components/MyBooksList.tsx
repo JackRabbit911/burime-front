@@ -11,7 +11,6 @@ import type { GetTextProp } from "common/i18n/types"
 
 const MyBooksList = ({ __ }: GetTextProp) => {
   const [status, isLoadind] = useUnit([$status, $isPending])
-  const noList = __("There's nothing here yet")
   const myBooks = useList($myBooks, {
     fn: (book) => (
       <CoverWrapper
@@ -20,7 +19,7 @@ const MyBooksList = ({ __ }: GetTextProp) => {
         <Cover book={book} />
       </CoverWrapper>
     ),
-    placeholder: noList
+    placeholder: __("There's nothing here yet")
   })
 
   useEffect(() => {
