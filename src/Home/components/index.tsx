@@ -5,11 +5,12 @@ import Stat from "reused/Stat"
 import Book from "reused/icons/Book"
 import Heart from "reused/icons/Heart"
 import Message from "reused/icons/Message"
-import { globalReset } from "common/store"
-import { $myStat, getMyStatFx } from "Home/store"
+import { $status, globalReset } from "common/store"
+import { $isPending, $myStat, getMyStatFx } from "Home/store"
+import ErrorOrPending from "reused/ErrorOrPendig"
 
 const Home = () => {
-  const stat = useUnit($myStat)
+  const [stat, status, isLoading] = useUnit([$myStat, $status, $isPending])
 
   useEffect(() => {
     globalReset()
@@ -17,8 +18,7 @@ const Home = () => {
   }, [])
 
   return (
-    stat ?
-    <>
+    <ErrorOrPending status={status} isLoading={isLoading}>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
         <Stat
           path="books"
@@ -77,7 +77,7 @@ const Home = () => {
           desc="Уже неплохо"
         />
       </div>
-    </> : null
+    </ErrorOrPending>
   )
 }
 
