@@ -38,7 +38,10 @@ const TranslateProvider = ({ deps = [], children }: Props) => {
     
     useEffect(() => {
       const keys = Object.keys(translate)
-      const diff = translateKeys.current.filter(x => !keys.includes(x));
+
+      const diff = keys.length > 0 ?
+        translateKeys.current.filter(x => !keys.includes(x)) :
+        translateKeys.current
       
     if (diff.length > 0) {
       debouncedFetch(lang, diff)
