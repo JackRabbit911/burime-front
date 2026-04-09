@@ -13,12 +13,12 @@ export const SUPPORTED_LANGS = {
 export const DEFAULT_LANG = 'ru'
 
 export const defaultTranslateKeys = [
-    'Title is required', 'Loading'
+    'Title is required', 'Loading', 'Edit author', 'Edit branch',
 ]
 
 export const getTranslateUri = 'http://localhost/api/gettranslate'
 export const limit = null //cache limit in pairs key-valaue
-export const delay = 100 //debounse delay im ms
+export const delay = 200 //debounse delay im ms
 
 export const detectLang = (): string => detectLangByAttribute()
 // export const detectLang = (): string => detectLangByUri()
