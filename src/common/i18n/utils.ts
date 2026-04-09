@@ -1,3 +1,4 @@
+import type { RefObject } from "react";
 import { DEFAULT_LANG, SUPPORTED_LANGS, defaultTranslateKeys, getTranslateUri, limit } from "./config";
 import type { TranslateType } from "./types";
 
@@ -7,11 +8,11 @@ export const sprintf = (str: string, ...argv: any[]): string => !argv.length ? s
 export const updateTranslate = (
     translate: TranslateType,
     result: TranslateType,
-    translateKeys: string[],
+    translateKeys: RefObject<string[]>,
     setTranslate: React.Dispatch<React.SetStateAction<TranslateType>>
 ) => {
     const keys = Object.keys(translate)
-    translateKeys = defaultTranslateKeys
+    translateKeys.current = defaultTranslateKeys
 
     if (limit) {
         const n = keys.length + Object.keys(result).length - limit

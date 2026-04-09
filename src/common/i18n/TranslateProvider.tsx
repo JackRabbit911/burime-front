@@ -32,7 +32,7 @@ const TranslateProvider = ({ deps = [], children }: Props) => {
   const debouncedFetch = useDebounce((lang, keys) => {
     getTranslate(lang, keys)
       .then((result: TranslateType) => {
-        updateTranslate(translate, result, translateKeys.current, setTranslate)
+        updateTranslate(translate, result, translateKeys, setTranslate)
       })
     }, delay)
     
