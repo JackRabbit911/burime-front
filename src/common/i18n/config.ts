@@ -1,8 +1,10 @@
 import { host } from "common/ajax"
-import { fetchTranslate } from "./utils"
-// import { fetchAllMap } from "./utils"
-// import { detectLangByUri } from "./utils"
-import { detectLangByAttribute } from "./utils"
+import {
+    fetchTranslate,
+    // fetchAllMap,
+    // detectLangByUri,
+    detectLangByAttribute,
+} from "./utils"
 
 import type { TranslateType } from "./types"
 
