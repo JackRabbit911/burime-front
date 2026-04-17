@@ -1,7 +1,7 @@
-import { host } from "common/ajax";
+import { host } from "common/constants";
 import RecipientCmp from "./RecipientCmp";
-import type { Message, Recipient } from "Message/types";
 import type { GetText } from "common/i18n/types";
+import type { Message, Recipient } from "Message/types";
 
 type Props = {
   message: Message;

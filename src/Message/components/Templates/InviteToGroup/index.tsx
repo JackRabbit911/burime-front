@@ -1,7 +1,8 @@
-import type { Message } from "../../../types"
-import { host } from "common/ajax";
 import Controls from "./Controls";
+import { host } from "common/constants";
 import { useTranslate } from "common/i18n/hooks";
+
+import type { Message } from "../../../types"
 
 type Props = {
   message: Message;

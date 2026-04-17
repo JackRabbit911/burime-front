@@ -1,5 +1,5 @@
-import { host } from "common/ajax";
 import MsgStatus from "../MsgStatus";
+import { host } from "common/constants";
 import { toAliasSetted } from "Message/store";
 import type { Recipient } from "Message/types";
 
