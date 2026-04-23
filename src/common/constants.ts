@@ -42,5 +42,6 @@ export const savePasswordUri = 'my/profile/savepswd'
 export const getCsrfPswdUri = 'my/profile/csrf'
 
 export const getCoverUri = 'my/additional/branch'
+export const srcAvatar = 'ava/user/'
 
 export const logoutUri = 'auth/logout'

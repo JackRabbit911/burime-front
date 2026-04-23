@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form"
 import { avatarSrc } from "common/utils"
+import { srcAvatar } from "common/constants"
 
 const Header = () => {
   const { getValues } = useFormContext()
 
   const id = getValues('id')
   const file = getValues('file')
-  const srcAvatar = `avatar/user/${id}`
 
   return (
     <div className="text-end -mb-4 mt-4">
@@ -14,7 +14,7 @@ const Header = () => {
         className="avatar aspect-square size-24"
         style={{ cursor: 'pointer' }}
       >
-        <img src={avatarSrc(file, srcAvatar)} />
+        <img src={avatarSrc(file, srcAvatar + id)} />
       </div>
     </div>
   )
