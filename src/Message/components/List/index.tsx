@@ -11,6 +11,7 @@ import ErrorOrPending from "reused/ErrorOrPendig"
 import { $isPending, getMessageListFx, msgResetted } from "Message/store"
 
 import type { GetText } from "common/i18n/types"
+import { $ownAuthors } from "MyAuthors/store"
 
 const component = (box: string, __: GetText) => {
   switch (box) {
@@ -31,6 +32,7 @@ type Props = {
 
 const List = ({ box }: Props) => {
   const isLoading = useUnit($isPending)
+  const ownAuthors = useUnit($ownAuthors)
   const __ = useTranslate()
 
   useEffect(() => {
@@ -42,11 +44,23 @@ const List = ({ box }: Props) => {
   return (
     <>
       <div className="text-end">
-        <Link to='/message/form'>
-          <button className="link">
-            {__('New message')}
-          </button>
-        </Link>
+        {ownAuthors.length > 0 ?
+          <Link to='/message/form'>
+            <button className="link">
+              {__('New message')}
+            </button>
+          </Link> :
+          <div className="text-end">
+            <span className="text-warning">
+              {__("You don't have any authors")}{' '}
+            </span>
+            <Link to='/author'>
+              <button className="link">
+                {__('Create new author or group')}
+              </button>
+            </Link>
+          </div>
+        }
       </div>
       <ErrorOrPending isLoading={isLoading}>
         {component(box, __)}
