@@ -1,5 +1,5 @@
-import { host } from "common/ajax";
 import MsgStatus from "../MsgStatus";
+import { host } from "common/constants";
 import type { Message } from "Message/types";
 import type { GetText } from "common/i18n/types";
 

@@ -1,6 +1,6 @@
-import { host } from "common/ajax";
-import type { GetText } from "common/i18n/types";
+import { host } from "common/constants";
 import type { Message } from "Message/types";
+import type { GetText } from "common/i18n/types";
 
 type Props = {
   message: Message;

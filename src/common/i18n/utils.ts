@@ -1,5 +1,5 @@
 import type { RefObject } from "react";
-import { DEFAULT_LANG, SUPPORTED_LANGS, defaultTranslateKeys, getTranslateUri, limit } from "./config";
+import { defaultTranslateKeys, getTranslateUri, limit } from "./config";
 import type { TranslateType } from "./types";
 
 export const sprintf = (str: string, ...argv: any[]): string => !argv.length ? str :
@@ -24,16 +24,6 @@ export const updateTranslate = (
 
     setTranslate({ ...translate, ...result })
     result = {}
-}
-
-export const detectLangByAttribute = (): string => (
-    document.querySelector('html')?.getAttribute('lang') || DEFAULT_LANG || navigator.language.split('-')[0]
-)
-
-export const detectLangByUri = () => {
-    const segments = window.location.pathname.split('/').filter(Boolean)
-    const langs = Object.keys(SUPPORTED_LANGS).filter((value) => value !== DEFAULT_LANG)
-    return langs.includes(segments[0]) ? segments[0] : DEFAULT_LANG
 }
 
 //fetch translate by array keys
