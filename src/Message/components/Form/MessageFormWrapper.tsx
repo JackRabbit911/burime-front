@@ -12,10 +12,13 @@ import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 import { useMessageTemplate } from "Message/hooks/messageTemplate"
 import CSRF from "reused/CSRF"
+import { useNavigate } from "react-router"
+import { useEffect } from "react"
 
 const MessageFormWrapper = () => {
   const { message, isPending } = useMessageTemplate()
   const { methods, ownAuthors, onSubmit, view } = useMessageForm(message)
+  const navigate = useNavigate()
 
   const handleSwitchBtn = (data: string) => {
     setMsgView(data)
@@ -23,6 +26,12 @@ const MessageFormWrapper = () => {
 
   const Component = view === 'form' ? <Form message={message} /> : <AuthorsChoiceWrapper />
   const __ = useTranslate()
+
+  useEffect(() => {
+    if (ownAuthors.length === 0) {
+      navigate('/author')
+    }
+  }, [])
   
   return (
     <FormProvider {...methods}>
