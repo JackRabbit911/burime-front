@@ -11,7 +11,7 @@ const SUPPORTED_LANGS = {
     en: 'English',
     de: 'Deutsch',
 }
-const DEFAULT_LANG = null
+const DEFAULT_LANG = 'ru'
 const LANG_INDEX = 0
 
 export const defaultTranslateKeys = [
