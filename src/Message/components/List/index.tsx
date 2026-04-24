@@ -6,12 +6,13 @@ import Inbox from "./Inbox"
 import Outbox from "./Outbox"
 import Delbox from "./Delbox"
 import { statusReset } from "common/store"
+import { $ownAuthors } from "MyAuthors/store"
 import { useTranslate } from "common/i18n/hooks"
 import ErrorOrPending from "reused/ErrorOrPendig"
+import { getOwnAuthorsFx } from "common/store/ownAuthors"
 import { $isPending, getMessageListFx, msgResetted } from "Message/store"
 
 import type { GetText } from "common/i18n/types"
-import { $ownAuthors } from "MyAuthors/store"
 
 const component = (box: string, __: GetText) => {
   switch (box) {
@@ -39,28 +40,20 @@ const List = ({ box }: Props) => {
     statusReset()
     msgResetted()
     getMessageListFx()
+
+    if (ownAuthors.length === 0) {
+      getOwnAuthorsFx()
+    }
   }, [])
 
   return (
     <>
       <div className="text-end">
-        {ownAuthors.length > 0 ?
-          <Link to='/message/form'>
-            <button className="link">
-              {__('New message')}
-            </button>
-          </Link> :
-          <div className="text-end">
-            <span className="text-warning">
-              {__("You don't have any authors")}{' '}
-            </span>
-            <Link to='/author'>
-              <button className="link">
-                {__('Create new author or group')}
-              </button>
-            </Link>
-          </div>
-        }
+        <Link to='/message/form'>
+          <button className="link">
+            {__('New message')}
+          </button>
+        </Link>
       </div>
       <ErrorOrPending isLoading={isLoading}>
         {component(box, __)}

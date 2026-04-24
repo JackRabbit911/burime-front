@@ -1,6 +1,8 @@
+import { Link } from "react-router"
 import { FormProvider } from "react-hook-form"
 
 import Form from "."
+import CSRF from "reused/CSRF"
 import Controls from "./Controls"
 import Recipients from "./Recipients"
 import CheckBox from "reused/CheckBox"
@@ -11,14 +13,10 @@ import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
 import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 import { useMessageTemplate } from "Message/hooks/messageTemplate"
-import CSRF from "reused/CSRF"
-import { useNavigate } from "react-router"
-import { useEffect } from "react"
 
 const MessageFormWrapper = () => {
   const { message, isPending } = useMessageTemplate()
   const { methods, ownAuthors, onSubmit, view } = useMessageForm(message)
-  const navigate = useNavigate()
 
   const handleSwitchBtn = (data: string) => {
     setMsgView(data)
@@ -27,12 +25,21 @@ const MessageFormWrapper = () => {
   const Component = view === 'form' ? <Form message={message} /> : <AuthorsChoiceWrapper />
   const __ = useTranslate()
 
-  useEffect(() => {
-    if (ownAuthors.length === 0) {
-      navigate('/author')
-    }
-  }, [])
-  
+  if (ownAuthors.length === 0) {
+    return (
+      <div className="text-end">
+        <span className="text-warning">
+          {__("You don't have any authors")}{' '}
+        </span>
+        <Link to='/author'>
+          <button className="link">
+            {__('Create new author or group')}
+          </button>
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <FormProvider {...methods}>
       <form
