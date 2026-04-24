@@ -14,7 +14,7 @@ const Header = () => {
         className="avatar aspect-square size-24"
         style={{ cursor: 'pointer' }}
       >
-        <img src={avatarSrc(file, srcAvatar + id)} />
+        {id && <img src={avatarSrc(file, srcAvatar + id)} />}
       </div>
     </div>
   )
