@@ -22,13 +22,15 @@ const Outbox = ({ __ }: GetTextProp) => {
         {__('Outbox')} ({outboxCount})
       </a>
       <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
-        <table className="table">
-          <TableHead __={__} />
-          <tbody>
-            {outbox}
-          </tbody>
-        </table>
-      </div>
+          <div className="overflow-x-auto">
+            <table className="table table-sm md:table-md">
+              <TableHead __={__} />
+              <tbody>
+                {outbox}
+              </tbody>
+            </table>
+          </div>
+        </div>
       <Link to='/message/deleted' role="tab" className="tab">
           {__('Deleted')} ({delboxCount})
       </Link>

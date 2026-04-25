@@ -24,16 +24,18 @@ const Delbox = ({ __ }: GetTextProp) => {
         {__('Deleted')} ({delboxCount})
       </a>
       <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>{__('Subject')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {delbox}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>{__('Subject')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {delbox}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div >
   )
