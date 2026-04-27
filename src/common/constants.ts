@@ -1,6 +1,3 @@
-const { protocol, hostname } = window.location
-export const host = `${protocol}//${hostname}`
-
 export const perPages = [25, 50, 100]
 
 export const getMyStatUri = '/my/stat'
