@@ -11,13 +11,9 @@ const Inbox = ({ __ }: GetTextProp) => {
   const { inboxCount, outboxCount, delboxCount } = useUnit($msgCounts)
 
   return (
-      <div role="tablist"
-        className="tabs tabs-lift w-full"
+      <div role="tablist" className="tabs tabs-lift w-full tabs-xs sm:tabs-md"
       >
-        <a
-          role="tab"
-          className="lg:[--tab-bg:red] tab tab-active"
-        >
+        <a role="tab" className="tab tab-active">
           {__('Inbox')} ({inboxCount})
         </a>
         <div role="tabpanel" className="w-full tab-content border-base-300 rounded-btn p-6">
