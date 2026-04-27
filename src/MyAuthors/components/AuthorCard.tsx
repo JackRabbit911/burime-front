@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 
-import { host } from "common/constants";
 import type { MyAuthor } from "../schema";
 import type { GetText } from "common/i18n/types";
+import { host } from "common/ajax";
 
 type Props = {
   __: GetText;

@@ -1,4 +1,4 @@
-import { host } from "common/constants";
+import { host } from "common/ajax";
 import RecipientCmp from "./RecipientCmp";
 import type { GetText } from "common/i18n/types";
 import type { Message, Recipient } from "Message/types";

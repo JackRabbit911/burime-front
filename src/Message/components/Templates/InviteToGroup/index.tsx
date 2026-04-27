@@ -1,5 +1,5 @@
 import Controls from "./Controls";
-import { host } from "common/constants";
+import { host } from "common/ajax";
 import { useTranslate } from "common/i18n/hooks";
 
 import type { Message } from "../../../types"
@@ -16,7 +16,7 @@ const InviteToGroup = ({ message }: Props) => {
       <div className="grid grid-cols-3 gap-2 mb-2">
         <a href={`${host}/author/${message.data.group}`}>
           <div className="avatar aspect-square">
-            <img src={`${host}/avatar/author/${message.data.group}`} />
+            <img src={`${host}/ava/author/${message.data.group}`} />
           </div>
         </a>
         <div className="col-span-2">

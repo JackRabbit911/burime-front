@@ -1,4 +1,4 @@
-import { host } from "common/constants"
+import { host } from "common/ajax"
 import type { CoverType, MyBook } from "common/types/cover"
 
 type Props = {

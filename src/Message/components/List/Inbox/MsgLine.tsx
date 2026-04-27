@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import { host } from "common/constants";
+import { host } from "common/ajax";
 import MsgStatus from "Message/components/MsgStatus";
 
 import type { Inbox } from "Message/types";

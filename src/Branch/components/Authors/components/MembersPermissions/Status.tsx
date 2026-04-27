@@ -1,8 +1,8 @@
 import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
-// import { host } from "common/ajax";
-import { host } from "common/constants";
+import { host } from "common/ajax";
+// import { host } from "common/constants";
 import { buttonEnabled } from "./utils";
 import { getStatusString } from "../../permissions";
 import { $permissions, $statusObj } from "Branch/store/bootstrap";
