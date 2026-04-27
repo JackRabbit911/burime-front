@@ -22,7 +22,7 @@ const MsgInfo = ({ __, message }: Props) => {
           {message.from_alias}
         </div>
         <div className="avatar aspect-square size-20">
-          <img src={`${host}/avatar/author/${message.from}`} alt={message.from_alias} />
+          <img src={`${host}/ava/author/${message.from}`} alt={message.from_alias} />
         </div>
       </div>
       <div className="flex justify-between overflow-x-auto">
@@ -31,7 +31,7 @@ const MsgInfo = ({ __, message }: Props) => {
           {message.to_alias}
         </div>
         <div className="avatar aspect-square size-20">
-          <img src={`${host}/avatar/author/${message.to}`} alt={message.to_alias} />
+          <img src={`${host}/ava/author/${message.to}`} alt={message.to_alias} />
         </div>
       </div>
     </div>

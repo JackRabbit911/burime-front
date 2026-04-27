@@ -26,7 +26,7 @@ const MsgLine = ({ message }: Props) => {
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-10 w-10">
-                <img src={`${host}/avatar/author/${message.from}`} alt={message.alias} />
+                <img src={`${host}/ava/author/${message.from}`} alt={message.alias} />
               </div>
             </div>
             <div>

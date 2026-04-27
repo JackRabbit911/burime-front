@@ -23,7 +23,7 @@ const RecipientCmp = ({ recipient }: Props) => {
       <td className="ps-0">
         <div className="avatar">
           <div className="mask mask-squircle h-10 w-10">
-            <img src={`${host}/avatar/author/${recipient.id}`} alt={recipient.alias} />
+            <img src={`${host}/ava/author/${recipient.id}`} alt={recipient.alias} />
           </div>
         </div>
       </td>

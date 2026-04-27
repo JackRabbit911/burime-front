@@ -23,7 +23,7 @@ const MsgInfo = ({ __, message }: Props) => {
           {message.from_alias}
         </div>
         <div className="avatar aspect-square size-20">
-          <img src={`${host}/avatar/author/${message.from}`} alt={message.from_alias} />
+          <img src={`${host}/ava/author/${message.from}`} alt={message.from_alias} />
         </div>
       </div>
       <h3 className="fieldset">{__('Recipients')}</h3>
