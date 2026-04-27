@@ -4,8 +4,8 @@ import {
 } from "./utils"
 
 import type { TranslateType } from "./types"
-import { host } from "common/constants"
 
+/********** FOR CHANGE ***********/
 const SUPPORTED_LANGS = {
     ru: 'Русский',
     en: 'English',
@@ -18,7 +18,6 @@ export const defaultTranslateKeys = [
     'Title is required', 'Loading', 'Edit author', 'Edit branch',
 ]
 
-export const getTranslateUri = `${host}/api/gettranslate`
 export const limit = null //cache limit in pairs key-valaue
 export const delay = 200 //debounse delay im ms
 
@@ -31,6 +30,8 @@ const detectLangMethod = {
 
 const DETECT_LANG_METHOD = detectLangMethod.subdomain
 
+export const getTranslateUri = `${getHost()}/api/gettranslate`
+
 //fetch translate by array keys
 export const getTranslate = (lang: string, keys: string[] | null): Promise<TranslateType> => fetchTranslate(lang, keys)
 
@@ -39,7 +40,7 @@ export const getTranslate = (lang: string, keys: string[] | null): Promise<Trans
 
 
 /********* NOT FOR CHANGE *********/
-export const detectLang = (): string => {
+export function detectLang(): string {
     const lang = DETECT_LANG_METHOD || DEFAULT_LANG || 'en'//navigator.language.split('-')[0] || 'en'
     setLangAttribute(lang)
     return lang
@@ -78,4 +79,10 @@ function detectLangByAttribute(): string | null {
 
 function setLangAttribute(lang: string) {
     document.querySelector('html')?.setAttribute('lang', lang)
+}
+
+function getHost() {
+    const { protocol, hostname } = window.location
+    const lang = detectLang()
+    return `${protocol}//${lang}.${hostname}`
 }

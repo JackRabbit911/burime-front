@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { host } from "common/constants";
 import { statusSetted } from "common/store";
 import { detectLang } from "common/i18n/config";
 
 const lang = detectLang()
+const { protocol, hostname } = window.location
+export const host = `${protocol}//${lang}.${hostname}`
 
 const ajax = axios.create({
     baseURL: `${host}/api`,

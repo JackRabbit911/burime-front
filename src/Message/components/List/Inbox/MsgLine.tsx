@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import { host } from "common/constants";
+import { host } from "common/ajax";
 import MsgStatus from "Message/components/MsgStatus";
 
 import type { Inbox } from "Message/types";
@@ -26,7 +26,7 @@ const MsgLine = ({ message }: Props) => {
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-10 w-10">
-                <img src={`${host}/avatar/author/${message.from}`} alt={message.alias} />
+                <img src={`${host}/ava/author/${message.from}`} alt={message.alias} />
               </div>
             </div>
             <div>

@@ -1,4 +1,4 @@
-import { host } from "./constants";
+import { host } from "./ajax";
 
 export const isObjectEmpty = (obj: object) => {
   for (const prop in obj) {

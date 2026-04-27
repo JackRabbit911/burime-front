@@ -1,4 +1,4 @@
-import { host } from "common/constants";
+import { host } from "common/ajax";
 import type { Message } from "Message/types";
 import type { GetText } from "common/i18n/types";
 
@@ -20,7 +20,7 @@ const MsgInfo = ({ __, message }: Props) => {
           {message.from_alias}
         </div>
         <div className="avatar aspect-square size-20">
-          <img src={`${host}/avatar/author/${message.from}`} alt={message.from_alias} />
+          <img src={`${host}/ava/author/${message.from}`} alt={message.from_alias} />
         </div>
       </div>
       
