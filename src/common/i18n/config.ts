@@ -5,6 +5,9 @@ import {
 
 import type { TranslateType } from "./types"
 
+const { protocol, hostname } = window.location
+const host = `${protocol}//${hostname}`
+
 /********** FOR CHANGE ***********/
 const SUPPORTED_LANGS = {
     ru: 'Русский',
@@ -13,6 +16,7 @@ const SUPPORTED_LANGS = {
 }
 const DEFAULT_LANG = null
 const LANG_INDEX = 0
+const DETECT_LANG_METHOD = 'subdomain'
 
 export const defaultTranslateKeys = [
     'Title is required', 'Loading', 'Edit author', 'Edit branch',
@@ -21,16 +25,7 @@ export const defaultTranslateKeys = [
 export const limit = null //cache limit in pairs key-valaue
 export const delay = 200 //debounse delay im ms
 
-const detectLangMethod = {
-    uri: detectLangByUri(),
-    config: detectLangByConfig(),
-    subdomain: detectLangBySubdomain(),
-    attribute: detectLangByAttribute(),
-}
-
-const DETECT_LANG_METHOD = detectLangMethod.subdomain
-
-export const getTranslateUri = `${getHost()}/api/gettranslate`
+export const getTranslateUri = `${host}/api/gettranslate`
 
 //fetch translate by array keys
 export const getTranslate = (lang: string, keys: string[] | null): Promise<TranslateType> => fetchTranslate(lang, keys)
@@ -38,10 +33,16 @@ export const getTranslate = (lang: string, keys: string[] | null): Promise<Trans
 //fetch all translates
 // export const getTranslate = (lang: string, keys: null): Promise<TranslateType> => fetchAllMap(lang, keys)
 
-
 /********* NOT FOR CHANGE *********/
+const detectLangMethod = {
+    uri: detectLangByUri(),
+    config: detectLangByConfig(),
+    subdomain: detectLangBySubdomain(),
+    attribute: detectLangByAttribute(),
+}
+
 export function detectLang(): string {
-    const lang = DETECT_LANG_METHOD || DEFAULT_LANG || 'en'//navigator.language.split('-')[0] || 'en'
+    const lang = detectLangMethod[DETECT_LANG_METHOD] || DEFAULT_LANG || 'en'//navigator.language.split('-')[0] || 'en'
     setLangAttribute(lang)
     return lang
 }
@@ -79,10 +80,4 @@ function detectLangByAttribute(): string | null {
 
 function setLangAttribute(lang: string) {
     document.querySelector('html')?.setAttribute('lang', lang)
-}
-
-function getHost() {
-    const { protocol, hostname } = window.location
-    const lang = detectLang()
-    return `${protocol}//${lang}.${hostname}`
 }
