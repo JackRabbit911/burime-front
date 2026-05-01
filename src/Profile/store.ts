@@ -1,17 +1,18 @@
-import { createEffect, createEvent, sample } from "effector";
 import { pending, throttle } from "patronum";
+import { createEffect, createEvent, sample } from "effector";
 
 import ajax from "common/ajax";
 import { modalOpened } from "reused/Modal/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
+import { successRedirectDialog } from "./components/SuccessRedirectDialog";
 import { getCsrfPswdUri, getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
 
-import type { ApiResponse } from "common/ajax/types";
 import type { ConfirmPassword, UserData } from "./schema";
-import { successRedirectDialog } from "./components/SuccessRedirectDialog";
+import type { ApiResponse, ValidationError } from "common/ajax/types";
 
 export const profileSubmitted = createEvent<UserData>()
 export const passwordSubmitted = createEvent<ConfirmPassword>()
+export const serverErrorRecieved = createEvent<ValidationError[] | undefined>()
 
 const throttledProfileSubmitted = throttle(profileSubmitted, 500)
 const throttledPasswordSubmitted = throttle(passwordSubmitted, 500)
@@ -33,7 +34,7 @@ export const getCsrfFx = createEffect(async () => {
 })
 
 const sendProfileFx = createEffect((data: UserData) => (
-    ajax.postForm(saveUserDataUri, data)
+    ajax.postForm<ApiResponse<boolean, ValidationError[]>>(saveUserDataUri, data)
 ))
 
 const sendPasswordFx = createEffect((data: ConfirmPassword) => (
@@ -55,6 +56,13 @@ sample({
     filter: (response) => Boolean(response?.data?.success),
     fn: () => successRedirectDialog({}),
     target: modalOpened,
+})
+
+sample({
+    source: sendProfileFx.doneData,
+    filter: (response) => !response?.data?.success,
+    fn: (response) => response?.data?.error,
+    target: serverErrorRecieved,
 })
 
 sample({
