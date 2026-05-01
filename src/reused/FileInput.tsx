@@ -26,6 +26,9 @@ const FileInput = ({ __, fieldName, label, optional }: Props) => {
           <legend className="fieldset-legend">
             {label}
           </legend>
+          <div className="fieldset-label text-error mt-1">
+            {errors[fieldName]?.message as string}
+          </div>
           <div className="label-text pt-2.5">{optional}</div>
         </div>
         <Controller
@@ -34,7 +37,7 @@ const FileInput = ({ __, fieldName, label, optional }: Props) => {
           render={({ field: { onChange, onBlur, name, ref } }) => (
             <input
               type="file"
-              style={{display: "none"}}
+              style={{ display: "none" }}
               id={fieldName}
               name={name}
               onBlur={onBlur}
@@ -58,9 +61,6 @@ const FileInput = ({ __, fieldName, label, optional }: Props) => {
           </button >
         </div>
       </label>
-      <div className="fieldset-label text-error mt-1">
-        {errors[fieldName]?.message as string}
-      </div>
     </>
   )
 }
