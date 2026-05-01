@@ -7,10 +7,12 @@ import Form from "./Form"
 import Header from "./Header"
 import CSRF from "reused/CSRF"
 import { isObjectEmpty } from "common/utils"
+import { useServerErrors } from "common/hook"
 import { useTranslate } from "common/i18n/hooks"
 import ErrorOrPending from "reused/ErrorOrPendig"
+import { $isPending, getUserDataFx, profileSubmitted, serverErrorRecieved } from "../store"
+
 import { userData, type UserData } from "../schema"
-import { $isPending, getUserDataFx, profileSubmitted } from "../store"
 
 const Profile = () => {
   const isLoading = useUnit($isPending)
@@ -25,6 +27,7 @@ const Profile = () => {
   }
 
   const __ = useTranslate()
+  useServerErrors(methods.setError, serverErrorRecieved)
   const disabled = !isObjectEmpty(methods.formState.errors)
 
   return (
