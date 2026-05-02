@@ -58,7 +58,6 @@ export const useMessageForm = (message: MessageForm) => {
     methods.setValue('message', message.message)
     methods.setValue('recipients', message.recipients)
     methods.setValue('important', message.important)
-    methods.setValue('_csrf', message._csrf)
   }, [message])
 
   useEffect(() => {
