@@ -6,7 +6,7 @@ import { modalOpened } from "reused/Modal/store";
 import { serverErrorRecieved } from "common/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { successRedirectDialog } from "./components/SuccessRedirectDialog";
-import { getCsrfPswdUri, getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
+import { getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
 
 import type { ConfirmPassword, UserData } from "./schema";
 import type { ApiResponse, ValidationError } from "common/ajax/types";
@@ -21,16 +21,6 @@ export const getUserDataFx = createEffect(async () => {
     const response = await ajax.get<ApiResponse<UserData>>(getUserDataUri)
     const { result } = response.data
     return result
-})
-
-export const getCsrfFx = createEffect(async () => {
-    const response = await ajax.get<ApiResponse<string>>(getCsrfPswdUri)
-    const { result } = response.data
-    return {
-        _csrf: result,
-        password: '',
-        confirmPassword: '',
-    }
 })
 
 const sendProfileFx = createEffect((data: UserData) => (
