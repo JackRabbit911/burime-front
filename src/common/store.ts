@@ -1,8 +1,10 @@
 import { createEvent, createStore, sample } from "effector";
+import type { ValidationError } from "./ajax/types";
 
 export const globalReset = createEvent()
 export const statusReset = createEvent()
 export const statusSetted = createEvent<number>()
+export const serverErrorRecieved = createEvent<ValidationError[] | undefined>()
 
 export const $status = createStore(200)
     .reset(globalReset, statusReset)
