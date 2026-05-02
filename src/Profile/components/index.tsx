@@ -5,12 +5,13 @@ import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
 import Form from "./Form"
 import Header from "./Header"
-import CSRF from "reused/CSRF"
 import { isObjectEmpty } from "common/utils"
+import { useServerErrors } from "common/hook"
 import { useTranslate } from "common/i18n/hooks"
 import ErrorOrPending from "reused/ErrorOrPendig"
-import { userData, type UserData } from "../schema"
 import { $isPending, getUserDataFx, profileSubmitted } from "../store"
+
+import { userData, type UserData } from "../schema"
 
 const Profile = () => {
   const isLoading = useUnit($isPending)
@@ -25,6 +26,7 @@ const Profile = () => {
   }
 
   const __ = useTranslate()
+  useServerErrors(methods.setError)
   const disabled = !isObjectEmpty(methods.formState.errors)
 
   return (
@@ -32,7 +34,6 @@ const Profile = () => {
       <FormProvider {...methods}>
         <Header />
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <CSRF />
           <Form __={__} />
           <button
             type="submit"

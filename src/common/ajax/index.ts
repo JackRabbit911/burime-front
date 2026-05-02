@@ -14,6 +14,10 @@ const ajax = axios.create({
         'Accept-Language': lang,
         'Content-Type': 'application/json',
     },
+    withCredentials: true, // Разрешает отправку кук
+    withXSRFToken: true,
+    // xsrfCookieName: 'XSRF-TOKEN', // Имя куки с токеном
+    // xsrfHeaderName: 'X-CSRF-TOKEN', // Имя заголовка для отправки
 });
 
 ajax.interceptors.response.use(

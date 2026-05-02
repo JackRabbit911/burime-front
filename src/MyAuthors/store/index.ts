@@ -12,9 +12,8 @@ import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
 import { pending } from "patronum";
 
-type MembersAndScrf = {
+type Members = {
     members: Member[];
-    _csrf: string;
 }
 
 export const authorSubmitted = createEvent<FormOutputType>()
@@ -33,7 +32,7 @@ export const getMyAuthorsFx = createEffect(() => (
 ))
 
 export const getMyMembersFx = createEffect((id: string | undefined) => (
-    ajax.get<ApiResponse<MembersAndScrf>>([getMyGroupMembersUri, id].join('/'))
+    ajax.get<ApiResponse<Members>>([getMyGroupMembersUri, id].join('/'))
 ))
 
 export const $myAuthors = createStore<MyAuthor[]>([])
@@ -83,13 +82,6 @@ sample({
     filter: (response) => Boolean(response?.data?.success),
     fn: (response) => response.data.result.members,
     target: $myMembers,
-})
-
-sample({
-    clock: getMyMembersFx.doneData,
-    filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => response.data.result._csrf,
-    target: $scrf,
 })
 
 export const $isPending = pending([getMyAuthorsFx])

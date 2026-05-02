@@ -40,5 +40,4 @@ export const emptyMessage = () => ({
     },
     recipients: [],
     important: false,
-    _csrf: ''
 })

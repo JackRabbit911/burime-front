@@ -18,11 +18,9 @@ export const userData = z.object({
   phone: z.coerce.number().nullable(),
   sex: z.coerce.number().min(0).max(1).nullable(),
   file: imageFile.nullish(),
-  _csrf: z.string()
 })
 
 export const passwordSchema = z.object({
-  _csrf: z.string(),
   password: z.string().min(5, "Password must be at least 5 characters"),
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {

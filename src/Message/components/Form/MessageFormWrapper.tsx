@@ -2,7 +2,6 @@ import { Link } from "react-router"
 import { FormProvider } from "react-hook-form"
 
 import Form from "."
-import CSRF from "reused/CSRF"
 import Controls from "./Controls"
 import Recipients from "./Recipients"
 import CheckBox from "reused/CheckBox"
@@ -45,7 +44,6 @@ const MessageFormWrapper = () => {
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
       >
-        <CSRF />
         <Grid3Cols>
           <div>
             <Select

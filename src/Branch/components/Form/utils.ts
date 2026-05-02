@@ -18,7 +18,6 @@ export const getDefaults = (bootstrap: Bootstrap) => {
         bgImg: base64ToFile(bootstrap.files.bg_img, 'background'),
         authorsPayload: setAuthorsPayload(),
         draft: bootstrap.draft || null,
-        _csrf: bootstrap._csrf,
     }
 }
 

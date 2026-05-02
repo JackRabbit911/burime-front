@@ -23,7 +23,6 @@ export const formSchema = z.object({
   bgImg: imageFile,
   cover: imageFile,
   authorsPayload,
-  _csrf: z.string(),
 });
 
 export const finalSchema = formSchema.omit({

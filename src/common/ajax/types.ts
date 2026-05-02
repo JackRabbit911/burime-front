@@ -1,9 +1,9 @@
-type ValidationErrors = {
+export type ValidationError = {
   key: string;
   msg: string;
-}[]
+}
 
-export type ApiResponse<T, E = ValidationErrors> = {
+export type ApiResponse<T, E = ValidationError[]> = {
   success: boolean;
   error?: E;
   result: T;
