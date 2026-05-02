@@ -3,6 +3,7 @@ import { createEffect, createEvent, sample } from "effector";
 
 import ajax from "common/ajax";
 import { modalOpened } from "reused/Modal/store";
+import { serverErrorRecieved } from "common/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { successRedirectDialog } from "./components/SuccessRedirectDialog";
 import { getCsrfPswdUri, getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
@@ -12,7 +13,6 @@ import type { ApiResponse, ValidationError } from "common/ajax/types";
 
 export const profileSubmitted = createEvent<UserData>()
 export const passwordSubmitted = createEvent<ConfirmPassword>()
-export const serverErrorRecieved = createEvent<ValidationError[] | undefined>()
 
 const throttledProfileSubmitted = throttle(profileSubmitted, 500)
 const throttledPasswordSubmitted = throttle(passwordSubmitted, 500)
