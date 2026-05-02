@@ -10,7 +10,7 @@ import { isObjectEmpty } from "common/utils"
 import { useServerErrors } from "common/hook"
 import { useTranslate } from "common/i18n/hooks"
 import ErrorOrPending from "reused/ErrorOrPendig"
-import { $isPending, getUserDataFx, profileSubmitted, serverErrorRecieved } from "../store"
+import { $isPending, getUserDataFx, profileSubmitted } from "../store"
 
 import { userData, type UserData } from "../schema"
 
@@ -27,7 +27,7 @@ const Profile = () => {
   }
 
   const __ = useTranslate()
-  useServerErrors(methods.setError, serverErrorRecieved)
+  useServerErrors(methods.setError)
   const disabled = !isObjectEmpty(methods.formState.errors)
 
   return (
