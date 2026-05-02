@@ -76,7 +76,6 @@ export const bootstrapSch = z.object({
     authorsPermissions,
     authorsStatuses,
     draft: z.number().positive().nullable().optional(),
-    _csrf: z.string(),
 })
 
 export type Bootstrap = z.infer<typeof bootstrapSch>
