@@ -33,7 +33,6 @@ export const messageForm = z.object({
     recipients: z.array(recipient),
     message: message,
     important: z.boolean(),
-    _csrf: z.string(),
 })
 
 export const messageOut = messageForm.extend({
