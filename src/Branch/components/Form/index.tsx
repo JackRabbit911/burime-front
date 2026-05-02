@@ -16,7 +16,6 @@ import { useTranslate } from "common/i18n/hooks";
 import { formSchema } from "Branch/schema/output";
 
 import type { Bootstrap } from "Branch/schema/input";
-import CSRF from "reused/CSRF";
 
 type Props = {
   bootstrap: Bootstrap;
@@ -36,7 +35,6 @@ const Form = ({ bootstrap }: Props) => {
 
   return (
     <FormProvider {...methods}>
-      <CSRF />
       <Title __={__} />
       <Steps __={__} />
       <Genres step={step} genres={bootstrap?.total_genres || []} checked={branchGenres} />

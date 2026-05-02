@@ -5,7 +5,6 @@ import { FormProvider, useForm, type SubmitHandler } from "react-hook-form"
 
 import Form from "./Form"
 import Header from "./Header"
-import CSRF from "reused/CSRF"
 import { isObjectEmpty } from "common/utils"
 import { useServerErrors } from "common/hook"
 import { useTranslate } from "common/i18n/hooks"
@@ -35,7 +34,6 @@ const Profile = () => {
       <FormProvider {...methods}>
         <Header />
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <CSRF />
           <Form __={__} />
           <button
             type="submit"
