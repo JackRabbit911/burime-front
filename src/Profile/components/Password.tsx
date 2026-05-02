@@ -2,17 +2,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 
 import TextInput from "reused/TextInput";
-import { getCsrfFx, passwordSubmitted } from "../store";
+import { passwordSubmitted } from "../store";
 import { passwordSchema, type ConfirmPassword } from "../schema";
 import { useTranslate } from "common/i18n/hooks";
-import CSRF from "reused/CSRF";
 import { isObjectEmpty } from "common/utils";
+
+const defaulValues = () => ({
+  password: '',
+  confirmPassword: '',
+})
 
 const Password = () => {
   const methods = useForm({
     resolver: zodResolver(passwordSchema),
     mode: 'all',
-    defaultValues: () => getCsrfFx(),
+    defaultValues: defaulValues(),
   });
 
   const __ = useTranslate()
@@ -41,7 +45,6 @@ const Password = () => {
           {__('Change Password form')}
         </h3>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <CSRF />
           <TextInput
             type="password"
             fieldName="password"
