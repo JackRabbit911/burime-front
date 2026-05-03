@@ -27,7 +27,7 @@ const FileInput = ({ __, fieldName, label, optional }: Props) => {
             {label}
           </legend>
           <div className="fieldset-label text-error mt-1">
-            {errors[fieldName]?.message as string}
+            {__(errors[fieldName]?.message as string)}
           </div>
           <div className="label-text pt-2.5">{optional}</div>
         </div>

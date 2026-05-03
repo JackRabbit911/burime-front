@@ -20,6 +20,8 @@ const DETECT_LANG_METHOD = 'subdomain'
 
 export const defaultTranslateKeys = [
     'Title is required', 'Loading', 'Edit author', 'Edit branch',
+    'The file size exceeds the allowed limit',
+    'The file must be an image',
 ]
 
 export const limit = null //cache limit in pairs key-valaue
