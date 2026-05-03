@@ -10,7 +10,7 @@ type Props = {
   members: Member[] | undefined;
 }
 
-const AuthorForm = ({ __, members }: Props) => { 
+const AuthorForm = ({ __, members }: Props) => {
   const disabled = (members: Member[] | undefined) => {
     if (members === undefined || members.length === 0) {
       return false
@@ -39,24 +39,24 @@ const AuthorForm = ({ __, members }: Props) => {
         rows={4}
         optional={__("Up to % words", 200)}
       />
-      <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2">
-        <FileInput
-          __={__}
-          fieldName="file"
-          label={__('Avatar')}
-          optional={__('Up % Mb', 2)}
-        />
-        </div>
-          <Select
-            fieldName="author.openclosed"
-            label={__('Status')}
-            options={[
-              { value: 2, label: __('Author only'), disabled: disabled(members)},
-              { value: 1, label: __('Closed group') },
-              { value: 0, label: __('Open group') },
-            ]}
+      <div className="grid md:grid-cols-3 gap-4">
+        <div className="md:col-span-2">
+          <FileInput
+            __={__}
+            fieldName="file"
+            label={__('Avatar')}
+            optional={__('Up % Mb', 2)}
           />
+        </div>
+        <Select
+          fieldName="author.openclosed"
+          label={__('Status')}
+          options={[
+            { value: 2, label: __('Author only'), disabled: disabled(members) },
+            { value: 1, label: __('Closed group') },
+            { value: 0, label: __('Open group') },
+          ]}
+        />
       </div>
     </>
   )
