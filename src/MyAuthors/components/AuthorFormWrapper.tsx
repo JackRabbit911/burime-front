@@ -16,6 +16,7 @@ import { $authorView, viewSetted } from "MyAuthors/store/authorView"
 import { $authorsPayload } from "reused/Participants/store/athorsPayload"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
 import { formOutputSchema, formInputSchema, type MyAuthor, type FormInputType } from "../schema"
+import { host } from "common/ajax"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -56,6 +57,10 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
     }
   }
 
+  const src = Object.hasOwn(methods.formState.errors, 'file') ?
+      `${host}/avatar/figa.png` :
+      avatarSrc(file, author?.avatar)
+
   useEffect(() => {
     methods.setValue('members', members)
   }, [members])
@@ -72,7 +77,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
           onClick={() => { setView('form') }}
           style={{ cursor: 'pointer' }}
         >
-          <img src={avatarSrc(file, author?.avatar)} />
+          <img src={src} />
         </div>
         <div className="flex flex-col">
           <h2 className="text-xl">
