@@ -8,10 +8,13 @@ const Header = () => {
 
   const id = getValues('id')
   const file = getValues('file')
+  const name = getValues('name')
 
   const src = Object.hasOwn(errors, 'file') ?
-    `${host}/avatar/figa.png` :
+    `${host}/avatar/figa.webp` :
     avatarSrc(file, srcAvatar + id)
+
+  console.log(getValues())
 
   return (
     <div className="text-end -mb-4 mt-4">
@@ -19,7 +22,7 @@ const Header = () => {
         className="avatar aspect-square size-24"
         style={{ cursor: 'pointer' }}
       >
-        {id && <img src={src} />}
+        {id && <img src={src} alt={name}/>}
       </div>
     </div>
   )

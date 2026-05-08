@@ -33,7 +33,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
           onClick={() => { setView('form') }}
           style={{ cursor: 'pointer' }}
         >
-          <img src={src} />
+          <img src={src} alt={author.alias}/>
         </div>
         <div className="flex flex-col">
           <h2 className="text-xl">
