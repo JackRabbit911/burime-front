@@ -46,7 +46,7 @@ export const useAuthorForm = (defaultAuthor?: MyAuthor) => {
       }
     
       const src = Object.hasOwn(methods.formState.errors, 'file') ?
-          `${host}/avatar/figa.png` :
+          `${host}/avatar/figa.webp` :
           avatarSrc(file, author?.avatar)
     
       useEffect(() => {
