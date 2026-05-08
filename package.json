@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cp ../www/public/assets/output.css ./public/output.css; vite",
+    "dev": "cp ../ru/public/assets/output.css ./public/output.css; vite",
     "build": "tsc -b && vite build; cp dist/assets/*.js ../ru/public/assets/js/main.js",
     "lint": "eslint .",
     "preview": "vite preview"
