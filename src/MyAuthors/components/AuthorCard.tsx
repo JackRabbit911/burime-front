@@ -13,10 +13,10 @@ const AuthorCard = ({ __, author }: Props) => {
   return (
     <div >
       <a href={`${host}/author/${author.id}`} className="mb-2">
-        <div className="aspect-[2.5/1] flex flex-col shadow-md hover:shadow-xl rounded">
+        <div className="aspect-2.5/1 flex flex-col shadow-md hover:shadow-xl rounded">
           <div className="flex flex-row justify-between h-4/5">
             <div className="avatar aspect-square">
-              <img src={`${host}/${author.avatar}`} />
+              <img src={`${host}/${author.avatar}`} alt={author.alias} />
             </div>
             <div className="grow overflow-hidden px-2 pt-1">
               <h2 className="text-xl font-medium">{author.alias}</h2>
