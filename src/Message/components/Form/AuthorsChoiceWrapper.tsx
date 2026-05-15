@@ -3,8 +3,6 @@ import AuthorsChoice from "reused/Participants/components/AuthorsChoice"
 
 const AuthorsChoiceWrapper = () => {
   const [
-    authorsFilters,
-    authorsList,
     recipients,
     authorsPayload,
     onChoice
@@ -12,8 +10,6 @@ const AuthorsChoiceWrapper = () => {
   
   return (
     <AuthorsChoice
-      filters={authorsFilters}
-      authors={authorsList}
       members={recipients}
       authorsPayload={authorsPayload}
       handler={onChoice}

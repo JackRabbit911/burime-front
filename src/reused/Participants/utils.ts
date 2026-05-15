@@ -34,9 +34,9 @@ const newMember = (author: Author) => ({
 export const addNewMember = (members: Member[], author: Author) => [...members, newMember(author)]
 
 export const addGroupMembers = (members: Member[], group: Author[]) => {
-    const groupMembers = group.map((author) => newMember(author))
-    const mergedMembers = [...members, ...groupMembers]
-    return Array.from(new Map(mergedMembers.map(item => [item.id, item])).values());
+    const ids = members.map((item) => item.id)
+    const groupMembers = group.filter((item) => !ids.includes(item.id)).map((author) => newMember(author))
+    return [...members, ...groupMembers]
 }
 
 export const isPermission = (role: number, permission: number) => (role & permission) !== 0 ? true : false
