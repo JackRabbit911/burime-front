@@ -1,18 +1,25 @@
+import { useUnit } from "effector-react";
+
 import Pagination from "./Pagination"
+import type { Author } from "../schema";
 import AuthorSearch from "./AuthorSearch";
 import ChoiceControl from "./ChoiceControl";
-import type { Author } from "../schema";
+import { $authorsList } from "../store/authors";
+import { $referenceBooks } from "../store/reference";
+
 import type { AuthorsPayload, Member } from "../types";
 
 type Props = {
-  filters: string[];
-  authors: Author[];
   members: Member[] | [];
   authorsPayload: AuthorsPayload;
   handler: (author: Author) => void;
 }
 
-const AuthorsChoice = ({ filters, authors, members, authorsPayload, handler }: Props) => {
+const AuthorsChoice = ({ members, authorsPayload, handler }: Props) => {
+  const authors = useUnit($authorsList)
+  const referenceBooks = useUnit($referenceBooks)
+  const filters = referenceBooks?.authorsFilters || []
+
   return (
     <>
       <AuthorSearch
