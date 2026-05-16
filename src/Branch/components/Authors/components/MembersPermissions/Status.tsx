@@ -2,7 +2,6 @@ import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import { host } from "common/ajax";
-// import { host } from "common/constants";
 import { buttonEnabled } from "./utils";
 import { getStatusString } from "../../permissions";
 import { $permissions, $statusObj } from "Branch/store/bootstrap";
@@ -21,7 +20,7 @@ const Status = ({ __, member }: Props) => {
   const statusObj = useUnit($statusObj)
   const { getValues, setValue } = useFormContext()
 
-  const enable =  new buttonEnabled(permissions, statusObj, member)
+  const enable = new buttonEnabled(permissions, statusObj, member)
 
   const members = getValues('members')
   const status = getStatusString(statusObj, member?.status || 0)
@@ -59,7 +58,7 @@ const Status = ({ __, member }: Props) => {
 
   return (
     <>
-      <h3>{__('Status')} {__(status)} {member?.status}</h3>
+      <h3>{__('Status')} {__(status)}</h3>
       <button
         className="btn btn-soft btn-sm"
         onClick={addPermission(permissions.MANAGE | permissions.MODERATE)}
@@ -72,7 +71,7 @@ const Status = ({ __, member }: Props) => {
         onClick={setStatus(statusObj.invited)}
         disabled={!enable.accept()}
       >
-        {__('Accept to project')} {statusObj.invited} qq
+        {__('Accept to project')}
       </button>
       <button
         className="btn btn-soft btn-sm"

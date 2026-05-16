@@ -28,7 +28,7 @@ const PermissionCheckBox = ({ handler, member, label, value, checked, __ }: Prop
         type="checkbox"
         className="checkbox checkbox-sm"
         value={value}
-        checked={checked}
+        defaultChecked={checked}
         onChange={handleChange}
       />
     </label>
