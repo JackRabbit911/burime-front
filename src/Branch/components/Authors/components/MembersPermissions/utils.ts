@@ -1,6 +1,6 @@
+import { isPermission } from "reused/Participants/utils";
 import type { Member } from "reused/Participants/types";
 import type { Permissions, Statuses } from "Branch/schema/input";
-import { isPermission } from "reused/Participants/utils";
 
 export class buttonEnabled {
     readonly permissions: Permissions;
