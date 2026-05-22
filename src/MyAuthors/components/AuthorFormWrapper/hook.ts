@@ -5,8 +5,9 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 
 import { host } from "common/ajax"
 import { avatarSrc } from "common/utils"
+import { $ownAuthors } from "common/store/ownAuthors"
+import { $myMembers, authorSubmitted } from "MyAuthors/store"
 import { $authorView, viewSetted } from "MyAuthors/store/authorView"
-import { $myMembers, $ownAuthors, authorSubmitted } from "MyAuthors/store"
 import { formInputSchema, formOutputSchema, type FormInputType, type MyAuthor } from "MyAuthors/schema"
 
 export const useAuthorForm = (defaultAuthor?: MyAuthor) => {

@@ -11,7 +11,7 @@ export const getBootsrapUri = '/my/branch/bootstrap'
 export const saveBranchUri = '/my/branch/action/savebranch'
 export const saveDraftUri = '/my/branch/action/savedraft'
 export const deleteDraftUri = '/my/branch/action/rmdraft'
-export const getBranchReferenceUri = '/my/reference/branch'
+// export const getBranchReferenceUri = '/my/reference/branch'
 export const getBranchAuthorStatusUri = 'my/branch/status/get'
 export const setBranchAuthorStatusUri = 'my/branch/status/set'
 

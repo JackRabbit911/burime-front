@@ -4,8 +4,8 @@ import { useFormContext } from "react-hook-form";
 import { host } from "common/ajax";
 import { buttonEnabled } from "./utils";
 import { getStatusString } from "../../permissions";
-import { $permissions, $statusObj } from "Branch/store/bootstrap";
 import { memberIdResetted } from "reused/Participants/store/authors";
+import { $permissions, $statusObj } from "reused/Participants/store/reference";
 
 import type { GetText } from "common/i18n/types";
 import type { Member } from "reused/Participants/types";

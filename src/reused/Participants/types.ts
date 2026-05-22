@@ -13,6 +13,6 @@ export type AuthorsPayload = {
 }
 
 export type OwnAuthor = {
-    id: number | undefined;
+    id: number;
     alias: string;
 }

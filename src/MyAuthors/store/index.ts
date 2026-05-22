@@ -1,4 +1,5 @@
-import { combine, createEffect, createEvent, createStore, sample } from "effector";
+import { pending } from "patronum";
+import { createEffect, createEvent, createStore, sample } from "effector";
 
 import ajax from "common/ajax";
 import { globalReset } from "common/store";
@@ -10,7 +11,6 @@ import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "common/con
 import type { ApiResponse } from "common/ajax/types";
 import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
-import { pending } from "patronum";
 
 type Members = {
     members: Member[];
@@ -40,14 +40,6 @@ export const $myAuthors = createStore<MyAuthor[]>([])
 
 export const $myMembers = createStore<Member[]>([])
     .reset(globalReset)
-
-export const $ownAuthors = combine($myAuthors, (store) => (
-    store.filter((value) => value.owner === true && value.openclosed === 2)
-        .map((value) => ({
-            id: value.id,
-            alias: value.alias,
-        }))
-))
 
 export const $scrf = createStore('')
     .reset(globalReset)

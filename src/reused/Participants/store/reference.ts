@@ -3,7 +3,7 @@ import { createEffect, createEvent, createStore, sample } from "effector"
 import ajax from "common/ajax"
 import type { ApiResponse } from "common/ajax/types"
 
-type ReferenceBooks = {
+export type ReferenceBooks = {
     authorsFilters: string[];
     authorsPermissions?: { [index: string]: number };
     authorsStatuses?: { [index: string]: number };
@@ -18,6 +18,9 @@ const getReferenceFx = createEffect(
 )
 
 export const $referenceBooks = createStore<ReferenceBooks | null>(null)
+
+export const $permissions = $referenceBooks.map((store) => store?.authorsPermissions || {})
+export const $statusObj = $referenceBooks.map((store) => store?.authorsStatuses || {})
 
 sample({
     clock: referenceRecived,

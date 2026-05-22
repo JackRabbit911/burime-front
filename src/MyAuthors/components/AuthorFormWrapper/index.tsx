@@ -4,7 +4,6 @@ import Controls from "../Controls"
 import AuthorForm from "../AuthorForm"
 import { useAuthorForm } from "./hook"
 import { useTranslate } from "common/i18n/hooks"
-import { getGroupReferenceUri } from "common/constants"
 import Members from "reused/Participants/components/Members"
 import MembersPermissions from "../Participants/MembersPermissions"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
@@ -33,7 +32,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
           onClick={() => { setView('form') }}
           style={{ cursor: 'pointer' }}
         >
-          <img src={src} alt={author.alias}/>
+          <img src={src} alt={author?.alias}/>
         </div>
         <div className="flex flex-col">
           <h2 className="text-xl">
@@ -56,7 +55,6 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
               ownAuthors={ownAuthors}
               choiceList={<Members />}
               permissions={<MembersPermissions />}
-              referenceUri={getGroupReferenceUri}
             />
           }
         </fieldset>

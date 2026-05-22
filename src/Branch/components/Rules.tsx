@@ -1,20 +1,10 @@
-// import { t } from "common/i18n/utils"
 import CheckBox from "reused/CheckBox"
 import RadioBox from "reused/RadioBox"
 import Textarea from "reused/Textarea"
 import NumberInput from "reused/NumberInput"
-import type { GetText } from "common/i18n/types"
+import type { GetTextProp } from "common/i18n/types"
 
-type Props = {
-  step: number;
-  __: GetText;
-}
-
-const Rules = ({ step, __ }: Props) => {
-  if (step !== 2) {
-    return <></>
-  }
-
+const Rules = ({ __ }: GetTextProp) => {
   return (
     <fieldset className="fieldset">
       <div className="grid md:grid-cols-3 gap-4">

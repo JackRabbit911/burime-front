@@ -78,6 +78,14 @@ export const bootstrapSch = z.object({
     draft: z.number().positive().nullable().optional(),
 })
 
+const bootstrapStore = bootstrapSch.omit({
+    ownAuthors: true,
+    authorsFilters: true,
+    authorsPermissions: true,
+    authorsStatuses: true,
+})
+
+export type BootstrapStore = z.infer<typeof bootstrapStore>
 export type Bootstrap = z.infer<typeof bootstrapSch>
 export type Genre = z.infer<typeof genreSch>
 export type AuthorsFilters = z.infer<typeof authorsFilters>

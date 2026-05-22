@@ -1,12 +1,11 @@
 import { perPages } from "common/constants"
 import { base64ToFile } from "Branch/utils/files"
-import type { Bootstrap } from "Branch/schema/input"
-import type { OwnAuthors } from "Branch/schema/authors"
-import type { AuthorsPayload, Member } from "reused/Participants/types"
+import type { BootstrapStore } from "Branch/schema/input"
+import type { AuthorsPayload, Member, OwnAuthor } from "reused/Participants/types"
 
-export const getDefaults = (bootstrap: Bootstrap) => {
-    const masterId = getMasterId(bootstrap.members, bootstrap.ownAuthors)
-    const members = getMembers(bootstrap.members, bootstrap.ownAuthors, masterId)
+export const getDefaults = (bootstrap: BootstrapStore, ownAuthors: OwnAuthor[]) => {
+    const masterId = getMasterId(bootstrap.members, ownAuthors)
+    const members = getMembers(bootstrap.members, ownAuthors, masterId)
 
     return {
         branch: bootstrap.branch,
@@ -30,7 +29,7 @@ function setAuthorsPayload(limit = perPages[0]): AuthorsPayload {
     }
 }
 
-function getMasterId(members: Member[], ownAuthors: OwnAuthors) {
+function getMasterId(members: Member[], ownAuthors: OwnAuthor[]): number {
     const master = members.length > 0
         ? members.reduce((acc, val) => {
             if (acc.role < val.role) {
@@ -43,12 +42,12 @@ function getMasterId(members: Member[], ownAuthors: OwnAuthors) {
     return !master ? ownAuthors[0].id : master.id
 }
 
-export const changeMaster = (members: Member[], ownAuthors: OwnAuthors, masterId: number) => {
+export const changeMaster = (members: Member[], ownAuthors: OwnAuthor[], masterId: number) => {
     const ownAuthorsIds: number[] = []
     let masterAlias = ''
 
     ownAuthors.forEach((ownAuthor) => {
-        ownAuthorsIds.push(ownAuthor.id)
+        ownAuthorsIds.push(ownAuthor?.id || 0)
 
         if (ownAuthor.id === Number(masterId)) {
             masterAlias = ownAuthor.alias
@@ -76,6 +75,6 @@ export const changeMaster = (members: Member[], ownAuthors: OwnAuthors, masterId
     return result;
 }
 
-function getMembers(members: Member[], ownAuthors: OwnAuthors, masterId: number) {
+function getMembers(members: Member[], ownAuthors: OwnAuthor[], masterId: number) {
     return members.length === 0 ? changeMaster(members, ownAuthors, masterId) : members
 }

@@ -1,11 +1,14 @@
-import { combine, createEffect, createEvent, createStore, sample } from "effector";
+import { createEffect, createEvent, createStore, sample } from "effector";
 
 import ajax from "common/ajax";
 import { getBootsrapUri } from "common/constants";
 import { $status, globalReset } from "common/store";
+import { $ownAuthors } from "common/store/ownAuthors";
+
 import type { ApiResponse } from "common/ajax/types";
 import type { AxiosError, AxiosResponse } from "axios";
-import { bootstrapSch, type Bootstrap } from "Branch/schema/input";
+import { bootstrapSch, type Bootstrap, type BootstrapStore } from "Branch/schema/input";
+import { $referenceBooks, type ReferenceBooks } from "reused/Participants/store/reference";
 
 type AxiosApiResponse = AxiosResponse<ApiResponse<Bootstrap>>;
 type Segment = string | undefined;
@@ -19,11 +22,12 @@ export const getBootstrapFx = createEffect<Segment[], AxiosApiResponse, AxiosErr
         ),
 );
 
-export const $bootstrap = createStore<Bootstrap | null>(null)
+export const $bootstrap = createStore<BootstrapStore | null>(null)
     .reset(globalReset)
 
-export const $permissions = combine($bootstrap, (store) => store?.authorsPermissions || {})
-export const $statusObj = combine($bootstrap, (store) => store?.authorsStatuses || {})
+export const $totalGenres  = $bootstrap.map((store) => store?.total_genres || [])
+
+const allowedKeys = ['authorsFilters', 'authorsPermissions', 'authorsStatuses']
 
 sample({
     clock: getBootstrapFx.doneData,
@@ -43,8 +47,32 @@ sample({
 sample({
     clock: getBootstrapFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
-    fn: (response) => response.data.result,
+    fn: (response) => {
+        const denyKeys = [...allowedKeys, 'ownAuthors']
+
+        return Object.fromEntries(
+            Object.entries(response.data.result).filter(([key]) => !denyKeys.includes(key))
+        )  as Bootstrap
+    },
     target: $bootstrap,
+});
+
+sample({
+    clock: getBootstrapFx.doneData,
+    filter: (response) => Boolean(response?.data?.success),
+    fn: (response) => response.data.result.ownAuthors,
+    target: $ownAuthors,
+});
+
+sample({
+    clock: getBootstrapFx.doneData,
+    filter: (response) => Boolean(response?.data?.success),
+    fn: (response): ReferenceBooks => {
+        return Object.fromEntries(
+            Object.entries(response.data.result).filter(([key]) => allowedKeys.includes(key))
+        )  as ReferenceBooks
+    },
+    target: $referenceBooks,
 });
 
 sample({
