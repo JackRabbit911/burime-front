@@ -1,14 +1,15 @@
 import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form";
 import { fileToUrl, getGenreString } from "../utils";
-import { $bootstrap } from "../../../store/bootstrap";
+import { $totalGenres } from "../../../store/bootstrap";
 import { getMasterAlias } from "../../../utils";
+import { $ownAuthors } from "common/store/ownAuthors";
 
 const BgLayers = () => {
-  const bootstrap = useUnit($bootstrap)
+  const totalGenres = useUnit($totalGenres)
+  const ownAuthors = useUnit($ownAuthors)
   const { getValues, watch, formState: { errors } } = useFormContext()
 
-  const ownAuthors = bootstrap?.ownAuthors || []
   const masterId = getValues('masterId')
 
   const authorName = getMasterAlias(ownAuthors, masterId)
@@ -21,7 +22,6 @@ const BgLayers = () => {
   const bgUrl = fileToUrl(bgImg)
   const coverUrl = fileToUrl(cover)
   const branchGenres = getValues('branch_genres')
-  const totalGenres = bootstrap?.total_genres || []
   const genreStr = getGenreString(totalGenres, branchGenres)
 
   return (
