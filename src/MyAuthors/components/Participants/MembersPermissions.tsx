@@ -1,15 +1,17 @@
+import { useEffect } from "react";
 import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import Status from "./Status";
+import { useTranslate } from "common/i18n/hooks";
+import { getGroupReferenceUri } from "common/constants";
 import { getCurrentMember } from "reused/Participants/utils";
-import { $referenceBooks } from "reused/Participants/store/reference";
 import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
 import Participants from "reused/Participants/components/Permissions/Participants";
+import { $referenceBooks, referenceRecived } from "reused/Participants/store/reference";
 import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
 
 import type { Member } from "reused/Participants/types";
-import { useTranslate } from "common/i18n/hooks";
 
 const MembersPermissions = () => {
   const onClose = useUnit(memberIdResetted)
@@ -24,16 +26,20 @@ const MembersPermissions = () => {
   const __ = useTranslate()
 
   const handleCheck = (val: number, id: number, isAdd: boolean) => {
-      const newMembers = members.map((value: Member) => {
-        if (value.id === id) {
-          value.role = isAdd ? value.role | val : value.role &= ~val
-        }
-  
-        return value
-      })
-  
-      setValue('members', newMembers)
-    }
+    const newMembers = members.map((value: Member) => {
+      if (value.id === id) {
+        value.role = isAdd ? value.role | val : value.role &= ~val
+      }
+
+      return value
+    })
+
+    setValue('members', newMembers)
+  }
+
+  useEffect(() => {
+    referenceRecived(getGroupReferenceUri)
+  }, [])
 
   return (
     <>
