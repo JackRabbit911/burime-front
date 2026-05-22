@@ -11,12 +11,11 @@ type Props = {
   ownAuthors: OwnAuthor[];
   choiceList: React.ReactNode;
   permissions: React.ReactNode;
-  referenceUri: string;
 }
 
-const AuthorsWrapper = ({ ownAuthors, choiceList, permissions, referenceUri }: Props) => {
+const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
   const memberId = useUnit($memberId)
-  const [members, authorsPayload, onChoice] = useAuthorsWrapper(referenceUri)
+  const [members, authorsPayload, onChoice] = useAuthorsWrapper()
 
   return (
     <div className="grid md:grid-cols-3 gap-4">
