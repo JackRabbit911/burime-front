@@ -6,13 +6,13 @@ import Members from "reused/Participants/components/Members";
 import MembersPermissions from "./components/MembersPermissions";
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper";
 
-import type { Bootstrap } from "Branch/schema/input";
+import type { OwnAuthor } from "reused/Participants/types";
 
 type Props = {
-  bootstrap: Bootstrap;
+  ownAuthors: OwnAuthor[];
 }
 
-const Authors = ({ bootstrap: { ownAuthors } }: Props) => {
+const Authors = ({ ownAuthors }: Props) => {
   const { watch, setValue } = useFormContext()
   const members = watch('members') || []
   const masterId = watch('masterId')
