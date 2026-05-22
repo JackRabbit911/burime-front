@@ -41,4 +41,3 @@ export const ownAuthors = z.array(author)
 
 export type Author = z.infer<typeof author>
 export type Authors = z.infer<typeof authorsSch>
-export type OwnAuthors = z.infer<typeof ownAuthors>
