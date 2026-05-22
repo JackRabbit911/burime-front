@@ -7,20 +7,15 @@ import SameWeightGenres from "./components/SameWeightGenres";
 import type { Genre } from "../../schema/input";
 
 type Props = {
-  step: number;
   genres: Genre[];
   checked: number[];
   fieldName?: string;
 }
 
-const Genres = ({ step, genres, checked, fieldName = 'branch_genres' }: Props) => {
+const Genres = ({ genres, checked, fieldName = 'branch_genres' }: Props) => {
   const __ = useTranslate()
   const { getValues, formState: { errors } } = useFormContext();
   const err = getObjectProp(errors, fieldName)
-
-  if (step !== 1) {
-    return null
-  }
   
   checked = getValues(fieldName) || checked
 
