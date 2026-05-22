@@ -3,14 +3,13 @@ import { useUnit } from "effector-react"
 import { useFormContext } from "react-hook-form"
 
 import { getAuthorsFx } from "../store/authors"
-import { referenceRecived } from "../store/reference"
 import { $authorsPayload } from "../store/athorsPayload"
 import { addGroupMembers, addNewMember } from "../utils"
 import { getGroupMembersFx } from "../store/groupMembers"
 
 import type { Author } from "../schema"
 
-export const useAuthorsWrapper = (referenceUri: string) => {
+export const useAuthorsWrapper = () => {
     const authorsPayload = useUnit($authorsPayload)
     const { watch, setValue } = useFormContext()
     const members = watch('members') || []
@@ -30,10 +29,6 @@ export const useAuthorsWrapper = (referenceUri: string) => {
     }
     
     const onChoice = authorsPayload.filter === 'groups' ? onChoiceGroup : onChoiceAuthor
-    
-    useEffect(() => {
-        referenceRecived(referenceUri)
-    }, [])
     
     useEffect(() => {
         getAuthorsFx(authorsPayload)
