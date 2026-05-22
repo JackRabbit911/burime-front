@@ -7,6 +7,10 @@ import type { Argv, TranslateContextType, TranslateType } from "./types";
 
 export const TranslateContext = createContext<TranslateContextType | undefined>(undefined)
 
+function isEmpty(value: string | null | undefined) {
+    return value === undefined || value === null || value === "";
+}
+
 type Props = {
   deps?: React.DependencyList;
   children?: React.ReactNode;
@@ -22,7 +26,7 @@ const TranslateProvider = ({ deps = [], children }: Props) => {
       return sprintf(translate[key], ...argv)
     }
 
-    if (!translate[key] && !translateKeys.current.includes(key)) {
+    if (!translate[key] && !translateKeys.current.includes(key) && !isEmpty(key)) {
       translateKeys.current.push(key)
     }
 
