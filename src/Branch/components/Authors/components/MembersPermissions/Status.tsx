@@ -60,6 +60,7 @@ const Status = ({ __, member }: Props) => {
       <button
         className="btn btn-soft btn-sm"
         onClick={() => {window.open(`${host}/author/${member?.id}`, '_blank')}}
+        disabled={!member}
       >
         {__('Show profile')}
       </button>
