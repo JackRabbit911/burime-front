@@ -1,14 +1,8 @@
-import { useUnit } from "effector-react";
-import { useFormContext } from "react-hook-form";
-
 import { host } from "common/ajax";
-import { buttonEnabled } from "./utils";
-import { getStatusString } from "../../permissions";
-import { memberIdResetted } from "reused/Participants/store/authors";
-import { $permissions, $statusObj } from "reused/Participants/store/reference";
 
 import type { GetText } from "common/i18n/types";
 import type { Member } from "reused/Participants/types";
+import { useStatus } from "../../status";
 
 type Props = {
   __: GetText;
@@ -16,39 +10,15 @@ type Props = {
 }
 
 const Status = ({ __, member }: Props) => {
-  const permissions = useUnit($permissions)
-  const statusObj = useUnit($statusObj)
-  const { getValues, setValue } = useFormContext()
-
-  const enable = new buttonEnabled(permissions, statusObj, member)
-
-  const members = getValues('members')
-  const status = getStatusString(statusObj, member?.status || 0)
-
-  const addPermission = (permission: number) => () => {
-    const role =  member?.role || 1
-    const newMask = role | permission
-    setValue('mask', newMask)
-  }
-
-  const setStatus = (status: number) => () => {
-    const newMembers = members.map((value: Member) => {
-      if (value.id === member?.id) {
-        value.status = status
-      }
-
-      return value
-    })
-
-    setValue('members', newMembers)
-  }
-
-  const deleteMember = (author: Member | null) => () => {
-    if (author) {
-      setValue('members', members.filter((item: Member) => item.id !== author.id))
-      memberIdResetted()
-    }
-  }
+  const {
+    permissions,
+    enable,
+    statusObj,
+    status,
+    addPermission,
+    setStatus,
+    deleteMember
+  } = useStatus(member)
 
   return (
     <>
