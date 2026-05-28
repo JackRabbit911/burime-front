@@ -13,6 +13,7 @@ type Props<TFieldValues extends FieldValues> = {
   name: FieldPath<TFieldValues>;
   control: Control<TFieldValues>;
   options: BitmaskOption[];
+  disabled?: boolean;
 }
 
 const BitMask = <TFieldValues extends FieldValues>({
@@ -20,6 +21,7 @@ const BitMask = <TFieldValues extends FieldValues>({
   name,
   control,
   options,
+  disabled = false,
 }: Props<TFieldValues>) => {
   return (
     <Controller
@@ -51,6 +53,7 @@ const BitMask = <TFieldValues extends FieldValues>({
                     checked={isChecked}
                     value={value}
                     onChange={handleChange}
+                    disabled={disabled}
                   />
                 </label>
               )
