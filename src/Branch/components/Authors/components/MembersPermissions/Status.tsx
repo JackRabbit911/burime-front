@@ -26,15 +26,9 @@ const Status = ({ __, member }: Props) => {
   const status = getStatusString(statusObj, member?.status || 0)
 
   const addPermission = (permission: number) => () => {
-    const newMembers = members.map((value: Member) => {
-      if (value.id === member?.id) {
-        value.role = value.role | permission
-      }
-
-      return value
-    })
-
-    setValue('members', newMembers)
+    const role =  member?.role || 1
+    const newMask = role | permission
+    setValue('mask', newMask)
   }
 
   const setStatus = (status: number) => () => {
