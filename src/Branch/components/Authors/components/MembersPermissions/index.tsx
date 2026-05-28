@@ -4,48 +4,35 @@ import { useFormContext } from "react-hook-form";
 import Status from "./Status";
 import { useTranslate } from "common/i18n/hooks";
 import { getCurrentMember } from "reused/Participants/utils";
+import { $memberId } from "reused/Participants/store/authors";
 import { $referenceBooks } from "reused/Participants/store/reference";
-import { $memberId, memberIdResetted } from "reused/Participants/store/authors";
 import Participants from "reused/Participants/components/Permissions/Participants";
 import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
-
-import type { Member } from "reused/Participants/types";
 
 const MembersPermissions = () => {
   const __ = useTranslate()
   const authorId = useUnit($memberId)
-  const onClose = useUnit(memberIdResetted)
   const referenceBooks = useUnit($referenceBooks)
   const authorsPermissions = referenceBooks?.authorsPermissions
 
-  const { getValues, setValue } = useFormContext()
+  const { getValues } = useFormContext()
+
   const members = getValues('members')
+
   const currentAuthor = getCurrentMember(members, authorId)
-
-  const handleCheck = (val: number, id: number, isAdd: boolean) => {
-    const newMembers = members.map((value: Member) => {
-      if (value.id === id) {
-        value.role = isAdd ? value.role | val : value.role &= ~val
-      }
-
-      return value
-    })
-
-    setValue('members', newMembers)
-  }
-
+  
   return (
     <>
       <div className="md:col-span-3">
         <h2 className="text-lg">
-          {currentAuthor?.alias || authorId}
+          {currentAuthor?.alias || __('Participant not selected')}
         </h2>
       </div>
       <fieldset className="fieldset">
         <Participants
           __={__}
           members={members}
-          authorId={authorId}
+          member={currentAuthor}
         />
       </fieldset>
       <div className="md:col-span-2 grid grid-cols-2 gap-4">
@@ -53,7 +40,6 @@ const MembersPermissions = () => {
           <PermissionsList
             __={__}
             member={currentAuthor}
-            handler={handleCheck}
             permissions={authorsPermissions}
           />
         </fieldset>
@@ -63,11 +49,6 @@ const MembersPermissions = () => {
             member={currentAuthor}
           />
         </fieldset>
-        <button className="md:col-span-2 btn btn-sm"
-          onClick={onClose}
-        >
-          {__('Close')}
-        </button>
       </div>
     </>
   )

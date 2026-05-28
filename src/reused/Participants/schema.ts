@@ -16,6 +16,5 @@ export const authorsSch = z.object({
     count: z.number().nonnegative().int(),
 })
 
-
 export type Author = z.infer<typeof author>
 export type Authors = z.infer<typeof authorsSch>

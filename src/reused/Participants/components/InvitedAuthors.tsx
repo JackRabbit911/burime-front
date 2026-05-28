@@ -1,4 +1,3 @@
-import { memberIdSetted } from "../store/authors";
 import type { Member } from "../types";
 
 type Props = {
@@ -11,8 +10,7 @@ const InvitedAuthors = ({ author, onDelete }: Props) => {
     <div className="flex flex-row justify-between gap-2 w-full overflow-hidden">
       <div
         key={author.id}
-        onClick={() => memberIdSetted(author.id)}
-        className="grow text-wrap text-center text-sm overflow-hidden text-ellipsis transition-colors bg-base-100 hover:bg-base-200 border rounded border-zinc-300 cursor-pointer hover:border-base-200">
+        className="grow text-wrap text-center text-sm overflow-hidden text-ellipsis transition-colors bg-base-100 border rounded border-zinc-300">
         {author.alias}
       </div>
       <button

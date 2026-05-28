@@ -6,7 +6,7 @@ import type { AuthorsPayload, Member, OwnAuthor } from "reused/Participants/type
 export const getDefaults = (bootstrap: BootstrapStore, ownAuthors: OwnAuthor[]) => {
     const masterId = getMasterId(bootstrap.members, ownAuthors)
     const members = getMembers(bootstrap.members, ownAuthors, masterId)
-
+    
     return {
         branch: bootstrap.branch,
         branch_genres: bootstrap.branch_genres,
@@ -17,6 +17,7 @@ export const getDefaults = (bootstrap: BootstrapStore, ownAuthors: OwnAuthor[]) 
         bgImg: base64ToFile(bootstrap.files.bg_img, 'background'),
         authorsPayload: setAuthorsPayload(),
         draft: bootstrap.draft || null,
+        mask: 3,
     }
 }
 

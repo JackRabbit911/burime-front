@@ -1,18 +1,18 @@
-import { combine, createEffect, createEvent, createStore, sample } from "effector"
 import type { AxiosError, AxiosResponse } from "axios"
+import { combine, createEffect, createEvent, createStore, sample } from "effector"
 
 import ajax from "common/ajax"
 import { getAuthorsUri } from "common/constants"
-import type { ApiResponse } from "common/ajax/types"
 import { $status, globalReset } from "common/store"
 import { authorsSch, type Authors } from "../schema"
 import type { AuthorsPayload } from "../types"
+import type { ApiResponse } from "common/ajax/types"
 
 export const authorsPageChanged = createEvent<number>()
 export const authorsLimitChanged = createEvent<number>()
-
 export const memberIdSetted = createEvent<number>()
 export const memberIdResetted = createEvent()
+export const membersViewSetted = createEvent<boolean>()
 
 export const getAuthorsFx = createEffect
 <AuthorsPayload, AxiosResponse<ApiResponse<Authors>>, AxiosError>(
@@ -31,6 +31,9 @@ export const $authorsList = combine($authors, (authors) => authors?.list || [])
 export const $memberId = createStore<number>(0)
     .on(memberIdSetted, (_, id) => id)
     .reset(memberIdResetted, globalReset)
+
+export const $membersView = createStore<boolean>(true)
+    .on(membersViewSetted, (_, view) => view)
 
 sample({
     clock: getAuthorsFx.doneData,
