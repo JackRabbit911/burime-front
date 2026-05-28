@@ -2,7 +2,7 @@ import { useUnit } from "effector-react"
 
 import Select from "./Select"
 import AuthorsChoice from "./AuthorsChoice"
-import { $memberId } from "../store/authors"
+import { $membersView } from "../store/authors"
 import { useAuthorsWrapper } from "../hooks/authorsWrapper"
 
 import type { OwnAuthor } from "../types"
@@ -14,12 +14,12 @@ type Props = {
 }
 
 const AuthorsWrapper = ({ ownAuthors, choiceList, permissions }: Props) => {
-  const memberId = useUnit($memberId)
+  const isMembers = useUnit($membersView)
   const [members, authorsPayload, onChoice] = useAuthorsWrapper()
 
   return (
     <div className="grid md:grid-cols-3 gap-4">
-      {memberId === 0 ?
+      {isMembers ?
         <>
           <div>
             {ownAuthors.length > 0 ?
