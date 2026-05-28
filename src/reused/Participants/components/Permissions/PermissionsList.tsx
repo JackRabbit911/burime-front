@@ -50,6 +50,7 @@ const PermissionsList = ({ __, member, permissions }: Props) => {
         name="mask"
         control={control}
         options={options}
+        disabled={!member}
       />
     </>
   )
