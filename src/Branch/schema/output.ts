@@ -23,6 +23,7 @@ export const formSchema = z.object({
   bgImg: imageFile,
   cover: imageFile,
   authorsPayload,
+  mask: z.number(),
 });
 
 export const finalSchema = formSchema.omit({
