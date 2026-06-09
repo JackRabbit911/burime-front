@@ -8,6 +8,8 @@ import { addGroupMembers, addNewMember } from "../utils"
 import { getGroupMembersFx } from "../store/groupMembers"
 
 import type { Author } from "../schema"
+import { referenceRecived } from "../store/reference"
+import { getGroupReferenceUri } from "common/constants"
 
 export const useAuthorsWrapper = () => {
     const authorsPayload = useUnit($authorsPayload)
@@ -33,6 +35,10 @@ export const useAuthorsWrapper = () => {
     useEffect(() => {
         getAuthorsFx(authorsPayload)
     }, [authorsPayload])
+
+    useEffect(() => {
+    referenceRecived(getGroupReferenceUri)
+  }, [])
     
     return [members, authorsPayload, onChoice]
 }
