@@ -1,14 +1,12 @@
-import { useEffect } from "react";
 import { useUnit } from "effector-react";
 import { useFormContext } from "react-hook-form";
 
 import Status from "./Status";
 import { useTranslate } from "common/i18n/hooks";
-import { getGroupReferenceUri } from "common/constants";
 import { getCurrentMember } from "reused/Participants/utils";
 import { $memberId } from "reused/Participants/store/authors";
 import Participants from "reused/Participants/components/Permissions/Participants";
-import { $referenceBooks, referenceRecived } from "reused/Participants/store/reference";
+import { $referenceBooks } from "reused/Participants/store/reference";
 import PermissionsList from "reused/Participants/components/Permissions/PermissionsList";
 
 const MembersPermissions = () => {
@@ -21,10 +19,6 @@ const MembersPermissions = () => {
   const currentAuthor = getCurrentMember(members, authorId)
 
   const __ = useTranslate()
-
-  useEffect(() => {
-    referenceRecived(getGroupReferenceUri)
-  }, [])
 
   return (
     <>
