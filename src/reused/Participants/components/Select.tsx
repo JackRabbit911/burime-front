@@ -18,7 +18,8 @@ const Select = ({ fieldName, label, options }: Props) => {
         {__(label)}
       </legend>
       <select
-        className="select w-full"
+        className="select select-bordered max-w-full truncate"
+        style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
         {...register(fieldName, { required: true })}
         value={String(watch(fieldName))}
       >
@@ -30,6 +31,18 @@ const Select = ({ fieldName, label, options }: Props) => {
           )
         )}
       </select>
+
+      {/* <span className="truncate">
+        Ефим Череззаборногузадерищенский второй
+      </span> */}
+
+      {/* <select
+        className="w-full"
+        style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+      >
+        <option>This is an extremely long option text that will overflow</option>
+      </select> */}
+
     </fieldset>
   )
 }
