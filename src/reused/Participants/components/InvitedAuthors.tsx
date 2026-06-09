@@ -10,7 +10,7 @@ const InvitedAuthors = ({ author, onDelete }: Props) => {
     <div className="flex flex-row justify-between gap-2 w-full overflow-hidden">
       <div
         key={author.id}
-        className="grow text-wrap text-center text-sm overflow-hidden text-ellipsis transition-colors bg-base-100 border rounded border-zinc-300">
+        className="grow text-wrap text-center text-sm max-w-full truncate transition-colors bg-base-100 border rounded border-zinc-300 px-1">
         {author.alias}
       </div>
       <button
