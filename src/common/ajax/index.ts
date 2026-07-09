@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { statusSetted } from "common/store";
 import { detectLang } from "common/i18n/config";
 
@@ -16,16 +16,20 @@ const ajax = axios.create({
     },
     withCredentials: true, // Разрешает отправку кук
     withXSRFToken: true,
-    // xsrfCookieName: 'XSRF-TOKEN', // Имя куки с токеном
-    // xsrfHeaderName: 'X-CSRF-TOKEN', // Имя заголовка для отправки
 });
 
 ajax.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error instanceof AxiosError) {
-            statusSetted(error?.status || 400)
+        const status = error.response.status
+
+        if (error.response) {
+            if (status === 401) {
+                window.location.href = host + '/auth'
+            }
         }
+
+        statusSetted(status)
 
         return Promise.reject(error);
     },
