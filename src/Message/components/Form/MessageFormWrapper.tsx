@@ -12,6 +12,7 @@ import AuthorsChoiceWrapper from "./AuthorsChoiceWrapper"
 import Select from "reused/Participants/components/Select"
 import { useMessageForm } from "Message/hooks/messageform"
 import { useMessageTemplate } from "Message/hooks/messageTemplate"
+import { useServerErrors } from "common/hook"
 
 const MessageFormWrapper = () => {
   const { message, isPending } = useMessageTemplate()
@@ -23,6 +24,7 @@ const MessageFormWrapper = () => {
 
   const Component = view === 'form' ? <Form message={message} /> : <AuthorsChoiceWrapper />
   const __ = useTranslate()
+  useServerErrors(methods.setError)
 
   if (ownAuthors.length === 0) {
     return (

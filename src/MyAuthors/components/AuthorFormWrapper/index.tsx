@@ -9,6 +9,7 @@ import MembersPermissions from "../Participants/MembersPermissions"
 import AuthorsWrapper from "reused/Participants/components/AuthorsWrapper"
 
 import type { MyAuthor } from "MyAuthors/schema"
+import { useServerErrors } from "common/hook"
 
 type Props = {
   defaultAuthor?: MyAuthor;
@@ -23,6 +24,7 @@ const AuthorFormWrapper = ({ defaultAuthor }: Props) => {
   } = useAuthorForm(defaultAuthor)
 
   const __ = useTranslate()
+  useServerErrors(methods.setError)
 
   return (
     <FormProvider {...methods}>

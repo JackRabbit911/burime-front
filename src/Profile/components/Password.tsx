@@ -6,6 +6,7 @@ import { passwordSubmitted } from "../store";
 import { passwordSchema, type ConfirmPassword } from "../schema";
 import { useTranslate } from "common/i18n/hooks";
 import { isObjectEmpty } from "common/utils";
+import { useServerErrors } from "common/hook";
 
 const defaulValues = () => ({
   password: '',
@@ -20,6 +21,7 @@ const Password = () => {
   });
 
   const __ = useTranslate()
+  useServerErrors(methods.setError)
 
   const onSubmit: SubmitHandler<ConfirmPassword> = (data) => {
     const valid = passwordSchema.safeParse(data)
