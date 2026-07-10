@@ -3,7 +3,6 @@ import { createEffect, createEvent, createStore, sample } from "effector";
 
 import ajax from "common/ajax";
 import { modalOpened } from "reused/Modal/store";
-import { loading } from "reused/InModal/Loading";
 import { $status, globalReset } from "common/store";
 import type { ApiResponse } from "common/ajax/types";
 import type { FormData, DraftData } from "../schema/output";
@@ -45,12 +44,6 @@ sample({
 })
 
 sample({
-    clock: publishFx.failData,
-    fn: (error) => error.message,
-    target: modalOpened,
-})
-
-sample({
     clock: [publishFx.doneData, draftFx.doneData],
     filter: (response) => !response?.data?.success,
     fn: (response) => {
@@ -58,12 +51,6 @@ sample({
         return 400
     },
     target: $status,
-})
-
-sample({
-    clock: [published, draftClicked],
-    fn: () => loading,
-    target: modalOpened,
 })
 
 sample({
