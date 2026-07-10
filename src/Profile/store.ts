@@ -3,7 +3,6 @@ import { createEffect, createEvent, sample } from "effector";
 
 import ajax from "common/ajax";
 import { modalOpened } from "reused/Modal/store";
-import { serverErrorRecieved } from "common/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { successRedirectDialog } from "./components/SuccessRedirectDialog";
 import { getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constants";
@@ -46,13 +45,6 @@ sample({
     filter: (response) => Boolean(response?.data?.success),
     fn: () => successRedirectDialog({}),
     target: modalOpened,
-})
-
-sample({
-    source: sendProfileFx.doneData,
-    filter: (response) => !response?.data?.success,
-    fn: (response) => response?.data?.error,
-    target: serverErrorRecieved,
 })
 
 sample({

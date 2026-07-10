@@ -17,6 +17,7 @@ import { formSchema } from "Branch/schema/output";
 import { $ownAuthors } from "common/store/ownAuthors";
 
 import type { BootstrapStore } from "Branch/schema/input";
+import { useServerErrors } from "common/hook";
 
 type Props = {
   bootstrap: BootstrapStore;
@@ -34,6 +35,7 @@ const Form = ({ bootstrap }: Props) => {
   });
 
   const __ = useTranslate()
+  useServerErrors(methods.setError)
 
   return (
     <FormProvider {...methods}>

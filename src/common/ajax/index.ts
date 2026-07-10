@@ -1,6 +1,6 @@
 import axios from "axios";
-import { statusSetted } from "common/store";
 import { detectLang } from "common/i18n/config";
+import { serverErrorRecieved, statusSetted } from "common/store";
 
 const { protocol, hostname } = window.location
 const lang = detectLang()
@@ -26,6 +26,8 @@ ajax.interceptors.response.use(
         if (error.response) {
             if (status === 401) {
                 window.location.href = host + '/auth'
+            } else if (status === 422) {
+                serverErrorRecieved(error.response?.data?.error)
             }
         }
 
