@@ -20,7 +20,7 @@ const Branch = () => {
     getBootstrapFx([id, draft])
   }, [])
 
-   if (status >= 400) {
+   if (status >= 400 && status !== 422) {
     return (
         <ErrorCmp status={status} />
     )
