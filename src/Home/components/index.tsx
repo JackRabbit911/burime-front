@@ -8,6 +8,8 @@ import Message from "reused/icons/Message"
 import { globalReset } from "common/store"
 import ErrorOrPending from "reused/ErrorOrPendig"
 import { $isPending, $myStat, getMyStatFx } from "Home/store"
+import Cog from "reused/icons/Cog"
+import Admin from "./Admin"
 
 const Home = () => {
   const [stat, isLoading] = useUnit([$myStat, $isPending])
@@ -76,6 +78,12 @@ const Home = () => {
           icon={<Book />}
           desc="Уже неплохо"
         />
+        {stat?.admin && <Admin
+          title="Admin Panel"
+          value="Admin"
+          icon={<Cog />}
+          desc="Забань их всех!"
+        />}
       </div>
     </ErrorOrPending>
   )
