@@ -13,4 +13,5 @@ export type MyStat = {
         new: number;
     };
     complete: number;
+    admin: boolean;
 }

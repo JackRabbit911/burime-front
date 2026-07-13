@@ -1,9 +1,7 @@
-import { Link } from "react-router"
 import type { ReactNode } from "react";
-import { classMap } from "common/constants";
+import { adminHref, classMap } from "common/constants";
 
 type Props = {
-  path: string,
   title?: string,
   value?: string | number,
   color?: string,
@@ -11,11 +9,11 @@ type Props = {
   desc?: string,
 };
 
-const Stat = ({ path, title = '', value = '', icon = '', color = 'default', desc = '' }: Props) => {
+const Admin = ({ title = '', value = '', icon = '', color = 'default', desc = '' }: Props) => {
   return (
     <div className="text-center border border-zinc-600 rounded-sm">
       <div className="stats">
-        <Link to={path}>
+        <a href={adminHref} target='_blank'>
           <div className="stat p-0 gap-0">
             <div className={classMap.figure[color]}>
               {icon}
@@ -24,10 +22,10 @@ const Stat = ({ path, title = '', value = '', icon = '', color = 'default', desc
             <div className={classMap.value[color]}>{value}</div>
             <div className="stat-desc">{desc}</div>
           </div>
-        </Link>
+        </a>
       </div>
     </div>
   )
 }
 
-export default Stat
+export default Admin

@@ -1,3 +1,5 @@
+import { host } from "./ajax"
+
 export const perPages = [25, 50, 100]
 
 export const getMyStatUri = '/my/stat'
@@ -42,3 +44,28 @@ export const getCoverUri = 'my/additional/branch'
 export const srcAvatar = 'ava/user/'
 
 export const logoutUri = 'auth/logout'
+
+export const adminHref = `${host}/abrakadabra`
+
+export const classMap: { [key: string]: { [key: string]: string } } = {
+  figure: {
+    primary: "stat-figure text-primary",
+    secondary: "stat-figure text-secondary",
+    info: "stat-figure text-info",
+    accent: "stat-figure text-accent",
+    success: "stat-figure text-success",
+    warning: "stat-figure text-warning",
+    error: "stat-figure text-error",
+    default: "stat-figure",
+  },
+  value: {
+    primary: "text-start stat-value text-primary",
+    secondary: "text-start stat-value text-secondary",
+    info: "text-start stat-value text-info",
+    accent: "text-start stat-value text-accent",
+    success: "text-start stat-value text-success",
+    warning: "text-start stat-value text-warning",
+    error: "text-start stat-value text-error",
+    default: "text-start stat-value",
+  },
+}
