@@ -46,9 +46,6 @@ export const $myAuthors = createStore<MyAuthor[]>([])
 export const $myMembers = createStore<Member[]>([])
     .reset(globalReset)
 
-export const $scrf = createStore('')
-    .reset(globalReset)
-
 sample({
     clock: getMyAuthorsFx.doneData,
     filter: (response) => Boolean(response?.data?.success),
