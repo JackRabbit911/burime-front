@@ -1,5 +1,6 @@
 import ajax from "common/ajax"
 import { getBranchAuthorStatusUri, setBranchAuthorStatusUri } from "common/constants"
+import { $csrf } from "common/store/csrf"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 
@@ -16,6 +17,10 @@ export const useInviteStatus = (branch: string | number, author?: number) => {
             branch_id: branch,
             author_id: author,
             status: status,
+        }, {
+            headers: {
+                'X-XSRF-TOKEN': $csrf.getState()
+            }
         })
 
         setStatus(status)

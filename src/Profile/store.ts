@@ -9,6 +9,7 @@ import { getUserDataUri, savePasswordUri, saveUserDataUri } from "common/constan
 
 import type { ConfirmPassword, UserData } from "./schema";
 import type { ApiResponse, ValidationError } from "common/ajax/types";
+import { $csrf } from "common/store/csrf";
 
 export const profileSubmitted = createEvent<UserData>()
 export const passwordSubmitted = createEvent<ConfirmPassword>()
@@ -23,11 +24,19 @@ export const getUserDataFx = createEffect(async () => {
 })
 
 const sendProfileFx = createEffect((data: UserData) => (
-    ajax.postForm<ApiResponse<boolean, ValidationError[]>>(saveUserDataUri, data)
+    ajax.postForm<ApiResponse<boolean, ValidationError[]>>(saveUserDataUri, data, {
+        headers: {
+            'X-XSRF-TOKEN': $csrf.getState()
+        }
+    })
 ))
 
 const sendPasswordFx = createEffect((data: ConfirmPassword) => (
-    ajax.postForm(savePasswordUri, data)
+    ajax.postForm(savePasswordUri, data, {
+        headers: {
+            'X-XSRF-TOKEN': $csrf.getState()
+        }
+    })
 ))
 
 sample({

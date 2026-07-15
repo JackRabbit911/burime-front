@@ -2,12 +2,14 @@ import type { AxiosError, AxiosResponse } from "axios";
 import { createEffect, createEvent, createStore, sample } from "effector";
 
 import ajax from "common/ajax";
+import { $csrf } from "common/store/csrf";
 import { modalOpened } from "reused/Modal/store";
 import { $status, globalReset } from "common/store";
 import type { ApiResponse } from "common/ajax/types";
 import type { FormData, DraftData } from "../schema/output";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { saveBranchUri, saveDraftUri } from "common/constants";
+
 
 export type FinalResponse = {
     [x: string]: string | number;
@@ -19,7 +21,11 @@ export const draftClicked = createEvent<DraftData>()
 export const publishFx = createEffect
     <FormData, AxiosResponse<ApiResponse<FinalResponse>>, AxiosError>(
         (data: FormData) => (
-            ajax.postForm(saveBranchUri, data)
+            ajax.postForm(saveBranchUri, data, {
+                headers: {
+                    'X-XSRF-TOKEN': $csrf.getState()
+                }
+            })
         )
     )
 

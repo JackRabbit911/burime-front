@@ -3,15 +3,16 @@ import { combine, createEffect, createEvent, createStore, sample } from "effecto
 
 import ajax from "common/ajax";
 import { emptyMessage } from "./utils";
+import { $csrf } from "common/store/csrf";
 import { globalReset } from "common/store";
 import { modalOpened } from "reused/Modal/store";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { getMessageBlank, getMessageListUri, getMessageUri, saveMessageUri } from "common/constants";
 
 import type { ApiResponse } from "common/ajax/types";
+import type { AxiosError, AxiosResponse } from "axios";
 import type { MessageForm, MessageOut } from "./schema";
 import type { Message, Inbox, MessageList, Outbox, Delbox } from "./types";
-import type { AxiosError, AxiosResponse } from "axios";
 
 type AxiosApiResponse = AxiosResponse<ApiResponse<Message>>;
 
@@ -34,7 +35,11 @@ export const getMessageBlankFx = createEffect(
 )
 
 const saveMessageFx = createEffect((data: MessageOut) => (
-    ajax.postForm(saveMessageUri, data)
+    ajax.postForm(saveMessageUri, data, {
+        headers: {
+            'X-XSRF-TOKEN': $csrf.getState()
+        }
+    })
 ))
 
 export const $inbox = createStore<Inbox[]>([])

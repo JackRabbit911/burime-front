@@ -1,6 +1,7 @@
 import ajax from "common/ajax";
 import type { ApiResponse } from "common/ajax/types";
 import { getGroupStatusUri, setGroupStatusUri } from "common/constants";
+import { $csrf } from "common/store/csrf";
 import { createEffect } from "effector";
 
 type SetStatusPayload = {
@@ -19,7 +20,11 @@ type GetStatusPayload = {
 }
 
 export const setGroupStatusFx = createEffect(
-    (data: SetStatusPayload) => ajax.postForm(setGroupStatusUri, data)
+    (data: SetStatusPayload) => ajax.postForm(setGroupStatusUri, data, {
+        headers: {
+            'X-XSRF-TOKEN': $csrf.getState()
+        }
+    })
 )
 
 export const getGroupStatusFx = createEffect(({ group, author }: GetStatusPayload) => {

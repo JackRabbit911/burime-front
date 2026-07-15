@@ -1,22 +1,27 @@
 import { useEffect } from "react"
 import { useUnit } from "effector-react"
 
+import Admin from "./Admin"
 import Stat from "reused/Stat"
+import Cog from "reused/icons/Cog"
 import Book from "reused/icons/Book"
 import Heart from "reused/icons/Heart"
 import Message from "reused/icons/Message"
 import { globalReset } from "common/store"
 import ErrorOrPending from "reused/ErrorOrPendig"
+import { $csrf, getCsrfFx } from "common/store/csrf"
 import { $isPending, $myStat, getMyStatFx } from "Home/store"
-import Cog from "reused/icons/Cog"
-import Admin from "./Admin"
 
 const Home = () => {
-  const [stat, isLoading] = useUnit([$myStat, $isPending])
+  const [stat, csrf, isLoading] = useUnit([$myStat, $csrf, $isPending])
 
   useEffect(() => {
     globalReset()
     getMyStatFx()
+
+    if (!Boolean(csrf)) {
+      getCsrfFx()
+    }
   }, [])
 
   return (
