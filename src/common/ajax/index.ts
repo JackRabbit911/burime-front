@@ -15,7 +15,7 @@ const ajax = axios.create({
         'Content-Type': 'application/json',
     },
     withCredentials: true, // Разрешает отправку кук
-    withXSRFToken: true,
+    // withXSRFToken: true,
 });
 
 ajax.interceptors.response.use(
@@ -25,7 +25,8 @@ ajax.interceptors.response.use(
 
         if (error.response) {
             if (status === 401) {
-                window.location.href = host + '/auth'
+                console.log(error);
+                // window.location.href = host + '/auth'
             } else if (status === 422) {
                 serverErrorRecieved(error.response?.data?.error)
             }
