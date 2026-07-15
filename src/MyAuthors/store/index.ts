@@ -8,6 +8,7 @@ import { loading } from "reused/InModal/Loading";
 import { successDialog } from "reused/InModal/SuccessDialog";
 import { getMyAuthorsUri, getMyGroupMembersUri, saveAuthorUri } from "common/constants";
 
+import { $csrf } from "common/store/csrf";
 import type { ApiResponse } from "common/ajax/types";
 import type { Member } from "reused/Participants/types";
 import type { FormOutputType, MyAuthor } from "../schema";
@@ -24,7 +25,11 @@ const saveMyAuthorFx = createEffect((data: FormOutputType) => {
         Object.entries(data).filter(([_, value]) => value !== undefined)
     )
 
-    return ajax.postForm(saveAuthorUri, post)
+    return ajax.postForm(saveAuthorUri, post, {
+        headers: {
+            'X-XSRF-TOKEN': $csrf.getState()
+        }
+    })
 })
 
 export const getMyAuthorsFx = createEffect(() => (
