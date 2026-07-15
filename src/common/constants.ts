@@ -45,6 +45,8 @@ export const srcAvatar = 'ava/user/'
 
 export const logoutUri = 'auth/logout'
 
+export const getCsrfUri = 'my/reference/csrf'
+
 export const adminHref = `${host}/abrakadabra`
 
 export const classMap: { [key: string]: { [key: string]: string } } = {
