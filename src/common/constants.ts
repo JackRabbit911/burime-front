@@ -44,6 +44,7 @@ export const getCoverUri = 'my/additional/branch'
 export const srcAvatar = 'ava/user/'
 
 export const logoutUri = 'auth/logout'
+export const quitUri = '/auth/quit'
 
 export const getCsrfUri = 'my/reference/csrf'
 

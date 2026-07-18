@@ -25,8 +25,7 @@ ajax.interceptors.response.use(
 
         if (error.response) {
             if (status === 401) {
-                console.log(error);
-                // window.location.href = host + '/auth'
+                window.location.href = host
             } else if (status === 422) {
                 serverErrorRecieved(error.response?.data?.error)
             }
