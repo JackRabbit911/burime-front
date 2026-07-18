@@ -1,22 +1,9 @@
 import { useLocation } from "react-router";
 
-import ajax from "common/ajax";
+import LogOut from "./LogOut";
 import { getTitle } from "../utils";
 import BreadCrumbs from "./BreadCrumbs";
-import { logoutUri } from "common/constants";
 import { useTranslate } from "common/i18n/hooks";
-
-const onLogOut = () => {
-  ajax.get(logoutUri)
-    .then((response) => response.data)
-    .then((data) => {
-      if (data.success) {
-        window.location.href = "/"
-      } else {
-        console.error(data.error)
-      }
-    })
-}
 
 type Props = {
   children?: React.ReactNode;
@@ -35,12 +22,7 @@ const Wrapper = ({ children }: Props) => {
         <div className="flex flex-roe justify-between mb-4">
           <h1 className="text-2xl">{__(getTitle(addr, id))}</h1>
           {addr === 'home' ?
-            <button
-              className="btn btn-outline btn-error"
-              onClick={onLogOut}
-            >
-              {__('Log Out')}
-            </button> :
+            <LogOut __={__} /> :
             <BreadCrumbs
               __={__}
               pathname={location.pathname}
